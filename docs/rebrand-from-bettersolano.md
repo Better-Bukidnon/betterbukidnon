@@ -25,7 +25,9 @@ A province does different work from a municipality. The conversion did more than
 - BetterSolano.org → BetterBukidnon.org everywhere (titles, meta tags, canonical URLs,
   sitemap, manifest, service worker cache names, React app).
 - New logo and favicon: the Philippine sun over a silhouette of Bukidnon province (outline
-  from OpenStreetMap data, © OpenStreetMap contributors, ODbL).
+  from OpenStreetMap data, © OpenStreetMap contributors, ODbL). The sun was later replaced
+  with a panika, the fan-shaped headdress Bukidnon women wear at rituals and festivities,
+  drawn flat from a beaded panika design (#9).
 - Page titles say "Bukidnon Civic Portal" instead of "Official Portal", and the footer and
   homepage state that this is a volunteer project, not an official government website.
 - Footer: removed BetterSolano's LinkedIn, Discord and Facebook links and the Abakada.org and
