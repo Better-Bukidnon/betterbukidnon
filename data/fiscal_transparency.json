@@ -1,9 +1,8 @@
 {
-  "_schema_version": "1.0",
-  "_status": "draft",
-  "_source": "Bureau of Local Government Finance (BLGF) / LGU Solano Budget Office",
-  "_note": "Awaiting official fiscal data",
-  "municipality": "Solano",
-  "province": "Nueva Vizcaya",
+  "_schema_version": "1.1",
+  "_status": "empty",
+  "_source": "Bureau of Local Government Finance (BLGF) Statement of Receipts and Expenditures for the Province of Bukidnon",
+  "_note": "No official fiscal data has been added yet. Amounts are in millions of pesos. Each fiscal_years entry: {\"year\": 2025, \"source_url\": \"https://blgf.gov.ph/\", \"periods\": [{\"id\": \"q1\", \"label\": \"Q1\", \"range\": \"Jan - Mar\", \"income\": {\"local\": 0, \"external\": 0, \"total\": 0}, \"expenditures\": {\"gps\": 0, \"social\": 0, \"economic\": 0, \"debt\": 0, \"total\": 0}, \"netIncome\": 0, \"fundBalance\": 0}]}. The budget page shows the latest year.",
+  "province": "Bukidnon",
   "fiscal_years": []
 }

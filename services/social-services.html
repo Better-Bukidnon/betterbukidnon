@@ -1,65 +1,55 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8777S9SP9X"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      gtag('config', 'G-8777S9SP9X');
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="MSWDO social welfare services in Solano, Nueva Vizcaya. Social case study, certificate of indigency, AICS assistance, PWD services, senior citizen programs, women and children welfare support."
+      content="Social welfare in Bukidnon: the Provincial Social Welfare and Development Office (PSWDO), city and municipal social welfare offices, and national programs. A volunteer-run guide."
     />
-    <meta name="author" content="Ramon Logan Jr." />
+    <meta name="author" content="BetterBukidnon volunteers" />
     <meta
       name="keywords"
-      content="MSWDO Solano, social services, certificate of indigency, AICS, PWD assistance, senior citizen ID, women welfare, children welfare, social case study, financial assistance, LGU Solano welfare"
+      content="Bukidnon social welfare, PSWDO, senior citizen, PWD, solo parent, financial assistance, DSWD, 4Ps"
     />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://bettersolano.org/services/social-services" />
+    <link rel="canonical" href="https://betterbukidnon.org/services/social-services" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://bettersolano.org/services/social-services" />
-    <meta property="og:title" content="Social Welfare Services | BetterSolano.org" />
+    <meta property="og:url" content="https://betterbukidnon.org/services/social-services" />
+    <meta property="og:title" content="Social Welfare Services | BetterBukidnon.org" />
     <meta
       property="og:description"
-      content="Social welfare services in Solano, Nueva Vizcaya including senior citizen ID, PWD services, financial assistance, MSWDO programs, and social support from LGU Solano."
+      content="Social welfare in Bukidnon: the Provincial Social Welfare and Development Office (PSWDO), city and municipal social welfare offices, and national programs. A volunteer-run guide."
     />
     <meta
       property="og:image"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:type" content="image/png" />
     <meta
       property="og:image:secure_url"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
     <meta property="og:locale" content="en_PH" />
-    <meta property="og:site_name" content="BetterSolano.org" />
+    <meta property="og:site_name" content="BetterBukidnon.org" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://bettersolano.org/services/social-services" />
-    <meta name="twitter:title" content="Social Welfare Services | BetterSolano.org" />
+    <meta name="twitter:url" content="https://betterbukidnon.org/services/social-services" />
+    <meta name="twitter:title" content="Social Welfare Services | BetterBukidnon.org" />
     <meta
       name="twitter:description"
-      content="Social welfare services in Solano, Nueva Vizcaya including senior citizen ID, PWD services, financial assistance, MSWDO programs, and social support from LGU Solano."
+      content="Social welfare in Bukidnon: the Provincial Social Welfare and Development Office (PSWDO), city and municipal social welfare offices, and national programs. A volunteer-run guide."
     />
     <meta
       name="twitter:image"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
-    <title>Social Welfare Services | BetterSolano.org</title>
+    <title>Social Welfare Services | BetterBukidnon.org</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/logo/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="../assets/images/logo/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -80,6 +70,106 @@
     <link rel="stylesheet" href="../assets/css/responsive.css" />
     <link rel="stylesheet" href="../assets/css/accessibility.css" />
     <link rel="stylesheet" href="../assets/css/footer.css" />
+
+    <style>
+      .bk-section-title {
+        font-size: 1.25rem;
+        margin: 0 0 4px;
+      }
+      .bk-section-intro {
+        color: var(--color-text-light);
+        margin: 0 0 var(--spacing-md, 16px);
+        max-width: 760px;
+      }
+      .bk-card {
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .bk-card h3 {
+        font-size: 1rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .bk-card h3 i {
+        color: var(--color-primary);
+      }
+      .bk-card p {
+        margin: 0;
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: var(--color-text);
+      }
+      .bk-card-link {
+        margin-top: auto;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+      .bk-card-link:hover {
+        text-decoration: underline;
+      }
+      .bk-contacts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .bk-contact {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
+        padding: 12px 16px;
+        text-decoration: none;
+        color: var(--color-text);
+        font-size: 0.875rem;
+      }
+      .bk-contact i {
+        color: var(--color-primary);
+        font-size: 1.125rem;
+      }
+      .bk-contact strong {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--color-text-light);
+        font-weight: 600;
+      }
+      .charter-note {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-left: 4px solid var(--color-primary);
+        border-radius: 8px;
+        padding: 14px 16px;
+        font-size: 0.8125rem;
+        line-height: 1.6;
+      }
+      .charter-note i {
+        color: var(--color-primary);
+        margin-top: 2px;
+      }
+      .charter-note p {
+        margin: 0;
+        font-size: inherit;
+        color: inherit;
+      }
+      .charter-note a {
+        color: var(--color-primary);
+        font-weight: 600;
+        text-decoration: underline;
+      }
+    </style>
   </head>
 
   <body>
@@ -92,29 +182,29 @@
       <div class="container">
         <div class="hotline-inner">
           <div class="hotline-items">
-            <a href="tel:09274008033" class="hotline-item">
-              <i class="bi bi-shield-fill"></i>
-              <span>Police: 0927 400 8033</span>
+            <a href="tel:911" class="hotline-item">
+              <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+              <span>Emergency: 911</span>
             </a>
-            <a href="tel:09162840885" class="hotline-item">
-              <i class="bi bi-heart-fill"></i>
-              <span>MSWDO: 0916 284 0885</span>
+            <a href="tel:+63888131262" class="hotline-item">
+              <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+              <span>PDRRMD: (088) 813-1262</span>
             </a>
-            <a href="tel:09360620305" class="hotline-item">
-              <i class="bi bi-fire"></i>
-              <span>Fire: 0936 062 0305</span>
+            <a href="tel:+63888134263" class="hotline-item">
+              <i class="bi bi-shield-fill" aria-hidden="true"></i>
+              <span>Police: (088) 813-4263</span>
             </a>
-            <a href="tel:0906188086" class="hotline-item">
-              <i class="bi bi-building"></i>
-              <span>DILG: 0906 188 086</span>
+            <a href="tel:+63888135449" class="hotline-item">
+              <i class="bi bi-fire" aria-hidden="true"></i>
+              <span>Fire: (088) 813-5449</span>
             </a>
-            <a href="tel:09263833744" class="hotline-item">
-              <i class="bi bi-exclamation-triangle-fill"></i>
-              <span>MDRRMO: 0926 383 3744</span>
+            <a href="tel:+63888135631" class="hotline-item">
+              <i class="bi bi-heart-pulse-fill" aria-hidden="true"></i>
+              <span>PHO: (088) 813-5631</span>
             </a>
-            <a href="tel:09068195569" class="hotline-item">
-              <i class="bi bi-truck"></i>
-              <span>R2TMC: 0906 819 5569</span>
+            <a href="tel:+63888135734" class="hotline-item">
+              <i class="bi bi-heart-fill" aria-hidden="true"></i>
+              <span>PSWDO: (088) 813-5734</span>
             </a>
           </div>
         </div>
@@ -127,8 +217,8 @@
         <div class="logo-container">
           <a href="../"
             ><img
-              src="../assets/images/logo/better-solano-logo.svg"
-              alt="Municipality of Solano Logo"
+              src="../assets/images/logo/better-bukidnon-logo.svg"
+              alt="Province of Bukidnon Logo"
               class="logo-img"
           /></a>
         </div>
@@ -136,7 +226,14 @@
           <ul>
             <li><a href="../" data-i18n="nav-home">Home</a></li>
             <li class="has-dropdown">
-              <a href="./" class="active" data-i18n="nav-services" aria-haspopup="true" aria-expanded="false">Services</a>
+              <a
+                href="./"
+                class="active"
+                data-i18n="nav-services"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Services</a
+              >
               <ul class="dropdown-menu">
                 <li><a href="certificates" data-i18n="social-certificates">Certificates</a></li>
                 <li><a href="business" data-i18n="social-business">Business</a></li>
@@ -157,7 +254,13 @@
             <li><a href="../government/" data-i18n="nav-government">Government</a></li>
             <li><a href="../statistics/" data-i18n="nav-statistics">Statistics</a></li>
             <li class="has-dropdown">
-              <a href="../legislative/" data-i18n="nav-legislative" aria-haspopup="true" aria-expanded="false">Legislative</a>
+              <a
+                href="../legislative/"
+                data-i18n="nav-legislative"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Legislative</a
+              >
               <ul class="dropdown-menu">
                 <li>
                   <a
@@ -183,7 +286,7 @@
           <div class="lang-selector">
             <button class="btn btn-secondary btn-sm lang-btn" data-lang="en">EN</button>
             <button class="btn btn-secondary btn-sm lang-btn" data-lang="fil">FIL</button>
-            <button class="btn btn-secondary btn-sm lang-btn" data-lang="ilo">ILO</button>
+            <button class="btn btn-secondary btn-sm lang-btn" data-lang="ceb">CEB</button>
           </div>
         </div>
       </div>
@@ -199,9 +302,9 @@
               <span class="rate-display">1 USD = ₱ --</span>
             </span>
           </div>
-          <div class="info-bar-item info-bar-weather" aria-label="Current weather in Solano">
+          <div class="info-bar-item info-bar-weather" aria-label="Current weather in Bukidnon">
             <i class="bi bi-thermometer-half"></i>
-            <span class="weather-location">Solano</span>
+            <span class="weather-location">Malaybalay</span>
             <span class="weather-temp">--°C</span>
           </div>
           <div class="info-bar-item info-bar-datetime" aria-label="Philippine Date and Time">
@@ -221,7 +324,7 @@
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           <a href="../" data-i18n="social-home">Home</a><span>/</span>
           <a href="./" data-i18n="social-services">Services</a><span>/</span>
-          <span aria-current="page">Social Services</span>
+          <span aria-current="page" data-i18n="social-bc">Social Services</span>
         </nav>
       </div>
       <section class="page-header">
@@ -229,113 +332,139 @@
           <div class="page-header-content">
             <span class="page-header-badge"
               ><i class="bi bi-people-fill"></i>
-              <span data-i18n="social-page-badge">Social Services</span></span
+              <span data-i18n="social-badge">Social Services</span></span
             >
-            <h1 data-i18n="social-page-title">Social Services</h1>
-            <p class="page-header-desc" data-i18n="social-page-desc">
-              Support programs for vulnerable sectors and communities
+            <h1 data-i18n="social-h1">Social Welfare Services</h1>
+            <p class="page-header-desc" data-i18n="social-hdesc">
+              The Provincial Social Welfare and Development Office and local welfare offices
             </p>
+          </div>
+        </div>
+      </section>
+      <section class="section section-compact">
+        <div class="container">
+          <div class="bk-contacts">
+            <a class="bk-contact" href="tel:0888135734"
+              ><i class="bi bi-people" aria-hidden="true"></i
+              ><span
+                ><strong data-i18n="social-x1">PSWDO</strong
+                ><span data-i18n="social-x2">(088) 813-5734</span></span
+              ></a
+            >
           </div>
         </div>
       </section>
       <section class="section">
         <div class="container">
+          <h2 class="bk-section-title" data-i18n="social-x3">What the Province does</h2>
+          <p class="bk-section-intro" data-i18n="social-x4">
+            Under the Local Government Code, the province provides social welfare services and
+            supports those of its cities and municipalities.
+          </p>
           <div class="grid grid-3">
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-person-badge"></i>
-                <span data-i18n="social-senior">Senior Citizen ID</span>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-people-fill" aria-hidden="true"></i>
+                <span data-i18n="social-x6">Provincial Social Welfare and Development Office</span>
               </h3>
-              <p class="service-item-desc" data-i18n="social-senior-desc">
-                ID for citizens 60 years and above
+              <p data-i18n="social-x7">
+                The PSWDO leads provincial programs for families, children, women, senior citizens,
+                persons with disabilities and people in crisis.
               </p>
-              <div class="service-item-meta">
-                <span
-                  ><strong data-i18n="label-fee">Fee:</strong>
-                  <span data-i18n="label-free">Free</span></span
-                >
-                <span
-                  ><strong data-i18n="label-time">Time:</strong>
-                  <span data-i18n="label-1-day">1 day</span></span
-                >
-              </div>
+              <a class="bk-card-link" href="/service-details/pswdo"
+                ><span data-i18n="social-x5">Office details</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
             </div>
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-universal-access"></i> <span data-i18n="social-pwd">PWD ID</span>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-cash-coin" aria-hidden="true"></i>
+                <span data-i18n="social-x8">Assistance</span>
               </h3>
-              <p class="service-item-desc" data-i18n="social-pwd-desc">
-                Identification for persons with disabilities
+              <p data-i18n="social-x9">
+                Assistance for people in difficult situations is evaluated by social workers. Ask
+                the PSWDO what applies to you.
               </p>
-              <div class="service-item-meta">
-                <span
-                  ><strong data-i18n="label-fee">Fee:</strong>
-                  <span data-i18n="label-free">Free</span></span
-                >
-                <span
-                  ><strong data-i18n="label-time">Time:</strong>
-                  <span data-i18n="label-1-2-days">1-2 days</span></span
-                >
-              </div>
             </div>
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-cash-stack"></i>
-                <span data-i18n="social-assistance">Financial Assistance</span>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-people" aria-hidden="true"></i>
+                <span data-i18n="social-x11">Community programs</span>
               </h3>
-              <p class="service-item-desc" data-i18n="social-assistance-desc">
-                Emergency financial aid for medical, burial, and education
+              <p data-i18n="social-x12">
+                The PSWDO coordinates with city and municipal social welfare offices and barangays.
               </p>
-              <div class="service-item-meta">
-                <span
-                  ><strong data-i18n="label-fee">Fee:</strong>
-                  <span data-i18n="label-free">Free</span></span
-                >
-                <span
-                  ><strong data-i18n="label-time">Time:</strong>
-                  <span data-i18n="label-3-5-days">3-5 days</span></span
-                >
-              </div>
-            </div>
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-gift"></i>
-                <span data-i18n="social-social-pension">Social Pension</span>
-              </h3>
-              <p class="service-item-desc">Monthly pension for indigent senior citizens</p>
-              <div class="service-item-meta">
-                <span><strong data-i18n="social-fee">Fee:</strong> Free</span>
-                <span><strong data-i18n="social-time">Time:</strong> Quarterly release</span>
-              </div>
+              <a class="bk-card-link" href="/government/#lgus"
+                ><span data-i18n="social-x10">Find your city or municipality</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
             </div>
           </div>
         </div>
       </section>
-
-      <!-- Responsible Offices -->
-      <section class="section section-compact bg-alt">
+      <section class="section">
         <div class="container">
-          <h2 class="section-title-sm" data-i18n="section-responsible-offices">
-            Responsible Offices
-          </h2>
-          <div class="office-cards-grid">
-            <a href="../service-details/mswdo-services" class="office-card">
-              <div class="office-card-icon">
-                <i class="bi bi-heart-fill"></i>
-              </div>
-              <div class="office-card-content">
-                <h3 class="office-card-title" data-i18n="social-mswdo-services">MSWDO Services</h3>
-                <p
-                  class="office-card-desc"
-                  data-i18n="social-social-case-studies-indigency-certificates-aics"
-                >
-                  Social case studies, indigency certificates, AICS, PWD & senior citizen assistance
-                </p>
-              </div>
-              <div class="office-card-arrow">
-                <i class="bi bi-arrow-right"></i>
-              </div>
-            </a>
+          <h2 class="bk-section-title" data-i18n="social-x13">Who handles what</h2>
+          <p class="bk-section-intro" data-i18n="social-x14">
+            IDs and benefits are often processed locally.
+          </p>
+          <div class="grid grid-3">
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-person-vcard" aria-hidden="true"></i>
+                <span data-i18n="social-x16">Senior citizen, PWD and solo parent IDs</span>
+              </h3>
+              <p data-i18n="social-x17">
+                These are usually processed at the city or municipal office for senior citizens,
+                persons with disabilities and social welfare. Ask your city or municipal hall.
+              </p>
+              <a class="bk-card-link" href="/government/#lgus"
+                ><span data-i18n="social-x15">Find your city or municipality</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
+            </div>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-flag" aria-hidden="true"></i>
+                <span data-i18n="social-x18">DSWD national programs</span>
+              </h3>
+              <p data-i18n="social-x19">
+                Programs such as 4Ps are run by the Department of Social Welfare and Development,
+                with local social welfare offices as partners.
+              </p>
+            </div>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-telephone" aria-hidden="true"></i>
+                <span data-i18n="social-x21">Need help now</span>
+              </h3>
+              <p data-i18n="social-x22">
+                For emergencies call 911. For welfare concerns, call the PSWDO during office hours.
+              </p>
+              <a class="bk-card-link" href="/service-details/pswdo"
+                ><span data-i18n="social-x20">PSWDO</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section section-compact">
+        <div class="container">
+          <div class="charter-note" role="note">
+            <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
+            <p>
+              <span data-i18n="social-note"
+                >This page is a general guide written by volunteers. Requirements, fees and
+                processing times are set by each office and may vary, so confirm with the office
+                before you go. The official source is the</span
+              >
+              <a href="https://bukidnon.gov.ph/" target="_blank" rel="noopener noreferrer"
+                ><span data-i18n="social-note-link"
+                  >Provincial Government of Bukidnon website</span
+                ></a
+              >.
+            </p>
           </div>
         </div>
       </section>
@@ -345,60 +474,41 @@
         <div class="footer-main-new">
           <div class="footer-brand">
             <img
-              src="../assets/images/logo/better-solano-logo-white.svg"
-              alt="Better Solano logo"
+              src="../assets/images/logo/better-bukidnon-logo-white.svg"
+              alt="Better Bukidnon logo"
               class="footer-logo"
             />
             <p
               class="footer-tagline"
-              data-i18n="social-empowering-the-people-of-solano-with-transparent"
+              data-i18n="social-empowering-the-people-of-bukidnon-with-transparent"
             >
-              Empowering the people of Solano with transparent access to the services, programs, and
-              public funds of LGU Solano.
+              Empowering the people of Bukidnon with transparent access to the services, programs,
+              and public funds of LGU Bukidnon.
             </p>
             <div class="footer-social-new">
               <a
-                href="https://www.facebook.com/bettersolano.org"
+                href="https://github.com/DMNCDLPRT/betterbukidnon"
                 class="footer-social-btn"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook"
-                ><i class="bi bi-facebook"></i
+                aria-label="GitHub"
+                ><i class="bi bi-github"></i
               ></a>
               <a
-                href="https://www.linkedin.com/company/bettersolano/"
+                href="mailto:volunteer@betterbukidnon.org"
                 class="footer-social-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                ><i class="bi bi-linkedin"></i
-              ></a>
-              <a
-                href="https://discord.com/invite/qeSu7RJkjQ"
-                class="footer-social-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Discord"
-                ><i class="bi bi-discord"></i
+                aria-label="Email the volunteers"
+                ><i class="bi bi-envelope-fill"></i
               ></a>
             </div>
           </div>
           <div class="footer-column">
             <h4 data-i18n="social-quick-links">Quick Links</h4>
             <ul class="footer-links-new">
-              <li>
-                <a
-                  href="https://quiz.bettersolano.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-i18n="social-solano-quiz"
-                  >Solano Quiz</a
-                >
-              </li>
               <li><a href="../sitemap/" data-i18n="social-sitemap">Sitemap</a></li>
               <li>
                 <a
-                  href="https://solano.gov.ph/wp-content/uploads/2025/10/As-of-October-21-2025-2.pdf"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-i18n="social-citizens-charter"
@@ -436,29 +546,29 @@
               </li>
               <li>
                 <a
-                  href="https://solano.gov.ph/"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="social-official-lgu-solano-portal"
-                  >Official LGU Solano Portal</a
+                  data-i18n="social-official-lgu-bukidnon-portal"
+                  >Official LGU Bukidnon Portal</a
                 >
               </li>
               <li>
                 <a
-                  href="https://sangguniangbayan.solano.gov.ph/"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-i18n="social-sangguniang-bayan"
-                  >Sangguniang Bayan</a
+                  >Sangguniang Panlalawigan</a
                 >
               </li>
               <li>
                 <a
-                  href="https://www.facebook.com/OfficialLguSolanoFanpage/"
+                  href="https://www.facebook.com/lgubukidnon"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="social-lgu-solano-facebook"
-                  >LGU Solano Facebook</a
+                  data-i18n="social-lgu-bukidnon-facebook"
+                  >LGU Bukidnon Facebook</a
                 >
               </li>
               <li>
@@ -485,16 +595,16 @@
             <div
               class="footer-cost"
               role="status"
-              aria-label="Cost to the People of Solano: Zero Pesos"
+              aria-label="Cost to the People of Bukidnon: Zero Pesos"
             >
-              Cost to the People of Solano = <span class="footer-cost-value">₱0</span>
+              Cost to the People of Bukidnon = <span class="footer-cost-value">₱0</span>
             </div>
-            <a href="mailto:volunteer@bettersolano.org" class="footer-contribute"
+            <a href="mailto:volunteer@betterbukidnon.org" class="footer-contribute"
               ><i class="bi bi-envelope-heart"></i>
               <span data-i18n="social-volunteer-with-us">Volunteer with us</span></a
             >
             <a
-              href="https://github.com/BetterSolano/bettersolano"
+              href="https://github.com/DMNCDLPRT/betterbukidnon"
               class="footer-contribute"
               target="_blank"
               rel="noopener noreferrer"
@@ -502,32 +612,6 @@
               <span data-i18n="social-contribute-code-with-us">Contribute code with us</span></a
             >
             <div class="footer-partners">
-              <a
-                href="https://abakada.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abakada.org"
-                ><img
-                  src="../assets/images/logo/abakada-footer.svg"
-                  alt="Abakada.org"
-                  class="footer-partner-logo"
-                  width="120"
-                  height="28"
-                  loading="lazy"
-              /></a>
-              <a
-                href="https://hivcareph.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="HIV Care Philippines"
-                ><img
-                  src="../assets/images/logo/hiv-care-logo-footer.svg"
-                  alt="HIV Care Philippines"
-                  class="footer-partner-logo"
-                  width="120"
-                  height="28"
-                  loading="lazy"
-              /></a>
               <a
                 href="https://bettergov.ph"
                 target="_blank"
@@ -546,12 +630,13 @@
         </div>
         <div class="footer-bottom-new">
           <div class="footer-copyright">
-            <span class="footer-copyright-text">&copy; 2026 BetterSolano.org</span>
+            <span class="footer-copyright-text">&copy; 2026 BetterBukidnon.org</span>
             <span class="footer-copyright-license">MIT | CC BY 4.0</span>
             <span class="footer-copyright-disclaimer"
-              >All public information sourced from official government portals.</span
+              >Volunteer civic project, not an official government website. Built on the
+              BetterSolano template (MIT).</span
             >
-            <span class="footer-version"><i class="bi bi-boxes"></i> Ver. 1.1.19</span>
+            <span class="footer-version"><i class="bi bi-boxes"></i> Ver. 2.0.0</span>
           </div>
         </div>
       </div>

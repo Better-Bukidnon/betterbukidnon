@@ -7,7 +7,11 @@ How the **Latest Updates** (homepage) and **News** page are kept up to date.
 Both sections are rendered by [`assets/js/news.js`](../assets/js/news.js) from a single
 file: [`data/news.json`](../data/news.json). The homepage shows the 3 most recent items;
 the News page shows all of them, newest first. No backend is involved — it is a static
-JSON file served from cPanel.
+JSON file served by the Cloudflare Workers deployment (previously cPanel).
+
+`data/news.json` starts empty (`{ "news": [] }`). While it has no items, the News page and the
+homepage feed show: "No updates yet. Follow the Provincial Government of Bukidnon on Facebook",
+linking to <https://www.facebook.com/lgubukidnon>.
 
 To avoid hand-editing JSON, use the curation tool:
 

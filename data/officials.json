@@ -1,54 +1,75 @@
 {
-  "mayor": {
-    "name": "Hon. Philip A. Dacayo",
-    "title": "Municipal Mayor",
-    "image": "assets/images/officials/mayor.jpg"
-  },
-  "vice_mayor": {
-    "name": "Hon. Eduardo D. Tiongson",
-    "title": "Municipal Vice Mayor",
-    "image": "assets/images/officials/vice-mayor.jpg"
-  },
-  "councilors": [
+  "_schema_version": "2.0",
+  "_note": "Officials of the Province of Bukidnon. Names follow docs/bukidnon-facts.md, section 3. Update the fact sheet first, then this file. Do not add photos, committees, emails or phone numbers for individual officials unless they come from an official source.",
+  "term": "2025–2028",
+  "last_verified": "2026-11-01",
+  "sources": [
     {
-      "name": "Hon. Councilor One",
-      "title": "SB Member",
-      "image": "assets/images/officials/sb1.jpg"
+      "name": "Wikipedia: Bukidnon Provincial Board",
+      "url": "https://en.wikipedia.org/wiki/Bukidnon_Provincial_Board"
     },
     {
-      "name": "Hon. Councilor Two",
-      "title": "SB Member",
-      "image": "assets/images/officials/sb2.jpg"
+      "name": "Rappler: 2025 Bukidnon election results",
+      "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon"
     },
     {
-      "name": "Hon. Councilor Three",
-      "title": "SB Member",
-      "image": "assets/images/officials/sb3.jpg"
-    },
-    {
-      "name": "Hon. Councilor Four",
-      "title": "SB Member",
-      "image": "assets/images/officials/sb4.jpg"
-    },
-    {
-      "name": "Hon. Councilor Five",
-      "title": "SB Member",
-      "image": "assets/images/officials/sb5.jpg"
-    },
-    {
-      "name": "Hon. Councilor Six",
-      "title": "SB Member",
-      "image": "assets/images/officials/sb6.jpg"
-    },
-    {
-      "name": "Hon. Councilor Seven",
-      "title": "SB Member",
-      "image": "assets/images/officials/sb7.jpg"
-    },
-    {
-      "name": "Hon. Councilor Eight",
-      "title": "SB Member",
-      "image": "assets/images/officials/sb8.jpg"
+      "name": "Wikipedia: Legislative districts of Bukidnon",
+      "url": "https://en.wikipedia.org/wiki/Legislative_districts_of_Bukidnon"
     }
+  ],
+  "governor": {
+    "name": "Hon. Rogelio Neil P. Roque",
+    "title": "Governor",
+    "party": "PFP"
+  },
+  "vice_governor": {
+    "name": "Hon. Clive D. Quiño",
+    "title": "Vice Governor",
+    "role": "Presiding Officer, Sangguniang Panlalawigan",
+    "party": "BPP"
+  },
+  "board_members": [
+    { "name": "Hon. Mario B. Albarece Jr.", "district": 1 },
+    { "name": "Hon. Eliezer S. Onahon", "district": 1 },
+    { "name": "Hon. Marlon Brando B. Dinlayan", "district": 2 },
+    { "name": "Hon. Hollis E. Monsanto", "district": 2 },
+    { "name": "Hon. Bobby Jay B. Dinlayan", "district": 2 },
+    { "name": "Hon. Minerva C. Casinabe", "district": 3 },
+    { "name": "Hon. Joseph D. Palmada", "district": 3 },
+    { "name": "Hon. Jose Miguel S. Fortich", "district": 3 },
+    { "name": "Hon. Ranulfo Jose Z. Pepito Jr.", "district": 4 },
+    { "name": "Hon. Oliver Owen L. Garcia", "district": 4 }
+  ],
+  "ex_officio": [
+    {
+      "id": "abc",
+      "name": "Hon. Godofredo I. Balansag",
+      "seat": "Liga ng mga Barangay (ABC) President",
+      "status": "verify"
+    },
+    {
+      "id": "pcl",
+      "name": "Hon. Armando S. Evangelista Jr.",
+      "seat": "Philippine Councilors League (PCL) President",
+      "status": "verify"
+    },
+    {
+      "id": "sk",
+      "name": "Hon. Rhea Lou S. Linas",
+      "seat": "SK Provincial Federation President",
+      "status": "verify"
+    },
+    {
+      "id": "ipmr",
+      "name": "Hon. Renato S. Sumbongan",
+      "seat": "Indigenous Peoples Mandatory Representative (IPMR)",
+      "status": "verify"
+    }
+  ],
+  "representatives": [
+    { "name": "Hon. Jose Manuel \"Joeman\" Alba", "district": 1 },
+    { "name": "Hon. Jonathan Keith \"John\" Flores", "district": 2 },
+    { "name": "Hon. Audrey Zubiri", "district": 3 },
+    { "name": "Hon. Laarni Roque", "district": 4 }
   ]
 }

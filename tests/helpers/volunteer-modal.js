@@ -1,7 +1,7 @@
 // @ts-check
 
 /** localStorage key the popup uses to remember a dismissal. */
-const STORAGE_KEY = 'bs-vol-popup-v1';
+const STORAGE_KEY = 'bb-vol-popup-v1';
 
 /** Selectors for the "Be Part of Something Greater" modal. */
 const SEL = {

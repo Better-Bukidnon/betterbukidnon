@@ -1,4 +1,4 @@
-/* Better Solano - Complete Main Stylesheet */
+/* Better Bukidnon - Complete Main Stylesheet */
 :root {
   --color-primary: #0032a0;
   --color-primary-dark: #002170;
@@ -1268,7 +1268,7 @@ body.mobile-menu-open {
   margin-right: var(--spacing-xs);
 }
 
-.councilor-card {
+.board member-card {
   padding: var(--spacing-md);
 }
 
@@ -2033,8 +2033,8 @@ body.mobile-menu-open {
   }
 }
 
-/* Councilor Cards - Government Page */
-.councilor-card {
+/* Board Member Cards - Government Page */
+.board member-card {
   background: var(--color-white);
   border-radius: 10px;
   border: 1px solid #e5e7eb;
@@ -2043,31 +2043,31 @@ body.mobile-menu-open {
   transition: all 0.2s ease;
 }
 
-.councilor-card:hover {
+.board member-card:hover {
   border-color: var(--color-primary);
   box-shadow: 0 4px 12px rgba(0, 50, 160, 0.08);
 }
 
-.councilor-card--liga {
+.board member-card--liga {
   border-left-color: var(--color-success);
 }
 
-.councilor-card--sk {
+.board member-card--sk {
   border-left-color: var(--color-accent);
 }
 
-.councilor-card--ipmr {
+.board member-card--ipmr {
   border-left-color: #8b4513;
 }
 
-.councilor-name {
+.board member-name {
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--color-text);
   margin: 0 0 6px 0;
 }
 
-.councilor-badge {
+.board member-badge {
   display: inline-block;
   background: var(--color-primary);
   color: white;
@@ -2078,19 +2078,19 @@ body.mobile-menu-open {
   margin-bottom: 10px;
 }
 
-.councilor-badge--liga {
+.board member-badge--liga {
   background: var(--color-success);
 }
 
-.councilor-badge--sk {
+.board member-badge--sk {
   background: var(--color-accent);
 }
 
-.councilor-badge--ipmr {
+.board member-badge--ipmr {
   background: #8b4513;
 }
 
-.councilor-committees {
+.board member-committees {
   font-size: 0.8125rem;
   color: var(--color-text-light);
   margin: 0;
@@ -2560,7 +2560,7 @@ h6 {
 }
 
 .cost-badge::before {
-  content: 'Cost to the People of Solano';
+  content: 'Cost to the People of Bukidnon';
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -6399,7 +6399,7 @@ cklist with Icons - Proper Indentation */
   }
 }
 
-/* Solano Quiz CTA */
+/* Bukidnon Quiz CTA */
 .quiz-cta-section {
   background:
     radial-gradient(circle, rgba(0, 50, 160, 0.1) 1px, transparent 1px),
@@ -9335,4 +9335,3 @@ a.a11y-contact-item:hover i {
     padding: 14px 24px;
   }
 }
-

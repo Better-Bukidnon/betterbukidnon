@@ -3,17 +3,17 @@
 import { useEffect, useRef, useCallback } from 'react';
 
 const hotlines = [
-  { icon: 'bi-shield-fill', label: 'Police', number: '0927 400 8033', tel: '09274008033' },
-  { icon: 'bi-heart-fill', label: 'MSWDO', number: '0916 284 0885', tel: '09162840885' },
-  { icon: 'bi-fire', label: 'Fire', number: '0936 062 0305', tel: '09360620305' },
-  { icon: 'bi-building', label: 'DILG', number: '0906 188 086', tel: '0906188086' },
+  { icon: 'bi-telephone-fill', label: 'Emergency', number: '911', tel: '911' },
   {
     icon: 'bi-exclamation-triangle-fill',
-    label: 'MDRRMO',
-    number: '0926 383 3744',
-    tel: '09263833744',
+    label: 'PDRRMD',
+    number: '(088) 813-1262',
+    tel: '+63888131262',
   },
-  { icon: 'bi-truck', label: 'R2TMC', number: '0906 819 5569', tel: '09068195569' },
+  { icon: 'bi-shield-fill', label: 'Police', number: '(088) 813-4263', tel: '+63888134263' },
+  { icon: 'bi-fire', label: 'Fire', number: '(088) 813-5449', tel: '+63888135449' },
+  { icon: 'bi-heart-pulse-fill', label: 'PHO', number: '(088) 813-5631', tel: '+63888135631' },
+  { icon: 'bi-heart-fill', label: 'PSWDO', number: '(088) 813-5734', tel: '+63888135734' },
 ];
 
 export default function HotlineBar() {

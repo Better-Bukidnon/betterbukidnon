@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
 import SearchAutocomplete from '@/components/SearchAutocomplete';
 
@@ -17,12 +16,12 @@ export default function HomePage() {
               <h1>{t('hero-welcome')}</h1>
               <p>{t('hero-subtitle')}</p>
               <div className="home-hero-v2-actions">
-                <Link href="/services" className="btn btn-primary">
+                <a href="/services" className="btn btn-primary">
                   {t('hero-browse-services')} <i className="bi bi-arrow-right"></i>
-                </Link>
-                <Link href="/contact" className="btn btn-outline">
+                </a>
+                <a href="/contact" className="btn btn-outline">
                   {t('hero-contact-us')}
-                </Link>
+                </a>
               </div>
             </div>
             <div className="home-hero-v2-search">
@@ -40,15 +39,9 @@ export default function HomePage() {
                 </form>
                 <div className="home-search-tags">
                   <span>{t('hero-popular')}</span>
-                  <Link href="/service-details/birth-certificate">
-                    {t('hero-birth-certificate')}
-                  </Link>
-                  <Link href="/service-details/business-permits-licensing">
-                    {t('hero-business-permit')}
-                  </Link>
-                  <Link href="/service-details/municipal-treasurer">
-                    {t('hero-real-property-tax')}
-                  </Link>
+                  <a href="/service-details/provincial-treasurer">{t('hero-real-property-tax')}</a>
+                  <a href="/service-details/birth-certificate">{t('hero-birth-certificate')}</a>
+                  <a href="/service-details/pswdo">{t('hero-social-assistance')}</a>
                 </div>
               </div>
             </div>
@@ -56,8 +49,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Appointment Services CTA */}
-      <section className="appointment-cta-section" aria-label="Mayor's Office Appointment Services">
+      {/* Who handles what */}
+      <section className="appointment-cta-section" aria-labelledby="lgu-cta-heading">
         <div className="container">
           <div className="appointment-cta-inner">
             <div className="appointment-cta-animation" aria-hidden="true">
@@ -70,26 +63,21 @@ export default function HomePage() {
               ></dotlottie-player>
             </div>
             <div className="appointment-cta-content">
-              <h2 className="appointment-cta-heading">{t('appointment-cta-heading')}</h2>
-              <p className="appointment-cta-subtitle">{t('appointment-cta-subtitle')}</p>
+              <h2 id="lgu-cta-heading" className="appointment-cta-heading">
+                {t('home-lgu-cta-heading')}
+              </h2>
+              <p className="appointment-cta-subtitle">{t('home-lgu-cta-subtitle')}</p>
               <div className="appointment-cta-actions">
                 <a
-                  href="https://solanomayorsoffice-oasys.com/user/auth/login.php"
+                  href="/government#lgus"
                   className="appointment-cta-btn appointment-cta-btn--primary"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
-                  <i className="bi bi-calendar-check" aria-hidden="true"></i>{' '}
-                  {t('appointment-schedule-btn')}
+                  <i className="bi bi-geo-alt-fill" aria-hidden="true"></i>{' '}
+                  <span>{t('home-lgu-cta-find')}</span>
                 </a>
-                <a
-                  href="https://solanomayorsoffice-oasys.com/user/auth/register.php"
-                  className="appointment-cta-btn appointment-cta-btn--outline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="bi bi-person-plus" aria-hidden="true"></i>{' '}
-                  {t('appointment-create-btn')}
+                <a href="/government" className="appointment-cta-btn appointment-cta-btn--outline">
+                  <i className="bi bi-building" aria-hidden="true"></i>{' '}
+                  <span>{t('home-lgu-cta-offices')}</span>
                 </a>
               </div>
             </div>
@@ -105,27 +93,7 @@ export default function HomePage() {
             <p>{t('popular-services-subtitle')}</p>
           </div>
           <div className="home-services-grid">
-            <Link href="/services/certificates" className="home-service-card">
-              <div className="home-service-icon">
-                <i className="bi bi-file-earmark-text-fill"></i>
-              </div>
-              <div className="home-service-content">
-                <h3>{t('service-certificates')}</h3>
-                <p>{t('service-certificates-desc')}</p>
-              </div>
-              <i className="bi bi-arrow-right home-service-arrow"></i>
-            </Link>
-            <Link href="/services/business" className="home-service-card">
-              <div className="home-service-icon">
-                <i className="bi bi-shop"></i>
-              </div>
-              <div className="home-service-content">
-                <h3>{t('service-business')}</h3>
-                <p>{t('service-business-desc')}</p>
-              </div>
-              <i className="bi bi-arrow-right home-service-arrow"></i>
-            </Link>
-            <Link href="/services/tax-payments" className="home-service-card">
+            <a href="/services/tax-payments" className="home-service-card">
               <div className="home-service-icon">
                 <i className="bi bi-cash-coin"></i>
               </div>
@@ -134,8 +102,8 @@ export default function HomePage() {
                 <p>{t('service-tax-desc')}</p>
               </div>
               <i className="bi bi-arrow-right home-service-arrow"></i>
-            </Link>
-            <Link href="/services/social-services" className="home-service-card">
+            </a>
+            <a href="/services/social-services" className="home-service-card">
               <div className="home-service-icon">
                 <i className="bi bi-people-fill"></i>
               </div>
@@ -144,8 +112,8 @@ export default function HomePage() {
                 <p>{t('service-social-desc')}</p>
               </div>
               <i className="bi bi-arrow-right home-service-arrow"></i>
-            </Link>
-            <Link href="/services/health" className="home-service-card">
+            </a>
+            <a href="/services/health" className="home-service-card">
               <div className="home-service-icon">
                 <i className="bi bi-heart-pulse-fill"></i>
               </div>
@@ -154,8 +122,28 @@ export default function HomePage() {
                 <p>{t('service-health-desc')}</p>
               </div>
               <i className="bi bi-arrow-right home-service-arrow"></i>
-            </Link>
-            <Link href="/services" className="home-service-card home-service-card--all">
+            </a>
+            <a href="/services/agriculture" className="home-service-card">
+              <div className="home-service-icon">
+                <i className="bi bi-flower2"></i>
+              </div>
+              <div className="home-service-content">
+                <h3>{t('service-agriculture')}</h3>
+                <p>{t('service-agriculture-desc')}</p>
+              </div>
+              <i className="bi bi-arrow-right home-service-arrow"></i>
+            </a>
+            <a href="/services/certificates" className="home-service-card">
+              <div className="home-service-icon">
+                <i className="bi bi-file-earmark-text-fill"></i>
+              </div>
+              <div className="home-service-content">
+                <h3>{t('service-certificates')}</h3>
+                <p>{t('service-certificates-desc')}</p>
+              </div>
+              <i className="bi bi-arrow-right home-service-arrow"></i>
+            </a>
+            <a href="/services" className="home-service-card home-service-card--all">
               <div className="home-service-icon">
                 <i className="bi bi-grid-fill"></i>
               </div>
@@ -164,7 +152,7 @@ export default function HomePage() {
                 <p>{t('popular-browse-directory')}</p>
               </div>
               <i className="bi bi-arrow-right home-service-arrow"></i>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -174,51 +162,51 @@ export default function HomePage() {
         <div className="container">
           <div className="home-stats-v2-header">
             <h2>{t('stats-at-a-glance')}</h2>
-            <Link href="/statistics" className="home-section-link">
+            <a href="/statistics" className="home-section-link">
               {t('stats-view-statistics')} <i className="bi bi-arrow-right"></i>
-            </Link>
+            </a>
           </div>
           <div className="home-stats-v2-grid">
-            <Link href="/statistics" className="home-stat-card">
+            <a href="/statistics" className="home-stat-card">
               <div className="home-stat-card-icon">
                 <i className="bi bi-people-fill"></i>
               </div>
               <div className="home-stat-card-content">
-                <span className="home-stat-card-value">69,296</span>
+                <span className="home-stat-card-value">1,601,902</span>
                 <span className="home-stat-card-label">{t('stats-population-label')}</span>
                 <span className="home-stat-card-source">{t('stats-population-source')}</span>
               </div>
-            </Link>
-            <Link href="/government" className="home-stat-card">
+            </a>
+            <a href="/government#lgus" className="home-stat-card">
               <div className="home-stat-card-icon">
                 <i className="bi bi-geo-alt-fill"></i>
               </div>
               <div className="home-stat-card-content">
-                <span className="home-stat-card-value">22</span>
+                <span className="home-stat-card-value">464</span>
                 <span className="home-stat-card-label">{t('stats-barangays-label')}</span>
                 <span className="home-stat-card-source">{t('stats-barangays-source')}</span>
               </div>
-            </Link>
-            <Link href="/budget" className="home-stat-card">
+            </a>
+            <a href="/budget" className="home-stat-card">
               <div className="home-stat-card-icon">
                 <i className="bi bi-award-fill"></i>
               </div>
               <div className="home-stat-card-content">
-                <span className="home-stat-card-value">1st Class</span>
-                <span className="home-stat-card-label">{t('stats-municipality-label')}</span>
-                <span className="home-stat-card-source">{t('stats-municipality-source')}</span>
+                <span className="home-stat-card-value">{t('stats-first-class')}</span>
+                <span className="home-stat-card-label">{t('stats-province-label')}</span>
+                <span className="home-stat-card-source">{t('stats-province-source')}</span>
               </div>
-            </Link>
-            <Link href="/statistics" className="home-stat-card">
+            </a>
+            <a href="/statistics" className="home-stat-card">
               <div className="home-stat-card-icon">
                 <i className="bi bi-rulers"></i>
               </div>
               <div className="home-stat-card-content">
-                <span className="home-stat-card-value">162.70 km²</span>
+                <span className="home-stat-card-value">10,498.59 km²</span>
                 <span className="home-stat-card-label">{t('stats-land-area-label')}</span>
                 <span className="home-stat-card-source">{t('stats-land-area-source')}</span>
               </div>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -235,28 +223,18 @@ export default function HomePage() {
                 <div
                   className="weather-widget"
                   role="region"
-                  aria-label="Current weather in Solano"
+                  aria-label="Current weather in Malaybalay City"
                 >
                   <div className="weather-current">
                     <div className="weather-current-icon">
                       <i className="bi bi-cloud-sun-fill"></i>
                     </div>
                     <div className="weather-current-info">
-                      <div className="weather-current-temp">29°C</div>
+                      <div className="weather-current-temp">--°C</div>
                       <div className="weather-current-condition">{t('weather-mainly-clear')}</div>
                       <div className="weather-current-location">
                         <i className="bi bi-geo-alt"></i> {t('weather-location')}
                       </div>
-                    </div>
-                  </div>
-                  <div className="weather-stats">
-                    <div className="weather-stat">
-                      <i className="bi bi-droplet"></i>
-                      <span>65%</span>
-                    </div>
-                    <div className="weather-stat">
-                      <i className="bi bi-wind"></i>
-                      <span>12 km/h</span>
                     </div>
                   </div>
                 </div>
@@ -267,20 +245,20 @@ export default function HomePage() {
                 <div
                   id="map-container"
                   role="application"
-                  aria-label="Interactive map of Solano, Nueva Vizcaya"
+                  aria-label="Interactive map of Bukidnon"
                   data-map-loaded="iframe"
                 >
                   <iframe
-                    src="https://www.openstreetmap.org/export/embed.html?bbox=121.1633%2C16.5017%2C121.2033%2C16.5317&layer=mapnik&marker=16.5167%2C121.1833"
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=124.55%2C7.35%2C125.65%2C8.65&layer=mapnik&marker=8.1575%2C125.1278"
                     className="map-iframe"
-                    title="Map of Solano, Nueva Vizcaya"
-                    aria-label="OpenStreetMap showing Solano Municipal Hall, Nueva Vizcaya"
+                    title="Map of Bukidnon"
+                    aria-label="OpenStreetMap of Bukidnon with a marker on the Provincial Capitol in Malaybalay City"
                     loading="lazy"
                   ></iframe>
                 </div>
                 <p className="map-attribution">
-                  <i className="bi bi-geo-alt" aria-hidden="true"></i> Solano Municipal Hall, Nueva
-                  Vizcaya 3708
+                  <i className="bi bi-geo-alt" aria-hidden="true"></i>{' '}
+                  <span>{t('home-capitol-address')}</span>
                 </p>
               </div>
             </div>
@@ -288,7 +266,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Brief History of Solano */}
+      {/* Brief History of Bukidnon */}
       <section className="section history-section">
         <div className="container">
           <div className="home-stats-v2-header">
@@ -298,73 +276,73 @@ export default function HomePage() {
           </div>
           <div className="history-content">
             <div className="history-timeline">
-              <div className="timeline-item" data-year="1760">
+              <div className="timeline-item" data-year="pre-colonial">
                 <div className="timeline-marker"></div>
                 <div className="timeline-content">
-                  <span className="timeline-year">1760</span>
-                  <p>{t('history-1760')}</p>
+                  <span className="timeline-year">{t('history-precolonial-label')}</span>
+                  <p>{t('history-precolonial')}</p>
                 </div>
               </div>
-              <div className="timeline-item" data-year="1767">
+              <div className="timeline-item" data-year="1850">
                 <div className="timeline-marker"></div>
                 <div className="timeline-content">
-                  <span className="timeline-year">1767</span>
-                  <p>{t('history-1767')}</p>
+                  <span className="timeline-year">1850s</span>
+                  <p>{t('history-1850s')}</p>
                 </div>
               </div>
-              <div className="timeline-item" data-year="1768">
+              <div className="timeline-item" data-year="1907">
                 <div className="timeline-marker"></div>
                 <div className="timeline-content">
-                  <span className="timeline-year">1768</span>
-                  <p>{t('history-1768')}</p>
+                  <span className="timeline-year">1907</span>
+                  <p>{t('history-1907')}</p>
                 </div>
               </div>
-              <div className="timeline-item" data-year="1851">
+              <div className="timeline-item" data-year="1917">
                 <div className="timeline-marker"></div>
                 <div className="timeline-content">
-                  <span className="timeline-year">1851</span>
-                  <p>{t('history-1851')}</p>
+                  <span className="timeline-year">1917</span>
+                  <p>{t('history-1917')}</p>
                 </div>
               </div>
-              <div className="timeline-item" data-year="1853">
+              <div className="timeline-item" data-year="1977">
                 <div className="timeline-marker"></div>
                 <div className="timeline-content">
-                  <span className="timeline-year">1853</span>
-                  <p>{t('history-1853')}</p>
+                  <span className="timeline-year">1977</span>
+                  <p>{t('history-1977')}</p>
                 </div>
               </div>
-              <div className="timeline-item" data-year="1889">
+              <div className="timeline-item" data-year="1998">
                 <div className="timeline-marker"></div>
                 <div className="timeline-content">
-                  <span className="timeline-year">1889</span>
-                  <p>{t('history-1889')}</p>
+                  <span className="timeline-year">1998–2001</span>
+                  <p>{t('history-cityhood')}</p>
                 </div>
               </div>
-              <div className="timeline-item" data-year="1957">
+              <div className="timeline-item" data-year="2012">
                 <div className="timeline-marker"></div>
                 <div className="timeline-content">
-                  <span className="timeline-year">1957</span>
-                  <p>{t('history-1957')}</p>
+                  <span className="timeline-year">2012</span>
+                  <p>{t('history-2012')}</p>
                 </div>
               </div>
             </div>
             <div className="history-summary">
               <div className="history-card">
                 <div className="history-card-icon">
-                  <i className="bi bi-geo-alt-fill"></i>
+                  <i className="bi bi-people-fill"></i>
                 </div>
                 <div className="history-card-content">
-                  <h4>{t('history-once-largest-title')}</h4>
-                  <p>{t('history-once-largest-desc')}</p>
+                  <h4>{t('history-card-tribes-title')}</h4>
+                  <p>{t('history-card-tribes')}</p>
                 </div>
               </div>
               <div className="history-card">
                 <div className="history-card-icon">
-                  <i className="bi bi-grid-3x3"></i>
+                  <i className="bi bi-triangle-fill"></i>
                 </div>
                 <div className="history-card-content">
-                  <h4>{t('history-urban-planning-title')}</h4>
-                  <p>{t('history-urban-planning-desc')}</p>
+                  <h4>{t('history-card-highlands-title')}</h4>
+                  <p>{t('history-card-highlands')}</p>
                 </div>
               </div>
             </div>
@@ -579,86 +557,68 @@ export default function HomePage() {
         <div className="container">
           <div className="home-section-header">
             <h2>{t('section-updates')}</h2>
-            <Link href="/news" className="home-section-link">
-              <span>{t('btn-view-all')}</span> <i className="bi bi-arrow-right"></i>
-            </Link>
           </div>
           <div className="home-news-grid">
             <article className="home-news-card">
               <div className="home-news-meta">
                 <span className="home-news-badge home-news-badge--info">
-                  {t('news-announcement')}
+                  <i className="bi bi-facebook" aria-hidden="true"></i> {t('updates-eyebrow')}
                 </span>
-                <span className="home-news-date">Nov 28, 2025</span>
               </div>
-              <h3>
-                <Link href="/news">{t('news-business-permit-title')}</Link>
-              </h3>
-              <p>{t('news-business-permit-desc')}</p>
-            </article>
-            <article className="home-news-card">
-              <div className="home-news-meta">
-                <span className="home-news-badge home-news-badge--success">
-                  {t('news-project')}
-                </span>
-                <span className="home-news-date">Nov 15, 2025</span>
-              </div>
-              <h3>
-                <Link href="/news">{t('news-market-title')}</Link>
-              </h3>
-              <p>{t('news-market-desc')}</p>
-            </article>
-            <article className="home-news-card">
-              <div className="home-news-meta">
-                <span className="home-news-badge home-news-badge--warning">
-                  {t('news-advisory')}
-                </span>
-                <span className="home-news-date">Nov 10, 2025</span>
-              </div>
-              <h3>
-                <Link href="/news">{t('news-power-title')}</Link>
-              </h3>
-              <p>{t('news-power-desc')}</p>
+              <p>{t('updates-desc')}</p>
+              <p>
+                <a
+                  href="https://www.facebook.com/lgubukidnon"
+                  className="btn btn-primary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="bi bi-facebook" aria-hidden="true"></i> {t('updates-cta')}
+                </a>
+              </p>
             </article>
           </div>
         </div>
       </section>
 
-      {/* Municipal Leadership */}
+      {/* Provincial Leadership */}
       <section className="section home-leadership-section">
         <div className="container">
           <div className="home-section-header">
             <h2>{t('section-leadership')}</h2>
-            <Link href="/government" className="home-section-link">
+            <a href="/government/officials" className="home-section-link">
               <span>{t('btn-view-officials')}</span> <i className="bi bi-arrow-right"></i>
-            </Link>
+            </a>
           </div>
           <div className="home-leadership-grid">
             <div className="home-leader-card">
-              <div className="home-leader-badge">{t('title-mayor')}</div>
-              <h3>Hon. Philip A. Dacayo</h3>
+              <div className="home-leader-badge">{t('title-governor')}</div>
+              <h3>Hon. Rogelio Neil P. Roque</h3>
               <div className="home-leader-contacts">
-                <a href="mailto:mayor@solano.gov.ph">
-                  <i className="bi bi-envelope"></i> mayor@solano.gov.ph
-                </a>
-                <a href="tel:0783265002">
-                  <i className="bi bi-telephone"></i> (078) 326-5002
+                <span>
+                  <i className="bi bi-building" aria-hidden="true"></i> <span>{t('home-pgo')}</span>
+                </span>
+                <a href="tel:+63888132457">
+                  <i className="bi bi-telephone"></i> (088) 813-2457
                 </a>
               </div>
             </div>
             <div className="home-leader-card">
-              <div className="home-leader-badge">{t('title-vice-mayor')}</div>
-              <h3>Hon. Eduardo D. Tiongson</h3>
+              <div className="home-leader-badge">{t('title-vice-governor')}</div>
+              <h3>Hon. Clive D. Quiño</h3>
               <div className="home-leader-contacts">
-                <a href="mailto:vicemayor@solano.gov.ph">
-                  <i className="bi bi-envelope"></i> vicemayor@solano.gov.ph
-                </a>
-                <a href="tel:0783265003">
-                  <i className="bi bi-telephone"></i> (078) 326-5003
+                <span>
+                  <i className="bi bi-bank" aria-hidden="true"></i>{' '}
+                  <span>{t('home-sp-presiding-officer')}</span>
+                </span>
+                <a href="/legislative">
+                  <i className="bi bi-arrow-right" aria-hidden="true"></i>{' '}
+                  <span>{t('home-view-legislative')}</span>
                 </a>
               </div>
             </div>
           </div>
+          <p className="home-leadership-term">{t('home-leadership-term')}</p>
         </div>
       </section>
 
@@ -667,29 +627,34 @@ export default function HomePage() {
         <div className="container">
           <div className="home-section-header">
             <h2>{t('section-contact')}</h2>
-            <Link href="/contact" className="home-section-link">
+            <a href="/contact" className="home-section-link">
               {t('btn-view-all')} <i className="bi bi-arrow-right"></i>
-            </Link>
+            </a>
           </div>
           <div className="home-contact-v2-grid">
-            <a href="tel:0788053581" className="home-contact-v2-card">
+            <a href="tel:+63888135741" className="home-contact-v2-card">
               <div className="home-contact-v2-icon">
                 <i className="bi bi-telephone-fill"></i>
               </div>
               <div className="home-contact-v2-content">
                 <h3>{t('contact-phone')}</h3>
-                <p className="home-contact-v2-value">(078) 805-3581</p>
+                <p className="home-contact-v2-value">(088) 813-5741</p>
                 <span className="home-contact-v2-note">{t('contact-hours')}</span>
               </div>
             </a>
-            <a href="mailto:lgusolanonv@gmail.com" className="home-contact-v2-card">
+            <a
+              href="https://bukidnon.gov.ph/"
+              className="home-contact-v2-card"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <div className="home-contact-v2-icon">
-                <i className="bi bi-envelope-fill"></i>
+                <i className="bi bi-globe2"></i>
               </div>
               <div className="home-contact-v2-content">
-                <h3>{t('contact-email')}</h3>
-                <p className="home-contact-v2-value">lgusolanonv@gmail.com</p>
-                <span className="home-contact-v2-note">{t('contact-response')}</span>
+                <h3>{t('contact-website')}</h3>
+                <p className="home-contact-v2-value">bukidnon.gov.ph</p>
+                <span className="home-contact-v2-note">{t('contact-website-note')}</span>
               </div>
             </a>
             <div className="home-contact-v2-card">
@@ -698,16 +663,16 @@ export default function HomePage() {
               </div>
               <div className="home-contact-v2-content">
                 <h3>{t('contact-address')}</h3>
-                <p className="home-contact-v2-value">{t('contact-municipal-hall')}</p>
-                <span className="home-contact-v2-note">Solano, Nueva Vizcaya 3708</span>
+                <p className="home-contact-v2-value">{t('contact-capitol-compound')}</p>
+                <span className="home-contact-v2-note">{t('contact-capitol-city')}</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Solano Quiz CTA */}
-      <section className="quiz-cta-section" aria-label="Solano Quiz">
+      {/* Volunteer CTA */}
+      <section className="quiz-cta-section" aria-labelledby="volunteer-cta-heading">
         <div className="container">
           <div className="quiz-cta-inner">
             <div className="quiz-cta-animation" aria-hidden="true">
@@ -720,16 +685,18 @@ export default function HomePage() {
               ></dotlottie-player>
             </div>
             <div className="quiz-cta-content">
-              <h2 className="quiz-cta-heading">{t('quiz-title')}</h2>
-              <p className="quiz-cta-subtitle">{t('quiz-subtitle')}</p>
-              <p className="quiz-cta-description">{t('quiz-description')}</p>
+              <h2 id="volunteer-cta-heading" className="quiz-cta-heading">
+                {t('volunteer-heading')}
+              </h2>
+              <p className="quiz-cta-subtitle">{t('volunteer-subtitle')}</p>
+              <p className="quiz-cta-description">{t('volunteer-description')}</p>
               <a
-                href="https://quiz.bettersolano.org/"
+                href="https://github.com/DMNCDLPRT/betterbukidnon"
                 className="quiz-cta-btn"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i className="bi bi-play-circle-fill" aria-hidden="true"></i> {t('quiz-take')}
+                <i className="bi bi-github" aria-hidden="true"></i> {t('volunteer-cta')}
               </a>
             </div>
           </div>

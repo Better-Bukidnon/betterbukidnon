@@ -1,65 +1,55 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8777S9SP9X"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      gtag('config', 'G-8777S9SP9X');
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Infrastructure and engineering services in Solano, Nueva Vizcaya. Apply for building permits, construction permits, and access engineering services from LGU Solano."
+      content="Infrastructure in Bukidnon: the Provincial Engineer's Office for provincial roads and projects, city and municipal building permits, and DPWH for national roads. A volunteer-run guide."
     />
-    <meta name="author" content="Ramon Logan Jr." />
+    <meta name="author" content="BetterBukidnon volunteers" />
     <meta
       name="keywords"
-      content="building permit Solano, construction permit, engineering services, infrastructure, Solano Nueva Vizcaya, building requirements, construction services, LGU engineering"
+      content="Bukidnon infrastructure, Provincial Engineer, PEO, roads, bridges, building permit, DPWH, waterworks"
     />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://bettersolano.org/services/infrastructure" />
+    <link rel="canonical" href="https://betterbukidnon.org/services/infrastructure" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://bettersolano.org/services/infrastructure" />
-    <meta property="og:title" content="Infrastructure & Building Permits | BetterSolano.org" />
+    <meta property="og:url" content="https://betterbukidnon.org/services/infrastructure" />
+    <meta property="og:title" content="Infrastructure & Building Permits | BetterBukidnon.org" />
     <meta
       property="og:description"
-      content="Infrastructure and engineering services in Solano, Nueva Vizcaya. Apply for building permits, construction permits, and access engineering services from LGU Solano."
+      content="Infrastructure in Bukidnon: the Provincial Engineer's Office for provincial roads and projects, city and municipal building permits, and DPWH for national roads. A volunteer-run guide."
     />
     <meta
       property="og:image"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:type" content="image/png" />
     <meta
       property="og:image:secure_url"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
     <meta property="og:locale" content="en_PH" />
-    <meta property="og:site_name" content="BetterSolano.org" />
+    <meta property="og:site_name" content="BetterBukidnon.org" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://bettersolano.org/services/infrastructure" />
-    <meta name="twitter:title" content="Infrastructure & Building Permits | BetterSolano.org" />
+    <meta name="twitter:url" content="https://betterbukidnon.org/services/infrastructure" />
+    <meta name="twitter:title" content="Infrastructure & Building Permits | BetterBukidnon.org" />
     <meta
       name="twitter:description"
-      content="Infrastructure and engineering services in Solano, Nueva Vizcaya. Apply for building permits, construction permits, and access engineering services from LGU Solano."
+      content="Infrastructure in Bukidnon: the Provincial Engineer's Office for provincial roads and projects, city and municipal building permits, and DPWH for national roads. A volunteer-run guide."
     />
     <meta
       name="twitter:image"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
-    <title>Infrastructure & Building Permits | BetterSolano.org</title>
+    <title>Infrastructure & Building Permits | BetterBukidnon.org</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/logo/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="../assets/images/logo/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -80,6 +70,106 @@
     <link rel="stylesheet" href="../assets/css/responsive.css" />
     <link rel="stylesheet" href="../assets/css/accessibility.css" />
     <link rel="stylesheet" href="../assets/css/footer.css" />
+
+    <style>
+      .bk-section-title {
+        font-size: 1.25rem;
+        margin: 0 0 4px;
+      }
+      .bk-section-intro {
+        color: var(--color-text-light);
+        margin: 0 0 var(--spacing-md, 16px);
+        max-width: 760px;
+      }
+      .bk-card {
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .bk-card h3 {
+        font-size: 1rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .bk-card h3 i {
+        color: var(--color-primary);
+      }
+      .bk-card p {
+        margin: 0;
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: var(--color-text);
+      }
+      .bk-card-link {
+        margin-top: auto;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+      .bk-card-link:hover {
+        text-decoration: underline;
+      }
+      .bk-contacts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .bk-contact {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
+        padding: 12px 16px;
+        text-decoration: none;
+        color: var(--color-text);
+        font-size: 0.875rem;
+      }
+      .bk-contact i {
+        color: var(--color-primary);
+        font-size: 1.125rem;
+      }
+      .bk-contact strong {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--color-text-light);
+        font-weight: 600;
+      }
+      .charter-note {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-left: 4px solid var(--color-primary);
+        border-radius: 8px;
+        padding: 14px 16px;
+        font-size: 0.8125rem;
+        line-height: 1.6;
+      }
+      .charter-note i {
+        color: var(--color-primary);
+        margin-top: 2px;
+      }
+      .charter-note p {
+        margin: 0;
+        font-size: inherit;
+        color: inherit;
+      }
+      .charter-note a {
+        color: var(--color-primary);
+        font-weight: 600;
+        text-decoration: underline;
+      }
+    </style>
   </head>
 
   <body>
@@ -92,29 +182,29 @@
       <div class="container">
         <div class="hotline-inner">
           <div class="hotline-items">
-            <a href="tel:09274008033" class="hotline-item">
-              <i class="bi bi-shield-fill"></i>
-              <span>Police: 0927 400 8033</span>
+            <a href="tel:911" class="hotline-item">
+              <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+              <span>Emergency: 911</span>
             </a>
-            <a href="tel:09162840885" class="hotline-item">
-              <i class="bi bi-heart-fill"></i>
-              <span>MSWDO: 0916 284 0885</span>
+            <a href="tel:+63888131262" class="hotline-item">
+              <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+              <span>PDRRMD: (088) 813-1262</span>
             </a>
-            <a href="tel:09360620305" class="hotline-item">
-              <i class="bi bi-fire"></i>
-              <span>Fire: 0936 062 0305</span>
+            <a href="tel:+63888134263" class="hotline-item">
+              <i class="bi bi-shield-fill" aria-hidden="true"></i>
+              <span>Police: (088) 813-4263</span>
             </a>
-            <a href="tel:0906188086" class="hotline-item">
-              <i class="bi bi-building"></i>
-              <span>DILG: 0906 188 086</span>
+            <a href="tel:+63888135449" class="hotline-item">
+              <i class="bi bi-fire" aria-hidden="true"></i>
+              <span>Fire: (088) 813-5449</span>
             </a>
-            <a href="tel:09263833744" class="hotline-item">
-              <i class="bi bi-exclamation-triangle-fill"></i>
-              <span>MDRRMO: 0926 383 3744</span>
+            <a href="tel:+63888135631" class="hotline-item">
+              <i class="bi bi-heart-pulse-fill" aria-hidden="true"></i>
+              <span>PHO: (088) 813-5631</span>
             </a>
-            <a href="tel:09068195569" class="hotline-item">
-              <i class="bi bi-truck"></i>
-              <span>R2TMC: 0906 819 5569</span>
+            <a href="tel:+63888135734" class="hotline-item">
+              <i class="bi bi-heart-fill" aria-hidden="true"></i>
+              <span>PSWDO: (088) 813-5734</span>
             </a>
           </div>
         </div>
@@ -127,8 +217,8 @@
         <div class="logo-container">
           <a href="../"
             ><img
-              src="../assets/images/logo/better-solano-logo.svg"
-              alt="Municipality of Solano Logo"
+              src="../assets/images/logo/better-bukidnon-logo.svg"
+              alt="Province of Bukidnon Logo"
               class="logo-img"
           /></a>
         </div>
@@ -136,7 +226,14 @@
           <ul>
             <li><a href="../" data-i18n="nav-home">Home</a></li>
             <li class="has-dropdown">
-              <a href="./" class="active" data-i18n="nav-services" aria-haspopup="true" aria-expanded="false">Services</a>
+              <a
+                href="./"
+                class="active"
+                data-i18n="nav-services"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Services</a
+              >
               <ul class="dropdown-menu">
                 <li><a href="certificates" data-i18n="infra-certificates">Certificates</a></li>
                 <li><a href="business" data-i18n="infra-business">Business</a></li>
@@ -157,7 +254,13 @@
             <li><a href="../government/" data-i18n="nav-government">Government</a></li>
             <li><a href="../statistics/" data-i18n="nav-statistics">Statistics</a></li>
             <li class="has-dropdown">
-              <a href="../legislative/" data-i18n="nav-legislative" aria-haspopup="true" aria-expanded="false">Legislative</a>
+              <a
+                href="../legislative/"
+                data-i18n="nav-legislative"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Legislative</a
+              >
               <ul class="dropdown-menu">
                 <li>
                   <a href="../legislative/ordinance-framework" data-i18n="infra-ordinance-framework"
@@ -181,7 +284,7 @@
           <div class="lang-selector">
             <button class="btn btn-secondary btn-sm lang-btn" data-lang="en">EN</button>
             <button class="btn btn-secondary btn-sm lang-btn" data-lang="fil">FIL</button>
-            <button class="btn btn-secondary btn-sm lang-btn" data-lang="ilo">ILO</button>
+            <button class="btn btn-secondary btn-sm lang-btn" data-lang="ceb">CEB</button>
           </div>
         </div>
       </div>
@@ -197,9 +300,9 @@
               <span class="rate-display">1 USD = ₱ --</span>
             </span>
           </div>
-          <div class="info-bar-item info-bar-weather" aria-label="Current weather in Solano">
+          <div class="info-bar-item info-bar-weather" aria-label="Current weather in Bukidnon">
             <i class="bi bi-thermometer-half"></i>
-            <span class="weather-location">Solano</span>
+            <span class="weather-location">Malaybalay</span>
             <span class="weather-temp">--°C</span>
           </div>
           <div class="info-bar-item info-bar-datetime" aria-label="Philippine Date and Time">
@@ -219,7 +322,7 @@
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           <a href="../" data-i18n="infra-home">Home</a><span>/</span>
           <a href="./" data-i18n="infra-services">Services</a><span>/</span>
-          <span aria-current="page">Infrastructure</span>
+          <span aria-current="page" data-i18n="infra-bc">Infrastructure</span>
         </nav>
       </div>
       <section class="page-header">
@@ -227,130 +330,148 @@
           <div class="page-header-content">
             <span class="page-header-badge"
               ><i class="bi bi-building-fill-gear"></i>
-              <span data-i18n="infra-page-badge">Infrastructure</span></span
+              <span data-i18n="infra-badge">Infrastructure</span></span
             >
-            <h1 data-i18n="infra-page-title">Infrastructure Services</h1>
-            <p class="page-header-desc" data-i18n="infra-page-desc">
-              Building permits, construction, and engineering services
+            <h1 data-i18n="infra-h1">Infrastructure Services</h1>
+            <p class="page-header-desc" data-i18n="infra-hdesc">
+              Provincial roads, bridges and projects, and who issues building permits
             </p>
+          </div>
+        </div>
+      </section>
+      <section class="section section-compact">
+        <div class="container">
+          <div class="bk-contacts">
+            <a class="bk-contact" href="tel:0888133656"
+              ><i class="bi bi-tools" aria-hidden="true"></i
+              ><span
+                ><strong data-i18n="infra-x1">Provincial Engineer's Office</strong
+                ><span data-i18n="infra-x2">(088) 813-3656</span></span
+              ></a
+            >
+            <a class="bk-contact" href="tel:0888133688"
+              ><i class="bi bi-droplet" aria-hidden="true"></i
+              ><span
+                ><strong data-i18n="infra-x3">PEO Waterworks</strong
+                ><span data-i18n="infra-x4">(088) 813-3688</span></span
+              ></a
+            >
           </div>
         </div>
       </section>
       <section class="section">
         <div class="container">
+          <h2 class="bk-section-title" data-i18n="infra-x5">What the Province does</h2>
+          <p class="bk-section-intro" data-i18n="infra-x6">
+            The Province builds and maintains provincial infrastructure under the Local Government
+            Code.
+          </p>
           <div class="grid grid-3">
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-hammer"></i> <span data-i18n="infra-building">Building Permit</span>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-cone-striped" aria-hidden="true"></i>
+                <span data-i18n="infra-x8">Provincial Engineer's Office</span>
               </h3>
-              <p class="service-item-desc" data-i18n="infra-building-desc">
-                Permit for new construction and renovation
+              <p data-i18n="infra-x9">
+                In general, the PEO plans, builds and maintains provincial roads, bridges and other
+                provincial public works.
               </p>
-              <div class="service-item-meta">
-                <span
-                  ><strong data-i18n="label-fee">Fee:</strong>
-                  <span data-i18n="label-varies">Varies</span></span
-                >
-                <span><strong data-i18n="label-time">Time:</strong> 7-14 days</span>
-              </div>
+              <a class="bk-card-link" href="/service-details/provincial-engineering"
+                ><span data-i18n="infra-x7">Office details</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
             </div>
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-house"></i>
-                <span data-i18n="infra-occupancy-permit">Occupancy Permit</span>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-diagram-3" aria-hidden="true"></i>
+                <span data-i18n="infra-x11">Planning</span>
               </h3>
-              <p
-                class="service-item-desc"
-                data-i18n="infra-certificate-of-occupancy-for-completed-buildings"
-              >
-                Certificate of occupancy for completed buildings
+              <p data-i18n="infra-x12">
+                The Provincial Planning and Development Office prepares the development plan that
+                sets project priorities.
               </p>
-              <div class="service-item-meta">
-                <span><strong data-i18n="infra-fee">Fee:</strong> Varies</span>
-                <span><strong data-i18n="infra-time">Time:</strong> 3-5 days</span>
-              </div>
+              <a class="bk-card-link" href="/service-details/provincial-planning"
+                ><span data-i18n="infra-x10">Planning office</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
             </div>
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-rulers"></i>
-                <span data-i18n="infra-engineering-services">Engineering Services</span>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-box-seam" aria-hidden="true"></i>
+                <span data-i18n="infra-x14">Supplies and equipment</span>
               </h3>
-              <p class="service-item-desc" data-i18n="infra-technical-assistance-and-plan-review">
-                Technical assistance and plan review
+              <p data-i18n="infra-x15">
+                The Provincial General Services Office manages provincial property and procurement
+                support.
               </p>
-              <div class="service-item-meta">
-                <span><strong data-i18n="infra-fee">Fee:</strong> Varies</span>
-                <span><strong data-i18n="infra-time">Time:</strong> Varies</span>
-              </div>
+              <a class="bk-card-link" href="/service-details/provincial-general-services"
+                ><span data-i18n="infra-x13">General Services</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
             </div>
           </div>
         </div>
       </section>
-
-      <!-- Responsible Offices -->
-      <section class="section section-compact bg-alt">
+      <section class="section">
         <div class="container">
-          <h2 class="section-title-sm" data-i18n="section-responsible-offices">
-            Responsible Offices
-          </h2>
-          <div class="office-cards-grid">
-            <a href="../service-details/municipal-engineering" class="office-card">
-              <div class="office-card-icon">
-                <i class="bi bi-hammer"></i>
-              </div>
-              <div class="office-card-content">
-                <h3 class="office-card-title" data-i18n="infra-municipal-engineering-office">
-                  Municipal Engineering Office
-                </h3>
-                <p
-                  class="office-card-desc"
-                  data-i18n="infra-building-permits-construction-permits-and"
-                >
-                  Building permits, construction permits, and engineering services
-                </p>
-              </div>
-              <div class="office-card-arrow">
-                <i class="bi bi-arrow-right"></i>
-              </div>
-            </a>
-            <a href="../service-details/municipal-planning" class="office-card">
-              <div class="office-card-icon">
-                <i class="bi bi-building-gear"></i>
-              </div>
-              <div class="office-card-content">
-                <h3 class="office-card-title" data-i18n="infra-municipal-planning-development">
-                  Municipal Planning & Development
-                </h3>
-                <p
-                  class="office-card-desc"
-                  data-i18n="infra-zoning-clearance-locational-clearance-and-land"
-                >
-                  Zoning clearance, locational clearance, and land use services
-                </p>
-              </div>
-              <div class="office-card-arrow">
-                <i class="bi bi-arrow-right"></i>
-              </div>
-            </a>
-            <a href="../service-details/municipal-general-services" class="office-card">
-              <div class="office-card-icon">
-                <i class="bi bi-gear-wide-connected"></i>
-              </div>
-              <div class="office-card-content">
-                <h3 class="office-card-title" data-i18n="infra-municipal-general-services-office">
-                  Municipal General Services Office
-                </h3>
-                <p
-                  class="office-card-desc"
-                  data-i18n="infra-property-custodianship-supplies-management"
-                >
-                  Property custodianship, supplies management, vehicle services, and utilities
-                </p>
-              </div>
-              <div class="office-card-arrow">
-                <i class="bi bi-arrow-right"></i>
-              </div>
-            </a>
+          <h2 class="bk-section-title" data-i18n="infra-x16">Who handles what</h2>
+          <p class="bk-section-intro" data-i18n="infra-x17">
+            Different roads and permits belong to different levels of government.
+          </p>
+          <div class="grid grid-3">
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-house-gear" aria-hidden="true"></i>
+                <span data-i18n="infra-x19">Building and zoning permits</span>
+              </h3>
+              <p data-i18n="infra-x20">
+                Building permits, occupancy permits and zoning clearances are issued by the Office
+                of the Building Official of your city or municipality.
+              </p>
+              <a class="bk-card-link" href="/government/#lgus"
+                ><span data-i18n="infra-x18">Find your city or municipality</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
+            </div>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-signpost-split" aria-hidden="true"></i>
+                <span data-i18n="infra-x21">National roads</span>
+              </h3>
+              <p data-i18n="infra-x22">
+                National highways and bridges are under the Department of Public Works and Highways.
+                Barangay and municipal roads are handled by the local government concerned.
+              </p>
+            </div>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-megaphone" aria-hidden="true"></i>
+                <span data-i18n="infra-x23">Report a problem</span>
+              </h3>
+              <p data-i18n="infra-x24">
+                For a damaged provincial road or bridge, contact the Provincial Engineer's Office.
+                For other roads, contact the city, municipality or barangay.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section section-compact">
+        <div class="container">
+          <div class="charter-note" role="note">
+            <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
+            <p>
+              <span data-i18n="infra-note"
+                >This page is a general guide written by volunteers. Requirements, fees and
+                processing times are set by each office and may vary, so confirm with the office
+                before you go. The official source is the</span
+              >
+              <a href="https://bukidnon.gov.ph/" target="_blank" rel="noopener noreferrer"
+                ><span data-i18n="infra-note-link"
+                  >Provincial Government of Bukidnon website</span
+                ></a
+              >.
+            </p>
           </div>
         </div>
       </section>
@@ -360,60 +481,41 @@
         <div class="footer-main-new">
           <div class="footer-brand">
             <img
-              src="../assets/images/logo/better-solano-logo-white.svg"
-              alt="Better Solano logo"
+              src="../assets/images/logo/better-bukidnon-logo-white.svg"
+              alt="Better Bukidnon logo"
               class="footer-logo"
             />
             <p
               class="footer-tagline"
-              data-i18n="infra-empowering-the-people-of-solano-with-transparent"
+              data-i18n="infra-empowering-the-people-of-bukidnon-with-transparent"
             >
-              Empowering the people of Solano with transparent access to the services, programs, and
-              public funds of LGU Solano.
+              Empowering the people of Bukidnon with transparent access to the services, programs,
+              and public funds of LGU Bukidnon.
             </p>
             <div class="footer-social-new">
               <a
-                href="https://www.facebook.com/bettersolano.org"
+                href="https://github.com/DMNCDLPRT/betterbukidnon"
                 class="footer-social-btn"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook"
-                ><i class="bi bi-facebook"></i
+                aria-label="GitHub"
+                ><i class="bi bi-github"></i
               ></a>
               <a
-                href="https://www.linkedin.com/company/bettersolano/"
+                href="mailto:volunteer@betterbukidnon.org"
                 class="footer-social-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                ><i class="bi bi-linkedin"></i
-              ></a>
-              <a
-                href="https://discord.com/invite/qeSu7RJkjQ"
-                class="footer-social-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Discord"
-                ><i class="bi bi-discord"></i
+                aria-label="Email the volunteers"
+                ><i class="bi bi-envelope-fill"></i
               ></a>
             </div>
           </div>
           <div class="footer-column">
             <h4 data-i18n="infra-quick-links">Quick Links</h4>
             <ul class="footer-links-new">
-              <li>
-                <a
-                  href="https://quiz.bettersolano.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-i18n="infra-solano-quiz"
-                  >Solano Quiz</a
-                >
-              </li>
               <li><a href="../sitemap/" data-i18n="infra-sitemap">Sitemap</a></li>
               <li>
                 <a
-                  href="https://solano.gov.ph/wp-content/uploads/2025/10/As-of-October-21-2025-2.pdf"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-i18n="infra-citizens-charter"
@@ -449,29 +551,29 @@
               </li>
               <li>
                 <a
-                  href="https://solano.gov.ph/"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="infra-official-lgu-solano-portal"
-                  >Official LGU Solano Portal</a
+                  data-i18n="infra-official-lgu-bukidnon-portal"
+                  >Official LGU Bukidnon Portal</a
                 >
               </li>
               <li>
                 <a
-                  href="https://sangguniangbayan.solano.gov.ph/"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-i18n="infra-sangguniang-bayan"
-                  >Sangguniang Bayan</a
+                  >Sangguniang Panlalawigan</a
                 >
               </li>
               <li>
                 <a
-                  href="https://www.facebook.com/OfficialLguSolanoFanpage/"
+                  href="https://www.facebook.com/lgubukidnon"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="infra-lgu-solano-facebook"
-                  >LGU Solano Facebook</a
+                  data-i18n="infra-lgu-bukidnon-facebook"
+                  >LGU Bukidnon Facebook</a
                 >
               </li>
               <li>
@@ -498,16 +600,16 @@
             <div
               class="footer-cost"
               role="status"
-              aria-label="Cost to the People of Solano: Zero Pesos"
+              aria-label="Cost to the People of Bukidnon: Zero Pesos"
             >
-              Cost to the People of Solano = <span class="footer-cost-value">₱0</span>
+              Cost to the People of Bukidnon = <span class="footer-cost-value">₱0</span>
             </div>
-            <a href="mailto:volunteer@bettersolano.org" class="footer-contribute"
+            <a href="mailto:volunteer@betterbukidnon.org" class="footer-contribute"
               ><i class="bi bi-envelope-heart"></i>
               <span data-i18n="infra-volunteer-with-us">Volunteer with us</span></a
             >
             <a
-              href="https://github.com/BetterSolano/bettersolano"
+              href="https://github.com/DMNCDLPRT/betterbukidnon"
               class="footer-contribute"
               target="_blank"
               rel="noopener noreferrer"
@@ -515,32 +617,6 @@
               <span data-i18n="infra-contribute-code-with-us">Contribute code with us</span></a
             >
             <div class="footer-partners">
-              <a
-                href="https://abakada.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abakada.org"
-                ><img
-                  src="../assets/images/logo/abakada-footer.svg"
-                  alt="Abakada.org"
-                  class="footer-partner-logo"
-                  width="120"
-                  height="28"
-                  loading="lazy"
-              /></a>
-              <a
-                href="https://hivcareph.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="HIV Care Philippines"
-                ><img
-                  src="../assets/images/logo/hiv-care-logo-footer.svg"
-                  alt="HIV Care Philippines"
-                  class="footer-partner-logo"
-                  width="120"
-                  height="28"
-                  loading="lazy"
-              /></a>
               <a
                 href="https://bettergov.ph"
                 target="_blank"
@@ -559,12 +635,13 @@
         </div>
         <div class="footer-bottom-new">
           <div class="footer-copyright">
-            <span class="footer-copyright-text">&copy; 2026 BetterSolano.org</span>
+            <span class="footer-copyright-text">&copy; 2026 BetterBukidnon.org</span>
             <span class="footer-copyright-license">MIT | CC BY 4.0</span>
             <span class="footer-copyright-disclaimer"
-              >All public information sourced from official government portals.</span
+              >Volunteer civic project, not an official government website. Built on the
+              BetterSolano template (MIT).</span
             >
-            <span class="footer-version"><i class="bi bi-boxes"></i> Ver. 1.1.19</span>
+            <span class="footer-version"><i class="bi bi-boxes"></i> Ver. 2.0.0</span>
           </div>
         </div>
       </div>

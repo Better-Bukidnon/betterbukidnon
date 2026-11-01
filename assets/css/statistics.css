@@ -1206,3 +1206,178 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================
+   BUKIDNON DATA BLOCKS (districts, LGU table, notes)
+   ============================================ */
+
+.stats-note {
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: 0.9375rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.stats-empty {
+  color: var(--color-text-light);
+  font-size: 0.9375rem;
+  text-align: center;
+  margin: 0;
+  padding: 16px;
+}
+
+/* District rows beside the doughnut chart */
+.district-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 6px 12px;
+  padding: 12px 16px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-left: 4px solid var(--district-color, var(--color-primary));
+}
+
+.district-row .district-name {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.district-row .district-pop {
+  font-weight: 600;
+  color: var(--color-text);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.district-row .district-pop small {
+  font-weight: 400;
+  color: var(--color-text-light);
+}
+
+.district-row .bar-wrap {
+  grid-column: 1 / -1;
+}
+
+.district-row .bar-wrap .bar {
+  background: var(--district-color, var(--color-primary));
+}
+
+.district-row .district-lgus {
+  grid-column: 1 / -1;
+  font-size: 0.8125rem;
+  color: var(--color-text-light);
+  line-height: 1.4;
+}
+
+/* City / municipality table */
+.stats-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: white;
+}
+
+.stats-lgu-table {
+  min-width: 560px;
+  font-size: 0.9375rem;
+}
+
+.stats-lgu-table th[scope='row'] {
+  font-weight: 600;
+  background: none;
+  color: var(--color-text);
+}
+
+.stats-lgu-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.stats-lgu-table tfoot th,
+.stats-lgu-table tfoot td {
+  font-weight: 700;
+  border-top: 2px solid var(--color-primary);
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+}
+
+.stats-capital {
+  font-weight: 400;
+  color: var(--color-text-light);
+}
+
+/* Small info cards (languages, peoples, pending data) */
+.stats-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.stats-info-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.stats-info-card h3 {
+  font-size: 1.0625rem;
+  color: var(--color-text);
+  margin-bottom: 12px;
+}
+
+.stats-info-card ul {
+  margin: 0 0 12px;
+  padding-left: 1.25rem;
+  line-height: 1.7;
+}
+
+.stats-info-card .stats-note {
+  text-align: left;
+  font-size: 0.8125rem;
+}
+
+/* Empty state (CMCI) */
+.stats-empty-card {
+  background: white;
+  border-radius: 12px;
+  padding: 32px 24px;
+  border: 1px dashed rgba(0, 50, 160, 0.3);
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.stats-empty-card > i {
+  font-size: 2rem;
+  color: var(--color-primary);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.stats-empty-card p {
+  color: var(--color-text-light);
+  margin-bottom: 16px;
+}
+
+/* Chart replaced by a message (no data or Chart.js unavailable) */
+.chart-wrapper.chart-wrapper-empty,
+.distribution-chart.chart-wrapper-empty {
+  height: auto;
+}
+
+@media (max-width: 575px) {
+  .stats-lgu-table {
+    font-size: 0.8125rem;
+  }
+
+  .stats-info-card,
+  .stats-empty-card {
+    padding: 20px 16px;
+  }
+}

@@ -150,7 +150,7 @@ try {
     await page.locator('.vol-popup-skip').click();
     await sleep(500);
     ok((await overlay.count()) === 0, 'overlay removed from DOM after dismiss');
-    const flag = await page.evaluate(() => localStorage.getItem('bs-vol-popup-v1'));
+    const flag = await page.evaluate(() => localStorage.getItem('bb-vol-popup-v1'));
     ok(flag === '1', 'dismissal persisted to localStorage');
 
     // Reload: popup must NOT show again (show-once). Assert via computed opacity,
