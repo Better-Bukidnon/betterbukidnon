@@ -2655,7 +2655,7 @@ const translations = {
     'faq-see-github': 'BetterBukidnon on GitHub',
     'faq-q-languages': 'What languages is this website available in?',
     'faq-a-languages':
-      'English, Filipino and Cebuano (Binisaya). Use the EN, FIL and CEB buttons at the top of each page. Some pages are not fully translated yet; untranslated text appears in English.',
+      'English, Filipino and Cebuano (Binisaya). Choose a language with the globe button at the top of each page. Some pages are not fully translated yet; untranslated text appears in English.',
     'faq-a-report-1': 'Thank you for helping us improve! Email',
     'faq-a-report-2':
       'with "Website Issue" as the subject. Describe the problem and include the page address if you can.',
@@ -7544,7 +7544,7 @@ const translations = {
     'faq-see-github': 'BetterBukidnon sa GitHub',
     'faq-q-languages': 'Anong mga wika ang magagamit sa website na ito?',
     'faq-a-languages':
-      'Ingles, Filipino at Cebuano (Binisaya). Gamitin ang mga button na EN, FIL at CEB sa itaas ng bawat pahina. May ilang pahinang hindi pa ganap na naisasalin; lalabas sa Ingles ang hindi pa naisasaling teksto.',
+      'Ingles, Filipino at Cebuano (Binisaya). Pumili ng wika gamit ang button na may globo sa itaas ng bawat pahina. May ilang pahinang hindi pa ganap na naisasalin; lalabas sa Ingles ang hindi pa naisasaling teksto.',
     'faq-a-report-1': 'Salamat sa pagtulong na mapabuti kami! Mag-email sa',
     'faq-a-report-2':
       'na may paksang “Website Issue”. Ilarawan ang problema at isama ang address ng pahina kung maaari.',
