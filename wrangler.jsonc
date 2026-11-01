@@ -16,5 +16,15 @@
   "previews": {},
   // Serve previews on *.workers.dev (Cloudflare adds X-Robots-Tag: noindex there).
   // workers.dev is disabled for production, so preview URLs stay off unless set here.
-  "preview_urls": true
+  "preview_urls": true,
+
+  // The top level above is the development Worker "betterbukidnon" (branch: develop).
+  // `npx wrangler deploy --env production` deploys the Worker "betterbukidnon-production"
+  // (branch: main). It inherits assets, compatibility_date and observability.
+  "env": {
+    "production": {
+      // No branch previews on production; the development Worker handles those.
+      "preview_urls": false
+    }
+  }
 }
