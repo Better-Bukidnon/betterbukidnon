@@ -17,6 +17,11 @@
   // Serve previews on *.workers.dev (Cloudflare adds X-Robots-Tag: noindex there).
   // workers.dev is disabled for production, so preview URLs stay off unless set here.
   "preview_urls": true,
+  // Custom domains are managed here, not in the dashboard. Each deploy sets that
+  // Worker's custom domains to the list for its environment.
+  "routes": [
+    { "pattern": "dev.betterbukidnon.org", "custom_domain": true }
+  ],
 
   // The top level above is the development Worker "betterbukidnon" (branch: develop).
   // `npx wrangler deploy --env production` deploys the Worker "betterbukidnon-production"
@@ -24,7 +29,11 @@
   "env": {
     "production": {
       // No branch previews on production; the development Worker handles those.
-      "preview_urls": false
+      "preview_urls": false,
+      // Must be set here: without it, production would inherit dev.betterbukidnon.org.
+      "routes": [
+        { "pattern": "betterbukidnon.org", "custom_domain": true }
+      ]
     }
   }
 }
