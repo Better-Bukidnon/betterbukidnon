@@ -1,105 +1,35 @@
 /**
- * Transparency Page 2025 - Financial Data and Utilities
- * Displays Statement of Receipts and Expenditures for FY 2025 Q1 and Q2
+ * Transparency Page 2025 - Financial Data and Utilities (legacy layout)
+ *
+ * Not loaded by any page; budget/index.html uses transparency-v2.js, which
+ * reads data/fiscal_transparency.json. Kept for reference and tests.
+ *
+ * SRE_DATA holds one entry per quarter ('q1', 'q2', ...) in millions of pesos,
+ * copied from the official BLGF Statement of Receipts and Expenditures.
+ * It is empty until official figures for the Province of Bukidnon are added;
+ * while empty, every update function below does nothing.
+ *
+ * Entry shape:
+ *   q1: {
+ *     period: 'Q1 2025', periodLabel: 'Jan - Mar',
+ *     income: {
+ *       local: {
+ *         taxRevenue: { realPropertyTax: { generalFund, sef, total }, businessTax, otherTaxes, total },
+ *         nonTaxRevenue: { regulatoryFees, serviceCharges, economicEnterprises, otherReceipts, total },
+ *         total,
+ *       },
+ *       external: { nationalTaxAllotment, otherShares, interLocalTransfers, extraordinaryReceipts, total },
+ *       total,
+ *     },
+ *     expenditures: {
+ *       generalPublicServices,
+ *       socialServices: { education, health, labor, housing, socialWelfare, total },
+ *       economicServices, debtService, total,
+ *     },
+ *     netOperatingIncome, fundBalanceEnd, fundBalanceBeginning,
+ *   }
  */
-
-// Financial data parsed from CSV files
-const SRE_DATA = {
-  q1: {
-    period: 'Q1 2025',
-    periodLabel: 'Jan - Mar',
-    income: {
-      local: {
-        taxRevenue: {
-          realPropertyTax: { generalFund: 6.21, sef: 7.76, total: 13.97 },
-          businessTax: 49.66,
-          otherTaxes: 1.58,
-          total: 65.21,
-        },
-        nonTaxRevenue: {
-          regulatoryFees: 10.43,
-          serviceCharges: 13.1,
-          economicEnterprises: 0,
-          otherReceipts: 0.11,
-          total: 23.64,
-        },
-        total: 88.85,
-      },
-      external: {
-        nationalTaxAllotment: 69.62,
-        otherShares: 0,
-        interLocalTransfers: 0,
-        extraordinaryReceipts: 0,
-        total: 69.62,
-      },
-      total: 158.47,
-    },
-    expenditures: {
-      generalPublicServices: 42.76,
-      socialServices: {
-        education: 2.42,
-        health: 7.09,
-        labor: 0,
-        housing: 0,
-        socialWelfare: 3.83,
-        total: 13.33,
-      },
-      economicServices: 11.07,
-      debtService: 0.35,
-      total: 67.51,
-    },
-    netOperatingIncome: 90.96,
-    fundBalanceEnd: 283.29,
-    fundBalanceBeginning: 204.64,
-  },
-  q2: {
-    period: 'Q2 2025',
-    periodLabel: 'Apr - Jun',
-    income: {
-      local: {
-        taxRevenue: {
-          realPropertyTax: { generalFund: 7.05, sef: 8.82, total: 15.87 },
-          businessTax: 60.47,
-          otherTaxes: 1.82,
-          total: 78.16,
-        },
-        nonTaxRevenue: {
-          regulatoryFees: 12.65,
-          serviceCharges: 23.12,
-          economicEnterprises: 0,
-          otherReceipts: 0.23,
-          total: 36.0,
-        },
-        total: 114.15,
-      },
-      external: {
-        nationalTaxAllotment: 139.25,
-        otherShares: 0,
-        interLocalTransfers: 0,
-        extraordinaryReceipts: 0,
-        total: 139.25,
-      },
-      total: 253.4,
-    },
-    expenditures: {
-      generalPublicServices: 88.31,
-      socialServices: {
-        education: 4.82,
-        health: 16.53,
-        labor: 0,
-        housing: 0,
-        socialWelfare: 9.21,
-        total: 30.56,
-      },
-      economicServices: 20.32,
-      debtService: 1.29,
-      total: 140.48,
-    },
-    netOperatingIncome: 112.92,
-    fundBalanceEnd: 275.2,
-    fundBalanceBeginning: 204.64,
-  },
-};
+const SRE_DATA = {};
 
 /**
  * Format a numeric value as Philippine Peso in millions
@@ -144,9 +74,10 @@ let expenditureChart = null;
  * @param {string} quarter - 'q1' or 'q2'
  */
 function selectQuarter(quarter) {
-  if (quarter !== 'q1' && quarter !== 'q2') {
-    quarter = 'q1';
+  if (!SRE_DATA[quarter]) {
+    quarter = Object.keys(SRE_DATA)[0];
   }
+  if (!quarter) return; // no official data yet
 
   currentQuarter = quarter;
   const data = SRE_DATA[quarter];
@@ -220,7 +151,7 @@ function updateIncomeSection(data) {
   // Update period text
   const periodText = document.getElementById('income-period-text');
   if (periodText) {
-    periodText.textContent = `Breakdown of municipal revenue for ${data.period}`;
+    periodText.textContent = `Breakdown of provincial revenue for ${data.period}`;
   }
 
   // Update local sources
@@ -319,6 +250,8 @@ function updateBarWidth(id, percentage) {
 function initCharts() {
   const incomeCtx = document.getElementById('incomeChart');
   const expenditureCtx = document.getElementById('expenditureChart');
+
+  if (!SRE_DATA[currentQuarter]) return; // no official data yet
 
   if (incomeCtx && typeof Chart !== 'undefined') {
     const data = SRE_DATA[currentQuarter];

@@ -5,34 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Business Permits and Licensing Section - New business permit, renewal, Mayor's clearance, and other business permits in Solano, Nueva Vizcaya."
+      content="Business permits in Bukidnon are issued by the BPLO of each city and municipality. General steps: DTI, SEC or CDA registration, barangay clearance, then the city or municipal BPLO."
     />
-    <meta name="author" content="Ramon Logan Jr." />
+    <meta name="author" content="BetterBukidnon volunteers" />
     <meta
       name="keywords"
-      content="Business Permit Solano, Mayor's Permit, business license, permit renewal, Mayor's clearance, Nueva Vizcaya"
+      content="business permit Bukidnon, BPLO, Mayor's permit, business registration, DTI, SEC, CDA, barangay clearance, Malaybalay, Valencia"
     />
     <meta name="robots" content="index, follow" />
     <link
       rel="canonical"
-      href="https://bettersolano.org/service-details/business-permits-licensing"
+      href="https://betterbukidnon.org/service-details/business-permits-licensing"
     />
     <meta property="og:type" content="website" />
     <meta
       property="og:url"
-      content="https://bettersolano.org/service-details/business-permits-licensing"
+      content="https://betterbukidnon.org/service-details/business-permits-licensing"
     />
-    <meta property="og:title" content="Business Permits and Licensing | BetterSolano.org" />
+    <meta property="og:title" content="Business Permits in Bukidnon | BetterBukidnon.org" />
     <meta
       property="og:description"
-      content="New business permit, renewal, Mayor's clearance, and other business permits in Solano, Nueva Vizcaya."
+      content="Business permits are issued by your city or municipality in Bukidnon. Here is the general process and where to go."
     />
     <meta
       property="og:image"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <title>Business Permits and Licensing | BetterSolano.org</title>
+    <title>Business Permits in Bukidnon | BetterBukidnon.org</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/logo/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="../assets/images/logo/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -313,6 +313,48 @@
           text-align: center;
         }
       }
+      .two-col {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+      @media (max-width: 768px) {
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+      }
+      .notice-box {
+        background: linear-gradient(135deg, rgba(0, 50, 160, 0.06) 0%, rgba(0, 50, 160, 0.02) 100%);
+        border: 1px solid rgba(0, 50, 160, 0.15);
+        border-radius: 8px;
+        padding: 14px;
+        margin-bottom: 14px;
+      }
+      .notice-box h4 {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .notice-box p {
+        font-size: 0.75rem;
+        color: var(--color-text);
+        margin: 0;
+        line-height: 1.5;
+      }
+      .notice-box a {
+        color: var(--color-primary);
+        font-weight: 600;
+      }
+      .staff-card h4 a {
+        color: var(--color-primary);
+      }
+      .process-table td strong {
+        font-weight: 600;
+      }
     </style>
   </head>
   <body>
@@ -323,24 +365,30 @@
       <div class="container">
         <div class="hotline-inner">
           <div class="hotline-items">
-            <a href="tel:09274008033" class="hotline-item"
-              ><i class="bi bi-shield-fill"></i><span>Police: 0927 400 8033</span></a
-            >
-            <a href="tel:09162840885" class="hotline-item"
-              ><i class="bi bi-heart-fill"></i><span>MSWDO: 0916 284 0885</span></a
-            >
-            <a href="tel:09360620305" class="hotline-item"
-              ><i class="bi bi-fire"></i><span>Fire: 0936 062 0305</span></a
-            >
-            <a href="tel:0906188086" class="hotline-item"
-              ><i class="bi bi-building"></i><span>DILG: 0906 188 086</span></a
-            >
-            <a href="tel:09263833744" class="hotline-item"
-              ><i class="bi bi-exclamation-triangle-fill"></i><span>MDRRMO: 0926 383 3744</span></a
-            >
-            <a href="tel:09068195569" class="hotline-item"
-              ><i class="bi bi-truck"></i><span>R2TMC: 0906 819 5569</span></a
-            >
+            <a href="tel:911" class="hotline-item">
+              <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+              <span>Emergency: 911</span>
+            </a>
+            <a href="tel:+63888131262" class="hotline-item">
+              <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+              <span>PDRRMD: (088) 813-1262</span>
+            </a>
+            <a href="tel:+63888134263" class="hotline-item">
+              <i class="bi bi-shield-fill" aria-hidden="true"></i>
+              <span>Police: (088) 813-4263</span>
+            </a>
+            <a href="tel:+63888135449" class="hotline-item">
+              <i class="bi bi-fire" aria-hidden="true"></i>
+              <span>Fire: (088) 813-5449</span>
+            </a>
+            <a href="tel:+63888135631" class="hotline-item">
+              <i class="bi bi-heart-pulse-fill" aria-hidden="true"></i>
+              <span>PHO: (088) 813-5631</span>
+            </a>
+            <a href="tel:+63888135734" class="hotline-item">
+              <i class="bi bi-heart-fill" aria-hidden="true"></i>
+              <span>PSWDO: (088) 813-5734</span>
+            </a>
           </div>
         </div>
       </div>
@@ -350,8 +398,8 @@
         <div class="logo-container">
           <a href="../"
             ><img
-              src="../assets/images/logo/better-solano-logo.svg"
-              alt="Better Solano Logo"
+              src="../assets/images/logo/better-bukidnon-logo.svg"
+              alt="Better Bukidnon Logo"
               class="logo-img"
           /></a>
         </div>
@@ -359,7 +407,14 @@
           <ul>
             <li><a href="../" data-i18n="bpl-home">Home</a></li>
             <li class="has-dropdown">
-              <a href="../services/" class="active" data-i18n="bpl-services" aria-haspopup="true" aria-expanded="false">Services</a>
+              <a
+                href="../services/"
+                class="active"
+                data-i18n="bpl-services"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Services</a
+              >
               <ul class="dropdown-menu">
                 <li>
                   <a href="../services/certificates" data-i18n="bpl-certificates">Certificates</a>
@@ -396,7 +451,13 @@
             <li><a href="../government/" data-i18n="bpl-government">Government</a></li>
             <li><a href="../statistics/" data-i18n="bpl-statistics">Statistics</a></li>
             <li class="has-dropdown">
-              <a href="../legislative/" data-i18n="bpl-legislative" aria-haspopup="true" aria-expanded="false">Legislative</a>
+              <a
+                href="../legislative/"
+                data-i18n="bpl-legislative"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Legislative</a
+              >
               <ul class="dropdown-menu">
                 <li>
                   <a href="../legislative/ordinance-framework" data-i18n="bpl-ordinance-framework"
@@ -422,8 +483,8 @@
             <button type="button" class="btn btn-secondary btn-sm lang-btn" data-lang="fil">
               FIL
             </button>
-            <button type="button" class="btn btn-secondary btn-sm lang-btn" data-lang="ilo">
-              ILO
+            <button type="button" class="btn btn-secondary btn-sm lang-btn" data-lang="ceb">
+              CEB
             </button>
           </div>
         </div>
@@ -437,7 +498,7 @@
             ><span class="rate-rotator"><span class="rate-display">1 USD = ₱ --</span></span>
           </div>
           <div class="info-bar-item info-bar-weather">
-            <i class="bi bi-thermometer-half"></i><span class="weather-location">Solano</span
+            <i class="bi bi-thermometer-half"></i><span class="weather-location">Malaybalay</span
             ><span class="weather-temp">--°C</span>
           </div>
           <div class="info-bar-item info-bar-datetime">
@@ -455,24 +516,20 @@
           <a href="../" data-i18n="bpl-home">Home</a><span>/</span>
           <a href="../services/" data-i18n="bpl-services">Services</a><span>/</span>
           <a href="../services/business" data-i18n="bpl-business">Business</a><span>/</span>
-          <span aria-current="page">Business Permits & Licensing</span>
+          <span aria-current="page" data-i18n="bpl-business-permits-in-bukidnon"
+            >Business Permits in Bukidnon</span
+          >
         </nav>
       </div>
-
       <section class="page-header">
         <div class="container">
           <div class="page-header-content">
             <span class="page-header-badge"
               ><i class="bi bi-shop"></i> <span data-i18n="bpl-business">Business</span></span
             >
-            <h1 data-i18n="bpl-business-permits-licensing-section">
-              Business Permits & Licensing Section
-            </h1>
-            <p
-              class="page-header-desc"
-              data-i18n="bpl-new-business-permits-renewals-mayors-clearance"
-            >
-              New business permits, renewals, Mayor's clearance, and other business-related permits
+            <h1 data-i18n="bpl-business-permits-in-bukidnon">Business Permits in Bukidnon</h1>
+            <p class="page-header-desc" data-i18n="bpl-page-desc">
+              Business permits are issued by your city or municipality. Here is the general process.
             </p>
           </div>
         </div>
@@ -484,94 +541,171 @@
           <div class="quick-stats">
             <div class="stat-card">
               <i class="bi bi-building"></i>
-              <h4 data-i18n="bpl-office">Office</h4>
-              <p data-i18n="bpl-mayors-office-bpls">Mayor's Office - BPLS</p>
+              <h4 data-i18n="bpl-stat-issued-by">Issued By</h4>
+              <p data-i18n="bpl-stat-issued-by-value">City/Municipal BPLO</p>
             </div>
             <div class="stat-card">
               <i class="bi bi-geo-alt"></i>
               <h4 data-i18n="bpl-location">Location</h4>
-              <p data-i18n="bpl-municipal-hall">Municipal Hall</p>
-            </div>
-            <div class="stat-card">
-              <i class="bi bi-clock"></i>
-              <h4 data-i18n="bpl-hours">Hours</h4>
-              <p data-i18n="bpl-8am-5pm">8AM - 5PM</p>
+              <p data-i18n="bpl-stat-location-value">Your City or Municipal Hall</p>
             </div>
             <div class="stat-card">
               <i class="bi bi-calendar-check"></i>
               <h4 data-i18n="bpl-renewal">Renewal</h4>
-              <p data-i18n="bpl-jan-1-jan-20">Jan 1 - Jan 20</p>
+              <p data-i18n="bpl-stat-renewal-value">Every Year, Usually in January</p>
             </div>
+            <div class="stat-card">
+              <i class="bi bi-cash"></i>
+              <h4 data-i18n="bpl-stat-fees">Fees and Taxes</h4>
+              <p data-i18n="bpl-stat-fees-value">Set by Each LGU</p>
+            </div>
+          </div>
+
+          <div class="notice-box">
+            <h4>
+              <i class="bi bi-info-circle"></i>
+              <span data-i18n="bpl-notice-title">Who issues business permits</span>
+            </h4>
+            <p>
+              <span data-i18n="bpl-notice-text"
+                >The Provincial Government of Bukidnon does not issue business permits for stores,
+                offices or other establishments. Permits (often called the Mayor's Permit) are
+                issued by the Business Permits and Licensing Office (BPLO) of the city or
+                municipality where the business is located: Malaybalay City, Valencia City, or one
+                of the 20 municipalities. Requirements, fees and deadlines vary, so confirm with
+                that office.</span
+              >
+              <a href="../government/#lgus" data-i18n="bpl-find-your-lgu"
+                >Find your city or municipality</a
+              >
+            </p>
           </div>
         </div>
       </section>
 
-      <!-- Service Tabs -->
+      <!-- General Process -->
       <section class="bpl-section alt-bg">
         <div class="container">
-          <div class="section-header" style="text-align: center">
-            <h2 style="justify-content: center">
-              <i class="bi bi-grid-3x3-gap"></i>
-              <span data-i18n="bpl-business-permit-services">Business Permit Services</span>
+          <div class="section-header">
+            <h2>
+              <i class="bi bi-list-ol"></i>
+              <span data-i18n="bpl-process-title">Getting a New Business Permit</span>
             </h2>
-            <p data-i18n="bpl-select-a-service-to-view-the-detailed-process-and">
-              Select a service to view the detailed process and requirements
+            <p data-i18n="bpl-process-desc">
+              The usual order of steps. Your city or municipality may combine some of them in a
+              Business One-Stop Shop.
             </p>
           </div>
-          <div class="service-tabs">
-            <button
-              type="button"
-              class="service-tab active"
-              data-tab="new"
-              data-i18n="bpl-new-business-permit"
-            >
-              New Business Permit
-            </button>
-            <button
-              type="button"
-              class="service-tab"
-              data-tab="renewal"
-              data-i18n="bpl-permit-renewal"
-            >
-              Permit Renewal
-            </button>
-            <button
-              type="button"
-              class="service-tab"
-              data-tab="clearance"
-              data-i18n="bpl-mayors-clearance"
-            >
-              Mayor's Clearance
-            </button>
-            <button
-              type="button"
-              class="service-tab"
-              data-tab="other"
-              data-i18n="bpl-other-permits"
-            >
-              Other Permits
-            </button>
+          <div class="table-responsive">
+            <table class="process-table">
+              <thead>
+                <tr>
+                  <th style="width: 34%" data-i18n="bpl-col-step">Step</th>
+                  <th style="width: 40%" data-i18n="bpl-col-what">What to Do</th>
+                  <th style="width: 26%" data-i18n="bpl-col-where">Where</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <span class="step-badge">1</span>
+                    <strong data-i18n="bpl-step1-title">Register the business</strong>
+                  </td>
+                  <td data-i18n="bpl-step1-what">
+                    Register the business name (sole proprietorship), the corporation or
+                    partnership, or the cooperative.
+                  </td>
+                  <td data-i18n="bpl-step1-where">DTI, SEC, or CDA</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="step-badge">2</span>
+                    <strong data-i18n="bpl-step2-title">Get a barangay business clearance</strong>
+                  </td>
+                  <td data-i18n="bpl-step2-what">
+                    Apply for a clearance from the barangay where the business will operate.
+                  </td>
+                  <td data-i18n="bpl-step2-where">Barangay hall</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="step-badge">3</span>
+                    <strong data-i18n="bpl-step3-title">Apply for the business permit</strong>
+                  </td>
+                  <td data-i18n="bpl-step3-what">
+                    Submit the application form and requirements. The office assesses your fees and
+                    local business taxes.
+                  </td>
+                  <td data-i18n="bpl-step3-where">City or municipal BPLO</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="step-badge">4</span>
+                    <strong data-i18n="bpl-step4-title">Pay fees and taxes</strong>
+                  </td>
+                  <td data-i18n="bpl-step4-what">
+                    Pay the assessed fees and local business taxes and keep the official receipt.
+                  </td>
+                  <td data-i18n="bpl-step4-where">City or municipal treasurer's office</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="step-badge">5</span>
+                    <strong data-i18n="bpl-step5-title">Complete clearances and inspections</strong>
+                  </td>
+                  <td data-i18n="bpl-step5-what">
+                    Depending on the business, this can include a fire safety inspection, a sanitary
+                    permit, a zoning or locational clearance, and building or occupancy permits.
+                  </td>
+                  <td data-i18n="bpl-step5-where">
+                    BFP and the city or municipal offices concerned
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="step-badge">6</span>
+                    <strong data-i18n="bpl-step6-title">Claim and display the permit</strong>
+                  </td>
+                  <td data-i18n="bpl-step6-what">
+                    Claim the business permit and display it where customers can see it.
+                  </td>
+                  <td data-i18n="bpl-step3-where">City or municipal BPLO</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="step-badge">7</span>
+                    <strong data-i18n="bpl-step7-title">Register with the BIR</strong>
+                  </td>
+                  <td data-i18n="bpl-step7-what">
+                    Register for tax purposes with the BIR Revenue District Office that covers your
+                    business address.
+                  </td>
+                  <td data-i18n="bpl-step7-where">BIR</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+        </div>
+      </section>
 
-          <!-- New Business Permit -->
-          <div class="service-content active" id="new">
-            <div class="section-header">
-              <h2>
-                <i class="bi bi-plus-circle"></i>
-                <span data-i18n="bpl-issuance-of-new-business-permit"
-                  >Issuance of New Business Permit</span
-                >
-              </h2>
-              <p data-i18n="bpl-application-for-new-business-permit-for">
-                Application for new business permit for businesses operating in Solano
-              </p>
-            </div>
-            <div class="req-box" style="margin-bottom: 14px">
+      <!-- Requirements -->
+      <section class="bpl-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>
+              <i class="bi bi-clipboard-check"></i>
+              <span data-i18n="bpl-req-title">Commonly Asked Requirements</span>
+            </h2>
+            <p data-i18n="bpl-req-desc">
+              Each city and municipality publishes its own list. Use these to prepare, then confirm
+              with your BPLO.
+            </p>
+          </div>
+          <div class="two-col">
+            <div class="req-box">
               <h4>
-                <i class="bi bi-file-earmark-text"></i>
-                <span data-i18n="bpl-requirements-for-new-business"
-                  >Requirements for New Business</span
-                >
+                <i class="bi bi-plus-circle"></i>
+                <span data-i18n="bpl-req-new-title">New Business</span>
               </h4>
               <ul class="req-list">
                 <li>
@@ -606,679 +740,196 @@
                 </li>
                 <li>
                   <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="bpl-zoning-clearance-from-mpdo">Zoning Clearance from MPDO</span>
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="bpl-sanitary-permit-from-mho">Sanitary Permit from MHO</span>
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="bpl-fire-safety-inspection-certificate-from-bfp"
-                    >Fire Safety Inspection Certificate from BFP</span
+                  <span data-i18n="bpl-req-new-location"
+                    >Proof of business location, such as a lease contract, or the title or tax
+                    declaration if you own the place</span
                   >
                 </li>
                 <li>
                   <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="bpl-locational-clearance-if-applicable"
-                    >Locational Clearance (if applicable)</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="bpl-contract-of-lease-land-title-proof-of-business"
-                    >Contract of Lease / Land Title (proof of business location)</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="bpl-community-tax-certificate-cedula"
-                    >Community Tax Certificate (Cedula)</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="bpl-valid-id-of-ownerauthorized-representative"
-                    >Valid ID of owner/authorized representative</span
-                  >
+                  <span data-i18n="bpl-req-new-id">Valid ID of the owner or authorized person</span>
                 </li>
               </ul>
             </div>
-            <div class="table-responsive">
-              <table class="process-table">
-                <thead>
-                  <tr>
-                    <th style="width: 5%" data-i18n="bpl-step">Step</th>
-                    <th style="width: 35%" data-i18n="bpl-activity">Activity</th>
-                    <th style="width: 20%" data-i18n="bpl-documents">Documents</th>
-                    <th style="width: 15%" data-i18n="bpl-duration">Duration</th>
-                    <th style="width: 25%" data-i18n="bpl-personnel">Personnel</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="step-badge">1</span></td>
-                    <td data-i18n="bpl-submit-application-form-and-complete-requirements">
-                      Submit application form and complete requirements
-                    </td>
-                    <td data-i18n="bpl-application-form-all-requirements">
-                      Application form, all requirements
-                    </td>
-                    <td><span class="time-tag" data-i18n="bpl-10-minutes">10 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="bpl-bpls-staff">BPLS Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">2</span></td>
-                    <td data-i18n="bpl-verification-and-assessment-of-documents">
-                      Verification and assessment of documents
-                    </td>
-                    <td>—</td>
-                    <td>
-                      <span class="time-tag" data-i18n="bpl-1530-minutes">15-30 minutes</span>
-                    </td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="bpl-bpls-staff">BPLS Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">3</span></td>
-                    <td data-i18n="bpl-computation-of-fees-and-taxes">
-                      Computation of fees and taxes
-                    </td>
-                    <td data-i18n="bpl-assessment-sheet">Assessment sheet</td>
-                    <td><span class="time-tag" data-i18n="bpl-10-minutes">10 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="bpl-bpls-staff">BPLS Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">4</span></td>
-                    <td data-i18n="bpl-payment-of-fees-at-treasurers-office">
-                      Payment of fees at Treasurer's Office
-                    </td>
-                    <td data-i18n="bpl-order-of-payment">Order of Payment</td>
-                    <td><span class="time-tag" data-i18n="bpl-10-minutes">10 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="bpl-treasurers-office"
-                        >Treasurer's Office</span
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">5</span></td>
-                    <td data-i18n="bpl-issuance-of-business-permit">Issuance of Business Permit</td>
-                    <td data-i18n="bpl-official-receipt">Official Receipt</td>
-                    <td><span class="time-tag" data-i18n="bpl-10-minutes">10 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="bpl-bpls-staff">BPLS Staff</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="req-box" style="margin-top: 14px">
+            <div class="req-box">
               <h4>
-                <i class="bi bi-clock-history"></i>
-                <span data-i18n="bpl-processing-information">Processing Information</span>
-              </h4>
-              <ul class="req-list">
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="bpl-total-processing-time-55-minutes-to-1-hour-if"
-                    >Total processing time: 55 minutes to 1 hour (if complete)</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-info-circle"></i>
-                  <span data-i18n="bpl-fees-vary-based-on-business-type-capitalization"
-                    >Fees vary based on business type, capitalization, and floor area</span
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Permit Renewal -->
-          <div class="service-content" id="renewal">
-            <div class="section-header">
-              <h2>
                 <i class="bi bi-arrow-repeat"></i>
-                <span data-i18n="bpl-renewal-of-business-permit">Renewal of Business Permit</span>
-              </h2>
-              <p data-i18n="bpl-annual-renewal-of-existing-business-permit">
-                Annual renewal of existing business permit (January 1-20 without surcharge)
-              </p>
-            </div>
-            <div class="req-box" style="margin-bottom: 14px">
-              <h4>
-                <i class="bi bi-file-earmark-text"></i>
-                <span data-i18n="bpl-requirements-for-renewal">Requirements for Renewal</span>
+                <span data-i18n="bpl-req-renewal-title">Renewal</span>
               </h4>
               <ul class="req-list">
                 <li>
                   <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="bpl-previous-years-business-permit"
-                    >Previous year's Business Permit</span
+                  <span data-i18n="bpl-req-renewal-previous">Previous year's business permit</span>
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-i18n="bpl-req-renewal-sales"
+                    >Declaration or proof of gross sales or receipts for the past year</span
                   >
                 </li>
                 <li>
                   <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="bpl-barangay-business-clearance-current-year"
-                    >Barangay Business Clearance (current year)</span
+                  <span data-i18n="bpl-req-renewal-barangay"
+                    >Barangay business clearance for the current year</span
                   >
                 </li>
                 <li>
                   <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="bpl-sanitary-permit-from-mho-current-year"
-                    >Sanitary Permit from MHO (current year)</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="bpl-fire-safety-inspection-certificate-from-bfp"
-                    >Fire Safety Inspection Certificate from BFP (current year)</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="bpl-community-tax-certificate-cedula"
-                    >Community Tax Certificate (Cedula)</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="bpl-sworn-statement-of-gross-salesreceipts"
-                    >Sworn Statement of Gross Sales/Receipts</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="bpl-financial-statements-for-corporations"
-                    >Financial Statements (for corporations)</span
+                  <span data-i18n="bpl-req-renewal-clearances"
+                    >Updated clearances your city or municipality asks for</span
                   >
                 </li>
               </ul>
             </div>
-            <div class="table-responsive">
-              <table class="process-table">
-                <thead>
-                  <tr>
-                    <th style="width: 5%" data-i18n="bpl-step">Step</th>
-                    <th style="width: 35%" data-i18n="bpl-activity">Activity</th>
-                    <th style="width: 20%" data-i18n="bpl-documents">Documents</th>
-                    <th style="width: 15%" data-i18n="bpl-duration">Duration</th>
-                    <th style="width: 25%" data-i18n="bpl-personnel">Personnel</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="step-badge">1</span></td>
-                    <td data-i18n="bpl-submit-renewal-application-and-requirements">
-                      Submit renewal application and requirements
-                    </td>
-                    <td data-i18n="bpl-previous-permit-clearances">Previous permit, clearances</td>
-                    <td><span class="time-tag" data-i18n="bpl-5-minutes">5 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="bpl-bpls-staff">BPLS Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">2</span></td>
-                    <td data-i18n="bpl-verification-and-assessment">Verification and assessment</td>
-                    <td data-i18n="bpl-gross-sales-declaration">Gross sales declaration</td>
-                    <td><span class="time-tag" data-i18n="bpl-10-minutes">10 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="bpl-bpls-staff">BPLS Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">3</span></td>
-                    <td data-i18n="bpl-payment-of-fees-at-treasurers-office">
-                      Payment of fees at Treasurer's Office
-                    </td>
-                    <td data-i18n="bpl-order-of-payment">Order of Payment</td>
-                    <td><span class="time-tag" data-i18n="bpl-10-minutes">10 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="bpl-treasurers-office"
-                        >Treasurer's Office</span
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">4</span></td>
-                    <td data-i18n="bpl-issuance-of-renewed-business-permit">
-                      Issuance of renewed Business Permit
-                    </td>
-                    <td data-i18n="bpl-official-receipt">Official Receipt</td>
-                    <td><span class="time-tag" data-i18n="bpl-5-minutes">5 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="bpl-bpls-staff">BPLS Staff</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <table class="fee-table">
-              <thead>
-                <tr>
-                  <th data-i18n="bpl-renewal-period">Renewal Period</th>
-                  <th data-i18n="bpl-surcharge">Surcharge</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td data-i18n="bpl-january-120">January 1-20</td>
-                  <td class="fee-tag" data-i18n="bpl-no-surcharge">No Surcharge</td>
-                </tr>
-                <tr>
-                  <td data-i18n="bpl-january-21-onwards">January 21 onwards</td>
-                  <td style="color: #dc3545" data-i18n="bpl-25-surcharge-2-interestmonth">
-                    25% Surcharge + 2% Interest/month
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Mayor's Clearance -->
-          <div class="service-content" id="clearance">
-            <div class="section-header">
-              <h2>
-                <i class="bi bi-patch-check"></i>
-                <span data-i18n="bpl-issuance-of-mayors-clearancepermit"
-                  >Issuance of Mayor's Clearance/Permit</span
-                >
-              </h2>
-              <p data-i18n="bpl-mayors-clearance-for-various-purposes-including">
-                Mayor's clearance for various purposes including employment, travel, and other
-                transactions
-              </p>
-            </div>
-            <div class="grid grid-2" style="gap: 14px; margin-bottom: 14px">
-              <div class="req-box">
-                <h4>
-                  <i class="bi bi-briefcase"></i>
-                  <span data-i18n="bpl-for-employment">For Employment</span>
-                </h4>
-                <ul class="req-list">
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-barangay-clearance">Barangay Clearance</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-police-clearance">Police Clearance</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-nbi-clearance">NBI Clearance</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-community-tax-certificate-cedula"
-                      >Community Tax Certificate (Cedula)</span
-                    >
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-2x2-id-photo">2x2 ID Photo</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-valid-id">Valid ID</span>
-                  </li>
-                </ul>
-              </div>
-              <div class="req-box">
-                <h4>
-                  <i class="bi bi-file-earmark"></i>
-                  <span data-i18n="bpl-for-other-purposes">For Other Purposes</span>
-                </h4>
-                <ul class="req-list">
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-barangay-clearance">Barangay Clearance</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-community-tax-certificate-cedula"
-                      >Community Tax Certificate (Cedula)</span
-                    >
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-valid-id">Valid ID</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-supporting-documents-as-applicable"
-                      >Supporting documents (as applicable)</span
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="table-responsive">
-              <table class="process-table">
-                <thead>
-                  <tr>
-                    <th style="width: 5%" data-i18n="bpl-step">Step</th>
-                    <th style="width: 40%" data-i18n="bpl-activity">Activity</th>
-                    <th style="width: 20%" data-i18n="bpl-duration">Duration</th>
-                    <th style="width: 35%" data-i18n="bpl-personnel">Personnel</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="step-badge">1</span></td>
-                    <td data-i18n="bpl-submit-requirements-and-fill-out-application-form">
-                      Submit requirements and fill out application form
-                    </td>
-                    <td><span class="time-tag" data-i18n="bpl-5-minutes">5 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="bpl-bpls-staff">BPLS Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">2</span></td>
-                    <td data-i18n="bpl-verification-of-documents">Verification of documents</td>
-                    <td><span class="time-tag" data-i18n="bpl-5-minutes">5 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="bpl-bpls-staff">BPLS Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">3</span></td>
-                    <td data-i18n="bpl-payment-of-fee-at-treasurers-office">
-                      Payment of fee at Treasurer's Office
-                    </td>
-                    <td><span class="time-tag" data-i18n="bpl-5-minutes">5 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="bpl-treasurers-office"
-                        >Treasurer's Office</span
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">4</span></td>
-                    <td data-i18n="bpl-issuance-of-mayors-clearance">
-                      Issuance of Mayor's Clearance
-                    </td>
-                    <td><span class="time-tag" data-i18n="bpl-5-minutes">5 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="bpl-bpls-staff">BPLS Staff</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <table class="fee-table">
-              <thead>
-                <tr>
-                  <th data-i18n="bpl-type-of-clearance">Type of Clearance</th>
-                  <th data-i18n="bpl-fee">Fee</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td data-i18n="bpl-mayors-clearance-employment">
-                    Mayor's Clearance (Employment)
-                  </td>
-                  <td class="fee-tag">₱50.00</td>
-                </tr>
-                <tr>
-                  <td data-i18n="bpl-mayors-clearance-other-purposes">
-                    Mayor's Clearance (Other purposes)
-                  </td>
-                  <td class="fee-tag">₱30.00</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Other Permits -->
-          <div class="service-content" id="other">
-            <div class="section-header">
-              <h2>
-                <i class="bi bi-card-list"></i>
-                <span data-i18n="bpl-other-permits-and-clearances"
-                  >Other Permits and Clearances</span
-                >
-              </h2>
-              <p data-i18n="bpl-additional-permits-and-clearances-issued-by-the">
-                Additional permits and clearances issued by the Mayor's Office
-              </p>
-            </div>
-            <div class="grid grid-2" style="gap: 14px; margin-bottom: 14px">
-              <div class="req-box">
-                <h4>
-                  <i class="bi bi-truck"></i>
-                  <span data-i18n="bpl-delivery-permit">Delivery Permit</span>
-                </h4>
-                <ul class="req-list">
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-request-letter">Request letter</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-business-permit-of-supplier"
-                      >Business Permit of supplier</span
-                    >
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-vehicle-registration-orcr"
-                      >Vehicle registration (OR/CR)</span
-                    >
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-drivers-license">Driver's License</span>
-                  </li>
-                </ul>
-              </div>
-              <div class="req-box">
-                <h4>
-                  <i class="bi bi-music-note-beamed"></i>
-                  <span data-i18n="bpl-special-permit-events">Special Permit (Events)</span>
-                </h4>
-                <ul class="req-list">
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-request-letter-stating-purpose"
-                      >Request letter stating purpose</span
-                    >
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-barangay-clearance">Barangay Clearance</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-valid-id-of-applicant">Valid ID of applicant</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-list-of-activitiesprogram"
-                      >List of activities/program</span
-                    >
-                  </li>
-                </ul>
-              </div>
-              <div class="req-box">
-                <h4>
-                  <i class="bi bi-x-circle"></i>
-                  <span data-i18n="bpl-closure-of-business">Closure of Business</span>
-                </h4>
-                <ul class="req-list">
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-affidavit-of-closure">Affidavit of Closure</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-original-business-permit">Original Business Permit</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-tax-clearance-from-treasurer"
-                      >Tax Clearance from Treasurer</span
-                    >
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-bir-certificate-of-closure"
-                      >BIR Certificate of Closure</span
-                    >
-                  </li>
-                </ul>
-              </div>
-              <div class="req-box">
-                <h4>
-                  <i class="bi bi-geo-alt"></i>
-                  <span data-i18n="bpl-transfer-of-business-location"
-                    >Transfer of Business Location</span
-                  >
-                </h4>
-                <ul class="req-list">
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-letter-of-intent">Letter of Intent</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-current-business-permit">Current Business Permit</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-new-barangay-clearance">New Barangay Clearance</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span data-i18n="bpl-new-zoning-clearance">New Zoning Clearance</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <table class="fee-table">
-              <thead>
-                <tr>
-                  <th data-i18n="bpl-permit-type">Permit Type</th>
-                  <th data-i18n="bpl-fee">Fee</th>
-                  <th data-i18n="bpl-processing-time">Processing Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td data-i18n="bpl-delivery-permit">Delivery Permit</td>
-                  <td class="fee-tag">₱100.00</td>
-                  <td data-i18n="bpl-same-day">Same day</td>
-                </tr>
-                <tr>
-                  <td data-i18n="bpl-special-permit-events">Special Permit (Events)</td>
-                  <td class="fee-tag">₱200.00 - ₱500.00</td>
-                  <td data-i18n="bpl-13-days">1-3 days</td>
-                </tr>
-                <tr>
-                  <td data-i18n="bpl-business-closure-certificate">Business Closure Certificate</td>
-                  <td class="fee-tag">₱100.00</td>
-                  <td data-i18n="bpl-same-day">Same day</td>
-                </tr>
-                <tr>
-                  <td data-i18n="bpl-transfer-of-location">Transfer of Location</td>
-                  <td class="fee-tag">₱200.00</td>
-                  <td data-i18n="bpl-12-days">1-2 days</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </section>
 
-      <!-- Staff Section -->
+      <!-- Provincial Role and FAQ -->
+      <section class="bpl-section alt-bg">
+        <div class="container">
+          <div class="section-header">
+            <h2>
+              <i class="bi bi-building"></i>
+              <span data-i18n="bpl-province-title">What the Provincial Government Handles</span>
+            </h2>
+          </div>
+          <div class="req-box" style="margin-bottom: 20px">
+            <ul class="req-list">
+              <li>
+                <i class="bi bi-check-circle-fill"></i>
+                <span data-i18n="bpl-province-quarry"
+                  >Under the Local Government Code, permits to extract sand, gravel and other quarry
+                  resources are issued by the Provincial Governor.</span
+                >
+              </li>
+              <li>
+                <i class="bi bi-check-circle-fill"></i>
+                <span data-i18n="bpl-province-taxes"
+                  >Provincial taxes and fees are paid at the Provincial Treasurer's Office.</span
+                >
+                <a href="provincial-treasurer" data-i18n="bpl-provincial-treasurer-link"
+                  >Provincial Treasurer's Office</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="section-header">
+            <h2>
+              <i class="bi bi-question-circle"></i>
+              <span data-i18n="bpl-faq-title">Frequently Asked Questions</span>
+            </h2>
+          </div>
+          <div class="two-col">
+            <div class="staff-card">
+              <h4 data-i18n="bpl-faq1-q">When do I renew my business permit?</h4>
+              <p data-i18n="bpl-faq1-a">
+                Every year. Under the Local Government Code, local business taxes are due in
+                January, with quarterly installments where the LGU allows them. Check your city or
+                municipality's deadline and penalties.
+              </p>
+            </div>
+            <div class="staff-card">
+              <h4 data-i18n="bpl-faq2-q">Can I apply online?</h4>
+              <p data-i18n="bpl-faq2-a">
+                Some cities and municipalities accept online applications through their own systems
+                or an electronic Business One-Stop Shop. Ask your BPLO what it offers.
+              </p>
+            </div>
+            <div class="staff-card">
+              <h4 data-i18n="bpl-faq3-q">My business has branches in different towns.</h4>
+              <p data-i18n="bpl-faq3-a">
+                Each city or municipality issues its own permit. A branch or outlet usually needs a
+                permit from the LGU where it operates.
+              </p>
+            </div>
+            <div class="staff-card">
+              <h4 data-i18n="bpl-faq4-q">Where do I register my business name?</h4>
+              <p data-i18n="bpl-faq4-a">
+                Sole proprietors register the business name with the DTI. Corporations and
+                partnerships register with the SEC, and cooperatives with the CDA.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Helpful Links -->
       <section class="bpl-section">
         <div class="container">
           <div class="section-header">
             <h2>
-              <i class="bi bi-people"></i>
-              <span data-i18n="bpl-office-personnel">Office Personnel</span>
+              <i class="bi bi-link-45deg"></i>
+              <span data-i18n="bpl-links-title">Helpful Links</span>
             </h2>
-            <p data-i18n="bpl-key-personnel-handling-business-permits-and">
-              Key personnel handling business permits and licensing
-            </p>
           </div>
           <div class="staff-grid">
             <div class="staff-card">
-              <h4 data-i18n="bpl-bpls-head">BPLS Head</h4>
-              <p data-i18n="bpl-section-chief">Section Chief</p>
+              <h4>
+                <a href="../government/#lgus" data-i18n="bpl-find-your-lgu"
+                  >Find your city or municipality</a
+                >
+              </h4>
+              <p data-i18n="bpl-link-lgus-desc">
+                Malaybalay City, Valencia City and 20 municipalities
+              </p>
             </div>
             <div class="staff-card">
-              <h4 data-i18n="bpl-licensing-officer">Licensing Officer</h4>
-              <p data-i18n="bpl-permit-processing">Permit Processing</p>
+              <h4>
+                <a
+                  href="https://bnrs.dti.gov.ph/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-i18n="bpl-link-dti"
+                  >DTI Business Name Registration</a
+                >
+              </h4>
+              <p data-i18n="bpl-link-dti-desc">For sole proprietorships</p>
             </div>
             <div class="staff-card">
-              <h4 data-i18n="bpl-administrative-staff">Administrative Staff</h4>
-              <p data-i18n="bpl-records-assessment">Records & Assessment</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Contact Section -->
-      <section class="bpl-section alt-bg">
-        <div class="container">
-          <div class="grid grid-2" style="gap: 14px">
-            <div class="req-box">
               <h4>
-                <i class="bi bi-building"></i>
-                <span data-i18n="bpl-office-information">Office Information</span>
+                <a
+                  href="https://www.sec.gov.ph/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-i18n="bpl-link-sec"
+                  >Securities and Exchange Commission</a
+                >
               </h4>
-              <ul class="req-list">
-                <li>
-                  <i class="bi bi-geo-alt"></i>
-                  <span data-i18n="bpl-business-permits-licensing-section-municipal-hall"
-                    >Business Permits & Licensing Section, Municipal Hall, Solano, Nueva
-                    Vizcaya</span
-                  >
-                </li>
-                <li><i class="bi bi-clock"></i> Monday - Friday: 8:00 AM - 5:00 PM</li>
-                <li><i class="bi bi-telephone"></i> (078) 326-5001</li>
-              </ul>
+              <p data-i18n="bpl-link-sec-desc">For corporations and partnerships</p>
             </div>
-            <div class="req-box">
+            <div class="staff-card">
               <h4>
-                <i class="bi bi-info-circle"></i>
-                <span data-i18n="bpl-important-notes">Important Notes</span>
+                <a
+                  href="https://cda.gov.ph/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-i18n="bpl-link-cda"
+                  >Cooperative Development Authority</a
+                >
               </h4>
-              <ul class="req-list">
-                <li>
-                  <i class="bi bi-check-circle"></i>
-                  <span data-i18n="bpl-business-permit-renewal-deadline-january-20"
-                    >Business permit renewal deadline: January 20</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle"></i>
-                  <span data-i18n="bpl-late-renewal-incurs-25-surcharge-2-monthly"
-                    >Late renewal incurs 25% surcharge + 2% monthly interest</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle"></i>
-                  <span data-i18n="bpl-all-clearances-must-be-current-year"
-                    >All clearances must be current year</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle"></i>
-                  <span data-i18n="bpl-bring-original-documents-for-verification"
-                    >Bring original documents for verification</span
-                  >
-                </li>
-              </ul>
+              <p data-i18n="bpl-link-cda-desc">For cooperatives</p>
+            </div>
+            <div class="staff-card">
+              <h4>
+                <a
+                  href="https://www.bir.gov.ph/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-i18n="bpl-link-bir"
+                  >Bureau of Internal Revenue</a
+                >
+              </h4>
+              <p data-i18n="bpl-link-bir-desc">Tax registration after your permit</p>
+            </div>
+            <div class="staff-card">
+              <h4>
+                <a href="provincial-treasurer" data-i18n="bpl-provincial-treasurer-link"
+                  >Provincial Treasurer's Office</a
+                >
+              </h4>
+              <p data-i18n="bpl-link-pto-desc">Provincial taxes and fees</p>
             </div>
           </div>
         </div>
@@ -1290,60 +941,41 @@
         <div class="footer-main-new">
           <div class="footer-brand">
             <img
-              src="../assets/images/logo/better-solano-logo-white.svg"
-              alt="Better Solano logo"
+              src="../assets/images/logo/better-bukidnon-logo-white.svg"
+              alt="Better Bukidnon logo"
               class="footer-logo"
             />
             <p
               class="footer-tagline"
-              data-i18n="bpl-empowering-the-people-of-solano-with-transparent"
+              data-i18n="bpl-empowering-the-people-of-bukidnon-with-transparent"
             >
-              Empowering the people of Solano with transparent access to the services, programs, and
-              public funds of LGU Solano.
+              Empowering the people of Bukidnon with transparent access to the services, programs,
+              and public funds of LGU Bukidnon.
             </p>
             <div class="footer-social-new">
               <a
-                href="https://www.facebook.com/bettersolano.org"
+                href="https://github.com/DMNCDLPRT/betterbukidnon"
                 class="footer-social-btn"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook"
-                ><i class="bi bi-facebook"></i
+                aria-label="GitHub"
+                ><i class="bi bi-github"></i
               ></a>
               <a
-                href="https://www.linkedin.com/company/bettersolano/"
+                href="mailto:volunteer@betterbukidnon.org"
                 class="footer-social-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                ><i class="bi bi-linkedin"></i
-              ></a>
-              <a
-                href="https://discord.com/invite/qeSu7RJkjQ"
-                class="footer-social-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Discord"
-                ><i class="bi bi-discord"></i
+                aria-label="Email the volunteers"
+                ><i class="bi bi-envelope-fill"></i
               ></a>
             </div>
           </div>
           <div class="footer-column">
             <h4 data-i18n="bpl-quick-links">Quick Links</h4>
             <ul class="footer-links-new">
-              <li>
-                <a
-                  href="https://quiz.bettersolano.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-i18n="bpls-solano-quiz"
-                  >Solano Quiz</a
-                >
-              </li>
               <li><a href="../sitemap/" data-i18n="bpl-sitemap">Sitemap</a></li>
               <li>
                 <a
-                  href="https://solano.gov.ph/wp-content/uploads/2025/10/As-of-October-21-2025-2.pdf"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-i18n="bpl-citizens-charter"
@@ -1379,29 +1011,29 @@
               </li>
               <li>
                 <a
-                  href="https://solano.gov.ph/"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="bpl-official-lgu-solano-portal"
-                  >Official LGU Solano Portal</a
+                  data-i18n="bpl-official-lgu-bukidnon-portal"
+                  >Official LGU Bukidnon Portal</a
                 >
               </li>
               <li>
                 <a
-                  href="https://sangguniangbayan.solano.gov.ph/"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-i18n="bpl-sangguniang-bayan"
-                  >Sangguniang Bayan</a
+                  >Sangguniang Panlalawigan</a
                 >
               </li>
               <li>
                 <a
-                  href="https://www.facebook.com/OfficialLguSolanoFanpage/"
+                  href="https://www.facebook.com/lgubukidnon"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="bpl-lgu-solano-facebook"
-                  >LGU Solano Facebook</a
+                  data-i18n="bpl-lgu-bukidnon-facebook"
+                  >LGU Bukidnon Facebook</a
                 >
               </li>
               <li>
@@ -1426,14 +1058,14 @@
           </div>
           <div class="footer-column">
             <div class="footer-cost" role="status">
-              Cost to the People of Solano = <span class="footer-cost-value">₱0</span>
+              Cost to the People of Bukidnon = <span class="footer-cost-value">₱0</span>
             </div>
-            <a href="mailto:volunteer@bettersolano.org" class="footer-contribute"
+            <a href="mailto:volunteer@betterbukidnon.org" class="footer-contribute"
               ><i class="bi bi-envelope-heart"></i>
               <span data-i18n="bpl-volunteer-with-us">Volunteer with us</span></a
             >
             <a
-              href="https://github.com/BetterSolano/bettersolano"
+              href="https://github.com/DMNCDLPRT/betterbukidnon"
               class="footer-contribute"
               target="_blank"
               rel="noopener noreferrer"
@@ -1441,32 +1073,6 @@
               <span data-i18n="bpl-contribute-code-with-us">Contribute code with us</span></a
             >
             <div class="footer-partners">
-              <a
-                href="https://abakada.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abakada.org"
-                ><img
-                  src="../assets/images/logo/abakada-footer.svg"
-                  alt="Abakada.org"
-                  class="footer-partner-logo"
-                  width="120"
-                  height="28"
-                  loading="lazy"
-              /></a>
-              <a
-                href="https://hivcareph.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="HIV Care Philippines"
-                ><img
-                  src="../assets/images/logo/hiv-care-logo-footer.svg"
-                  alt="HIV Care Philippines"
-                  class="footer-partner-logo"
-                  width="120"
-                  height="28"
-                  loading="lazy"
-              /></a>
               <a
                 href="https://bettergov.ph"
                 target="_blank"
@@ -1485,12 +1091,13 @@
         </div>
         <div class="footer-bottom-new">
           <div class="footer-copyright">
-            <span class="footer-copyright-text">&copy; 2026 BetterSolano.org</span>
+            <span class="footer-copyright-text">&copy; 2026 BetterBukidnon.org</span>
             <span class="footer-copyright-license">MIT | CC BY 4.0</span>
             <span class="footer-copyright-disclaimer"
-              >All public information sourced from official government portals.</span
+              >Volunteer civic project, not an official government website. Built on the
+              BetterSolano template (MIT).</span
             >
-            <span class="footer-version"><i class="bi bi-boxes"></i> Ver. 1.1.19</span>
+            <span class="footer-version"><i class="bi bi-boxes"></i> Ver. 2.0.0</span>
           </div>
         </div>
       </div>
@@ -1499,18 +1106,5 @@
     <script defer src="../assets/js/info-bar.js"></script>
     <script defer src="../assets/js/main.js"></script>
     <script defer src="../assets/js/version.js"></script>
-    <script>
-      // Tab functionality
-      document.querySelectorAll('.service-tab').forEach((tab) => {
-        tab.addEventListener('click', () => {
-          document.querySelectorAll('.service-tab').forEach((t) => t.classList.remove('active'));
-          document
-            .querySelectorAll('.service-content')
-            .forEach((c) => c.classList.remove('active'));
-          tab.classList.add('active');
-          document.getElementById(tab.dataset.tab).classList.add('active');
-        });
-      });
-    </script>
   </body>
 </html>

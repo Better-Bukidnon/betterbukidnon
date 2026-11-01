@@ -1,6 +1,12 @@
 /**
- * Statistics Page - Enhanced Animations & Charts
- * Better Solano Portal - Minimal Professional Design
+ * Statistics Page - Data, Animations & Charts
+ * Better Bukidnon Portal
+ *
+ * Province-level numbers in the page header are static HTML. The district
+ * breakdown, the city/municipality table and both charts are rendered from
+ * data/demographics.json; the CMCI block is rendered from
+ * data/competitive-index.json when that file has scores. Every renderer copes
+ * with a missing or empty dataset and leaves an empty-state message instead.
  */
 
 // Brand colors
@@ -13,60 +19,130 @@ const COLORS = {
   info: '#0077BE',
 };
 
-// Barangay data (2024 Census)
-const barangayData = [
-  { name: 'Roxas', pop: 9088 },
-  { name: 'Quirino', pop: 6572 },
-  { name: 'Osmeña', pop: 6403 },
-  { name: 'Quezon', pop: 5758 },
-  { name: 'Curifang', pop: 4885 },
-  { name: 'Bagahabag', pop: 4731 },
-  { name: 'Uddiawan', pop: 4217 },
-  { name: 'Bascaran', pop: 3845 },
-  { name: 'Aggub', pop: 3101 },
-  { name: 'San Luis', pop: 2668 },
-  { name: 'Communal', pop: 2586 },
-  { name: 'Lactawan', pop: 2109 },
-  { name: 'San Juan', pop: 1965 },
-  { name: 'Concepcion', pop: 1954 },
-  { name: 'Dadap', pop: 1409 },
-  { name: 'Wacal', pop: 1398 },
-  { name: 'Bangaan', pop: 1284 },
-  { name: 'Tucal', pop: 1244 },
-  { name: 'Bangar', pop: 1146 },
-  { name: 'Pilar D. Galima', pop: 1146 },
-  { name: 'Poblacion North', pop: 970 },
-  { name: 'Poblacion South', pop: 817 },
-];
+// One color per legislative district (1st to 4th)
+const DISTRICT_COLORS = [COLORS.primary, COLORS.accent, COLORS.success, '#8B5CF6'];
 
-// Historical data
-const historicalData = {
-  years: [1990, 1995, 2000, 2007, 2010, 2015, 2020, 2024],
-  populations: [38006, 42857, 47288, 53004, 56831, 62649, 65896, 69296],
+const ORDINALS = { 1: '1st', 2: '2nd', 3: '3rd', 4: '4th' };
+
+const DATA_URLS = {
+  demographics: '../data/demographics.json',
+  cmci: '../data/competitive-index.json',
 };
 
 // Chart instances
-let charts = {};
+const charts = {};
+
+// Loaded datasets
+const state = {
+  lgus: [],
+  districts: [],
+};
+
+/* ------------------------------------------------------------------ */
+/* Helpers                                                            */
+/* ------------------------------------------------------------------ */
+
+function escapeHtml(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function formatNumber(value, decimals) {
+  if (typeof value !== 'number' || Number.isNaN(value)) return '–';
+  return value.toLocaleString('en-US', {
+    minimumFractionDigits: decimals || 0,
+    maximumFractionDigits: decimals || 0,
+  });
+}
+
+/** Translate a key for text drawn on canvas (charts are not DOM text). */
+function tr(key, fallback) {
+  const engine = typeof window !== 'undefined' ? window.TranslationEngine : null;
+  if (engine && typeof engine.getTranslation === 'function') {
+    return engine.getTranslation(key) || fallback;
+  }
+  return fallback;
+}
+
+function districtText(district) {
+  return (ORDINALS[district] || String(district)) + ' District';
+}
+
+function districtSpan(district) {
+  const text = escapeHtml(districtText(district));
+  return ORDINALS[district] ? `<span data-i18n="stats-district-${district}">${text}</span>` : text;
+}
+
+function emptyMessage(key, text) {
+  return `<span data-i18n="${key}">${text}</span>`;
+}
+
+/** Fetch a JSON file; resolve to null instead of throwing. */
+function loadJSON(url) {
+  if (typeof fetch !== 'function') return Promise.resolve(null);
+  return fetch(url)
+    .then((response) => (response.ok ? response.json() : null))
+    .catch((error) => {
+      console.warn('[statistics] Could not load', url, error);
+      return null;
+    });
+}
+
+/** Keep only well-formed LGU rows. */
+function normalizeLgus(data) {
+  const list = data && Array.isArray(data.lgus) ? data.lgus : [];
+  return list.filter(
+    (lgu) =>
+      lgu &&
+      typeof lgu.name === 'string' &&
+      typeof lgu.population_2020 === 'number' &&
+      Number.isFinite(Number(lgu.district))
+  );
+}
+
+/** Sum the LGU rows into one entry per legislative district. */
+function groupByDistrict(lgus) {
+  const byDistrict = new Map();
+  lgus.forEach((lgu) => {
+    const district = Number(lgu.district);
+    if (!byDistrict.has(district)) {
+      byDistrict.set(district, { district, population: 0, barangays: 0, lgus: [] });
+    }
+    const entry = byDistrict.get(district);
+    entry.population += lgu.population_2020;
+    entry.barangays += typeof lgu.barangays === 'number' ? lgu.barangays : 0;
+    entry.lgus.push(lgu.name);
+  });
+  return [...byDistrict.values()].sort((a, b) => a.district - b.district);
+}
+
+/* ------------------------------------------------------------------ */
+/* Animations                                                         */
+/* ------------------------------------------------------------------ */
 
 /**
  * Animate number counting
  */
 function animateCount(element, target, duration = 2000) {
-  const start = 0;
+  if (!Number.isFinite(target)) return;
   const startTime = performance.now();
 
   function update(currentTime) {
     const elapsed = currentTime - startTime;
     const progress = Math.min(elapsed / duration, 1);
     const easeOut = 1 - Math.pow(1 - progress, 3);
-    const current = Math.floor(start + (target - start) * easeOut);
+    const current = Math.floor(target * easeOut);
 
-    element.textContent = current.toLocaleString();
+    element.textContent = formatNumber(current);
 
     if (progress < 1) {
       requestAnimationFrame(update);
     } else {
-      element.textContent = target.toLocaleString();
+      element.textContent = formatNumber(target);
     }
   }
 
@@ -74,9 +150,31 @@ function animateCount(element, target, duration = 2000) {
 }
 
 /**
+ * Animate progress bars within an element
+ */
+function animateBars(container) {
+  if (!container) return;
+  container.querySelectorAll('.bar-wrap .bar').forEach((bar) => {
+    const width = bar.dataset.width;
+    if (width) {
+      setTimeout(() => {
+        bar.style.width = width + '%';
+      }, 100);
+    }
+  });
+}
+
+/**
  * Intersection Observer for scroll animations
  */
 function initScrollAnimations() {
+  const targets = document.querySelectorAll('.animate-on-scroll, .metric-card');
+
+  if (typeof IntersectionObserver === 'undefined') {
+    targets.forEach((el) => el.classList.add('visible'));
+    return;
+  }
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -85,14 +183,12 @@ function initScrollAnimations() {
           setTimeout(() => {
             entry.target.classList.add('visible');
 
-            // Trigger count animation for metric cards
+            // Count-up animation for metric cards
             const countEl = entry.target.querySelector('[data-count]');
             if (countEl) {
-              const target = parseInt(countEl.dataset.count);
-              animateCount(countEl, target);
+              animateCount(countEl, parseInt(countEl.dataset.count, 10));
             }
 
-            // Animate bars
             animateBars(entry.target);
           }, delay);
 
@@ -103,163 +199,193 @@ function initScrollAnimations() {
     { threshold: 0.2 }
   );
 
-  document.querySelectorAll('.animate-on-scroll, .metric-card').forEach((el) => {
-    observer.observe(el);
-  });
+  targets.forEach((el) => observer.observe(el));
+}
+
+/* ------------------------------------------------------------------ */
+/* Renderers                                                          */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Population by legislative district (list beside the doughnut chart)
+ */
+function renderDistrictList(districts) {
+  const list = document.getElementById('district-list');
+  if (!list) return;
+
+  if (!districts.length) {
+    list.innerHTML = `<p class="stats-empty">${emptyMessage(
+      'stats-no-data',
+      'We are still gathering this information.'
+    )}</p>`;
+    return;
+  }
+
+  const max = Math.max(...districts.map((d) => d.population));
+  const total = districts.reduce((sum, d) => sum + d.population, 0);
+
+  list.innerHTML = districts
+    .map((d, i) => {
+      const width = max > 0 ? Math.round((d.population / max) * 100) : 0;
+      const share = total > 0 ? ((d.population / total) * 100).toFixed(1) : '0.0';
+      const color = DISTRICT_COLORS[i % DISTRICT_COLORS.length];
+      return `
+        <div class="district-row" style="--district-color: ${color}">
+          <span class="district-name">${districtSpan(d.district)}</span>
+          <span class="district-pop">${formatNumber(d.population)} <small>(${share}%)</small></span>
+          <div class="bar-wrap"><div class="bar" data-width="${width}"></div></div>
+          <span class="district-lgus">${d.lgus.map(escapeHtml).join(', ')}</span>
+        </div>`;
+    })
+    .join('');
+
+  // The section may already be visible by the time the data arrives
+  animateBars(list);
 }
 
 /**
- * Animate progress bars within an element
+ * City and municipality table
  */
-function animateBars(container) {
-  // Breakdown bars
-  container.querySelectorAll('.breakdown-segment').forEach((bar) => {
-    const width = bar.dataset.width;
-    if (width) {
-      setTimeout(() => {
-        bar.style.width = width + '%';
-      }, 300);
-    }
-  });
+function renderLguTable(lgus) {
+  const body = document.getElementById('lgu-table-body');
+  const foot = document.getElementById('lgu-table-foot');
+  if (!body) return;
 
-  // Barangay bars
-  container.querySelectorAll('.bar-wrap .bar').forEach((bar) => {
-    const width = bar.dataset.width;
-    if (width) {
-      setTimeout(() => {
-        bar.style.width = width + '%';
-      }, 100);
-    }
-  });
+  if (!lgus.length) {
+    body.innerHTML = `<tr><td colspan="5" class="stats-empty">${emptyMessage(
+      'stats-no-data',
+      'We are still gathering this information.'
+    )}</td></tr>`;
+    if (foot) foot.innerHTML = '';
+    return;
+  }
 
-  // Sector bars
-  container.querySelectorAll('.sector-bar, .sc-fill').forEach((bar) => {
-    const width = bar.dataset.width;
-    if (width) {
-      setTimeout(() => {
-        bar.style.width = width + '%';
-      }, 200);
-    }
-  });
+  const sorted = [...lgus].sort((a, b) => a.name.localeCompare(b.name));
 
-  // Poverty bars
-  container.querySelectorAll('.poverty-fill').forEach((bar) => {
-    const width = bar.dataset.width;
-    if (width) {
-      setTimeout(() => {
-        bar.style.width = width * 10 + '%';
-      }, 300);
-    }
-  });
+  body.innerHTML = sorted
+    .map((lgu) => {
+      const capital = lgu.capital
+        ? ' <small class="stats-capital" data-i18n="stats-capital">(capital)</small>'
+        : '';
+      return `
+        <tr>
+          <th scope="row">${escapeHtml(lgu.name)}${capital}</th>
+          <td>${districtSpan(Number(lgu.district))}</td>
+          <td class="num">${formatNumber(lgu.population_2020)}</td>
+          <td class="num">${formatNumber(lgu.area_km2, 2)}</td>
+          <td class="num">${formatNumber(lgu.barangays)}</td>
+        </tr>`;
+    })
+    .join('');
+
+  if (foot) {
+    const sum = (key) =>
+      lgus.reduce((total, lgu) => total + (typeof lgu[key] === 'number' ? lgu[key] : 0), 0);
+    foot.innerHTML = `
+      <tr>
+        <th scope="row" colspan="2" data-i18n="stats-total-province">Province of Bukidnon</th>
+        <td class="num">${formatNumber(sum('population_2020'))}</td>
+        <td class="num">${formatNumber(Math.round(sum('area_km2') * 100) / 100, 2)}</td>
+        <td class="num">${formatNumber(sum('barangays'))}</td>
+      </tr>`;
+  }
 }
 
 /**
- * Create Historical Line Chart
+ * CMCI scores (only when data/competitive-index.json has been filled in)
  */
-function createHistoricalChart() {
-  const ctx = document.getElementById('historicalLineChart');
-  if (!ctx) return;
+function renderCMCI(data) {
+  const target = document.getElementById('cmci-data');
+  const empty = document.getElementById('cmci-empty');
+  if (!target) return;
 
-  const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
-  gradient.addColorStop(0, 'rgba(0, 50, 160, 0.2)');
-  gradient.addColorStop(1, 'rgba(0, 50, 160, 0)');
+  const years = data && Array.isArray(data.years) ? data.years : [];
+  const pillars = data && Array.isArray(data.pillars) ? data.pillars : [];
+  const overall = data && Array.isArray(data.overall) ? data.overall : [];
+  if (!years.length || (!pillars.length && !overall.length)) return; // keep the empty state
 
-  charts.historical = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: historicalData.years,
-      datasets: [
-        {
-          label: 'Population',
-          data: historicalData.populations,
-          borderColor: COLORS.primary,
-          backgroundColor: gradient,
-          fill: true,
-          tension: 0.4,
-          pointBackgroundColor: COLORS.primary,
-          pointBorderColor: '#fff',
-          pointBorderWidth: 3,
-          pointRadius: 6,
-          pointHoverRadius: 8,
-          pointHoverBorderWidth: 3,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: {
-        duration: 2000,
-        easing: 'easeOutQuart',
-      },
-      interaction: {
-        intersect: false,
-        mode: 'index',
-      },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: 'rgba(0, 50, 160, 0.95)',
-          titleFont: { size: 14, weight: '600' },
-          bodyFont: { size: 13 },
-          padding: 12,
-          cornerRadius: 8,
-          displayColors: false,
-          callbacks: {
-            label: (ctx) => `Population: ${ctx.raw.toLocaleString()}`,
-          },
-        },
-      },
-      scales: {
-        x: {
-          grid: { display: false },
-          ticks: { font: { size: 12 } },
-        },
-        y: {
-          beginAtZero: false,
-          grid: { color: 'rgba(0,0,0,0.05)' },
-          ticks: {
-            font: { size: 12 },
-            callback: (v) => v / 1000 + 'K',
-          },
-        },
-      },
-    },
+  const cell = (value) =>
+    `<td class="num">${typeof value === 'number' ? formatNumber(value, 2) : '–'}</td>`;
+  const row = (label, scores) =>
+    `<tr><th scope="row">${label}</th>${years
+      .map((_, i) => cell(Array.isArray(scores) ? scores[i] : null))
+      .join('')}</tr>`;
+
+  let rows = '';
+  if (overall.length) {
+    rows += row('<span data-i18n="stats-cmci-overall">Overall score</span>', overall);
+  }
+  pillars.forEach((pillar) => {
+    if (pillar) rows += row(escapeHtml(pillar.name || pillar.id || ''), pillar.scores);
   });
+
+  target.innerHTML = `
+    <table class="data-table stats-lgu-table">
+      <thead>
+        <tr>
+          <th scope="col" data-i18n="stats-cmci-pillar">Pillar</th>
+          ${years.map((y) => `<th scope="col" class="num">${escapeHtml(y)}</th>`).join('')}
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+  target.hidden = false;
+  if (empty) empty.hidden = true;
 }
 
+/* ------------------------------------------------------------------ */
+/* Charts                                                             */
+/* ------------------------------------------------------------------ */
+
+function chartsAvailable() {
+  return typeof Chart !== 'undefined';
+}
+
+/** Replace a chart's canvas with a short message. */
+function showChartFallback(canvasId) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas || !canvas.parentElement) return;
+  const wrapper = canvas.parentElement;
+  wrapper.classList.add('chart-wrapper-empty');
+  wrapper.innerHTML = `<p class="stats-empty">${emptyMessage(
+    'stats-chart-unavailable',
+    'The chart could not be shown. The same figures are in the table on this page.'
+  )}</p>`;
+}
+
+const tooltipStyle = {
+  backgroundColor: 'rgba(0, 50, 160, 0.95)',
+  titleFont: { size: 14, weight: '600' },
+  bodyFont: { size: 13 },
+  padding: 12,
+  cornerRadius: 8,
+};
+
 /**
- * Create Distribution Pie Chart
+ * Doughnut chart: 2020 population by legislative district
  */
-function createDistributionChart() {
-  const ctx = document.getElementById('distributionPieChart');
-  if (!ctx) return;
+function createDistrictChart() {
+  const ctx = document.getElementById('districtChart');
+  if (!ctx || charts.district) return;
+  if (!chartsAvailable() || !state.districts.length) {
+    showChartFallback('districtChart');
+    return;
+  }
 
-  const top10 = barangayData.slice(0, 10);
-  const colors = [
-    COLORS.primary,
-    COLORS.accent,
-    COLORS.success,
-    COLORS.info,
-    '#8B5CF6',
-    '#EC4899',
-    '#14B8A6',
-    '#F59E0B',
-    '#6366F1',
-    COLORS.secondary,
-  ];
-
-  charts.distribution = new Chart(ctx, {
+  charts.district = new Chart(ctx, {
     type: 'doughnut',
     data: {
-      labels: top10.map((d) => d.name),
+      labels: state.districts.map((d) =>
+        tr(`stats-district-${d.district}`, districtText(d.district))
+      ),
       datasets: [
         {
-          data: top10.map((d) => d.pop),
-          backgroundColor: colors,
+          data: state.districts.map((d) => d.population),
+          backgroundColor: state.districts.map(
+            (_, i) => DISTRICT_COLORS[i % DISTRICT_COLORS.length]
+          ),
           borderColor: '#fff',
           borderWidth: 3,
-          hoverBorderWidth: 3,
           hoverOffset: 8,
         },
       ],
@@ -267,35 +393,20 @@ function createDistributionChart() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      animation: {
-        animateRotate: true,
-        animateScale: true,
-        duration: 1500,
-        easing: 'easeOutQuart',
-      },
+      animation: { animateRotate: true, animateScale: true, duration: 1500 },
       cutout: '55%',
       plugins: {
         legend: {
-          position: 'right',
-          labels: {
-            boxWidth: 14,
-            padding: 12,
-            font: { size: 12 },
-            usePointStyle: true,
-            pointStyle: 'circle',
-          },
+          position: 'bottom',
+          labels: { boxWidth: 14, padding: 12, font: { size: 12 }, usePointStyle: true },
         },
         tooltip: {
-          backgroundColor: 'rgba(0, 50, 160, 0.95)',
-          titleFont: { size: 14, weight: '600' },
-          bodyFont: { size: 13 },
-          padding: 12,
-          cornerRadius: 8,
+          ...tooltipStyle,
           callbacks: {
-            label: (ctx) => {
-              const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
-              const pct = ((ctx.raw / total) * 100).toFixed(1);
-              return `${ctx.raw.toLocaleString()} (${pct}%)`;
+            label: (item) => {
+              const total = item.dataset.data.reduce((a, b) => a + b, 0);
+              const pct = total > 0 ? ((item.raw / total) * 100).toFixed(1) : '0.0';
+              return `${formatNumber(item.raw)} (${pct}%)`;
             },
           },
         },
@@ -305,26 +416,30 @@ function createDistributionChart() {
 }
 
 /**
- * Create Population Bar Chart
+ * Horizontal bar chart: 2020 population of each city and municipality
  */
 function createBarChart() {
   const ctx = document.getElementById('populationBarChart');
-  if (!ctx) return;
+  if (!ctx || charts.bar) return;
+  if (!chartsAvailable() || !state.lgus.length) {
+    showChartFallback('populationBarChart');
+    return;
+  }
 
-  const sorted = [...barangayData].sort((a, b) => b.pop - a.pop);
+  const sorted = [...state.lgus].sort((a, b) => b.population_2020 - a.population_2020);
+  const populationLabel = tr('stats-population', 'Population');
 
   charts.bar = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: sorted.map((d) => d.name),
+      labels: sorted.map((lgu) => lgu.name),
       datasets: [
         {
-          label: 'Population',
-          data: sorted.map((d) => d.pop),
-          backgroundColor: sorted.map((_, i) => {
-            const opacity = 1 - i * 0.03;
-            return `rgba(0, 50, 160, ${opacity})`;
-          }),
+          label: populationLabel,
+          data: sorted.map((lgu) => lgu.population_2020),
+          backgroundColor: sorted.map(
+            (lgu) => DISTRICT_COLORS[(Number(lgu.district) - 1) % DISTRICT_COLORS.length]
+          ),
           borderRadius: 4,
           borderSkipped: false,
         },
@@ -334,22 +449,18 @@ function createBarChart() {
       indexAxis: 'y',
       responsive: true,
       maintainAspectRatio: false,
-      animation: {
-        duration: 1500,
-        easing: 'easeOutQuart',
-        delay: (ctx) => ctx.dataIndex * 50,
-      },
+      animation: { duration: 1500, easing: 'easeOutQuart' },
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: 'rgba(0, 50, 160, 0.95)',
-          titleFont: { size: 14, weight: '600' },
-          bodyFont: { size: 13 },
-          padding: 12,
-          cornerRadius: 8,
+          ...tooltipStyle,
           displayColors: false,
           callbacks: {
-            label: (ctx) => `Population: ${ctx.raw.toLocaleString()}`,
+            label: (item) => `${populationLabel}: ${formatNumber(item.raw)}`,
+            afterLabel: (item) => {
+              const lgu = sorted[item.dataIndex];
+              return lgu ? tr(`stats-district-${lgu.district}`, districtText(lgu.district)) : '';
+            },
           },
         },
       },
@@ -357,14 +468,11 @@ function createBarChart() {
         x: {
           beginAtZero: true,
           grid: { color: 'rgba(0,0,0,0.05)' },
-          ticks: {
-            font: { size: 11 },
-            callback: (v) => v.toLocaleString(),
-          },
+          ticks: { font: { size: 11 }, callback: (v) => formatNumber(v) },
         },
         y: {
           grid: { display: false },
-          ticks: { font: { size: 11 } },
+          ticks: { font: { size: 11 }, autoSkip: false },
         },
       },
     },
@@ -372,23 +480,27 @@ function createBarChart() {
 }
 
 /**
- * Initialize all charts with lazy loading
+ * Create charts when their canvas scrolls into view
  */
 function initCharts() {
+  const creators = {
+    districtChart: createDistrictChart,
+    populationBarChart: createBarChart,
+  };
+  const canvases = Object.keys(creators)
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
+
+  if (typeof IntersectionObserver === 'undefined') {
+    canvases.forEach((canvas) => creators[canvas.id]());
+    return;
+  }
+
   const chartObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const chartId = entry.target.id;
-
-          if (chartId === 'historicalLineChart' && !charts.historical) {
-            createHistoricalChart();
-          } else if (chartId === 'distributionPieChart' && !charts.distribution) {
-            createDistributionChart();
-          } else if (chartId === 'populationBarChart' && !charts.bar) {
-            createBarChart();
-          }
-
+          creators[entry.target.id]();
           chartObserver.unobserve(entry.target);
         }
       });
@@ -396,349 +508,47 @@ function initCharts() {
     { threshold: 0.1 }
   );
 
-  document.querySelectorAll('canvas').forEach((canvas) => {
-    chartObserver.observe(canvas);
-  });
+  canvases.forEach((canvas) => chartObserver.observe(canvas));
 }
 
-/**
- * Initialize economy section counters
- */
-function initEconomyCounters() {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const countEl = entry.target.querySelector('[data-count]');
-          if (countEl) {
-            const target = parseInt(countEl.dataset.count);
-            animateCount(countEl, target, 1500);
-          }
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.3 }
-  );
+/* ------------------------------------------------------------------ */
+/* Init                                                               */
+/* ------------------------------------------------------------------ */
 
-  document.querySelectorAll('.economy-card').forEach((card) => {
-    observer.observe(card);
-  });
-}
-
-/**
- * CMCI (Competitive Index) Data
- */
-const cmciData = {
-  years: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
-  pillars: {
-    economicDynamism: {
-      labels: [
-        'Local Economy Size',
-        'Economy Growth',
-        'Active Establishments',
-        'Safety Compliant',
-        'Employment',
-      ],
-      data: [
-        [0.4353, 0.1829, 0.1004, 0.042, 0.0328, 0.0935, 0.0344, 0.0571, 0.0259],
-        [0.0847, 0.003, 0.0081, 0.0028, 0.3297, 0.0026, 0.0, 0.0005, 0.0318],
-        [null, 0.1411, 0.8263, 0.3719, 0.5391, 0.5346, 0.5349, 0.5154, 0.4994],
-        [null, 0.2991, 0.3683, 0.2471, 0.247, 0.2629, 0.0, 0.248, 0.2235],
-        [0.3157, 0.1756, 0.1604, 0.1599, 0.1807, 0.1636, 0.1433, 0.1485, 0.3835],
-      ],
-    },
-    governmentEfficiency: {
-      labels: [
-        'Cost of Living',
-        'Cost of Business',
-        'Financial Deepening',
-        'Productivity',
-        'Compliance',
-      ],
-      data: [
-        [2.6667, 1.6216, 1.3889, 1.1508, 0.8621, 0.4063, 1.6635, 1.1905, 1.1919],
-        [2.2968, 2.2431, 2.1045, 1.9988, 2.1827, 2.1901, 1.8629, 1.546, 1.5599],
-        [2.2418, 1.5657, 0.2448, 0.7057, 0.8357, 0.7899, 1.1689, 1.1263, 0.8288],
-        [0.0062, 0.0339, 0.0083, 0.004, 0.1654, 0.2272, 0.1243, 0.1451, 0.3297],
-        [3.0994, 2.1474, 0.0, 2.45, 2.5, 2.381, 1.8929, 1.9565, 1.96],
-      ],
-    },
-    infrastructure: {
-      labels: [
-        'Road Network',
-        'Distance to Ports',
-        'Basic Utilities',
-        'Transportation',
-        'IT Capacity',
-      ],
-      data: [
-        [0.0019, 0.0003, 0.0, 0.009, 0.0021, 0.0235, 0.0015, 0.0016, 0.0016],
-        [2.3543, 1.8319, 0.0, 1.6595, 2.4576, 2.4658, 1.3088, 1.562, 1.5281],
-        [3.3333, 2.5, 0.0, 1.8498, 2.475, 2.4714, 0.0037, 0.6363, 0.356],
-        [0.4063, 0.2816, 0.0, 0.0343, 0.0221, 0.0153, 0.023, 0.0636, 0.0959],
-        [1.4638, 0.4, 0.0, 0.1278, 0.3108, 0.2727, 0.0617, 0.1674, 0.0155],
-      ],
-    },
-    resiliency: {
-      labels: ['DRR Plan', 'Disaster Drill', 'Early Warning', 'DRRMP Budget', 'Risk Assessments'],
-      data: [
-        [null, 2.5, 0.0, 2.4537, 2.5, 2.4474, 1.9995, 1.9583, 1.9783],
-        [null, 2.5, 0.0, 2.25, 2.5, 1.2583, 1.002, 1.0016, 1.0023],
-        [null, 2.5, 0.0, 2.5, 2.5, 1.2573, 1.0062, 1.0033, 1.0397],
-        [null, 0.0022, 0.0, 0.2655, 0.1649, 0.0183, 0.0, 0.0699, 0.002],
-        [null, 2.5, 0.0, 2.5, 2.5, 2.5, 2.0, 2.0, 2.0],
-      ],
-    },
-    innovation: {
-      labels: [
-        'ICT Plan',
-        'R&D Expenditures',
-        'E-BPLS Software',
-        'STEM Graduates',
-        'Innovation Facilities',
-      ],
-      data: [
-        [null, null, null, null, null, null, 1.3334, 2.0001, 2.0001],
-        [null, null, null, null, null, null, 0.0, 0.0, 0.0006],
-        [null, null, null, null, null, null, 2.0, 0.0, 2.0],
-        [null, null, null, null, null, null, 0.0039, 0.0052, 0.0181],
-        [null, null, null, null, null, null, 0.0392, 0.1669, 0.0227],
-      ],
-    },
-  },
-  keyIndicators: {
-    labels: ['Health', 'Education', 'Social Protection', 'Peace & Order', 'LGU Investment'],
-    data: [
-      [0.7476, 0.5608, 0.0, 0.3946, 0.3941, 0.469, 0.3219, 0.2037, 0.2995],
-      [0.0605, 0.0992, 0.0, 0.0348, 0.1006, 0.0231, 0.1263, 0.0764, 0.1341],
-      [0.2988, 0.2421, 0.0, 0.2778, 0.2845, 0.4097, 0.0011, 0.2567, 0.4923],
-      [0.0638, 0.408, 0.0, 0.0395, 0.0347, 0.0649, 0.0, 0.2571, 0.1031],
-      [2.4381, 0.2859, 0.0, 0.2648, 0.1597, 0.0191, 0.0, 0.0016, 0.0108],
-    ],
-  },
-};
-
-/**
- * Create CMCI Overview Chart
- */
-function createCMCIOverviewChart() {
-  const ctx = document.getElementById('cmciOverviewChart');
-  if (!ctx || charts.cmciOverview) return;
-
-  const chartColors = [COLORS.primary, COLORS.accent, COLORS.success, COLORS.info, '#8B5CF6'];
-
-  charts.cmciOverview = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: cmciData.years,
-      datasets: cmciData.keyIndicators.labels.map((label, i) => ({
-        label: label,
-        data: cmciData.keyIndicators.data[i],
-        borderColor: chartColors[i],
-        backgroundColor: chartColors[i] + '20',
-        fill: false,
-        tension: 0.4,
-        pointRadius: 4,
-        pointHoverRadius: 6,
-        borderWidth: 2,
-      })),
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: { duration: 1500, easing: 'easeOutQuart' },
-      interaction: { intersect: false, mode: 'index' },
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: { boxWidth: 12, padding: 16, font: { size: 11 }, usePointStyle: true },
-        },
-        tooltip: {
-          backgroundColor: 'rgba(0, 50, 160, 0.95)',
-          padding: 12,
-          cornerRadius: 8,
-          callbacks: {
-            label: (ctx) =>
-              ctx.raw !== null
-                ? `${ctx.dataset.label}: ${ctx.raw.toFixed(4)}`
-                : `${ctx.dataset.label}: N/A`,
-          },
-        },
-      },
-      scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 11 } } },
-        y: {
-          beginAtZero: true,
-          grid: { color: 'rgba(0,0,0,0.05)' },
-          ticks: { font: { size: 11 } },
-        },
-      },
-    },
-  });
-}
-
-/**
- * Create CMCI Pillar Chart
- */
-function createCMCIPillarChart(pillarKey, canvasId) {
-  const ctx = document.getElementById(canvasId);
-  if (!ctx || charts[canvasId]) return;
-
-  const pillarData = cmciData.pillars[pillarKey];
-  if (!pillarData) return;
-
-  const chartColors = [COLORS.primary, COLORS.accent, COLORS.success, COLORS.info, '#8B5CF6'];
-
-  charts[canvasId] = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: cmciData.years,
-      datasets: pillarData.labels.map((label, i) => ({
-        label: label,
-        data: pillarData.data[i],
-        borderColor: chartColors[i],
-        backgroundColor: chartColors[i] + '20',
-        fill: false,
-        tension: 0.4,
-        pointRadius: 3,
-        pointHoverRadius: 5,
-        borderWidth: 2,
-      })),
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: { duration: 1200, easing: 'easeOutQuart' },
-      interaction: { intersect: false, mode: 'index' },
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: { boxWidth: 10, padding: 12, font: { size: 10 }, usePointStyle: true },
-        },
-        tooltip: {
-          backgroundColor: 'rgba(0, 50, 160, 0.95)',
-          padding: 10,
-          cornerRadius: 6,
-          callbacks: {
-            label: (ctx) =>
-              ctx.raw !== null
-                ? `${ctx.dataset.label}: ${ctx.raw.toFixed(4)}`
-                : `${ctx.dataset.label}: N/A`,
-          },
-        },
-      },
-      scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 10 } } },
-        y: {
-          beginAtZero: true,
-          grid: { color: 'rgba(0,0,0,0.05)' },
-          ticks: { font: { size: 10 } },
-        },
-      },
-    },
-  });
-}
-
-/**
- * Initialize CMCI Tab Navigation
- */
-function initCMCITabs() {
-  const tabs = document.querySelectorAll('.cmci-tab');
-  const panels = document.querySelectorAll('.cmci-panel');
-
-  if (!tabs.length) return;
-
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const pillar = tab.dataset.pillar;
-
-      // Update active tab
-      tabs.forEach((t) => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      // Update active panel
-      panels.forEach((p) => p.classList.remove('active'));
-      const activePanel = document.getElementById(`panel-${pillar}`);
-      if (activePanel) {
-        activePanel.classList.add('active');
-
-        // Create chart for this panel if needed
-        if (pillar === 'overview') {
-          createCMCIOverviewChart();
-        } else if (pillar === 'economic-dynamism') {
-          createCMCIPillarChart('economicDynamism', 'cmciEconomicChart');
-        } else if (pillar === 'government-efficiency') {
-          createCMCIPillarChart('governmentEfficiency', 'cmciGovernmentChart');
-        } else if (pillar === 'infrastructure') {
-          createCMCIPillarChart('infrastructure', 'cmciInfraChart');
-        } else if (pillar === 'resiliency') {
-          createCMCIPillarChart('resiliency', 'cmciResiliencyChart');
-        } else if (pillar === 'innovation') {
-          createCMCIPillarChart('innovation', 'cmciInnovationChart');
-        }
-
-        // Animate indicator bars
-        animateCMCIBars(activePanel);
-      }
-    });
-  });
-}
-
-/**
- * Animate CMCI indicator bars
- */
-function animateCMCIBars(container) {
-  container.querySelectorAll('.indicator-fill').forEach((bar) => {
-    const value = bar.dataset.value;
-    if (value) {
-      setTimeout(() => {
-        bar.style.setProperty('--fill-width', value + '%');
-        bar.classList.add('animated');
-      }, 100);
-    }
-  });
-}
-
-/**
- * Initialize CMCI Section
- */
-function initCMCISection() {
-  const cmciSection = document.getElementById('competitive-index');
-  if (!cmciSection) return;
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          initCMCITabs();
-          createCMCIOverviewChart();
-          animateCMCIBars(document.getElementById('panel-overview'));
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
-
-  observer.observe(cmciSection);
-}
-
-// Initialize on DOM ready
-document.addEventListener('DOMContentLoaded', () => {
+function initStatisticsPage() {
   initScrollAnimations();
-  initCharts();
-  initEconomyCounters();
-  initCMCISection();
-});
+
+  const demographicsReady = loadJSON(DATA_URLS.demographics).then((data) => {
+    state.lgus = normalizeLgus(data);
+    state.districts = groupByDistrict(state.lgus);
+    renderDistrictList(state.districts);
+    renderLguTable(state.lgus);
+    initCharts();
+  });
+
+  const cmciReady = loadJSON(DATA_URLS.cmci).then(renderCMCI);
+
+  return Promise.all([demographicsReady, cmciReady]).catch((error) => {
+    console.error('[statistics] Failed to render statistics:', error);
+  });
+}
+
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', initStatisticsPage);
+}
 
 // Export for testing
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
-    barangayData,
-    historicalData,
-    cmciData,
     COLORS,
+    DISTRICT_COLORS,
     animateCount,
+    formatNumber,
+    normalizeLgus,
+    groupByDistrict,
+    renderDistrictList,
+    renderLguTable,
+    renderCMCI,
+    initStatisticsPage,
   };
 }

@@ -8,7 +8,7 @@
  * cookies / partitioned storage (blocked by default in current Chrome, Safari
  * and Firefox) and is routinely stripped by ad/tracker blockers. When that
  * happens it renders a blank white box — which is exactly what was reported on
- * the live cPanel site even though the page is public and the CSP fully allows
+ * the live site even though the page is public and the CSP fully allows
  * Facebook.
  *
  * STRATEGY (progressive enhancement, graceful degradation)
@@ -103,16 +103,18 @@
 
   function renderLocalFeed(container, articles, pageUrl) {
     var items = sortByDateDesc(articles).slice(0, MAX_ITEMS);
-    var safePage = safeUrl(pageUrl) || 'https://www.facebook.com';
+    var safePage = safeUrl(pageUrl) || 'https://www.facebook.com/lgubukidnon';
 
     var html = '<div class="fb-feed-local" data-fb-local>';
 
     if (!items.length) {
       html +=
         '<article class="fb-post fb-post--empty">' +
-        '<p class="fb-post-text">No updates to show right now.</p>' +
-        '<a class="fb-post-link" href="' + safePage + '" target="_blank" rel="noopener noreferrer">' +
-        'See the latest on Facebook <i class="bi bi-arrow-right" aria-hidden="true"></i></a>' +
+        '<p class="fb-post-text">No updates yet. Follow the Provincial Government of Bukidnon on Facebook.</p>' +
+        '<a class="fb-post-link" href="' +
+        safePage +
+        '" target="_blank" rel="noopener noreferrer">' +
+        'Provincial Government of Bukidnon on Facebook <i class="bi bi-arrow-right" aria-hidden="true"></i></a>' +
         '</article>';
     } else {
       for (var i = 0; i < items.length; i++) {
@@ -126,16 +128,21 @@
         // Author row — avatar + page name + date + category badge
         html += '<div class="fb-post-author">';
         html +=
-          '<img src="' + AVATAR_SRC + '" class="fb-post-avatar" ' +
+          '<img src="' +
+          AVATAR_SRC +
+          '" class="fb-post-avatar" ' +
           'width="36" height="36" alt="" aria-hidden="true" loading="lazy">';
         html += '<div class="fb-post-author-info">';
-        html += '<span class="fb-post-page-name">LGU Solano</span>';
+        html += '<span class="fb-post-page-name">Provincial Government of Bukidnon</span>';
         html += '<time class="fb-post-date">' + formatDate(a.date) + '</time>';
         html += '</div>';
         if (a.category) {
           html +=
-            '<span class="fb-post-badge fb-post-badge--' + badge + '">' +
-            esc(a.category) + '</span>';
+            '<span class="fb-post-badge fb-post-badge--' +
+            badge +
+            '">' +
+            esc(a.category) +
+            '</span>';
         }
         html += '</div>';
 
@@ -156,8 +163,11 @@
         if (url) {
           var label = esc(a.source) || 'Read more';
           html +=
-            '<a class="fb-post-link" href="' + url + '" target="_blank" rel="noopener noreferrer">' +
-            label + ' <i class="bi bi-arrow-right" aria-hidden="true"></i></a>';
+            '<a class="fb-post-link" href="' +
+            url +
+            '" target="_blank" rel="noopener noreferrer">' +
+            label +
+            ' <i class="bi bi-arrow-right" aria-hidden="true"></i></a>';
         }
 
         html += '</article>';
@@ -179,7 +189,7 @@
       '&adapt_container_width=true&hide_cover=false&show_facepile=true';
 
     var iframe = document.createElement('iframe');
-    iframe.title = 'Latest posts from the Official LGU Solano Facebook Page';
+    iframe.title = 'Latest posts from the Provincial Government of Bukidnon Facebook Page';
     iframe.src = src;
     iframe.width = '500';
     iframe.height = '700';
@@ -286,7 +296,7 @@
   function init() {
     var container = document.getElementById('fb-feed');
     if (!container) return;
-    var pageUrl = container.getAttribute('data-fb-page') || 'https://www.facebook.com';
+    var pageUrl = container.getAttribute('data-fb-page') || 'https://www.facebook.com/lgubukidnon';
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', NEWS_DATA_URL, true);
@@ -296,7 +306,7 @@
       if (xhr.status === 200) {
         try {
           var data = JSON.parse(xhr.responseText);
-          articles = (data && data.news) || [];
+          articles = data && Array.isArray(data.news) ? data.news : [];
         } catch (e) {
           articles = [];
         }

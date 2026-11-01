@@ -1,65 +1,55 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8777S9SP9X"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      gtag('config', 'G-8777S9SP9X');
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Public safety services in Solano, Nueva Vizcaya including emergency response, disaster preparedness, police services, fire protection, and MDRRMO programs."
+      content="Emergency and public safety contacts in Bukidnon: 911, PDRRMD, Bukidnon Police Provincial Office and BFP Malaybalay. A volunteer-run guide; confirm numbers with the offices."
     />
-    <meta name="author" content="Ramon Logan Jr." />
+    <meta name="author" content="BetterBukidnon volunteers" />
     <meta
       name="keywords"
-      content="public safety Solano, emergency response, disaster preparedness, MDRRMO, police services, fire protection, Solano Nueva Vizcaya, emergency hotlines, safety services"
+      content="Bukidnon emergency, 911, PDRRMD, disaster, Bukidnon Police Provincial Office, BFP Malaybalay, fire station"
     />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://bettersolano.org/services/public-safety" />
+    <link rel="canonical" href="https://betterbukidnon.org/services/public-safety" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://bettersolano.org/services/public-safety" />
-    <meta property="og:title" content="Public Safety & Emergency Services | BetterSolano.org" />
+    <meta property="og:url" content="https://betterbukidnon.org/services/public-safety" />
+    <meta property="og:title" content="Public Safety & Emergency Services | BetterBukidnon.org" />
     <meta
       property="og:description"
-      content="Public safety services in Solano, Nueva Vizcaya including emergency response, disaster preparedness, police services, fire protection, and MDRRMO programs."
+      content="Emergency and public safety contacts in Bukidnon: 911, PDRRMD, Bukidnon Police Provincial Office and BFP Malaybalay. A volunteer-run guide; confirm numbers with the offices."
     />
     <meta
       property="og:image"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:type" content="image/png" />
     <meta
       property="og:image:secure_url"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
     <meta property="og:locale" content="en_PH" />
-    <meta property="og:site_name" content="BetterSolano.org" />
+    <meta property="og:site_name" content="BetterBukidnon.org" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://bettersolano.org/services/public-safety" />
-    <meta name="twitter:title" content="Public Safety & Emergency Services | BetterSolano.org" />
+    <meta name="twitter:url" content="https://betterbukidnon.org/services/public-safety" />
+    <meta name="twitter:title" content="Public Safety & Emergency Services | BetterBukidnon.org" />
     <meta
       name="twitter:description"
-      content="Public safety services in Solano, Nueva Vizcaya including emergency response, disaster preparedness, police services, fire protection, and MDRRMO programs."
+      content="Emergency and public safety contacts in Bukidnon: 911, PDRRMD, Bukidnon Police Provincial Office and BFP Malaybalay. A volunteer-run guide; confirm numbers with the offices."
     />
     <meta
       name="twitter:image"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
-    <title>Public Safety & Emergency Services | BetterSolano.org</title>
+    <title>Public Safety & Emergency Services | BetterBukidnon.org</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/logo/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="../assets/images/logo/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -80,6 +70,106 @@
     <link rel="stylesheet" href="../assets/css/responsive.css" />
     <link rel="stylesheet" href="../assets/css/accessibility.css" />
     <link rel="stylesheet" href="../assets/css/footer.css" />
+
+    <style>
+      .bk-section-title {
+        font-size: 1.25rem;
+        margin: 0 0 4px;
+      }
+      .bk-section-intro {
+        color: var(--color-text-light);
+        margin: 0 0 var(--spacing-md, 16px);
+        max-width: 760px;
+      }
+      .bk-card {
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .bk-card h3 {
+        font-size: 1rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .bk-card h3 i {
+        color: var(--color-primary);
+      }
+      .bk-card p {
+        margin: 0;
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: var(--color-text);
+      }
+      .bk-card-link {
+        margin-top: auto;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+      .bk-card-link:hover {
+        text-decoration: underline;
+      }
+      .bk-contacts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .bk-contact {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
+        padding: 12px 16px;
+        text-decoration: none;
+        color: var(--color-text);
+        font-size: 0.875rem;
+      }
+      .bk-contact i {
+        color: var(--color-primary);
+        font-size: 1.125rem;
+      }
+      .bk-contact strong {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--color-text-light);
+        font-weight: 600;
+      }
+      .charter-note {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-left: 4px solid var(--color-primary);
+        border-radius: 8px;
+        padding: 14px 16px;
+        font-size: 0.8125rem;
+        line-height: 1.6;
+      }
+      .charter-note i {
+        color: var(--color-primary);
+        margin-top: 2px;
+      }
+      .charter-note p {
+        margin: 0;
+        font-size: inherit;
+        color: inherit;
+      }
+      .charter-note a {
+        color: var(--color-primary);
+        font-weight: 600;
+        text-decoration: underline;
+      }
+    </style>
   </head>
 
   <body>
@@ -92,29 +182,29 @@
       <div class="container">
         <div class="hotline-inner">
           <div class="hotline-items">
-            <a href="tel:09274008033" class="hotline-item">
-              <i class="bi bi-shield-fill"></i>
-              <span>Police: 0927 400 8033</span>
+            <a href="tel:911" class="hotline-item">
+              <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+              <span>Emergency: 911</span>
             </a>
-            <a href="tel:09162840885" class="hotline-item">
-              <i class="bi bi-heart-fill"></i>
-              <span>MSWDO: 0916 284 0885</span>
+            <a href="tel:+63888131262" class="hotline-item">
+              <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+              <span>PDRRMD: (088) 813-1262</span>
             </a>
-            <a href="tel:09360620305" class="hotline-item">
-              <i class="bi bi-fire"></i>
-              <span>Fire: 0936 062 0305</span>
+            <a href="tel:+63888134263" class="hotline-item">
+              <i class="bi bi-shield-fill" aria-hidden="true"></i>
+              <span>Police: (088) 813-4263</span>
             </a>
-            <a href="tel:0906188086" class="hotline-item">
-              <i class="bi bi-building"></i>
-              <span>DILG: 0906 188 086</span>
+            <a href="tel:+63888135449" class="hotline-item">
+              <i class="bi bi-fire" aria-hidden="true"></i>
+              <span>Fire: (088) 813-5449</span>
             </a>
-            <a href="tel:09263833744" class="hotline-item">
-              <i class="bi bi-exclamation-triangle-fill"></i>
-              <span>MDRRMO: 0926 383 3744</span>
+            <a href="tel:+63888135631" class="hotline-item">
+              <i class="bi bi-heart-pulse-fill" aria-hidden="true"></i>
+              <span>PHO: (088) 813-5631</span>
             </a>
-            <a href="tel:09068195569" class="hotline-item">
-              <i class="bi bi-truck"></i>
-              <span>R2TMC: 0906 819 5569</span>
+            <a href="tel:+63888135734" class="hotline-item">
+              <i class="bi bi-heart-fill" aria-hidden="true"></i>
+              <span>PSWDO: (088) 813-5734</span>
             </a>
           </div>
         </div>
@@ -127,8 +217,8 @@
         <div class="logo-container">
           <a href="../"
             ><img
-              src="../assets/images/logo/better-solano-logo.svg"
-              alt="Municipality of Solano Logo"
+              src="../assets/images/logo/better-bukidnon-logo.svg"
+              alt="Province of Bukidnon Logo"
               class="logo-img"
           /></a>
         </div>
@@ -136,7 +226,14 @@
           <ul>
             <li><a href="../" data-i18n="nav-home">Home</a></li>
             <li class="has-dropdown">
-              <a href="./" class="active" data-i18n="nav-services" aria-haspopup="true" aria-expanded="false">Services</a>
+              <a
+                href="./"
+                class="active"
+                data-i18n="nav-services"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Services</a
+              >
               <ul class="dropdown-menu">
                 <li><a href="certificates" data-i18n="safety-certificates">Certificates</a></li>
                 <li><a href="business" data-i18n="safety-business">Business</a></li>
@@ -157,7 +254,13 @@
             <li><a href="../government/" data-i18n="nav-government">Government</a></li>
             <li><a href="../statistics/" data-i18n="nav-statistics">Statistics</a></li>
             <li class="has-dropdown">
-              <a href="../legislative/" data-i18n="nav-legislative" aria-haspopup="true" aria-expanded="false">Legislative</a>
+              <a
+                href="../legislative/"
+                data-i18n="nav-legislative"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Legislative</a
+              >
               <ul class="dropdown-menu">
                 <li>
                   <a
@@ -183,7 +286,7 @@
           <div class="lang-selector">
             <button class="btn btn-secondary btn-sm lang-btn" data-lang="en">EN</button>
             <button class="btn btn-secondary btn-sm lang-btn" data-lang="fil">FIL</button>
-            <button class="btn btn-secondary btn-sm lang-btn" data-lang="ilo">ILO</button>
+            <button class="btn btn-secondary btn-sm lang-btn" data-lang="ceb">CEB</button>
           </div>
         </div>
       </div>
@@ -199,9 +302,9 @@
               <span class="rate-display">1 USD = ₱ --</span>
             </span>
           </div>
-          <div class="info-bar-item info-bar-weather" aria-label="Current weather in Solano">
+          <div class="info-bar-item info-bar-weather" aria-label="Current weather in Bukidnon">
             <i class="bi bi-thermometer-half"></i>
-            <span class="weather-location">Solano</span>
+            <span class="weather-location">Malaybalay</span>
             <span class="weather-temp">--°C</span>
           </div>
           <div class="info-bar-item info-bar-datetime" aria-label="Philippine Date and Time">
@@ -221,7 +324,7 @@
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           <a href="../" data-i18n="safety-home">Home</a><span>/</span>
           <a href="./" data-i18n="safety-services">Services</a><span>/</span>
-          <span aria-current="page">Public Safety</span>
+          <span aria-current="page" data-i18n="safety-bc">Public Safety</span>
         </nav>
       </div>
       <section class="page-header">
@@ -229,208 +332,160 @@
           <div class="page-header-content">
             <span class="page-header-badge"
               ><i class="bi bi-shield-fill-check"></i>
-              <span data-i18n="safety-page-badge">Public Safety</span></span
+              <span data-i18n="safety-badge">Public Safety</span></span
             >
-            <h1 data-i18n="safety-page-title">Public Safety Services</h1>
-            <p class="page-header-desc" data-i18n="safety-page-desc">
-              Emergency response and disaster preparedness
+            <h1 data-i18n="safety-h1">Public Safety &amp; Emergency Services</h1>
+            <p class="page-header-desc" data-i18n="safety-hdesc">
+              Emergency numbers and who responds to disasters, crime and fire in Bukidnon
             </p>
           </div>
         </div>
       </section>
-      <!-- Services -->
+      <section class="section section-compact">
+        <div class="container">
+          <div class="bk-contacts">
+            <a class="bk-contact" href="tel:911"
+              ><i class="bi bi-telephone-fill" aria-hidden="true"></i
+              ><span
+                ><strong data-i18n="safety-x1">National Emergency Hotline</strong
+                ><span data-i18n="safety-x2">911</span></span
+              ></a
+            >
+            <a class="bk-contact" href="tel:0888131262"
+              ><i class="bi bi-exclamation-triangle" aria-hidden="true"></i
+              ><span
+                ><strong data-i18n="safety-x3">PDRRMD Bukidnon</strong
+                ><span data-i18n="safety-x4">(088) 813-1262</span></span
+              ></a
+            >
+            <a class="bk-contact" href="tel:0888134263"
+              ><i class="bi bi-shield-check" aria-hidden="true"></i
+              ><span
+                ><strong data-i18n="safety-x5">Bukidnon Police Provincial Office</strong
+                ><span data-i18n="safety-x6">(088) 813-4263</span></span
+              ></a
+            >
+            <a class="bk-contact" href="tel:0888135449"
+              ><i class="bi bi-fire" aria-hidden="true"></i
+              ><span
+                ><strong data-i18n="safety-x7">BFP Malaybalay City Fire Station</strong
+                ><span data-i18n="safety-x8">(088) 813-5449</span></span
+              ></a
+            >
+          </div>
+        </div>
+      </section>
       <section class="section">
         <div class="container">
-          <div class="hotlines-header">
-            <div class="hotlines-title">
-              <span class="hotlines-badge"
-                ><i class="bi bi-shield-check"></i>
-                <span data-i18n="safety-services">Services</span></span
-              >
-              <h2 data-i18n="safety-public-safety-services">Public Safety Services</h2>
-            </div>
-            <p data-i18n="safety-emergency-response-and-disaster-preparedness">
-              Emergency response and disaster preparedness programs.
-            </p>
-          </div>
+          <h2 class="bk-section-title" data-i18n="safety-x9">Who to call</h2>
+          <p class="bk-section-intro" data-i18n="safety-x10">
+            In a life-threatening emergency, call 911 first. The other numbers are local landlines;
+            dial (088) first if you are calling from outside the area.
+          </p>
           <div class="grid grid-3">
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-exclamation-triangle"></i>
-                <span data-i18n="safety-disaster">Emergency Response</span>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-exclamation-triangle" aria-hidden="true"></i>
+                <span data-i18n="safety-x12">Disasters: PDRRMD</span>
               </h3>
-              <p class="service-item-desc" data-i18n="safety-disaster-desc">
-                24/7 emergency response and rescue services
+              <p data-i18n="safety-x13">
+                The Provincial Disaster Risk Reduction and Management Department leads disaster
+                preparedness, response and recovery in the province, working with city, municipal
+                and barangay offices.
               </p>
-              <div class="service-item-meta">
-                <span
-                  ><strong data-i18n="label-fee">Fee:</strong>
-                  <span data-i18n="label-free">Free</span></span
-                >
-                <span><strong data-i18n="label-time">Time:</strong> 24/7</span>
-              </div>
+              <a class="bk-card-link" href="/service-details/pdrrmd"
+                ><span data-i18n="safety-x11">Office details</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
             </div>
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-cloud-rain"></i>
-                <span data-i18n="safety-disaster-assistance">Disaster Assistance</span>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-shield-check" aria-hidden="true"></i>
+                <span data-i18n="safety-x14">Crime and security: Bukidnon PPO</span>
               </h3>
-              <p class="service-item-desc" data-i18n="safety-relief-goods-and-evacuation-support">
-                Relief goods and evacuation support
+              <p data-i18n="safety-x15">
+                The Bukidnon Police Provincial Office (Camp Onahon, Malaybalay City) is part of the
+                Philippine National Police. It is a national agency, not a provincial office.
               </p>
-              <div class="service-item-meta">
-                <span><strong data-i18n="safety-fee">Fee:</strong> Free</span>
-                <span><strong data-i18n="safety-office">Office:</strong> MDRRMO</span>
-              </div>
             </div>
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-megaphone"></i>
-                <span data-i18n="safety-disaster-preparedness">Disaster Preparedness</span>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-fire" aria-hidden="true"></i>
+                <span data-i18n="safety-x16">Fire: BFP</span>
               </h3>
-              <p
-                class="service-item-desc"
-                data-i18n="safety-training-and-resources-for-disaster-readiness"
-              >
-                Training and resources for disaster readiness
+              <p data-i18n="safety-x17">
+                The Bureau of Fire Protection is a national agency. The number above is for the
+                Malaybalay City Fire Station; for other areas, ask your city or municipal fire
+                station.
               </p>
-              <div class="service-item-meta">
-                <span><strong data-i18n="safety-fee">Fee:</strong> Free</span>
-                <span><strong>Office:</strong> MDRRMO</span>
-              </div>
             </div>
           </div>
         </div>
       </section>
-
-      <!-- Emergency Hotlines -->
-      <section class="section bg-alt">
-        <div class="container">
-          <div class="hotlines-header">
-            <div class="hotlines-title">
-              <span class="hotlines-badge"
-                ><i class="bi bi-exclamation-triangle-fill"></i>
-                <span data-i18n="safety-emergency">Emergency</span></span
-              >
-              <h2 data-i18n="safety-emergency-hotlines">Emergency Hotlines</h2>
-            </div>
-            <p data-i18n="safety-for-emergencies-and-inquiries-contact-these">
-              For emergencies and inquiries, contact these numbers anytime.
-            </p>
-          </div>
-          <div class="hotlines-grid">
-            <a href="tel:09263833744" class="hotline-card"
-              ><i class="bi bi-exclamation-triangle-fill"></i>
-              <span data-i18n="safety-mdrrmo-solano-0926-383-3744"
-                >MDRRMO Solano 0926 383 3744</span
-              ></a
-            >
-            <a href="tel:09274008033" class="hotline-card"
-              ><i class="bi bi-shield-fill"></i>
-              <span data-i18n="safety-pnp-solano-0927-400-8033">PNP Solano 0927 400 8033</span></a
-            >
-            <a href="tel:09162840885" class="hotline-card"
-              ><i class="bi bi-heart-fill"></i>
-              <span data-i18n="safety-mswdo-solano-0916-284-0885"
-                >MSWDO Solano 0916 284 0885</span
-              ></a
-            >
-            <a href="tel:09054471061" class="hotline-card"
-              ><i class="bi bi-broadcast"></i>
-              <span data-i18n="safety-kabalikat-civicom-0905-447-1061"
-                >KABALIKAT Civicom 0905 447 1061</span
-              ></a
-            >
-            <a href="tel:09358121081" class="hotline-card"
-              ><i class="bi bi-lightning-fill"></i>
-              <span data-i18n="safety-nuvelco-solano-0935-812-1081"
-                >NUVELCO Solano 0935 812 1081</span
-              ></a
-            >
-            <a href="tel:09175951931" class="hotline-card"
-              ><i class="bi bi-building-fill"></i>
-              <span data-i18n="safety-mayors-office-0917-595-1931"
-                >Mayor's Office 0917 595 1931</span
-              ></a
-            >
-            <a href="tel:09061880868" class="hotline-card"
-              ><i class="bi bi-building"></i>
-              <span data-i18n="safety-dilg-solano-0906-188-0868">DILG Solano 0906 188 0868</span></a
-            >
-            <a href="tel:09171345511" class="hotline-card"
-              ><i class="bi bi-shop"></i>
-              <span data-i18n="safety-seedo-public-market-0917-134-5511"
-                >SEEDO Public Market 0917 134 5511</span
-              ></a
-            >
-            <a href="tel:09161744979" class="hotline-card"
-              ><i class="bi bi-tree-fill"></i>
-              <span data-i18n="safety-magro-solano-0916-174-4979"
-                >MAGRO Solano 0916 174 4979</span
-              ></a
-            >
-            <a href="tel:09171227150" class="hotline-card"
-              ><i class="bi bi-cone-striped"></i>
-              <span data-i18n="safety-pdrrmo-n-vizcaya-0917-122-7150"
-                >PDRRMO N. Vizcaya 0917 122 7150</span
-              ></a
-            >
-            <a href="tel:09360620305" class="hotline-card"
-              ><i class="bi bi-fire"></i>
-              <span data-i18n="safety-bfp-solano-0936-062-0305">BFP Solano 0936 062 0305</span></a
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- Medical Emergency Hotlines -->
       <section class="section">
         <div class="container">
-          <div class="hotlines-header">
-            <div class="hotlines-title">
-              <span class="hotlines-badge hotlines-badge--medical"
-                ><i class="bi bi-hospital-fill"></i>
-                <span data-i18n="safety-medical">Medical</span></span
-              >
-              <h2 data-i18n="safety-medical-emergency-hotlines">Medical Emergency Hotlines</h2>
+          <h2 class="bk-section-title" data-i18n="safety-x18">Other help</h2>
+          <p class="bk-section-intro" data-i18n="safety-x19">Related offices and local contacts.</p>
+          <div class="grid grid-3">
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-heart-pulse" aria-hidden="true"></i>
+                <span data-i18n="safety-x21">Medical emergencies</span>
+              </h3>
+              <p data-i18n="safety-x22">
+                The Provincial Health Office can guide you to health services.
+              </p>
+              <a class="bk-card-link" href="/service-details/provincial-health-office"
+                ><span data-i18n="safety-x20">Health Office</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
             </div>
-            <p data-i18n="safety-for-medical-emergencies-and-hospital-inquiries">
-              For medical emergencies and hospital inquiries.
-            </p>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-people" aria-hidden="true"></i>
+                <span data-i18n="safety-x24">Families in crisis</span>
+              </h3>
+              <p data-i18n="safety-x25">
+                The PSWDO assists individuals and families in crisis situations.
+              </p>
+              <a class="bk-card-link" href="/service-details/pswdo"
+                ><span data-i18n="safety-x23">PSWDO</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
+            </div>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-building" aria-hidden="true"></i>
+                <span data-i18n="safety-x27">City and municipal offices</span>
+              </h3>
+              <p data-i18n="safety-x28">
+                Each city and municipality has its own disaster risk reduction office, police
+                station and barangay officials.
+              </p>
+              <a class="bk-card-link" href="/government/#lgus"
+                ><span data-i18n="safety-x26">Find your city or municipality</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
+            </div>
           </div>
-          <div class="hotlines-grid">
-            <a href="tel:09679103054" class="hotline-card hotline-card--medical"
-              ><i class="bi bi-hospital"></i>
-              <span data-i18n="safety-rhu-solano-0967-910-3054">RHU Solano 0967 910 3054</span></a
-            >
-            <a href="tel:09068195569" class="hotline-card hotline-card--medical"
-              ><i class="bi bi-truck"></i>
-              <span data-i18n="safety-r2tmc-former-vrh-0906-819-5569"
-                >R2TMC (Former VRH) 0906 819 5569</span
-              ></a
-            >
-            <a href="tel:09208335766" class="hotline-card hotline-card--medical"
-              ><i class="bi bi-hospital"></i>
-              <span data-i18n="safety-plt-hospital-0920-833-5766"
-                >PLT Hospital 0920 833 5766</span
-              ></a
-            >
-            <a href="tel:09474981746" class="hotline-card hotline-card--medical"
-              ><i class="bi bi-hospital"></i>
-              <span data-i18n="safety-mmg-hospital-0947-498-1746"
-                >MMG Hospital 0947 498 1746</span
-              ></a
-            >
-            <a href="tel:09171080452" class="hotline-card hotline-card--medical"
-              ><i class="bi bi-hospital"></i>
-              <span data-i18n="safety-salubris-hospital-0917-108-0452"
-                >Salubris Hospital 0917 108 0452</span
-              ></a
-            >
-            <a href="tel:09175079950" class="hotline-card hotline-card--medical"
-              ><i class="bi bi-plus-circle-fill"></i>
-              <span data-i18n="safety-red-cross-0917-507-9950">Red Cross 0917 507 9950</span></a
-            >
+        </div>
+      </section>
+      <section class="section section-compact">
+        <div class="container">
+          <div class="charter-note" role="note">
+            <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
+            <p>
+              <span data-i18n="safety-note"
+                >This page is a general guide written by volunteers. Requirements, fees and
+                processing times are set by each office and may vary, so confirm with the office
+                before you go. The official source is the</span
+              >
+              <a href="https://bukidnon.gov.ph/" target="_blank" rel="noopener noreferrer"
+                ><span data-i18n="safety-note-link"
+                  >Provincial Government of Bukidnon website</span
+                ></a
+              >.
+            </p>
           </div>
         </div>
       </section>
@@ -440,60 +495,41 @@
         <div class="footer-main-new">
           <div class="footer-brand">
             <img
-              src="../assets/images/logo/better-solano-logo-white.svg"
-              alt="Better Solano logo"
+              src="../assets/images/logo/better-bukidnon-logo-white.svg"
+              alt="Better Bukidnon logo"
               class="footer-logo"
             />
             <p
               class="footer-tagline"
-              data-i18n="safety-empowering-the-people-of-solano-with-transparent"
+              data-i18n="safety-empowering-the-people-of-bukidnon-with-transparent"
             >
-              Empowering the people of Solano with transparent access to the services, programs, and
-              public funds of LGU Solano.
+              Empowering the people of Bukidnon with transparent access to the services, programs,
+              and public funds of LGU Bukidnon.
             </p>
             <div class="footer-social-new">
               <a
-                href="https://www.facebook.com/bettersolano.org"
+                href="https://github.com/DMNCDLPRT/betterbukidnon"
                 class="footer-social-btn"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook"
-                ><i class="bi bi-facebook"></i
+                aria-label="GitHub"
+                ><i class="bi bi-github"></i
               ></a>
               <a
-                href="https://www.linkedin.com/company/bettersolano/"
+                href="mailto:volunteer@betterbukidnon.org"
                 class="footer-social-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                ><i class="bi bi-linkedin"></i
-              ></a>
-              <a
-                href="https://discord.com/invite/qeSu7RJkjQ"
-                class="footer-social-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Discord"
-                ><i class="bi bi-discord"></i
+                aria-label="Email the volunteers"
+                ><i class="bi bi-envelope-fill"></i
               ></a>
             </div>
           </div>
           <div class="footer-column">
             <h4 data-i18n="safety-quick-links">Quick Links</h4>
             <ul class="footer-links-new">
-              <li>
-                <a
-                  href="https://quiz.bettersolano.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-i18n="safety-solano-quiz"
-                  >Solano Quiz</a
-                >
-              </li>
               <li><a href="../sitemap/" data-i18n="safety-sitemap">Sitemap</a></li>
               <li>
                 <a
-                  href="https://solano.gov.ph/wp-content/uploads/2025/10/As-of-October-21-2025-2.pdf"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-i18n="safety-citizens-charter"
@@ -531,29 +567,29 @@
               </li>
               <li>
                 <a
-                  href="https://solano.gov.ph/"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="safety-official-lgu-solano-portal"
-                  >Official LGU Solano Portal</a
+                  data-i18n="safety-official-lgu-bukidnon-portal"
+                  >Official LGU Bukidnon Portal</a
                 >
               </li>
               <li>
                 <a
-                  href="https://sangguniangbayan.solano.gov.ph/"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-i18n="safety-sangguniang-bayan"
-                  >Sangguniang Bayan</a
+                  >Sangguniang Panlalawigan</a
                 >
               </li>
               <li>
                 <a
-                  href="https://www.facebook.com/OfficialLguSolanoFanpage/"
+                  href="https://www.facebook.com/lgubukidnon"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="safety-lgu-solano-facebook"
-                  >LGU Solano Facebook</a
+                  data-i18n="safety-lgu-bukidnon-facebook"
+                  >LGU Bukidnon Facebook</a
                 >
               </li>
               <li>
@@ -580,16 +616,16 @@
             <div
               class="footer-cost"
               role="status"
-              aria-label="Cost to the People of Solano: Zero Pesos"
+              aria-label="Cost to the People of Bukidnon: Zero Pesos"
             >
-              Cost to the People of Solano = <span class="footer-cost-value">₱0</span>
+              Cost to the People of Bukidnon = <span class="footer-cost-value">₱0</span>
             </div>
-            <a href="mailto:volunteer@bettersolano.org" class="footer-contribute"
+            <a href="mailto:volunteer@betterbukidnon.org" class="footer-contribute"
               ><i class="bi bi-envelope-heart"></i>
               <span data-i18n="safety-volunteer-with-us">Volunteer with us</span></a
             >
             <a
-              href="https://github.com/BetterSolano/bettersolano"
+              href="https://github.com/DMNCDLPRT/betterbukidnon"
               class="footer-contribute"
               target="_blank"
               rel="noopener noreferrer"
@@ -597,32 +633,6 @@
               <span data-i18n="safety-contribute-code-with-us">Contribute code with us</span></a
             >
             <div class="footer-partners">
-              <a
-                href="https://abakada.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abakada.org"
-                ><img
-                  src="../assets/images/logo/abakada-footer.svg"
-                  alt="Abakada.org"
-                  class="footer-partner-logo"
-                  width="120"
-                  height="28"
-                  loading="lazy"
-              /></a>
-              <a
-                href="https://hivcareph.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="HIV Care Philippines"
-                ><img
-                  src="../assets/images/logo/hiv-care-logo-footer.svg"
-                  alt="HIV Care Philippines"
-                  class="footer-partner-logo"
-                  width="120"
-                  height="28"
-                  loading="lazy"
-              /></a>
               <a
                 href="https://bettergov.ph"
                 target="_blank"
@@ -641,12 +651,13 @@
         </div>
         <div class="footer-bottom-new">
           <div class="footer-copyright">
-            <span class="footer-copyright-text">&copy; 2026 BetterSolano.org</span>
+            <span class="footer-copyright-text">&copy; 2026 BetterBukidnon.org</span>
             <span class="footer-copyright-license">MIT | CC BY 4.0</span>
             <span class="footer-copyright-disclaimer"
-              >All public information sourced from official government portals.</span
+              >Volunteer civic project, not an official government website. Built on the
+              BetterSolano template (MIT).</span
             >
-            <span class="footer-version"><i class="bi bi-boxes"></i> Ver. 1.1.19</span>
+            <span class="footer-version"><i class="bi bi-boxes"></i> Ver. 2.0.0</span>
           </div>
         </div>
       </div>

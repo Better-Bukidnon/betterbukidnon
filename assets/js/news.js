@@ -115,17 +115,31 @@
     grid.innerHTML = html;
   }
 
+  var FB_PAGE_URL = 'https://www.facebook.com/lgubukidnon';
+
+  // Friendly empty state shown when there are no curated items (or the data
+  // file cannot be loaded). Static markup only, so it cannot throw.
+  function renderEmptyState(grid) {
+    grid.removeAttribute('aria-busy');
+    grid.innerHTML =
+      '<article class="news-card" aria-label="No updates yet"><div class="news-card-body">' +
+      '<h3 class="news-card-title">No updates yet</h3>' +
+      '<p class="news-card-desc">No updates yet. Follow the Provincial Government of Bukidnon on Facebook.</p>' +
+      '</div><div class="news-card-footer">' +
+      '<a class="news-card-source" href="' +
+      FB_PAGE_URL +
+      '" target="_blank" rel="noopener noreferrer">Provincial Government of Bukidnon on Facebook ' +
+      '<i class="bi bi-box-arrow-up-right" aria-hidden="true"></i></a>' +
+      '</div></article>';
+  }
+
   function renderNewsPage(articles) {
     var grid = document.getElementById('news-grid');
     if (!grid) return;
 
     var items = sortByDateDesc(articles);
     if (!items.length) {
-      grid.innerHTML =
-        '<article class="news-card"><div class="news-card-body">' +
-        '<h3 class="news-card-title">No updates yet</h3>' +
-        '<p class="news-card-desc">Check back soon for the latest news and advisories from Solano.</p>' +
-        '</div></article>';
+      renderEmptyState(grid);
       return;
     }
 
@@ -169,14 +183,20 @@
     xhr.open('GET', NEWS_DATA_URL, true);
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
+        if (xhr.status !== 200) {
+          var failedGrid = document.getElementById('news-grid');
+          if (failedGrid) renderEmptyState(failedGrid);
+          return;
+        }
         if (xhr.status === 200) {
           try {
             var data = JSON.parse(xhr.responseText);
-            var articles = (data && data.news) || [];
+            var articles = data && Array.isArray(data.news) ? data.news : [];
             renderHomeNews(articles);
             renderNewsPage(articles);
           } catch (e) {
-            // Silent fail - placeholder content remains
+            var errGrid = document.getElementById('news-grid');
+            if (errGrid) renderEmptyState(errGrid);
           }
         }
       }

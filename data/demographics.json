@@ -1,18 +1,226 @@
 {
-  "_schema_version": "1.0",
-  "_status": "draft",
-  "_source": "Philippine Statistics Authority (PSA)",
-  "_note": "Awaiting official data from PSA / LGU Solano planning office",
-  "municipality": "Solano",
-  "province": "Nueva Vizcaya",
-  "region": "Region II - Cagayan Valley",
-  "population": {
-    "total": 69296,
-    "year": 2024,
-    "source": "PSA Census"
-  },
-  "land_area_km2": 162.7,
-  "barangay_count": 22,
+  "_schema_version": "2.0",
+  "_note": "Province-level figures for Bukidnon. Values follow docs/bukidnon-facts.md, section 2. Update the fact sheet first, then this file. Per-LGU 2024 figures are not included yet.",
+  "province": "Bukidnon",
+  "region": "Region X - Northern Mindanao",
+  "capital": "Malaybalay City",
   "income_class": "1st",
-  "barangays": []
+  "land_area_km2": 10498.59,
+  "population": {
+    "total": 1601902,
+    "year": 2024,
+    "source": "PSA 2024 Census of Population (POPCEN)"
+  },
+  "population_2020": {
+    "total": 1541308,
+    "year": 2020,
+    "source": "PSA 2020 Census of Population and Housing (CPH)"
+  },
+  "density_2024_per_km2": {
+    "value": 153,
+    "note": "Derived: 2024 population divided by land area, rounded"
+  },
+  "counts": {
+    "cities": 2,
+    "municipalities": 20,
+    "barangays": 464
+  },
+  "districts_basis": "Republic Act No. 10184 (2012), in effect since the 2013 elections",
+  "lgus": [
+    {
+      "name": "Baungon",
+      "type": "municipality",
+      "district": 1,
+      "population_2020": 37111,
+      "area_km2": 328.34,
+      "barangays": 16
+    },
+    {
+      "name": "Cabanglasan",
+      "type": "municipality",
+      "district": 2,
+      "population_2020": 36286,
+      "area_km2": 243.3,
+      "barangays": 15
+    },
+    {
+      "name": "Damulog",
+      "type": "municipality",
+      "district": 3,
+      "population_2020": 39322,
+      "area_km2": 244.19,
+      "barangays": 17
+    },
+    {
+      "name": "Dangcagan",
+      "type": "municipality",
+      "district": 3,
+      "population_2020": 26076,
+      "area_km2": 422.69,
+      "barangays": 14
+    },
+    {
+      "name": "Don Carlos",
+      "type": "municipality",
+      "district": 3,
+      "population_2020": 69273,
+      "area_km2": 213.72,
+      "barangays": 29
+    },
+    {
+      "name": "Impasug-ong",
+      "type": "municipality",
+      "district": 2,
+      "population_2020": 53863,
+      "area_km2": 1051.17,
+      "barangays": 13
+    },
+    {
+      "name": "Kadingilan",
+      "type": "municipality",
+      "district": 3,
+      "population_2020": 33735,
+      "area_km2": 171.94,
+      "barangays": 17
+    },
+    {
+      "name": "Kalilangan",
+      "type": "municipality",
+      "district": 4,
+      "population_2020": 43711,
+      "area_km2": 251.43,
+      "barangays": 14
+    },
+    {
+      "name": "Kibawe",
+      "type": "municipality",
+      "district": 3,
+      "population_2020": 41897,
+      "area_km2": 304.13,
+      "barangays": 23
+    },
+    {
+      "name": "Kitaotao",
+      "type": "municipality",
+      "district": 3,
+      "population_2020": 53796,
+      "area_km2": 788.78,
+      "barangays": 35
+    },
+    {
+      "name": "Lantapan",
+      "type": "municipality",
+      "district": 2,
+      "population_2020": 65974,
+      "area_km2": 328.35,
+      "barangays": 14
+    },
+    {
+      "name": "Libona",
+      "type": "municipality",
+      "district": 1,
+      "population_2020": 48965,
+      "area_km2": 374.37,
+      "barangays": 14
+    },
+    {
+      "name": "Malaybalay City",
+      "type": "city",
+      "capital": true,
+      "district": 2,
+      "population_2020": 190712,
+      "area_km2": 969.19,
+      "barangays": 46
+    },
+    {
+      "name": "Malitbog",
+      "type": "municipality",
+      "district": 1,
+      "population_2020": 26741,
+      "area_km2": 581.85,
+      "barangays": 11
+    },
+    {
+      "name": "Manolo Fortich",
+      "type": "municipality",
+      "district": 1,
+      "population_2020": 113200,
+      "area_km2": 413.6,
+      "barangays": 22
+    },
+    {
+      "name": "Maramag",
+      "type": "municipality",
+      "district": 3,
+      "population_2020": 108293,
+      "area_km2": 447.26,
+      "barangays": 20
+    },
+    {
+      "name": "Pangantucan",
+      "type": "municipality",
+      "district": 4,
+      "population_2020": 56580,
+      "area_km2": 461.72,
+      "barangays": 19
+    },
+    {
+      "name": "Quezon",
+      "type": "municipality",
+      "district": 3,
+      "population_2020": 109624,
+      "area_km2": 626.86,
+      "barangays": 31
+    },
+    {
+      "name": "San Fernando",
+      "type": "municipality",
+      "district": 2,
+      "population_2020": 63045,
+      "area_km2": 705.06,
+      "barangays": 24
+    },
+    {
+      "name": "Sumilao",
+      "type": "municipality",
+      "district": 1,
+      "population_2020": 29531,
+      "area_km2": 196.95,
+      "barangays": 10
+    },
+    {
+      "name": "Talakag",
+      "type": "municipality",
+      "district": 1,
+      "population_2020": 77027,
+      "area_km2": 786.4,
+      "barangays": 29
+    },
+    {
+      "name": "Valencia City",
+      "type": "city",
+      "district": 4,
+      "population_2020": 216546,
+      "area_km2": 587.29,
+      "barangays": 31
+    }
+  ],
+  "sources": [
+    {
+      "name": "Philippine Statistics Authority (PSA)",
+      "url": "https://psa.gov.ph/"
+    },
+    {
+      "name": "PSA Philippine Standard Geographic Code: Bukidnon",
+      "url": "https://psa.gov.ph/classification/psgc/provinces/1000000000"
+    },
+    {
+      "name": "Wikipedia: Bukidnon",
+      "url": "https://en.wikipedia.org/wiki/Bukidnon"
+    },
+    {
+      "name": "Wikipedia: Legislative districts of Bukidnon",
+      "url": "https://en.wikipedia.org/wiki/Legislative_districts_of_Bukidnon"
+    }
+  ]
 }

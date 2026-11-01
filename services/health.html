@@ -1,65 +1,55 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8777S9SP9X"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      gtag('config', 'G-8777S9SP9X');
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Access health services in Solano, Nueva Vizcaya including medical consultations, vaccinations, maternal care, immunizations, and health programs from LGU Solano."
+      content="Health services in Bukidnon: the Provincial Health Office, city and municipal health offices, DOH and emergency numbers. A volunteer-run guide."
     />
-    <meta name="author" content="Ramon Logan Jr." />
+    <meta name="author" content="BetterBukidnon volunteers" />
     <meta
       name="keywords"
-      content="health services Solano, medical consultation, vaccination, immunization, maternal care, health center, rural health unit, Solano Nueva Vizcaya, public health"
+      content="Bukidnon health, Provincial Health Office, PHO, hospital, vaccination, rural health unit, PhilHealth"
     />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://bettersolano.org/services/health" />
+    <link rel="canonical" href="https://betterbukidnon.org/services/health" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://bettersolano.org/services/health" />
-    <meta property="og:title" content="Health Services | BetterSolano.org" />
+    <meta property="og:url" content="https://betterbukidnon.org/services/health" />
+    <meta property="og:title" content="Health Services | BetterBukidnon.org" />
     <meta
       property="og:description"
-      content="Access health services in Solano, Nueva Vizcaya including medical consultations, vaccinations, maternal care, immunizations, and health programs from LGU Solano."
+      content="Health services in Bukidnon: the Provincial Health Office, city and municipal health offices, DOH and emergency numbers. A volunteer-run guide."
     />
     <meta
       property="og:image"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:type" content="image/png" />
     <meta
       property="og:image:secure_url"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
     <meta property="og:locale" content="en_PH" />
-    <meta property="og:site_name" content="BetterSolano.org" />
+    <meta property="og:site_name" content="BetterBukidnon.org" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://bettersolano.org/services/health" />
-    <meta name="twitter:title" content="Health Services | BetterSolano.org" />
+    <meta name="twitter:url" content="https://betterbukidnon.org/services/health" />
+    <meta name="twitter:title" content="Health Services | BetterBukidnon.org" />
     <meta
       name="twitter:description"
-      content="Access health services in Solano, Nueva Vizcaya including medical consultations, vaccinations, maternal care, immunizations, and health programs from LGU Solano."
+      content="Health services in Bukidnon: the Provincial Health Office, city and municipal health offices, DOH and emergency numbers. A volunteer-run guide."
     />
     <meta
       name="twitter:image"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
-    <title>Health Services | BetterSolano.org</title>
+    <title>Health Services | BetterBukidnon.org</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/logo/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="../assets/images/logo/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -80,6 +70,106 @@
     <link rel="stylesheet" href="../assets/css/responsive.css" />
     <link rel="stylesheet" href="../assets/css/accessibility.css" />
     <link rel="stylesheet" href="../assets/css/footer.css" />
+
+    <style>
+      .bk-section-title {
+        font-size: 1.25rem;
+        margin: 0 0 4px;
+      }
+      .bk-section-intro {
+        color: var(--color-text-light);
+        margin: 0 0 var(--spacing-md, 16px);
+        max-width: 760px;
+      }
+      .bk-card {
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .bk-card h3 {
+        font-size: 1rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .bk-card h3 i {
+        color: var(--color-primary);
+      }
+      .bk-card p {
+        margin: 0;
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: var(--color-text);
+      }
+      .bk-card-link {
+        margin-top: auto;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+      .bk-card-link:hover {
+        text-decoration: underline;
+      }
+      .bk-contacts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .bk-contact {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
+        padding: 12px 16px;
+        text-decoration: none;
+        color: var(--color-text);
+        font-size: 0.875rem;
+      }
+      .bk-contact i {
+        color: var(--color-primary);
+        font-size: 1.125rem;
+      }
+      .bk-contact strong {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--color-text-light);
+        font-weight: 600;
+      }
+      .charter-note {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-left: 4px solid var(--color-primary);
+        border-radius: 8px;
+        padding: 14px 16px;
+        font-size: 0.8125rem;
+        line-height: 1.6;
+      }
+      .charter-note i {
+        color: var(--color-primary);
+        margin-top: 2px;
+      }
+      .charter-note p {
+        margin: 0;
+        font-size: inherit;
+        color: inherit;
+      }
+      .charter-note a {
+        color: var(--color-primary);
+        font-weight: 600;
+        text-decoration: underline;
+      }
+    </style>
   </head>
 
   <body>
@@ -92,29 +182,29 @@
       <div class="container">
         <div class="hotline-inner">
           <div class="hotline-items">
-            <a href="tel:09274008033" class="hotline-item">
-              <i class="bi bi-shield-fill"></i>
-              <span>Police: 0927 400 8033</span>
+            <a href="tel:911" class="hotline-item">
+              <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+              <span>Emergency: 911</span>
             </a>
-            <a href="tel:09162840885" class="hotline-item">
-              <i class="bi bi-heart-fill"></i>
-              <span>MSWDO: 0916 284 0885</span>
+            <a href="tel:+63888131262" class="hotline-item">
+              <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+              <span>PDRRMD: (088) 813-1262</span>
             </a>
-            <a href="tel:09360620305" class="hotline-item">
-              <i class="bi bi-fire"></i>
-              <span>Fire: 0936 062 0305</span>
+            <a href="tel:+63888134263" class="hotline-item">
+              <i class="bi bi-shield-fill" aria-hidden="true"></i>
+              <span>Police: (088) 813-4263</span>
             </a>
-            <a href="tel:0906188086" class="hotline-item">
-              <i class="bi bi-building"></i>
-              <span>DILG: 0906 188 086</span>
+            <a href="tel:+63888135449" class="hotline-item">
+              <i class="bi bi-fire" aria-hidden="true"></i>
+              <span>Fire: (088) 813-5449</span>
             </a>
-            <a href="tel:09263833744" class="hotline-item">
-              <i class="bi bi-exclamation-triangle-fill"></i>
-              <span>MDRRMO: 0926 383 3744</span>
+            <a href="tel:+63888135631" class="hotline-item">
+              <i class="bi bi-heart-pulse-fill" aria-hidden="true"></i>
+              <span>PHO: (088) 813-5631</span>
             </a>
-            <a href="tel:09068195569" class="hotline-item">
-              <i class="bi bi-truck"></i>
-              <span>R2TMC: 0906 819 5569</span>
+            <a href="tel:+63888135734" class="hotline-item">
+              <i class="bi bi-heart-fill" aria-hidden="true"></i>
+              <span>PSWDO: (088) 813-5734</span>
             </a>
           </div>
         </div>
@@ -127,8 +217,8 @@
         <div class="logo-container">
           <a href="../"
             ><img
-              src="../assets/images/logo/better-solano-logo.svg"
-              alt="Municipality of Solano Logo"
+              src="../assets/images/logo/better-bukidnon-logo.svg"
+              alt="Province of Bukidnon Logo"
               class="logo-img"
           /></a>
         </div>
@@ -136,7 +226,14 @@
           <ul>
             <li><a href="../" data-i18n="nav-home">Home</a></li>
             <li class="has-dropdown">
-              <a href="./" class="active" data-i18n="nav-services" aria-haspopup="true" aria-expanded="false">Services</a>
+              <a
+                href="./"
+                class="active"
+                data-i18n="nav-services"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Services</a
+              >
               <ul class="dropdown-menu">
                 <li><a href="certificates" data-i18n="health-certificates">Certificates</a></li>
                 <li><a href="business" data-i18n="health-business">Business</a></li>
@@ -157,7 +254,13 @@
             <li><a href="../government/" data-i18n="nav-government">Government</a></li>
             <li><a href="../statistics/" data-i18n="nav-statistics">Statistics</a></li>
             <li class="has-dropdown">
-              <a href="../legislative/" data-i18n="nav-legislative" aria-haspopup="true" aria-expanded="false">Legislative</a>
+              <a
+                href="../legislative/"
+                data-i18n="nav-legislative"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Legislative</a
+              >
               <ul class="dropdown-menu">
                 <li>
                   <a
@@ -183,7 +286,7 @@
           <div class="lang-selector">
             <button class="btn btn-secondary btn-sm lang-btn" data-lang="en">EN</button>
             <button class="btn btn-secondary btn-sm lang-btn" data-lang="fil">FIL</button>
-            <button class="btn btn-secondary btn-sm lang-btn" data-lang="ilo">ILO</button>
+            <button class="btn btn-secondary btn-sm lang-btn" data-lang="ceb">CEB</button>
           </div>
         </div>
       </div>
@@ -199,9 +302,9 @@
               <span class="rate-display">1 USD = ₱ --</span>
             </span>
           </div>
-          <div class="info-bar-item info-bar-weather" aria-label="Current weather in Solano">
+          <div class="info-bar-item info-bar-weather" aria-label="Current weather in Bukidnon">
             <i class="bi bi-thermometer-half"></i>
-            <span class="weather-location">Solano</span>
+            <span class="weather-location">Malaybalay</span>
             <span class="weather-temp">--°C</span>
           </div>
           <div class="info-bar-item info-bar-datetime" aria-label="Philippine Date and Time">
@@ -219,9 +322,9 @@
     <main id="main-content">
       <div class="container">
         <nav class="breadcrumbs" aria-label="Breadcrumb">
-          <a href="../" data-i18n="health-home">Home</a><span>/</span
-          ><a href="./" data-i18n="health-services">Services</a><span>/</span
-          ><span aria-current="page">Health Services</span>
+          <a href="../" data-i18n="health-home">Home</a><span>/</span>
+          <a href="./" data-i18n="health-services">Services</a><span>/</span>
+          <span aria-current="page" data-i18n="health-bc">Health Services</span>
         </nav>
       </div>
       <section class="page-header">
@@ -229,359 +332,147 @@
           <div class="page-header-content">
             <span class="page-header-badge"
               ><i class="bi bi-heart-pulse-fill"></i>
-              <span data-i18n="health-page-badge">Health</span></span
+              <span data-i18n="health-badge">Health</span></span
             >
-            <h1 data-i18n="health-page-title">Health Services</h1>
-            <p class="page-header-desc" data-i18n="health-page-desc">
-              Medical consultations, vaccinations, and health programs
+            <h1 data-i18n="health-h1">Health Services</h1>
+            <p class="page-header-desc" data-i18n="health-hdesc">
+              The Provincial Health Office and where to go for health services in Bukidnon
             </p>
+          </div>
+        </div>
+      </section>
+      <section class="section section-compact">
+        <div class="container">
+          <div class="bk-contacts">
+            <a class="bk-contact" href="tel:0888135631"
+              ><i class="bi bi-heart-pulse" aria-hidden="true"></i
+              ><span
+                ><strong data-i18n="health-x1">Provincial Health Office</strong
+                ><span data-i18n="health-x2">(088) 813-5631</span></span
+              ></a
+            >
+            <a class="bk-contact" href="tel:911"
+              ><i class="bi bi-telephone-fill" aria-hidden="true"></i
+              ><span
+                ><strong data-i18n="health-x3">National Emergency Hotline</strong
+                ><span data-i18n="health-x4">911</span></span
+              ></a
+            >
           </div>
         </div>
       </section>
       <section class="section">
         <div class="container">
-          <div class="grid grid-3">
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-hospital"></i>
-                <span data-i18n="health-consultation">Medical Consultation</span>
-              </h3>
-              <p class="service-item-desc" data-i18n="health-consultation-desc">
-                Free consultation at Rural Health Units
-              </p>
-              <div class="service-item-meta">
-                <span
-                  ><strong data-i18n="label-fee">Fee:</strong>
-                  <span data-i18n="label-free">Free</span></span
-                >
-                <span
-                  ><strong data-i18n="label-time">Time:</strong>
-                  <span data-i18n="label-walk-in">Walk-in</span></span
-                >
-              </div>
-            </div>
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-shield-plus"></i>
-                <span data-i18n="health-vaccination">Vaccination Programs</span>
-              </h3>
-              <p class="service-item-desc" data-i18n="health-vaccination-desc">
-                Immunization services for children and adults
-              </p>
-              <div class="service-item-meta">
-                <span
-                  ><strong data-i18n="label-fee">Fee:</strong>
-                  <span data-i18n="label-free">Free</span></span
-                >
-                <span
-                  ><strong data-i18n="label-time">Time:</strong>
-                  <span data-i18n="label-schedule-varies">Schedule varies</span></span
-                >
-              </div>
-            </div>
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-heart"></i> <span data-i18n="health-maternal">Maternal Care</span>
-              </h3>
-              <p class="service-item-desc" data-i18n="health-maternal-desc">
-                Prenatal and postnatal health services
-              </p>
-              <div class="service-item-meta">
-                <span
-                  ><strong data-i18n="label-fee">Fee:</strong>
-                  <span data-i18n="label-free">Free</span></span
-                >
-                <span
-                  ><strong data-i18n="label-time">Time:</strong>
-                  <span data-i18n="label-by-appointment">By appointment</span></span
-                >
-              </div>
-            </div>
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-prescription2"></i>
-                <span data-i18n="health-medicine">Medicine Assistance</span>
-              </h3>
-              <p class="service-item-desc" data-i18n="health-medicine-desc">
-                Financial assistance for medicines through MSWDO
-              </p>
-              <div class="service-item-meta">
-                <span
-                  ><strong data-i18n="label-fee">Fee:</strong>
-                  <span data-i18n="label-free-subsidy">Free (subsidy)</span></span
-                >
-                <span
-                  ><strong data-i18n="label-time">Time:</strong>
-                  <span data-i18n="label-1-3-days">1-3 days</span></span
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Health Facilities Statistics -->
-      <section class="section section-compact">
-        <div class="container">
-          <div class="health-stats-grid">
-            <div class="health-stat-card">
-              <span class="health-stat-num">88</span>
-              <span class="health-stat-label" data-i18n="health-stat-facilities"
-                >Total Health Facilities</span
-              >
-            </div>
-            <div class="health-stat-card">
-              <span class="health-stat-num">3</span>
-              <span class="health-stat-label" data-i18n="health-stat-hospitals"
-                >Major Hospitals</span
-              >
-            </div>
-            <div class="health-stat-card">
-              <span class="health-stat-num">22</span>
-              <span class="health-stat-label" data-i18n="health-stat-bhs"
-                >Barangay Health Stations</span
-              >
-            </div>
-            <div class="health-stat-card">
-              <span class="health-stat-num">1</span>
-              <span class="health-stat-label" data-i18n="health-stat-mho"
-                >Municipal Health Office</span
-              >
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Hospitals Directory -->
-      <section class="section section-compact">
-        <div class="container">
-          <h2 class="section-title">
-            <i class="bi bi-hospital"></i>
-            <span data-i18n="health-section-hospitals">Hospitals in Solano</span>
-          </h2>
-          <div class="health-facilities-grid">
-            <div class="health-facility-card health-facility-card--hospital">
-              <div class="health-facility-badge">Tertiary Hospital</div>
-              <h3 data-i18n="health-pltciluis-a-tiam-medical-center">
-                PLTCI-Luis A. Tiam Medical Center
-              </h3>
-              <p
-                class="health-facility-desc"
-                data-i18n="health-a-tertiary-level-philhealthaccredited-private"
-              >
-                A tertiary level, PhilHealth-accredited private hospital providing comprehensive
-                medical services.
-              </p>
-              <div class="health-facility-meta">
-                <span
-                  ><i class="bi bi-geo-alt"></i>
-                  <span data-i18n="health-national-highway-solano"
-                    >National Highway, Solano</span
-                  ></span
-                >
-              </div>
-            </div>
-            <div class="health-facility-card health-facility-card--hospital">
-              <div class="health-facility-badge">Private Hospital</div>
-              <h3 data-i18n="health-medical-mission-group-hospital-health-services">
-                Medical Mission Group Hospital & Health Services Cooperative
-              </h3>
-              <p
-                class="health-facility-desc"
-                data-i18n="health-also-known-as-new-mmg-hospital-providing-quality"
-              >
-                Also known as New MMG Hospital, providing quality healthcare services to the
-                community.
-              </p>
-              <div class="health-facility-meta">
-                <span
-                  ><i class="bi bi-geo-alt"></i>
-                  <span data-i18n="health-bintawan-road-brgy-quezon"
-                    >Bintawan Road, Brgy. Quezon</span
-                  ></span
-                >
-              </div>
-            </div>
-            <div class="health-facility-card health-facility-card--hospital">
-              <div class="health-facility-badge">Medical Center</div>
-              <h3 data-i18n="health-salubris-inc-salubris-medical-center">
-                SALUBRIS, INC. (Salubris Medical Center)
-              </h3>
-              <p
-                class="health-facility-desc"
-                data-i18n="health-private-medical-center-offering-various"
-              >
-                Private medical center offering various healthcare and diagnostic services.
-              </p>
-              <div class="health-facility-meta">
-                <span
-                  ><i class="bi bi-geo-alt"></i>
-                  <span data-i18n="health-national-highway-solano"
-                    >National Highway, Solano</span
-                  ></span
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Municipal Health Office -->
-      <section class="section section-compact bg-alt">
-        <div class="container">
-          <h2 class="section-title">
-            <i class="bi bi-building"></i>
-            <span data-i18n="health-section-mho">Municipal Health Office</span>
-          </h2>
-          <div class="health-mho-card">
-            <div class="health-mho-content">
-              <h3 data-i18n="health-mho-title">Solano Municipal Health Office</h3>
-              <p data-i18n="health-mho-desc">
-                The Municipal Health Office provides primary healthcare services including a
-                lying-in facility and laboratory services. It serves as the main public health
-                center for the municipality.
-              </p>
-              <div class="health-mho-services">
-                <span
-                  ><i class="bi bi-check-circle"></i>
-                  <span data-i18n="health-service-lying-in">Lying-in Facility</span></span
-                >
-                <span
-                  ><i class="bi bi-check-circle"></i>
-                  <span data-i18n="health-service-laboratory">Laboratory Services</span></span
-                >
-                <span
-                  ><i class="bi bi-check-circle"></i>
-                  <span data-i18n="health-service-immunization">Immunization</span></span
-                >
-                <span
-                  ><i class="bi bi-check-circle"></i>
-                  <span data-i18n="health-service-prenatal">Prenatal Care</span></span
-                >
-                <span
-                  ><i class="bi bi-check-circle"></i>
-                  <span data-i18n="health-service-family-planning">Family Planning</span></span
-                >
-                <span
-                  ><i class="bi bi-check-circle"></i>
-                  <span data-i18n="health-service-tb-dots">TB-DOTS</span></span
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Barangay Health Stations -->
-      <section class="section section-compact">
-        <div class="container">
-          <h2 class="section-title">
-            <i class="bi bi-plus-circle"></i>
-            <span data-i18n="health-section-bhs">Barangay Health Stations</span>
-          </h2>
-          <p class="section-subtitle" data-i18n="health-bhs-subtitle">
-            22 Barangay Health Stations/Centers serving all barangays of Solano
+          <h2 class="bk-section-title" data-i18n="health-x5">What the Province does</h2>
+          <p class="bk-section-intro" data-i18n="health-x6">
+            The Provincial Health Office (PHO) leads public health work for the province and
+            supports health services in its cities and municipalities.
           </p>
-          <div class="health-bhs-grid">
-            <div class="health-bhs-item"><span data-i18n="health-aggub-bhs">Aggub BHS</span></div>
-            <div class="health-bhs-item">
-              <span data-i18n="health-bagahabag-bhs">Bagahabag BHS</span>
+          <div class="grid grid-3">
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-hospital" aria-hidden="true"></i>
+                <span data-i18n="health-x8">Provincial Health Office</span>
+              </h3>
+              <p data-i18n="health-x9">
+                Coordinates provincial health programs and supports the health offices of the cities
+                and municipalities. Visit the Provincial Capitol in Malaybalay City, Monday to
+                Friday, 8 AM to 5 PM.
+              </p>
+              <a class="bk-card-link" href="/service-details/provincial-health-office"
+                ><span data-i18n="health-x7">Office details</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
             </div>
-            <div class="health-bhs-item">
-              <span data-i18n="health-bangaan-bhs">Bangaan BHS</span>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-building-add" aria-hidden="true"></i>
+                <span data-i18n="health-x10">Provincial hospitals</span>
+              </h3>
+              <p data-i18n="health-x11">
+                In general, provinces support the operation of provincial and district hospitals.
+                Ask the PHO which facilities are near you.
+              </p>
             </div>
-            <div class="health-bhs-item"><span data-i18n="health-bangar-bhs">Bangar BHS</span></div>
-            <div class="health-bhs-item">
-              <span data-i18n="health-buenavista-bhs">Buenavista BHS</span>
-            </div>
-            <div class="health-bhs-item">
-              <span data-i18n="health-calaocan-bhs">Calaocan BHS</span>
-            </div>
-            <div class="health-bhs-item">
-              <span data-i18n="health-commando-bhs">Commando BHS</span>
-            </div>
-            <div class="health-bhs-item">
-              <span data-i18n="health-concepcion-bhs">Concepcion BHS</span>
-            </div>
-            <div class="health-bhs-item">
-              <span data-i18n="health-curifang-bhs">Curifang BHS</span>
-            </div>
-            <div class="health-bhs-item"><span data-i18n="health-dadap-bhs">Dadap BHS</span></div>
-            <div class="health-bhs-item">
-              <span data-i18n="health-lactawan-bhs">Lactawan BHS</span>
-            </div>
-            <div class="health-bhs-item">
-              <span data-i18n="health-nangalisan-bhs">Nangalisan BHS</span>
-            </div>
-            <div class="health-bhs-item"><span data-i18n="health-ocapon-bhs">Ocapon BHS</span></div>
-            <div class="health-bhs-item"><span data-i18n="health-osmea-bhs">Osmeña BHS</span></div>
-            <div class="health-bhs-item"><span data-i18n="health-paitan-bhs">Paitan BHS</span></div>
-            <div class="health-bhs-item"><span data-i18n="health-pilar-bhs">Pilar BHS</span></div>
-            <div class="health-bhs-item">
-              <span data-i18n="health-poblacion-bhs">Poblacion BHS</span>
-            </div>
-            <div class="health-bhs-item"><span data-i18n="health-quezon-bhs">Quezon BHS</span></div>
-            <div class="health-bhs-item">
-              <span data-i18n="health-quirino-bhs">Quirino BHS</span>
-            </div>
-            <div class="health-bhs-item"><span data-i18n="health-roxas-bhs">Roxas BHS</span></div>
-            <div class="health-bhs-item"><span data-i18n="health-tucal-bhs">Tucal BHS</span></div>
-            <div class="health-bhs-item">
-              <span data-i18n="health-uddiawan-bhs">Uddiawan BHS</span>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-heart" aria-hidden="true"></i>
+                <span data-i18n="health-x13">Medical and financial help</span>
+              </h3>
+              <p data-i18n="health-x14">
+                The Provincial Social Welfare and Development Office can advise on assistance for
+                people in need.
+              </p>
+              <a class="bk-card-link" href="/service-details/pswdo"
+                ><span data-i18n="health-x12">PSWDO</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
             </div>
           </div>
         </div>
       </section>
-
-      <!-- HIV Care Philippines CTA -->
-      <section
-        class="section hivcare-cta-section"
-        aria-label="HIV Care Philippines facility directory"
-      >
+      <section class="section">
         <div class="container">
-          <div class="hivcare-cta-card">
-            <span class="hivcare-cta-eyebrow">
-              <i class="bi bi-shield-check" aria-hidden="true"></i>
-              <span data-i18n="health-hivcare-cta-eyebrow">Official DOH-Sourced Directory</span>
-            </span>
-            <img
-              src="../assets/images/logo/hivcareph-logo.svg"
-              alt="HIV Care Philippines"
-              class="hivcare-cta-logo"
-              width="168"
-              height="50"
-              loading="lazy"
-            />
-            <h2 class="hivcare-cta-heading" data-i18n="health-hivcare-cta-heading">
-              Find HIV Treatment &amp; Care Facilities Near You
-            </h2>
-            <p class="hivcare-cta-text" data-i18n="health-hivcare-cta-desc">
-              A searchable, mobile-first web directory of all 338 DOH-designated HIV treatment and
-              care facilities in the Philippines, sourced from DOH Circular No. 2026-0065.
-            </p>
-            <div class="hivcare-cta-stats">
-              <span class="hivcare-cta-stat">
-                <i class="bi bi-hospital" aria-hidden="true"></i>
-                <strong>338</strong>
-                <span data-i18n="health-hivcare-cta-stat-facilities">Facilities Nationwide</span>
-              </span>
-              <span class="hivcare-cta-stat">
-                <i class="bi bi-phone" aria-hidden="true"></i>
-                <span data-i18n="health-hivcare-cta-stat-mobile">Mobile-Friendly Search</span>
-              </span>
-              <span class="hivcare-cta-stat">
-                <i class="bi bi-patch-check-fill" aria-hidden="true"></i>
-                <span data-i18n="health-hivcare-cta-stat-verified">DOH-Verified Listings</span>
-              </span>
+          <h2 class="bk-section-title" data-i18n="health-x15">Who handles what</h2>
+          <p class="bk-section-intro" data-i18n="health-x16">Most first-contact care is local.</p>
+          <div class="grid grid-3">
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-house-heart" aria-hidden="true"></i>
+                <span data-i18n="health-x18">Health centers and RHUs</span>
+              </h3>
+              <p data-i18n="health-x19">
+                Consultations, vaccination and maternal care are usually available at the rural
+                health unit or city health office of your city or municipality.
+              </p>
+              <a class="bk-card-link" href="/government/#lgus"
+                ><span data-i18n="health-x17">Find your city or municipality</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
             </div>
-            <a
-              href="https://hivcareph.org/"
-              class="hivcare-cta-btn"
-              target="_blank"
-              rel="noopener noreferrer"
-              ><i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
-              <span data-i18n="health-hivcare-cta-btn">Find HIV Care Facilities</span></a
-            >
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-flag" aria-hidden="true"></i>
+                <span data-i18n="health-x20">National programs</span>
+              </h3>
+              <p data-i18n="health-x21">
+                The Department of Health sets national programs. PhilHealth handles health insurance
+                membership and benefits.
+              </p>
+            </div>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-exclamation-octagon" aria-hidden="true"></i>
+                <span data-i18n="health-x23">Emergencies</span>
+              </h3>
+              <p data-i18n="health-x24">
+                For a medical emergency call 911. You can also reach the Provincial Disaster Risk
+                Reduction and Management Department.
+              </p>
+              <a class="bk-card-link" href="/service-details/pdrrmd"
+                ><span data-i18n="health-x22">PDRRMD</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section section-compact">
+        <div class="container">
+          <div class="charter-note" role="note">
+            <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
+            <p>
+              <span data-i18n="health-note"
+                >This page is a general guide written by volunteers. Requirements, fees and
+                processing times are set by each office and may vary, so confirm with the office
+                before you go. The official source is the</span
+              >
+              <a href="https://bukidnon.gov.ph/" target="_blank" rel="noopener noreferrer"
+                ><span data-i18n="health-note-link"
+                  >Provincial Government of Bukidnon website</span
+                ></a
+              >.
+            </p>
           </div>
         </div>
       </section>
@@ -591,60 +482,41 @@
         <div class="footer-main-new">
           <div class="footer-brand">
             <img
-              src="../assets/images/logo/better-solano-logo-white.svg"
-              alt="Better Solano logo"
+              src="../assets/images/logo/better-bukidnon-logo-white.svg"
+              alt="Better Bukidnon logo"
               class="footer-logo"
             />
             <p
               class="footer-tagline"
-              data-i18n="health-empowering-the-people-of-solano-with-transparent"
+              data-i18n="health-empowering-the-people-of-bukidnon-with-transparent"
             >
-              Empowering the people of Solano with transparent access to the services, programs, and
-              public funds of LGU Solano.
+              Empowering the people of Bukidnon with transparent access to the services, programs,
+              and public funds of LGU Bukidnon.
             </p>
             <div class="footer-social-new">
               <a
-                href="https://www.facebook.com/bettersolano.org"
+                href="https://github.com/DMNCDLPRT/betterbukidnon"
                 class="footer-social-btn"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook"
-                ><i class="bi bi-facebook"></i
+                aria-label="GitHub"
+                ><i class="bi bi-github"></i
               ></a>
               <a
-                href="https://www.linkedin.com/company/bettersolano/"
+                href="mailto:volunteer@betterbukidnon.org"
                 class="footer-social-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                ><i class="bi bi-linkedin"></i
-              ></a>
-              <a
-                href="https://discord.com/invite/qeSu7RJkjQ"
-                class="footer-social-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Discord"
-                ><i class="bi bi-discord"></i
+                aria-label="Email the volunteers"
+                ><i class="bi bi-envelope-fill"></i
               ></a>
             </div>
           </div>
           <div class="footer-column">
             <h4 data-i18n="health-quick-links">Quick Links</h4>
             <ul class="footer-links-new">
-              <li>
-                <a
-                  href="https://quiz.bettersolano.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-i18n="health-solano-quiz"
-                  >Solano Quiz</a
-                >
-              </li>
               <li><a href="../sitemap/" data-i18n="health-sitemap">Sitemap</a></li>
               <li>
                 <a
-                  href="https://solano.gov.ph/wp-content/uploads/2025/10/As-of-October-21-2025-2.pdf"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-i18n="health-citizens-charter"
@@ -682,29 +554,29 @@
               </li>
               <li>
                 <a
-                  href="https://solano.gov.ph/"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="health-official-lgu-solano-portal"
-                  >Official LGU Solano Portal</a
+                  data-i18n="health-official-lgu-bukidnon-portal"
+                  >Official LGU Bukidnon Portal</a
                 >
               </li>
               <li>
                 <a
-                  href="https://sangguniangbayan.solano.gov.ph/"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-i18n="health-sangguniang-bayan"
-                  >Sangguniang Bayan</a
+                  >Sangguniang Panlalawigan</a
                 >
               </li>
               <li>
                 <a
-                  href="https://www.facebook.com/OfficialLguSolanoFanpage/"
+                  href="https://www.facebook.com/lgubukidnon"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="health-lgu-solano-facebook"
-                  >LGU Solano Facebook</a
+                  data-i18n="health-lgu-bukidnon-facebook"
+                  >LGU Bukidnon Facebook</a
                 >
               </li>
               <li>
@@ -731,16 +603,16 @@
             <div
               class="footer-cost"
               role="status"
-              aria-label="Cost to the People of Solano: Zero Pesos"
+              aria-label="Cost to the People of Bukidnon: Zero Pesos"
             >
-              Cost to the People of Solano = <span class="footer-cost-value">₱0</span>
+              Cost to the People of Bukidnon = <span class="footer-cost-value">₱0</span>
             </div>
-            <a href="mailto:volunteer@bettersolano.org" class="footer-contribute"
+            <a href="mailto:volunteer@betterbukidnon.org" class="footer-contribute"
               ><i class="bi bi-envelope-heart"></i>
               <span data-i18n="health-volunteer-with-us">Volunteer with us</span></a
             >
             <a
-              href="https://github.com/BetterSolano/bettersolano"
+              href="https://github.com/DMNCDLPRT/betterbukidnon"
               class="footer-contribute"
               target="_blank"
               rel="noopener noreferrer"
@@ -748,32 +620,6 @@
               <span data-i18n="health-contribute-code-with-us">Contribute code with us</span></a
             >
             <div class="footer-partners">
-              <a
-                href="https://abakada.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abakada.org"
-                ><img
-                  src="../assets/images/logo/abakada-footer.svg"
-                  alt="Abakada.org"
-                  class="footer-partner-logo"
-                  width="120"
-                  height="28"
-                  loading="lazy"
-              /></a>
-              <a
-                href="https://hivcareph.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="HIV Care Philippines"
-                ><img
-                  src="../assets/images/logo/hiv-care-logo-footer.svg"
-                  alt="HIV Care Philippines"
-                  class="footer-partner-logo"
-                  width="120"
-                  height="28"
-                  loading="lazy"
-              /></a>
               <a
                 href="https://bettergov.ph"
                 target="_blank"
@@ -792,12 +638,13 @@
         </div>
         <div class="footer-bottom-new">
           <div class="footer-copyright">
-            <span class="footer-copyright-text">&copy; 2026 BetterSolano.org</span>
+            <span class="footer-copyright-text">&copy; 2026 BetterBukidnon.org</span>
             <span class="footer-copyright-license">MIT | CC BY 4.0</span>
             <span class="footer-copyright-disclaimer"
-              >All public information sourced from official government portals.</span
+              >Volunteer civic project, not an official government website. Built on the
+              BetterSolano template (MIT).</span
             >
-            <span class="footer-version"><i class="bi bi-boxes"></i> Ver. 1.1.19</span>
+            <span class="footer-version"><i class="bi bi-boxes"></i> Ver. 2.0.0</span>
           </div>
         </div>
       </div>

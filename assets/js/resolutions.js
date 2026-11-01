@@ -1,8 +1,8 @@
-/* Better Solano - Resolution Table JavaScript */
+/* Better Bukidnon - Resolution Table JavaScript */
 
 /**
  * Fetches resolution data from the JSON file
- * @returns {Promise<Array>} Array of resolution objects
+ * @returns {Promise<Array>} Array of resolution objects (empty on any failure)
  */
 async function fetchResolutions() {
   try {
@@ -11,43 +11,48 @@ async function fetchResolutions() {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    return data.resolutions || [];
+    return Array.isArray(data && data.resolutions) ? data.resolutions : [];
   } catch (error) {
-    console.error('Error fetching resolutions:', error);
+    console.warn('Could not load resolutions:', error);
     return [];
   }
 }
 
 /**
- * Extracts the year segment from a resolution number
- * Resolution format: "XXX-YYYY-SS" (sequence-year-session)
- * @param {string} resolutionNo - Resolution number (e.g., "246-2025-11")
- * @returns {number} The year (e.g., 2025)
+ * Escapes a value for safe insertion into HTML
+ * @param {*} value - Any value
+ * @returns {string} Escaped string
  */
-function getResolutionYear(resolutionNo) {
-  return parseInt(resolutionNo.split('-')[1], 10);
+function escapeResolutionHtml(value) {
+  if (value === null || value === undefined) return '';
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 /**
- * Sorts resolutions by year, then sequence number, in descending order (newest first)
- * Resolution format: "XXX-YYYY-SS" (sequence-year-session)
+ * Sorts resolutions newest first: by session date, then by resolution number.
+ * Numbering formats vary, so numbers are compared as natural-order strings.
  * @param {Array} resolutions - Array of resolution objects
- * @returns {Array} Sorted array of resolutions
+ * @returns {Array} Sorted copy of the array
  */
 function sortResolutionsByNumber(resolutions) {
   return [...resolutions].sort((a, b) => {
-    const [numA, yearA] = a.resolutionNo.split('-');
-    const [numB, yearB] = b.resolutionNo.split('-');
-    if (yearA !== yearB) {
-      return parseInt(yearB, 10) - parseInt(yearA, 10);
-    }
-    return parseInt(numB, 10) - parseInt(numA, 10);
+    const dateA = String(a.sessionDate || '');
+    const dateB = String(b.sessionDate || '');
+    if (dateA !== dateB) return dateB.localeCompare(dateA);
+    return String(b.resolutionNo || '').localeCompare(String(a.resolutionNo || ''), undefined, {
+      numeric: true,
+    });
   });
 }
 
 /**
  * Formats resolution number for display
- * @param {string} resolutionNo - Resolution number (e.g., "2025-001")
+ * @param {string} resolutionNo - Resolution number
  * @returns {string} Resolution number as-is
  */
 function formatResolutionNo(resolutionNo) {
@@ -77,50 +82,53 @@ function formatSessionDate(dateString) {
 }
 
 /**
- * Renders a resolution table to the DOM
- * @param {Array} resolutions - Array of resolution objects
- * @param {string} tableBodyId - The id of the tbody element to populate
- * @param {number} year - The year represented by this table (for the empty-state message)
+ * Shows the empty state (and hides the table) when there are no records.
+ * The empty-state markup lives in the page so it is translated with the rest
+ * of the page and still makes sense if this script never runs.
+ * @param {boolean} isEmpty - Whether there are no records to show
  */
-function renderResolutionTable(resolutions, tableBodyId, year) {
-  const tableBody = document.getElementById(tableBodyId);
+function toggleResolutionEmptyState(isEmpty) {
+  const emptyState = document.getElementById('resolution-empty');
+  const tableWrap = document.getElementById('resolution-table-wrap');
+  if (emptyState) emptyState.hidden = !isEmpty;
+  if (tableWrap) tableWrap.hidden = isEmpty;
+}
+
+/**
+ * Renders the resolution table to the DOM
+ * @param {Array} resolutions - Array of resolution objects
+ * @param {string} [tableBodyId] - The id of the tbody element to populate
+ */
+function renderResolutionTable(resolutions, tableBodyId) {
+  const tableBody = document.getElementById(tableBodyId || 'resolution-table-body');
 
   if (!tableBody) {
-    console.error('Resolution table body element not found:', tableBodyId);
     return;
   }
 
-  // Clear existing content
+  const valid = (resolutions || []).filter((resolution) => {
+    const ok = resolution && resolution.resolutionNo && resolution.title && resolution.sessionDate;
+    if (!ok) console.warn('Skipping invalid resolution record:', resolution);
+    return ok;
+  });
+
   tableBody.innerHTML = '';
 
-  // Handle empty data
-  if (!resolutions || resolutions.length === 0) {
-    const emptyRow = document.createElement('tr');
-    emptyRow.innerHTML = `
-            <td colspan="3" class="text-center text-muted">
-                No resolutions found for ${year}
-            </td>
-        `;
-    tableBody.appendChild(emptyRow);
+  if (valid.length === 0) {
+    toggleResolutionEmptyState(true);
     return;
   }
 
-  // Render each resolution
-  resolutions.forEach((resolution) => {
-    // Skip invalid records
-    if (!resolution.resolutionNo || !resolution.title || !resolution.sessionDate) {
-      console.warn('Skipping invalid resolution record:', resolution);
-      return;
-    }
-
+  valid.forEach((resolution) => {
     const row = document.createElement('tr');
     row.innerHTML = `
-            <td data-label="Resolution">${formatResolutionNo(resolution.resolutionNo)}</td>
-            <td data-label="Title">${resolution.title}</td>
-            <td data-label="Session Date">${formatSessionDate(resolution.sessionDate)}</td>
+            <td data-label="Resolution">${escapeResolutionHtml(formatResolutionNo(resolution.resolutionNo))}</td>
+            <td data-label="Title">${escapeResolutionHtml(resolution.title)}</td>
+            <td data-label="Session Date">${escapeResolutionHtml(formatSessionDate(resolution.sessionDate))}</td>
         `;
     tableBody.appendChild(row);
   });
+  toggleResolutionEmptyState(false);
 }
 
 /**
@@ -129,42 +137,23 @@ function renderResolutionTable(resolutions, tableBodyId, year) {
 async function initResolutionTable() {
   try {
     const resolutions = await fetchResolutions();
-    const sortedResolutions = sortResolutionsByNumber(resolutions);
-
-    const resolutions2026 = sortedResolutions.filter(
-      (resolution) => getResolutionYear(resolution.resolutionNo) === 2026
-    );
-    const resolutions2025 = sortedResolutions.filter(
-      (resolution) => getResolutionYear(resolution.resolutionNo) === 2025
-    );
-
-    renderResolutionTable(resolutions2026, 'resolution-table-body-2026', 2026);
-    renderResolutionTable(resolutions2025, 'resolution-table-body', 2025);
+    renderResolutionTable(sortResolutionsByNumber(resolutions), 'resolution-table-body');
   } catch (error) {
-    console.error('Error initializing resolution table:', error);
-    ['resolution-table-body-2026', 'resolution-table-body'].forEach((id) => {
-      const tableBody = document.getElementById(id);
-      if (tableBody) {
-        tableBody.innerHTML = `
-                <tr>
-                    <td colspan="3" class="text-center text-muted">
-                        Unable to load resolutions. Please try again later.
-                    </td>
-                </tr>
-            `;
-      }
-    });
+    console.warn('Error initializing resolution table:', error);
+    toggleResolutionEmptyState(true);
   }
 }
 
 // Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', initResolutionTable);
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', initResolutionTable);
+}
 
 // Export functions for testing (if module system is available)
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     fetchResolutions,
-    getResolutionYear,
+    escapeResolutionHtml,
     sortResolutionsByNumber,
     formatResolutionNo,
     formatSessionDate,

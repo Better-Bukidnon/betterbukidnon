@@ -1,5 +1,5 @@
 #!/bin/bash
-# BetterSolano — Production Build Script
+# BetterBukidnon — Production Build Script
 # Usage:
 #   bash build.sh            — bump patch, build everything
 #   bash build.sh --no-bump  — keep current version, build everything
@@ -22,7 +22,7 @@ done
 
 echo ""
 echo "╔══════════════════════════════════════════╗"
-echo "║   BetterSolano — Production Build        ║"
+echo "║   BetterBukidnon — Production Build      ║"
 echo "╚══════════════════════════════════════════╝"
 
 # ── 0. Build-time configuration (optional .env, see .env.example) ────────────
@@ -65,6 +65,7 @@ if command -v rsync &>/dev/null; then
         --exclude='dist' \
         --exclude='.git' \
         --exclude='.vscode' \
+        --exclude='.claude' \
         --exclude='.DS_Store' \
         --exclude='react-app' \
         --exclude='admin' \
@@ -141,6 +142,9 @@ echo "▶ [5/6] Minifying assets..."
 
 echo "  HTML..."
 find dist -name "*.html" -not -path "dist/_next/*" -type f | while read -r file; do
+    # Pages exported by Next.js are already minified; re-minifying them changes the markup
+    # React hydrates against and causes hydration errors (React #418).
+    grep -q '/_next/static/' "$file" && continue
     npx --yes html-minifier-terser \
         --collapse-whitespace \
         --remove-comments \
@@ -184,7 +188,7 @@ echo "╠═══════════════════════�
 printf  "║  Source: %-31s║\n" "${ORIG_SIZE}"
 printf  "║  Dist:   %-31s║\n" "${DIST_SIZE}"
 echo "╠══════════════════════════════════════════╣"
-echo "║  Upload dist/ → cPanel public_html/     ║"
-echo "║  Preview: cd dist && python3 -m http.server 8080  ║"
+echo "║  Deploy:  npx wrangler deploy            ║"
+echo "║  Preview: npm run serve:dist (port 8080) ║"
 echo "╚══════════════════════════════════════════╝"
 echo ""

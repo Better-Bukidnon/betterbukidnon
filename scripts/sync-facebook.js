@@ -2,7 +2,8 @@
 /**
  * Facebook → news.json sync engine.
  *
- * Fetches the latest posts from the official LGU Solano Facebook Page via the
+ * Fetches the latest posts from the Provincial Government of Bukidnon Facebook Page
+ * (https://www.facebook.com/lgubukidnon, marked "Verify" in docs/bukidnon-facts.md) via the
  * Graph API, derives a title/summary, categorizes each post, validates it, and
  * merges the result into data/news.json alongside any manually-curated entries.
  * The static front-end (assets/js/news.js) renders the merged file unchanged.
