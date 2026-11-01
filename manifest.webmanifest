@@ -1,7 +1,7 @@
 {
-  "name": "BetterSolano.org - LGU Solano Portal",
-  "short_name": "BetterSolano",
-  "description": "Access government services, emergency hotlines, and transparency data for Solano, Nueva Vizcaya.",
+  "name": "BetterBukidnon.org — Bukidnon Civic Portal",
+  "short_name": "BetterBukidnon",
+  "description": "A volunteer-run civic portal for the Province of Bukidnon: provincial services, emergency hotlines, government information and transparency.",
   "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",

@@ -1,4 +1,4 @@
-/* Better Solano - Enhanced Search Functionality */
+/* Better Bukidnon - Enhanced Search Functionality */
 /* Updated: 2025-12-05 */
 
 (function () {
@@ -10,8 +10,8 @@
   let searchIndex = null;
 
   // Search analytics storage
-  const ANALYTICS_KEY = 'bettersolano_search_analytics';
-  const RECENT_SEARCHES_KEY = 'bettersolano_recent_searches';
+  const ANALYTICS_KEY = 'betterbukidnon_search_analytics';
+  const RECENT_SEARCHES_KEY = 'betterbukidnon_recent_searches';
   const MAX_RECENT_SEARCHES = 10;
   const MAX_ANALYTICS_ENTRIES = 100;
 
@@ -19,19 +19,16 @@
   const CURATED_POPULAR = [
     'birth certificate',
     'business permit',
-    'cedula',
     'real property tax',
-    'senior citizen id',
-    'pwd id',
-    'barangay clearance',
-    'building permit',
+    'tax declaration',
     'marriage certificate',
     'death certificate',
-    'tricycle franchise',
-    'property declaration',
-    'online payment',
-    'mswdo',
-    'slaughterhouse',
+    'provincial health office',
+    'pswdo',
+    'pdrrmd',
+    'emergency hotline',
+    'provincial engineer',
+    'governor',
   ];
 
   // Determine the base path based on current page location
@@ -208,20 +205,22 @@
         title: 'Birth Certificate',
         category: 'Certificates & Vital Records',
         keywords: ['birth', 'certificate'],
-        office: 'Local Civil Registrar',
-        fee: '₱150',
-        processingTime: '15-30 minutes',
+        office: 'City/Municipal Civil Registrar and PSA',
+        description: 'How to register a birth or get a copy of a birth record in Bukidnon',
+        fee: 'Confirm with the office',
+        processingTime: 'Varies',
         url: '../service-details/birth-certificate.html',
       },
       {
-        id: 'business-permit',
-        title: 'Business Permit',
+        id: 'business',
+        title: 'Business Permits & Licenses',
         category: 'Business Trade & Investment',
         keywords: ['business', 'permit'],
-        office: 'BPLS',
-        fee: 'Varies',
-        processingTime: '3-5 days',
-        url: 'business.html',
+        office: 'City/Municipal BPLO',
+        description: 'Where to get a business permit and what the Province handles',
+        fee: 'Confirm with the office',
+        processingTime: 'Varies',
+        url: '../services/business.html',
       },
     ];
   }
@@ -1297,7 +1296,7 @@
   }
 
   if (typeof window !== 'undefined') {
-    window.BetterSolanoSearch = {
+    window.BetterBukidnonSearch = {
       searchServices,
       getSuggestions,
       getPopularSearches,

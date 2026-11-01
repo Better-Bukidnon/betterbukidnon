@@ -1,68 +1,35 @@
-# Contributing to BetterSolano.org
+# Contributing to BetterBukidnon.org
 
-Thank you for your interest in contributing to BetterSolano.org! This civic-tech project thrives on community participation. Whether you're a developer, designer, translator, or a concerned citizen of Solano, your contributions are welcome.
+Thank you for your interest in contributing to BetterBukidnon.org! This civic-tech project thrives on community participation. Whether you're a developer, designer, translator, or a concerned citizen of Bukidnon, your contributions are welcome.
 
-## Choosing a Version
-
-BetterSolano.org has two versions. Choose based on your preference:
-
-| Version            | Branch             | Best For                                                          |
-| ------------------ | ------------------ | ----------------------------------------------------------------- |
-| Static HTML        | `main`             | Quick fixes, content updates, contributors new to web development |
-| React + TypeScript | `react-typescript` | New features, complex UI, contributors familiar with React        |
-
-Both versions are actively maintained and contributions to either are welcome.
-
-For detailed differences and migration guidance, see [MIGRATION.md](MIGRATION.md).
+Start with the [documentation](docs/README.md). It explains how the site is put together,
+how to update content and translations, and how it is deployed.
 
 ## Getting Started
 
-### Static HTML Version
+### Prerequisites
 
-#### Prerequisites
-
-- Node.js v16 or higher
-- npm v8 or higher
-- Python 3 (for local development server)
+- Node.js 20 or higher and npm
+- Python 3 (for the local development server)
 - Git
 
-#### Setup
+### Setup
 
 ```bash
-git clone https://github.com/BetterSolano/bettersolano.git
-cd bettersolano
+git clone https://github.com/DMNCDLPRT/betterbukidnon.git
+cd betterbukidnon
 npm install
 npm run dev
 ```
 
-Open http://localhost:8000 in your browser.
-
-### React + TypeScript Version
-
-#### Prerequisites
-
-- Node.js v18 or higher
-- npm v9 or higher
-- Git
-
-#### Setup
-
-```bash
-git clone https://github.com/BetterSolano/bettersolano.git
-cd bettersolano
-git checkout react-typescript
-cd react-app
-npm install
-npm run dev
-```
-
-Open http://localhost:3000 in your browser.
+Open http://localhost:8000 in your browser. See [docs/getting-started.md](docs/getting-started.md)
+for the full workflow, including the React app in `react-app/` and the production build.
 
 ## How to Contribute
 
 ### Reporting Bugs
 
-1. Check existing [issues](https://github.com/BetterSolano/bettersolano/issues) to avoid duplicates
+1. Check existing [issues](https://github.com/DMNCDLPRT/betterbukidnon/issues) to avoid duplicates
 2. Create a new issue with:
    - Clear, descriptive title
    - Steps to reproduce
@@ -79,7 +46,7 @@ Open http://localhost:3000 in your browser.
 ### Submitting Code
 
 1. **Fork** the repository
-2. **Create** a feature branch
+2. **Create** a feature branch from `develop`
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -93,7 +60,7 @@ Open http://localhost:3000 in your browser.
    ```bash
    git push origin feature/your-feature-name
    ```
-7. **Open** a Pull Request
+7. **Open** a Pull Request against `develop`
 
 ### Commit Message Format
 
@@ -112,17 +79,17 @@ Types:
 
 ## Contribution Areas
 
-| Area               | Description                          |
-| ------------------ | ------------------------------------ |
-| Bug Fixes          | Fix reported issues                  |
-| Features           | Implement new functionality          |
-| Content            | Update municipal service information |
-| Translations       | Translate to Filipino or Ilocano     |
-| Design             | Improve UI/UX and accessibility      |
-| Data               | Verify and update statistics         |
-| Documentation      | Improve guides and comments          |
-| API Integration    | Connect real-time data sources       |
-| Data Visualization | Enhance charts and graphs            |
+| Area               | Description                           |
+| ------------------ | ------------------------------------- |
+| Bug Fixes          | Fix reported issues                   |
+| Features           | Implement new functionality           |
+| Content            | Update provincial service information |
+| Translations       | Translate to Filipino or Cebuano      |
+| Design             | Improve UI/UX and accessibility       |
+| Data               | Verify and update statistics          |
+| Documentation      | Improve guides and comments           |
+| API Integration    | Connect real-time data sources        |
+| Data Visualization | Enhance charts and graphs             |
 
 ## Code Guidelines
 
@@ -159,6 +126,8 @@ Types:
 - Include source attribution
 - Verify information before submitting
 - Do not include unverified or speculative data
+- Province-level facts live in [docs/bukidnon-facts.md](docs/bukidnon-facts.md). Update that file
+  first, with a source, then the pages that show the fact
 
 ## Pull Request Process
 
@@ -182,10 +151,9 @@ Pull requests are reviewed for:
 
 ## Community
 
-- **Discord:** [Join our community](https://discord.com/invite/qeSu7RJkjQ)
-- **Facebook:** [@bettersolano.org](https://www.facebook.com/bettersolano.org)
-- **LinkedIn:** [Connect with us](https://www.linkedin.com/company/bettersolano)
-- **Email:** volunteer@bettersolano.org
+- **GitHub:** [issues and discussions](https://github.com/DMNCDLPRT/betterbukidnon/issues)
+- **Email:** volunteer@betterbukidnon.org
+- **BetterGov.ph:** the wider volunteer movement this project is part of, at [bettergov.ph](https://bettergov.ph)
 
 ## Recognition
 
@@ -193,8 +161,8 @@ All contributors are recognized in our repository. Significant contributions may
 
 ## Questions?
 
-Feel free to open an issue or reach out on Discord. We're happy to help!
+Open an issue or email volunteer@betterbukidnon.org. We're happy to help.
 
 ---
 
-Thank you for helping make government information accessible to the people of Solano.
+Thank you for helping make government information accessible to the people of Bukidnon.

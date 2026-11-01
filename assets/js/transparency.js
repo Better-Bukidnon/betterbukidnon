@@ -1,6 +1,10 @@
 /**
- * Transparency Page - Charts & Animations
- * Better Solano Portal
+ * Transparency Page - Charts & Animations (legacy layout)
+ * Better Bukidnon Portal
+ *
+ * Not loaded by any page; budget/index.html uses transparency-v2.js. Kept for
+ * reference. No figures are hard-coded: the charts are skipped until
+ * CHART_DATA is filled from official BLGF data (amounts in millions of pesos).
  */
 
 // Brand colors
@@ -13,6 +17,9 @@ const COLORS = {
   accent: '#F77F00',
 };
 
+// Official figures go here, e.g. { income: [local, external], expenditure: [gps, social, economic, debt] }
+const CHART_DATA = { income: null, expenditure: null };
+
 // Chart instances
 let charts = {};
 
@@ -20,6 +27,7 @@ let charts = {};
  * Initialize scroll animations
  */
 function initScrollAnimations() {
+  if (typeof IntersectionObserver === 'undefined') return;
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -60,15 +68,15 @@ function animateBars(container) {
  */
 function createIncomeChart() {
   const ctx = document.getElementById('incomeChart');
-  if (!ctx) return;
+  if (!ctx || !CHART_DATA.income || typeof Chart === 'undefined') return;
 
   charts.income = new Chart(ctx, {
     type: 'doughnut',
     data: {
-      labels: ['Local Sources', 'External Sources (IRA)'],
+      labels: ['Local Sources', 'External Sources (NTA)'],
       datasets: [
         {
-          data: [149.81, 221.52],
+          data: CHART_DATA.income,
           backgroundColor: [COLORS.success, COLORS.info],
           borderColor: '#fff',
           borderWidth: 3,
@@ -121,7 +129,7 @@ function createIncomeChart() {
  */
 function createExpenditureChart() {
   const ctx = document.getElementById('expenditureChart');
-  if (!ctx) return;
+  if (!ctx || !CHART_DATA.expenditure || typeof Chart === 'undefined') return;
 
   charts.expenditure = new Chart(ctx, {
     type: 'doughnut',
@@ -129,7 +137,7 @@ function createExpenditureChart() {
       labels: ['General Public Services', 'Social Services', 'Economic Services', 'Debt Service'],
       datasets: [
         {
-          data: [172.28, 50.81, 37.95, 1.63],
+          data: CHART_DATA.expenditure,
           backgroundColor: [COLORS.primary, COLORS.success, COLORS.accent, COLORS.info],
           borderColor: '#fff',
           borderWidth: 3,
@@ -181,6 +189,7 @@ function createExpenditureChart() {
  * Initialize charts with lazy loading
  */
 function initCharts() {
+  if (typeof IntersectionObserver === 'undefined') return;
   const chartObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {

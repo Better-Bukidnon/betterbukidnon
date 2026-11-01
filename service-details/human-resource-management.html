@@ -5,34 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Human Resource Management Section - Service records, employment certifications, leave management for LGU Solano employees."
+      content="Provincial Human Resource Management Office (PHRMO) of Bukidnon: recruitment, personnel records, employment certification, leave and benefits for provincial employees, with contact details."
     />
-    <meta name="author" content="Ramon Logan Jr." />
+    <meta name="author" content="BetterBukidnon volunteers" />
     <meta
       name="keywords"
-      content="HRMO Solano, service record, employment certificate, leave credits, administrative case, Nueva Vizcaya"
+      content="PHRMO Bukidnon, provincial HRMO, job vacancies, service record, certificate of employment, leave, civil service, Malaybalay"
     />
     <meta name="robots" content="index, follow" />
     <link
       rel="canonical"
-      href="https://bettersolano.org/service-details/human-resource-management"
+      href="https://betterbukidnon.org/service-details/human-resource-management"
     />
     <meta property="og:type" content="website" />
     <meta
       property="og:url"
-      content="https://bettersolano.org/service-details/human-resource-management"
+      content="https://betterbukidnon.org/service-details/human-resource-management"
     />
-    <meta property="og:title" content="Human Resource Management | BetterSolano.org" />
+    <meta
+      property="og:title"
+      content="Provincial Human Resource Management Office | BetterBukidnon.org"
+    />
     <meta
       property="og:description"
-      content="Service records, employment certifications, leave management for LGU Solano employees."
+      content="Provincial Human Resource Management Office (PHRMO) of Bukidnon: recruitment, personnel records, employment certification, leave and benefits for provincial employees, with contact details."
     />
     <meta
       property="og:image"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <title>Human Resource Management | BetterSolano.org</title>
+    <title>Provincial Human Resource Management Office | BetterBukidnon.org</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/logo/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="../assets/images/logo/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -54,10 +57,10 @@
     <link rel="stylesheet" href="../assets/css/accessibility.css" />
     <link rel="stylesheet" href="../assets/css/footer.css" />
     <style>
-      .hrm-section {
+      .mto-section {
         padding: 40px 0;
       }
-      .hrm-section.alt-bg {
+      .mto-section.alt-bg {
         background: var(--color-bg-alt);
       }
       .section-header {
@@ -79,6 +82,54 @@
         color: var(--color-text-light);
         font-size: 0.8125rem;
         margin: 0;
+      }
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .service-card {
+        background: white;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-radius: 8px;
+        padding: 14px;
+        transition: all 0.2s ease;
+      }
+      .service-card:hover {
+        border-color: var(--color-primary);
+        box-shadow: 0 2px 10px rgba(0, 50, 160, 0.08);
+      }
+      .service-card h4 {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--color-text);
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .service-card h4 i {
+        color: var(--color-primary);
+        font-size: 0.875rem;
+      }
+      .service-card p {
+        font-size: 0.6875rem;
+        color: var(--color-text-light);
+        margin-bottom: 8px;
+        line-height: 1.4;
+      }
+      .service-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        font-size: 0.625rem;
+      }
+      .service-meta span {
+        background: rgba(0, 50, 160, 0.06);
+        color: var(--color-primary);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: 500;
       }
       .quick-stats {
         display: grid;
@@ -111,16 +162,16 @@
         color: var(--color-text);
         margin: 0;
       }
-      .process-table {
+      .fee-table {
         width: 100%;
         border-collapse: collapse;
+        font-size: 0.75rem;
         background: white;
         border-radius: 8px;
         overflow: hidden;
         border: 1px solid rgba(0, 0, 0, 0.06);
-        font-size: 0.75rem;
       }
-      .process-table th {
+      .fee-table th {
         background: var(--color-primary);
         color: white;
         padding: 10px 12px;
@@ -129,98 +180,15 @@
         font-size: 0.6875rem;
         text-transform: uppercase;
       }
-      .process-table td {
-        padding: 10px 12px;
+      .fee-table td {
+        padding: 8px 12px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-        vertical-align: top;
       }
-      .process-table tr:last-child td {
+      .fee-table tr:last-child td {
         border-bottom: none;
       }
-      .process-table tr:hover {
+      .fee-table tr:hover td {
         background: rgba(0, 50, 160, 0.02);
-      }
-      .step-badge {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 20px;
-        height: 20px;
-        background: var(--color-primary);
-        color: white;
-        font-size: 0.625rem;
-        font-weight: 700;
-        border-radius: 4px;
-        margin-right: 6px;
-      }
-      .personnel-tag {
-        display: inline-block;
-        background: rgba(0, 50, 160, 0.08);
-        color: var(--color-primary);
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-size: 0.625rem;
-        font-weight: 500;
-        margin: 1px 0;
-      }
-      .time-tag {
-        color: var(--color-text-light);
-        font-size: 0.6875rem;
-      }
-      .fee-tag {
-        color: var(--color-success);
-        font-size: 0.6875rem;
-        font-weight: 600;
-      }
-      .service-tabs {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 20px;
-        justify-content: center;
-      }
-      .service-tab {
-        padding: 8px 16px;
-        background: white;
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 6px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: var(--color-text);
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-      .service-tab:hover {
-        border-color: var(--color-primary);
-      }
-      .service-tab.active {
-        background: var(--color-primary);
-        border-color: var(--color-primary);
-        color: white;
-      }
-      .service-content {
-        display: none;
-      }
-      .service-content.active {
-        display: block;
-      }
-      .req-box {
-        background: white;
-        border: 1px solid rgba(0, 0, 0, 0.06);
-        border-radius: 8px;
-        padding: 14px;
-      }
-      .req-box h4 {
-        font-size: 0.8125rem;
-        font-weight: 600;
-        color: var(--color-text);
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-      .req-box h4 i {
-        color: var(--color-primary);
       }
       .req-list {
         list-style: none;
@@ -230,66 +198,35 @@
       .req-list li {
         font-size: 0.75rem;
         color: var(--color-text);
-        padding: 4px 0;
+        padding: 6px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
         display: flex;
         align-items: flex-start;
-        gap: 6px;
+        gap: 8px;
+      }
+      .req-list li:last-child {
+        border-bottom: none;
       }
       .req-list li i {
         color: var(--color-primary);
-        font-size: 0.625rem;
-        margin-top: 3px;
+        font-size: 0.6875rem;
+        margin-top: 2px;
         flex-shrink: 0;
       }
-      .fee-table {
-        width: 100%;
-        border-collapse: collapse;
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-        border: 1px solid rgba(0, 0, 0, 0.06);
-        font-size: 0.75rem;
-        margin-top: 14px;
-      }
-      .fee-table th {
-        background: rgba(0, 50, 160, 0.06);
-        color: var(--color-text);
-        padding: 8px 12px;
-        text-align: left;
-        font-weight: 600;
-        font-size: 0.6875rem;
-      }
-      .fee-table td {
-        padding: 8px 12px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-      }
-      .fee-table tr:last-child td {
-        border-bottom: none;
-      }
-      .staff-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-      }
-      .staff-card {
+      .info-box {
         background: white;
         border: 1px solid rgba(0, 0, 0, 0.06);
         border-radius: 8px;
-        padding: 12px;
+        padding: 14px;
       }
-      .staff-card h4 {
-        font-size: 0.75rem;
+      .info-box h4 {
+        font-size: 0.8125rem;
         font-weight: 600;
         color: var(--color-text);
-        margin-bottom: 2px;
-      }
-      .staff-card p {
-        font-size: 0.6875rem;
-        color: var(--color-text-light);
-        margin: 0;
+        margin-bottom: 10px;
       }
       @media (max-width: 992px) {
-        .staff-grid {
+        .service-grid {
           grid-template-columns: repeat(2, 1fr);
         }
       }
@@ -297,21 +234,55 @@
         .quick-stats {
           grid-template-columns: repeat(2, 1fr);
         }
-        .process-table {
-          font-size: 0.6875rem;
-        }
       }
       @media (max-width: 575px) {
-        .quick-stats,
-        .staff-grid {
+        .service-grid,
+        .quick-stats {
           grid-template-columns: 1fr;
         }
-        .service-tabs {
-          flex-direction: column;
-        }
-        .service-tab {
-          text-align: center;
-        }
+      }
+      .charter-note {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        background: rgba(0, 50, 160, 0.05);
+        border: 1px solid rgba(0, 50, 160, 0.15);
+        border-left: 4px solid var(--color-primary);
+        border-radius: 8px;
+        padding: 12px 14px;
+        margin: 0 0 16px;
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        color: var(--color-text);
+      }
+      .charter-note > i {
+        color: var(--color-primary);
+        font-size: 1rem;
+        margin-top: 2px;
+        flex-shrink: 0;
+      }
+      .charter-note p {
+        margin: 0;
+        font-size: inherit;
+        color: inherit;
+      }
+      .charter-note a {
+        color: var(--color-primary);
+        font-weight: 600;
+        text-decoration: underline;
+      }
+      .office-prose p {
+        font-size: 0.8125rem;
+        line-height: 1.6;
+        color: var(--color-text);
+        margin: 0 0 10px;
+      }
+      .office-prose p:last-child {
+        margin-bottom: 0;
+      }
+      .office-prose a {
+        color: var(--color-primary);
+        font-weight: 600;
       }
     </style>
   </head>
@@ -323,24 +294,30 @@
       <div class="container">
         <div class="hotline-inner">
           <div class="hotline-items">
-            <a href="tel:09274008033" class="hotline-item"
-              ><i class="bi bi-shield-fill"></i><span>Police: 0927 400 8033</span></a
-            >
-            <a href="tel:09162840885" class="hotline-item"
-              ><i class="bi bi-heart-fill"></i><span>MSWDO: 0916 284 0885</span></a
-            >
-            <a href="tel:09360620305" class="hotline-item"
-              ><i class="bi bi-fire"></i><span>Fire: 0936 062 0305</span></a
-            >
-            <a href="tel:0906188086" class="hotline-item"
-              ><i class="bi bi-building"></i><span>DILG: 0906 188 086</span></a
-            >
-            <a href="tel:09263833744" class="hotline-item"
-              ><i class="bi bi-exclamation-triangle-fill"></i><span>MDRRMO: 0926 383 3744</span></a
-            >
-            <a href="tel:09068195569" class="hotline-item"
-              ><i class="bi bi-truck"></i><span>R2TMC: 0906 819 5569</span></a
-            >
+            <a href="tel:911" class="hotline-item">
+              <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+              <span>Emergency: 911</span>
+            </a>
+            <a href="tel:+63888131262" class="hotline-item">
+              <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+              <span>PDRRMD: (088) 813-1262</span>
+            </a>
+            <a href="tel:+63888134263" class="hotline-item">
+              <i class="bi bi-shield-fill" aria-hidden="true"></i>
+              <span>Police: (088) 813-4263</span>
+            </a>
+            <a href="tel:+63888135449" class="hotline-item">
+              <i class="bi bi-fire" aria-hidden="true"></i>
+              <span>Fire: (088) 813-5449</span>
+            </a>
+            <a href="tel:+63888135631" class="hotline-item">
+              <i class="bi bi-heart-pulse-fill" aria-hidden="true"></i>
+              <span>PHO: (088) 813-5631</span>
+            </a>
+            <a href="tel:+63888135734" class="hotline-item">
+              <i class="bi bi-heart-fill" aria-hidden="true"></i>
+              <span>PSWDO: (088) 813-5734</span>
+            </a>
           </div>
         </div>
       </div>
@@ -350,8 +327,8 @@
         <div class="logo-container">
           <a href="../"
             ><img
-              src="../assets/images/logo/better-solano-logo.svg"
-              alt="Better Solano Logo"
+              src="../assets/images/logo/better-bukidnon-logo.svg"
+              alt="Better Bukidnon Logo"
               class="logo-img"
           /></a>
         </div>
@@ -359,7 +336,14 @@
           <ul>
             <li><a href="../" data-i18n="hrm-home">Home</a></li>
             <li class="has-dropdown">
-              <a href="../services/" class="active" data-i18n="hrm-services" aria-haspopup="true" aria-expanded="false">Services</a>
+              <a
+                href="../services/"
+                class="active"
+                data-i18n="hrm-services"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Services</a
+              >
               <ul class="dropdown-menu">
                 <li>
                   <a href="../services/certificates" data-i18n="hrm-certificates">Certificates</a>
@@ -396,7 +380,13 @@
             <li><a href="../government/" data-i18n="hrm-government">Government</a></li>
             <li><a href="../statistics/" data-i18n="hrm-statistics">Statistics</a></li>
             <li class="has-dropdown">
-              <a href="../legislative/" data-i18n="hrm-legislative" aria-haspopup="true" aria-expanded="false">Legislative</a>
+              <a
+                href="../legislative/"
+                data-i18n="hrm-legislative"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Legislative</a
+              >
               <ul class="dropdown-menu">
                 <li>
                   <a href="../legislative/ordinance-framework" data-i18n="hrm-ordinance-framework"
@@ -422,8 +412,8 @@
             <button type="button" class="btn btn-secondary btn-sm lang-btn" data-lang="fil">
               FIL
             </button>
-            <button type="button" class="btn btn-secondary btn-sm lang-btn" data-lang="ilo">
-              ILO
+            <button type="button" class="btn btn-secondary btn-sm lang-btn" data-lang="ceb">
+              CEB
             </button>
           </div>
         </div>
@@ -437,7 +427,7 @@
             ><span class="rate-rotator"><span class="rate-display">1 USD = ₱ --</span></span>
           </div>
           <div class="info-bar-item info-bar-weather">
-            <i class="bi bi-thermometer-half"></i><span class="weather-location">Solano</span
+            <i class="bi bi-thermometer-half"></i><span class="weather-location">Malaybalay</span
             ><span class="weather-temp">--°C</span>
           </div>
           <div class="info-bar-item info-bar-datetime">
@@ -454,9 +444,10 @@
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           <a href="../" data-i18n="hrm-home">Home</a><span>/</span>
           <a href="../services/" data-i18n="hrm-services">Services</a><span>/</span>
-          <a href="../services/certificates" data-i18n="hrm-certificates">Certificates</a
-          ><span>/</span>
-          <span aria-current="page">Human Resource Management</span>
+          <a href="../government/" data-i18n="hrm-bc-cat">Government</a><span>/</span>
+          <span aria-current="page" data-i18n="hrm-bc-current"
+            >Provincial Human Resource Management Office</span
+          >
         </nav>
       </div>
 
@@ -464,35 +455,29 @@
         <div class="container">
           <div class="page-header-content">
             <span class="page-header-badge"
-              ><i class="bi bi-people"></i>
-              <span data-i18n="hrm-mayors-office">Mayor's Office</span></span
+              ><i class="bi bi-people"></i> <span data-i18n="hrm-badge">Human Resources</span></span
             >
-            <h1 data-i18n="hrm-human-resource-management-section">
-              Human Resource Management Section
-            </h1>
-            <p
-              class="page-header-desc"
-              data-i18n="hrm-service-records-employment-certifications-and"
-            >
-              Service records, employment certifications, and leave management for LGU employees
+            <h1 data-i18n="hrm-page-title">Provincial Human Resource Management Office (PHRMO)</h1>
+            <p class="page-header-desc" data-i18n="hrm-page-desc">
+              Recruitment, personnel records, benefits and employee welfare for the Provincial
+              Government of Bukidnon
             </p>
           </div>
         </div>
       </section>
 
-      <!-- Quick Stats -->
-      <section class="hrm-section">
+      <section class="mto-section">
         <div class="container">
           <div class="quick-stats">
             <div class="stat-card">
               <i class="bi bi-building"></i>
               <h4 data-i18n="hrm-office">Office</h4>
-              <p data-i18n="hrm-mayors-office-hrms">Mayor's Office - HRMS</p>
+              <p data-i18n="hrm-stat-office">Provincial Human Resource Management Office</p>
             </div>
             <div class="stat-card">
               <i class="bi bi-geo-alt"></i>
               <h4 data-i18n="hrm-location">Location</h4>
-              <p data-i18n="hrm-municipal-hall">Municipal Hall</p>
+              <p data-i18n="hrm-capitol-malaybalay">Provincial Capitol, Malaybalay City</p>
             </div>
             <div class="stat-card">
               <i class="bi bi-clock"></i>
@@ -500,733 +485,342 @@
               <p data-i18n="hrm-8am-5pm">8AM - 5PM</p>
             </div>
             <div class="stat-card">
-              <i class="bi bi-file-earmark-text"></i>
-              <h4 data-i18n="hrm-services">Services</h4>
-              <p data-i18n="hrm-5-hr-services">5 HR Services</p>
+              <i class="bi bi-calendar-check"></i>
+              <h4 data-i18n="hrm-days">Days</h4>
+              <p data-i18n="hrm-monday-to-friday">Monday to Friday</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      <!-- Service Tabs -->
-      <section class="hrm-section alt-bg">
-        <div class="container">
-          <div class="section-header" style="text-align: center">
-            <h2 style="justify-content: center">
-              <i class="bi bi-grid-3x3-gap"></i>
-              <span data-i18n="hrm-hr-management-services">HR Management Services</span>
-            </h2>
-            <p data-i18n="hrm-select-a-service-to-view-the-detailed-process-and">
-              Select a service to view the detailed process and requirements
+          <div class="charter-note" role="note">
+            <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
+            <p>
+              <span data-i18n="hrm-charter-note"
+                >This page is a general guide written by volunteers. The official requirements, fees
+                and processing times are in the Provincial Government of Bukidnon's Citizen's
+                Charter. Requirements may vary, so confirm with the office before you go.</span
+              >
+              <a
+                href="https://bukidnon.gov.ph/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-i18n="hrm-charter-link"
+                >Read the Citizen's Charter on bukidnon.gov.ph</a
+              >
             </p>
           </div>
-          <div class="service-tabs">
-            <button
-              type="button"
-              class="service-tab active"
-              data-tab="service-record"
-              data-i18n="hrm-service-record"
-            >
-              Service Record
-            </button>
-            <button type="button" class="service-tab" data-tab="employment-cert">
-              Employment Certificate
-            </button>
-            <button
-              type="button"
-              class="service-tab"
-              data-tab="leave-credits"
-              data-i18n="hrm-leave-credits"
-            >
-              Leave Credits
-            </button>
-            <button
-              type="button"
-              class="service-tab"
-              data-tab="no-pending"
-              data-i18n="hrm-no-pending-case"
-            >
-              No Pending Case
-            </button>
-            <button
-              type="button"
-              class="service-tab"
-              data-tab="leave-application"
-              data-i18n="hrm-leave-application"
-            >
-              Leave Application
-            </button>
-          </div>
-
-          <!-- Service Record -->
-          <div class="service-content active" id="service-record">
-            <div class="section-header">
-              <h2>
-                <i class="bi bi-file-earmark-person"></i>
-                <span data-i18n="hrm-issuance-of-service-record">Issuance of Service Record</span>
-              </h2>
-              <p data-i18n="hrm-official-record-of-employment-history-for-lgu">
-                Official record of employment history for LGU employees
-              </p>
-            </div>
-            <div class="req-box" style="margin-bottom: 14px">
-              <h4>
-                <i class="bi bi-file-earmark-text"></i>
-                <span data-i18n="hrm-requirements">Requirements</span>
-              </h4>
-              <ul class="req-list">
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="hrm-duly-accomplished-request-form"
-                    >Duly accomplished request form</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="hrm-valid-governmentissued-id">Valid government-issued ID</span>
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="hrm-authorization-letter-if-representative"
-                    >Authorization letter (if representative)</span
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="table-responsive">
-              <table class="process-table">
-                <thead>
-                  <tr>
-                    <th data-i18n="hrm-step">Step</th>
-                    <th data-i18n="hrm-activity">Activity</th>
-                    <th data-i18n="hrm-duration">Duration</th>
-                    <th data-i18n="hrm-personnel">Personnel</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="step-badge">1</span></td>
-                    <td data-i18n="hrm-submit-request-form-with-requirements">
-                      Submit request form with requirements
-                    </td>
-                    <td><span class="time-tag" data-i18n="hrm-5-minutes">5 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-hrmo-staff">HRMO Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">2</span></td>
-                    <td data-i18n="hrm-verification-and-preparation-of-service-record">
-                      Verification and preparation of service record
-                    </td>
-                    <td>
-                      <span class="time-tag" data-i18n="hrm-1530-minutes">15-30 minutes</span>
-                    </td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-hrmo-staff">HRMO Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">3</span></td>
-                    <td data-i18n="hrm-review-and-signing-by-hrmo-head">
-                      Review and signing by HRMO Head
-                    </td>
-                    <td><span class="time-tag" data-i18n="hrm-5-minutes">5 minutes</span></td>
-                    <td><span class="personnel-tag" data-i18n="hrm-hrmo-head">HRMO Head</span></td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">4</span></td>
-                    <td data-i18n="hrm-release-of-service-record">Release of Service Record</td>
-                    <td><span class="time-tag">2 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-hrmo-staff">HRMO Staff</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="req-box" style="margin-top: 14px">
-              <h4>
-                <i class="bi bi-info-circle"></i>
-                <span data-i18n="hrm-processing-information">Processing Information</span>
-              </h4>
-              <ul class="req-list">
-                <li>
-                  <i class="bi bi-clock"></i>
-                  <span data-i18n="hrm-total-processing-time-2742-minutes"
-                    >Total processing time: 27-42 minutes</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-cash"></i>
-                  <span data-i18n="hrm-fee-free-for-current-employees"
-                    >Fee: Free for current employees</span
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Employment Certificate -->
-          <div class="service-content" id="employment-cert">
-            <div class="section-header">
-              <h2>
-                <i class="bi bi-award"></i>
-                <span data-i18n="hrm-issuance-of-certificate-of-employment"
-                  >Issuance of Certificate of Employment</span
-                >
-              </h2>
-              <p data-i18n="hrm-official-certification-of-current-or-previous">
-                Official certification of current or previous employment status
-              </p>
-            </div>
-            <div class="req-box" style="margin-bottom: 14px">
-              <h4>
-                <i class="bi bi-file-earmark-text"></i>
-                <span data-i18n="hrm-requirements">Requirements</span>
-              </h4>
-              <ul class="req-list">
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="hrm-request-letter-stating-purpose"
-                    >Request letter stating purpose</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="hrm-valid-governmentissued-id">Valid government-issued ID</span>
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="hrm-employee-id-for-current-employees"
-                    >Employee ID (for current employees)</span
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="table-responsive">
-              <table class="process-table">
-                <thead>
-                  <tr>
-                    <th data-i18n="hrm-step">Step</th>
-                    <th data-i18n="hrm-activity">Activity</th>
-                    <th data-i18n="hrm-duration">Duration</th>
-                    <th data-i18n="hrm-personnel">Personnel</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="step-badge">1</span></td>
-                    <td data-i18n="hrm-submit-request-letter-and-requirements">
-                      Submit request letter and requirements
-                    </td>
-                    <td><span class="time-tag" data-i18n="hrm-5-minutes">5 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-hrmo-staff">HRMO Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">2</span></td>
-                    <td data-i18n="hrm-verification-of-employment-records">
-                      Verification of employment records
-                    </td>
-                    <td><span class="time-tag" data-i18n="hrm-10-minutes">10 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-hrmo-staff">HRMO Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">3</span></td>
-                    <td data-i18n="hrm-preparation-and-signing-of-certificate">
-                      Preparation and signing of certificate
-                    </td>
-                    <td><span class="time-tag" data-i18n="hrm-10-minutes">10 minutes</span></td>
-                    <td><span class="personnel-tag" data-i18n="hrm-hrmo-head">HRMO Head</span></td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">4</span></td>
-                    <td data-i18n="hrm-release-of-certificate-of-employment">
-                      Release of Certificate of Employment
-                    </td>
-                    <td><span class="time-tag" data-i18n="hrm-2-minutes">2 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-hrmo-staff">HRMO Staff</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="req-box" style="margin-top: 14px">
-              <h4>
-                <i class="bi bi-info-circle"></i>
-                <span data-i18n="hrm-processing-information">Processing Information</span>
-              </h4>
-              <ul class="req-list">
-                <li>
-                  <i class="bi bi-clock"></i>
-                  <span data-i18n="hrm-total-processing-time-27-minutes"
-                    >Total processing time: 27 minutes</span
-                  >
-                </li>
-                <li><i class="bi bi-cash"></i> <span data-i18n="hrm-fee-free">Fee: Free</span></li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Leave Credits -->
-          <div class="service-content" id="leave-credits">
-            <div class="section-header">
-              <h2>
-                <i class="bi bi-calendar-check"></i>
-                <span data-i18n="hrm-issuance-of-certificate-of-leave-credits"
-                  >Issuance of Certificate of Leave Credits</span
-                >
-              </h2>
-              <p data-i18n="hrm-official-statement-of-accumulated-leave-credits">
-                Official statement of accumulated leave credits (vacation and sick leave)
-              </p>
-            </div>
-            <div class="req-box" style="margin-bottom: 14px">
-              <h4>
-                <i class="bi bi-file-earmark-text"></i>
-                <span data-i18n="hrm-requirements">Requirements</span>
-              </h4>
-              <ul class="req-list">
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="hrm-request-formletter">Request form/letter</span>
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="hrm-employee-id">Employee ID</span>
-                </li>
-              </ul>
-            </div>
-            <div class="table-responsive">
-              <table class="process-table">
-                <thead>
-                  <tr>
-                    <th data-i18n="hrm-step">Step</th>
-                    <th data-i18n="hrm-activity">Activity</th>
-                    <th data-i18n="hrm-duration">Duration</th>
-                    <th data-i18n="hrm-personnel">Personnel</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="step-badge">1</span></td>
-                    <td data-i18n="hrm-submit-request-for-leave-credits-certificate">
-                      Submit request for leave credits certificate
-                    </td>
-                    <td><span class="time-tag" data-i18n="hrm-3-minutes">3 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-hrmo-staff">HRMO Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">2</span></td>
-                    <td data-i18n="hrm-computation-and-verification-of-leave-balances">
-                      Computation and verification of leave balances
-                    </td>
-                    <td><span class="time-tag" data-i18n="hrm-15-minutes">15 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-hrmo-staff">HRMO Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">3</span></td>
-                    <td data-i18n="hrm-preparation-and-signing-of-certificate">
-                      Preparation and signing of certificate
-                    </td>
-                    <td><span class="time-tag" data-i18n="hrm-5-minutes">5 minutes</span></td>
-                    <td><span class="personnel-tag" data-i18n="hrm-hrmo-head">HRMO Head</span></td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">4</span></td>
-                    <td data-i18n="hrm-release-of-certificate">Release of Certificate</td>
-                    <td><span class="time-tag" data-i18n="hrm-2-minutes">2 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-hrmo-staff">HRMO Staff</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="req-box" style="margin-top: 14px">
-              <h4>
-                <i class="bi bi-info-circle"></i>
-                <span data-i18n="hrm-processing-information">Processing Information</span>
-              </h4>
-              <ul class="req-list">
-                <li>
-                  <i class="bi bi-clock"></i>
-                  <span data-i18n="hrm-total-processing-time-25-minutes"
-                    >Total processing time: 25 minutes</span
-                  >
-                </li>
-                <li><i class="bi bi-cash"></i> <span data-i18n="hrm-fee-free">Fee: Free</span></li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- No Pending Case -->
-          <div class="service-content" id="no-pending">
-            <div class="section-header">
-              <h2>
-                <i class="bi bi-shield-check"></i>
-                <span data-i18n="hrm-certificate-of-no-pending-administrative-case"
-                  >Certificate of No Pending Administrative Case</span
-                >
-              </h2>
-              <p data-i18n="hrm-certification-that-employee-has-no-pending">
-                Certification that employee has no pending administrative case
-              </p>
-            </div>
-            <div class="req-box" style="margin-bottom: 14px">
-              <h4>
-                <i class="bi bi-file-earmark-text"></i>
-                <span data-i18n="hrm-requirements">Requirements</span>
-              </h4>
-              <ul class="req-list">
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="hrm-request-letter-stating-purpose"
-                    >Request letter stating purpose</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="hrm-valid-governmentissued-id">Valid government-issued ID</span>
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="hrm-employee-id">Employee ID</span>
-                </li>
-              </ul>
-            </div>
-            <div class="table-responsive">
-              <table class="process-table">
-                <thead>
-                  <tr>
-                    <th data-i18n="hrm-step">Step</th>
-                    <th data-i18n="hrm-activity">Activity</th>
-                    <th data-i18n="hrm-duration">Duration</th>
-                    <th data-i18n="hrm-personnel">Personnel</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="step-badge">1</span></td>
-                    <td data-i18n="hrm-submit-request-letter-and-requirements">
-                      Submit request letter and requirements
-                    </td>
-                    <td><span class="time-tag" data-i18n="hrm-5-minutes">5 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-hrmo-staff">HRMO Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">2</span></td>
-                    <td data-i18n="hrm-verification-of-administrative-case-records">
-                      Verification of administrative case records
-                    </td>
-                    <td><span class="time-tag" data-i18n="hrm-10-minutes">10 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-hrmo-staff">HRMO Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">3</span></td>
-                    <td data-i18n="hrm-preparation-and-signing-of-certificate">
-                      Preparation and signing of certificate
-                    </td>
-                    <td><span class="time-tag" data-i18n="hrm-10-minutes">10 minutes</span></td>
-                    <td><span class="personnel-tag" data-i18n="hrm-hrmo-head">HRMO Head</span></td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">4</span></td>
-                    <td data-i18n="hrm-release-of-certificate">Release of Certificate</td>
-                    <td><span class="time-tag" data-i18n="hrm-2-minutes">2 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-hrmo-staff">HRMO Staff</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="req-box" style="margin-top: 14px">
-              <h4>
-                <i class="bi bi-info-circle"></i>
-                <span data-i18n="hrm-processing-information">Processing Information</span>
-              </h4>
-              <ul class="req-list">
-                <li>
-                  <i class="bi bi-clock"></i>
-                  <span data-i18n="hrm-total-processing-time-27-minutes"
-                    >Total processing time: 27 minutes</span
-                  >
-                </li>
-                <li><i class="bi bi-cash"></i> <span data-i18n="hrm-fee-free">Fee: Free</span></li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Leave Application -->
-          <div class="service-content" id="leave-application">
-            <div class="section-header">
-              <h2>
-                <i class="bi bi-calendar-minus"></i>
-                <span data-i18n="hrm-application-for-leave">Application for Leave</span>
-              </h2>
-              <p data-i18n="hrm-processing-of-vacation-leave-sick-leave-and-other">
-                Processing of vacation leave, sick leave, and other leave types
-              </p>
-            </div>
-            <div class="req-box" style="margin-bottom: 14px">
-              <h4>
-                <i class="bi bi-file-earmark-text"></i>
-                <span data-i18n="hrm-requirements">Requirements</span>
-              </h4>
-              <ul class="req-list">
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="hrm-duly-accomplished-cs-form-no-6-application-for"
-                    >Duly accomplished CS Form No. 6 (Application for Leave)</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="hrm-medical-certificate-for-sick-leave-exceeding-5"
-                    >Medical certificate (for sick leave exceeding 5 days)</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle-fill"></i>
-                  <span data-i18n="hrm-supporting-documents-as-applicable"
-                    >Supporting documents (as applicable)</span
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="table-responsive">
-              <table class="process-table">
-                <thead>
-                  <tr>
-                    <th data-i18n="hrm-step">Step</th>
-                    <th data-i18n="hrm-activity">Activity</th>
-                    <th data-i18n="hrm-duration">Duration</th>
-                    <th data-i18n="hrm-personnel">Personnel</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="step-badge">1</span></td>
-                    <td data-i18n="hrm-submit-accomplished-leave-application-form">
-                      Submit accomplished leave application form
-                    </td>
-                    <td><span class="time-tag" data-i18n="hrm-5-minutes">5 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-hrmo-staff">HRMO Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">2</span></td>
-                    <td data-i18n="hrm-verification-of-leave-credits-and-computation">
-                      Verification of leave credits and computation
-                    </td>
-                    <td><span class="time-tag" data-i18n="hrm-10-minutes">10 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-hrmo-staff">HRMO Staff</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">3</span></td>
-                    <td data-i18n="hrm-recommendation-by-department-head">
-                      Recommendation by Department Head
-                    </td>
-                    <td><span class="time-tag">1 day</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-department-head"
-                        >Department Head</span
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">4</span></td>
-                    <td data-i18n="hrm-approval-by-municipal-mayor">Approval by Municipal Mayor</td>
-                    <td><span class="time-tag" data-i18n="hrm-12-days">1-2 days</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-municipal-mayor"
-                        >Municipal Mayor</span
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><span class="step-badge">5</span></td>
-                    <td data-i18n="hrm-recording-and-release-of-approved-leave">
-                      Recording and release of approved leave
-                    </td>
-                    <td><span class="time-tag" data-i18n="hrm-5-minutes">5 minutes</span></td>
-                    <td>
-                      <span class="personnel-tag" data-i18n="hrm-hrmo-staff">HRMO Staff</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <table class="fee-table">
-              <thead>
-                <tr>
-                  <th data-i18n="hrm-leave-type">Leave Type</th>
-                  <th data-i18n="hrm-description">Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td data-i18n="hrm-vacation-leave">Vacation Leave</td>
-                  <td data-i18n="hrm-for-personal-matters-rest-and-recreation">
-                    For personal matters, rest, and recreation
-                  </td>
-                </tr>
-                <tr>
-                  <td data-i18n="hrm-sick-leave">Sick Leave</td>
-                  <td data-i18n="hrm-for-illness-or-medical-reasons">
-                    For illness or medical reasons
-                  </td>
-                </tr>
-                <tr>
-                  <td data-i18n="hrm-maternity-leave">Maternity Leave</td>
-                  <td data-i18n="hrm-105-days-for-female-employees">
-                    105 days for female employees
-                  </td>
-                </tr>
-                <tr>
-                  <td data-i18n="hrm-paternity-leave">Paternity Leave</td>
-                  <td data-i18n="hrm-7-days-for-male-employees">7 days for male employees</td>
-                </tr>
-                <tr>
-                  <td data-i18n="hrm-special-leave">Special Leave</td>
-                  <td data-i18n="hrm-for-special-circumstances-as-provided-by-law">
-                    For special circumstances as provided by law
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </div>
       </section>
 
-      <!-- Staff Section -->
-      <section class="hrm-section">
+      <section class="mto-section alt-bg">
         <div class="container">
           <div class="section-header">
             <h2>
-              <i class="bi bi-people"></i>
-              <span data-i18n="hrm-office-personnel">Office Personnel</span>
+              <i class="bi bi-bank"></i>
+              <span data-i18n="hrm-about-the-office">About the Office</span>
             </h2>
-            <p data-i18n="hrm-key-personnel-handling-human-resource-management">
-              Key personnel handling human resource management services
+            <p data-i18n="hrm-about-sub">What the Provincial HRMO does under the law</p>
+          </div>
+          <div class="info-box office-prose">
+            <p data-i18n="hrm-about-p1">
+              The Provincial Human Resource Management Office (PHRMO) looks after the people who
+              work for the Provincial Government of Bukidnon. Under the Local Government Code of
+              1991 (Republic Act No. 7160) and civil service rules, the office helps the Governor
+              with recruitment, selection and placement, keeps employee records, handles benefits
+              and leave, and runs programs on training, performance and employee welfare.
+            </p>
+            <p data-i18n="hrm-about-p2">
+              The PHRMO works within Civil Service Commission (CSC) rules. Most members of the
+              public deal with it as job applicants, or as current or former provincial employees
+              who need a record.
             </p>
           </div>
-          <div class="staff-grid">
-            <div class="staff-card">
-              <h4 data-i18n="hrm-hrmo-head">HRMO Head</h4>
-              <p data-i18n="hrm-section-chief">Section Chief</p>
+        </div>
+      </section>
+
+      <section class="mto-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>
+              <i class="bi bi-list-check"></i>
+              <span data-i18n="hrm-what-it-does">What the Office Does</span>
+            </h2>
+            <p data-i18n="hrm-what-it-does-sub">
+              General description of its services. See the Citizen's Charter for the official list.
+            </p>
+          </div>
+          <div class="service-grid">
+            <div class="service-card">
+              <h4>
+                <i class="bi bi-people"></i>
+                <span data-i18n="hrm-grp-public">To the Public</span>
+              </h4>
+              <ul class="req-list">
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-i18n="hrm-public-1"
+                    >Accepts applications for vacant provincial positions and posts vacancies as
+                    civil service rules require.</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-i18n="hrm-public-2"
+                    >Answers questions on qualifications and the hiring process for provincial
+                    positions.</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-i18n="hrm-public-3"
+                    >Issues certifications of employment and copies of service records to current
+                    and former provincial employees.</span
+                  >
+                </li>
+              </ul>
             </div>
-            <div class="staff-card">
-              <h4 data-i18n="hrm-hr-officer">HR Officer</h4>
-              <p data-i18n="hrm-records-certifications">Records & Certifications</p>
+            <div class="service-card">
+              <h4>
+                <i class="bi bi-diagram-3"></i>
+                <span data-i18n="hrm-grp-offices">To Other Provincial Offices</span>
+              </h4>
+              <ul class="req-list">
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-i18n="hrm-offices-1"
+                    >Handles recruitment, appointments and personnel records (the 201 file).</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-i18n="hrm-offices-2"
+                    >Processes leave, benefits and other employee entitlements.</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-i18n="hrm-offices-3"
+                    >Organizes training and performance management.</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-i18n="hrm-offices-4"
+                    >Supports discipline and employee welfare programs.</span
+                  >
+                </li>
+              </ul>
             </div>
-            <div class="staff-card">
-              <h4 data-i18n="hrm-administrative-staff">Administrative Staff</h4>
-              <p data-i18n="hrm-leave-processing">Leave Processing</p>
+            <div class="service-card">
+              <h4>
+                <i class="bi bi-buildings"></i>
+                <span data-i18n="hrm-grp-lgus">To Cities and Municipalities</span>
+              </h4>
+              <ul class="req-list">
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-i18n="hrm-lgus-1"
+                    >May give general guidance on civil service rules when asked.</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-i18n="hrm-lgus-2"
+                    >City and municipal employees are managed by their own HR offices and appointing
+                    authorities. The Province does not process their appointments or records.</span
+                  >
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Contact Section -->
-      <section class="hrm-section alt-bg">
+      <section class="mto-section alt-bg">
         <div class="container">
-          <div class="grid grid-2" style="gap: 14px">
-            <div class="req-box">
+          <div class="section-header">
+            <h2>
+              <i class="bi bi-list-ol"></i>
+              <span data-i18n="hrm-how-to">How to Apply or Request a Record</span>
+            </h2>
+            <p data-i18n="hrm-how-to-sub">
+              General steps. See the Citizen's Charter for the official steps.
+            </p>
+          </div>
+          <div class="grid grid-2" style="gap: 16px">
+            <div class="info-box">
+              <h4 data-i18n="hrm-steps">Steps</h4>
+              <ul class="req-list">
+                <li>
+                  <i class="bi bi-1-circle-fill"></i>
+                  <span data-i18n="hrm-step-1"
+                    >For a job: look for posted vacancies at the Capitol or on bukidnon.gov.ph, and
+                    check the required qualifications.</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-2-circle-fill"></i>
+                  <span data-i18n="hrm-step-2"
+                    >Prepare the documents listed in the posting and submit them to the PHRMO within
+                    the stated period.</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-3-circle-fill"></i>
+                  <span data-i18n="hrm-step-3"
+                    >For a certification or service record: ask the PHRMO what it needs, submit your
+                    request, and wait to be told when it is ready.</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-4-circle-fill"></i>
+                  <span data-i18n="hrm-step-4"
+                    >Keep your receipt or acknowledgment of what you submitted.</span
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="info-box">
+              <h4 data-i18n="hrm-what-to-bring">What to Bring</h4>
+              <ul class="req-list">
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-i18n="hrm-bring-1">A valid government-issued ID</span>
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-i18n="hrm-bring-2"
+                    >For job applicants: the documents listed in the vacancy posting</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-i18n="hrm-bring-3"
+                    >For records: your name as it appeared in service, your position, and the dates
+                    you served</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span data-i18n="hrm-bring-4"
+                    >If you are a representative: an authorization letter and the employee's
+                    ID</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mto-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>
+              <i class="bi bi-signpost-split"></i>
+              <span data-i18n="hrm-go-to-city-municipal">Handled by Your City or Municipality</span>
+            </h2>
+            <p data-i18n="hrm-go-to-city-municipal-sub">
+              These are handled by other agencies or by your own city or municipality
+            </p>
+          </div>
+          <div class="service-grid">
+            <div class="service-card">
+              <h4>
+                <i class="bi bi-award"></i>
+                <span data-i18n="hrm-instead-1-title">Civil Service Eligibility</span>
+              </h4>
+              <p data-i18n="hrm-instead-1-desc">
+                Civil service examinations and eligibility records are handled by the Civil Service
+                Commission. Ask the CSC regional or field office.
+              </p>
+            </div>
+            <div class="service-card">
               <h4>
                 <i class="bi bi-building"></i>
+                <span data-i18n="hrm-instead-2-title">City and Municipal Jobs</span>
+              </h4>
+              <p data-i18n="hrm-instead-2-desc">
+                Jobs in a city or municipal government are filled through that LGU's own HR office.
+                Ask your local hall.
+              </p>
+            </div>
+            <div class="service-card">
+              <h4>
+                <i class="bi bi-shield-check"></i>
+                <span data-i18n="hrm-instead-3-title">GSIS, PhilHealth and Pag-IBIG</span>
+              </h4>
+              <p data-i18n="hrm-instead-3-desc">
+                Benefits are administered by those agencies. The PHRMO can only help with employment
+                records and forms.
+              </p>
+            </div>
+          </div>
+          <p style="margin: 16px 0 0">
+            <a href="../government/#lgus" class="btn btn-secondary btn-sm"
+              ><i class="bi bi-geo-alt"></i>
+              <span data-i18n="hrm-find-your-lgu">Find your city or municipality</span></a
+            >
+          </p>
+        </div>
+      </section>
+
+      <section class="mto-section alt-bg">
+        <div class="container">
+          <div class="grid grid-2" style="gap: 16px">
+            <div class="info-box">
+              <h4>
+                <i
+                  class="bi bi-building"
+                  style="color: var(--color-primary); margin-right: 6px"
+                ></i>
                 <span data-i18n="hrm-office-information">Office Information</span>
               </h4>
               <ul class="req-list">
                 <li>
                   <i class="bi bi-geo-alt"></i>
-                  <span data-i18n="hrm-human-resource-management-section-mayors-office"
-                    >Human Resource Management Section, Mayor's Office, Municipal Hall, Solano,
-                    Nueva Vizcaya</span
+                  <span data-i18n="hrm-capitol-address"
+                    >Provincial Capitol Compound, Malaybalay City, Bukidnon 8700</span
                   >
                 </li>
-                <li><i class="bi bi-clock"></i> Monday - Friday: 8:00 AM - 5:00 PM</li>
-                <li><i class="bi bi-telephone"></i> (078) 326-5001</li>
+                <li>
+                  <i class="bi bi-clock"></i>
+                  <span data-i18n="hrm-office-hours">Monday to Friday, 8:00 AM to 5:00 PM</span>
+                </li>
+                <li>
+                  <i class="bi bi-telephone"></i>
+                  <a href="tel:+63888135741">(088) 813-5741</a>
+                  <span data-i18n="hrm-tel-note">(Capitol main line)</span>
+                </li>
               </ul>
             </div>
-            <div class="req-box">
+            <div class="info-box">
               <h4>
-                <i class="bi bi-info-circle"></i>
-                <span data-i18n="hrm-important-notes">Important Notes</span>
+                <i
+                  class="bi bi-lightbulb"
+                  style="color: var(--color-primary); margin-right: 6px"
+                ></i>
+                <span data-i18n="hrm-tips">Tips</span>
               </h4>
               <ul class="req-list">
                 <li>
-                  <i class="bi bi-check-circle"></i>
-                  <span data-i18n="hrm-services-are-free-for-current-lgu-employees"
-                    >Services are free for current LGU employees</span
+                  <i class="bi bi-check"></i>
+                  <span data-i18n="hrm-tip-1"
+                    >Read the vacancy posting to the end. It lists the exact documents and the
+                    deadline.</span
                   >
                 </li>
                 <li>
-                  <i class="bi bi-check-circle"></i>
-                  <span data-i18n="hrm-bring-valid-id-for-all-transactions"
-                    >Bring valid ID for all transactions</span
-                  >
+                  <i class="bi bi-check"></i>
+                  <span data-i18n="hrm-tip-2">Submit complete documents to avoid delays.</span>
                 </li>
                 <li>
-                  <i class="bi bi-check-circle"></i>
-                  <span data-i18n="hrm-leave-applications-should-be-filed-in-advance"
-                    >Leave applications should be filed in advance</span
-                  >
-                </li>
-                <li>
-                  <i class="bi bi-check-circle"></i>
-                  <span data-i18n="hrm-representatives-must-have-authorization-letter"
-                    >Representatives must have authorization letter</span
+                  <i class="bi bi-check"></i>
+                  <span data-i18n="hrm-tip-3"
+                    >Do not pay anyone for a job or a faster process. Government jobs are filled
+                    through the posted process.</span
                   >
                 </li>
               </ul>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Downloadable Resources Section -->
-      <section class="hrm-section">
-        <div class="container">
-          <div class="section-header">
-            <h2>
-              <i class="bi bi-download"></i>
-              <span data-i18n="hrm-downloadable-resources">Downloadable Resources</span>
-            </h2>
-            <p data-i18n="hrm-forms-and-documents-for-hr-services">
-              Forms and documents for HR services
-            </p>
-          </div>
-          <div class="req-box">
-            <ul class="req-list">
-              <li>
-                <i class="bi bi-file-earmark-pdf"></i>
-                <a
-                  href="https://solano.gov.ph/wp-content/uploads/2021/10/PDS.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-i18n="hrm-cs-form-no-212-revised-personal-data-sheet-2017"
-                  >CS Form No. 212 Revised Personal Data Sheet (2017)</a
-                >
-              </li>
-            </ul>
           </div>
         </div>
       </section>
@@ -1237,60 +831,41 @@
         <div class="footer-main-new">
           <div class="footer-brand">
             <img
-              src="../assets/images/logo/better-solano-logo-white.svg"
-              alt="Better Solano logo"
+              src="../assets/images/logo/better-bukidnon-logo-white.svg"
+              alt="Better Bukidnon logo"
               class="footer-logo"
             />
             <p
               class="footer-tagline"
-              data-i18n="hrm-empowering-the-people-of-solano-with-transparent"
+              data-i18n="hrm-empowering-the-people-of-bukidnon-with-transparent"
             >
-              Empowering the people of Solano with transparent access to the services, programs, and
-              public funds of LGU Solano.
+              Empowering the people of Bukidnon with transparent access to the services, programs,
+              and public funds of LGU Bukidnon.
             </p>
             <div class="footer-social-new">
               <a
-                href="https://www.facebook.com/bettersolano.org"
+                href="https://github.com/DMNCDLPRT/betterbukidnon"
                 class="footer-social-btn"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook"
-                ><i class="bi bi-facebook"></i
+                aria-label="GitHub"
+                ><i class="bi bi-github"></i
               ></a>
               <a
-                href="https://www.linkedin.com/company/bettersolano/"
+                href="mailto:volunteer@betterbukidnon.org"
                 class="footer-social-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                ><i class="bi bi-linkedin"></i
-              ></a>
-              <a
-                href="https://discord.com/invite/qeSu7RJkjQ"
-                class="footer-social-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Discord"
-                ><i class="bi bi-discord"></i
+                aria-label="Email the volunteers"
+                ><i class="bi bi-envelope-fill"></i
               ></a>
             </div>
           </div>
           <div class="footer-column">
             <h4 data-i18n="hrm-quick-links">Quick Links</h4>
             <ul class="footer-links-new">
-              <li>
-                <a
-                  href="https://quiz.bettersolano.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-i18n="hr-solano-quiz"
-                  >Solano Quiz</a
-                >
-              </li>
               <li><a href="../sitemap/" data-i18n="hrm-sitemap">Sitemap</a></li>
               <li>
                 <a
-                  href="https://solano.gov.ph/wp-content/uploads/2025/10/As-of-October-21-2025-2.pdf"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-i18n="hrm-citizens-charter"
@@ -1326,29 +901,29 @@
               </li>
               <li>
                 <a
-                  href="https://solano.gov.ph/"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="hrm-official-lgu-solano-portal"
-                  >Official LGU Solano Portal</a
+                  data-i18n="hrm-official-lgu-bukidnon-portal"
+                  >Official LGU Bukidnon Portal</a
                 >
               </li>
               <li>
                 <a
-                  href="https://sangguniangbayan.solano.gov.ph/"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-i18n="hrm-sangguniang-bayan"
-                  >Sangguniang Bayan</a
+                  >Sangguniang Panlalawigan</a
                 >
               </li>
               <li>
                 <a
-                  href="https://www.facebook.com/OfficialLguSolanoFanpage/"
+                  href="https://www.facebook.com/lgubukidnon"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="hrm-lgu-solano-facebook"
-                  >LGU Solano Facebook</a
+                  data-i18n="hrm-lgu-bukidnon-facebook"
+                  >LGU Bukidnon Facebook</a
                 >
               </li>
               <li>
@@ -1373,14 +948,14 @@
           </div>
           <div class="footer-column">
             <div class="footer-cost" role="status">
-              Cost to the People of Solano = <span class="footer-cost-value">₱0</span>
+              Cost to the People of Bukidnon = <span class="footer-cost-value">₱0</span>
             </div>
-            <a href="mailto:volunteer@bettersolano.org" class="footer-contribute"
+            <a href="mailto:volunteer@betterbukidnon.org" class="footer-contribute"
               ><i class="bi bi-envelope-heart"></i>
               <span data-i18n="hrm-volunteer-with-us">Volunteer with us</span></a
             >
             <a
-              href="https://github.com/BetterSolano/bettersolano"
+              href="https://github.com/DMNCDLPRT/betterbukidnon"
               class="footer-contribute"
               target="_blank"
               rel="noopener noreferrer"
@@ -1388,32 +963,6 @@
               <span data-i18n="hrm-contribute-code-with-us">Contribute code with us</span></a
             >
             <div class="footer-partners">
-              <a
-                href="https://abakada.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abakada.org"
-                ><img
-                  src="../assets/images/logo/abakada-footer.svg"
-                  alt="Abakada.org"
-                  class="footer-partner-logo"
-                  width="120"
-                  height="28"
-                  loading="lazy"
-              /></a>
-              <a
-                href="https://hivcareph.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="HIV Care Philippines"
-                ><img
-                  src="../assets/images/logo/hiv-care-logo-footer.svg"
-                  alt="HIV Care Philippines"
-                  class="footer-partner-logo"
-                  width="120"
-                  height="28"
-                  loading="lazy"
-              /></a>
               <a
                 href="https://bettergov.ph"
                 target="_blank"
@@ -1432,12 +981,13 @@
         </div>
         <div class="footer-bottom-new">
           <div class="footer-copyright">
-            <span class="footer-copyright-text">&copy; 2026 BetterSolano.org</span>
+            <span class="footer-copyright-text">&copy; 2026 BetterBukidnon.org</span>
             <span class="footer-copyright-license">MIT | CC BY 4.0</span>
             <span class="footer-copyright-disclaimer"
-              >All public information sourced from official government portals.</span
+              >Volunteer civic project, not an official government website. Built on the
+              BetterSolano template (MIT).</span
             >
-            <span class="footer-version"><i class="bi bi-boxes"></i> Ver. 1.1.19</span>
+            <span class="footer-version"><i class="bi bi-boxes"></i> Ver. 2.0.0</span>
           </div>
         </div>
       </div>

@@ -1,7 +1,12 @@
 name: Facebook News Sync
 
-# Fully automated: pulls the latest LGU Solano Facebook posts, categorizes them,
-# merges them into data/news.json, and (if changed) deploys the file to cPanel.
+# Pulls the latest Provincial Government of Bukidnon Facebook posts, categorizes
+# them, merges them into data/news.json, and (if changed) uploads the file.
+#
+# HOSTING NOTE: the site now deploys on Cloudflare Workers (wrangler.jsonc,
+# `npm run build`). The cPanel FTP deploy step below is LEGACY and only runs when
+# FTP_SERVER is set. Without it, the job uploads news.json as an artifact; commit
+# that file to the repo so the next Cloudflare build picks it up.
 # Runs on a schedule with no manual intervention. Stays dormant and harmless
 # until FB_ACCESS_TOKEN is added as a repository secret.
 
@@ -46,20 +51,20 @@ jobs:
           # MAX_FB_ITEMS: '30'
         run: node scripts/sync-facebook.js
 
-      - name: Deploy news.json to cPanel (FTPS)
+      - name: Deploy news.json to cPanel (FTPS) [legacy hosting]
         if: steps.sync.outputs.changed == 'true' && env.FTP_SERVER != ''
         run: |
           curl --fail --show-error --silent --ssl-reqd \
             -T data/news.json \
             "ftp://${FTP_SERVER}/${FTP_REMOTE_PATH}" \
             --user "${FTP_USERNAME}:${FTP_PASSWORD}"
-          echo "Deployed data/news.json to cPanel."
+          echo "Deployed data/news.json to legacy cPanel host."
 
       - name: No deploy target configured
         if: steps.sync.outputs.changed == 'true' && env.FTP_SERVER == ''
         run: |
           echo "news.json changed but no FTP_SERVER secret is set."
-          echo "Download the artifact below or configure FTP secrets to auto-deploy."
+          echo "Download the artifact below or commit it to the repo (Cloudflare Workers deploy), or configure the legacy FTP secrets."
 
       - name: Upload news.json artifact (fallback when no FTP configured)
         if: steps.sync.outputs.changed == 'true' && env.FTP_SERVER == ''

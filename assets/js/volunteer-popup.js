@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'bs-vol-popup-v1';
+  var STORAGE_KEY = 'bb-vol-popup-v1';
   var SHOW_DELAY_MS = 800;
   // Must be >= longest CSS exit duration (card: 220ms, overlay: 300ms)
   var EXIT_DURATION_MS = 340;

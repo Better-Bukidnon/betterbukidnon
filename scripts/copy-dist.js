@@ -12,6 +12,7 @@ const EXCLUDED = new Set([
   'dist',
   '.git',
   '.vscode',
+  '.claude',
   '.DS_Store',
   'react-app',
   'admin',

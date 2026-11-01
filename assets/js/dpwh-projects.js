@@ -14,64 +14,108 @@
   let currentFilter = 'all';
   let isLoading = false;
 
+  // The empty state (#dpwh-empty) is in the page markup and stays visible
+  // until the data file has at least one project.
+  function setEmptyState(isEmpty) {
+    const empty = document.getElementById('dpwh-empty');
+    const source = document.getElementById('dpwh-source');
+    if (empty) empty.hidden = !isEmpty;
+    if (source) source.hidden = isEmpty;
+  }
+
   async function loadDPWHProjects() {
     const container = document.getElementById('dpwh-projects-container');
     if (!container) return;
 
+    let data = null;
     try {
       const response = await fetch('../data/dpwh-projects.json');
-      const data = await response.json();
-      allProjects = data.projects;
-      filteredProjects = [...allProjects];
-      renderSection(container, data);
+      if (response.ok) data = await response.json();
     } catch (error) {
-      console.error('Failed to load DPWH projects:', error);
+      console.warn('Could not load DPWH projects:', error);
     }
+
+    const projects = Array.isArray(data && data.projects) ? data.projects : [];
+    allProjects = projects.filter((p) => p && p.name);
+    filteredProjects = [...allProjects];
+
+    if (allProjects.length === 0) {
+      container.innerHTML = '';
+      setEmptyState(true);
+      return;
+    }
+
+    setEmptyState(false);
+    renderSection(container);
+  }
+
+  function esc(value) {
+    if (value === null || value === undefined) return '';
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function toNumber(value) {
+    const num = Number(value);
+    return isFinite(num) ? num : 0;
   }
 
   function formatCurrency(amount) {
     return (
-      '₱' + amount.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+      '₱' +
+      toNumber(amount).toLocaleString('en-PH', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })
     );
   }
 
   function formatDate(dateStr) {
     if (!dateStr) return '—';
     const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return esc(dateStr);
     return date.toLocaleDateString('en-PH', { year: 'numeric', month: 'short', day: 'numeric' });
   }
 
   function truncateText(text, maxLength) {
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength).trim() + '…';
+    const str = String(text || '');
+    if (str.length <= maxLength) return str;
+    return str.substring(0, maxLength).trim() + '…';
   }
 
   function getCategoryClass(category) {
-    if (category.includes('Flood')) return 'flood';
-    if (category.includes('Road')) return 'roads';
-    if (category.includes('Water')) return 'water';
+    const c = String(category || '');
+    if (c.includes('Flood')) return 'flood';
+    if (c.includes('Road')) return 'roads';
+    if (c.includes('Water')) return 'water';
     return 'buildings';
   }
 
   function getCategoryLabel(category) {
-    if (category.includes('Flood')) return 'Flood Control';
-    if (category.includes('Road')) return 'Roads';
-    if (category.includes('Water')) return 'Water';
+    const c = String(category || '');
+    if (c.includes('Flood')) return 'Flood Control';
+    if (c.includes('Road')) return 'Roads';
+    if (c.includes('Water')) return 'Water';
     return 'Buildings';
   }
 
+  function isCompleted(project) {
+    return toNumber(project.status) >= 100;
+  }
+
   function getStatusBadge(status) {
-    if (status === 100) return '<span class="dpwh-badge complete">Completed</span>';
-    return `<span class="dpwh-badge ongoing">${status.toFixed(0)}%</span>`;
+    if (toNumber(status) >= 100) return '<span class="dpwh-badge complete">Completed</span>';
+    return `<span class="dpwh-badge ongoing">${toNumber(status).toFixed(0)}%</span>`;
   }
 
   function getCategoryCounts(projects) {
     const counts = { all: projects.length, buildings: 0, roads: 0, flood: 0, water: 0 };
     projects.forEach((p) => {
-      if (p.category.includes('Flood')) counts.flood++;
-      else if (p.category.includes('Road')) counts.roads++;
-      else if (p.category.includes('Water')) counts.water++;
-      else counts.buildings++;
+      counts[getCategoryClass(p.category)]++;
     });
     return counts;
   }
@@ -79,32 +123,24 @@
   function filterProjects(filter) {
     currentFilter = filter;
     if (filter === 'all') return [...allProjects];
-    return allProjects.filter((p) => {
-      if (filter === 'buildings')
-        return (
-          !p.category.includes('Flood') &&
-          !p.category.includes('Road') &&
-          !p.category.includes('Water')
-        );
-      if (filter === 'roads') return p.category.includes('Road');
-      if (filter === 'flood') return p.category.includes('Flood');
-      if (filter === 'water') return p.category.includes('Water');
-      return true;
-    });
+    return allProjects.filter((p) => getCategoryClass(p.category) === filter);
   }
 
-  function renderSection(container, data) {
+  function renderSection(container) {
     const counts = getCategoryCounts(allProjects);
-    const completedCount = allProjects.filter((p) => p.status === 100).length;
+    // Summary figures are computed from the records so they always match the table.
+    const totalProjects = allProjects.length;
+    const totalCost = allProjects.reduce((sum, p) => sum + toNumber(p.cost), 0);
+    const completedCount = allProjects.filter(isCompleted).length;
 
     const html = `
             <div class="dpwh-summary-bar">
                 <div class="dpwh-summary-item">
-                    <span class="dpwh-summary-value">${data.summary.totalProjects}</span>
+                    <span class="dpwh-summary-value">${totalProjects}</span>
                     <span class="dpwh-summary-label">Projects</span>
                 </div>
                 <div class="dpwh-summary-item">
-                    <span class="dpwh-summary-value">₱${(data.summary.totalCost / 1000000).toFixed(1)}M</span>
+                    <span class="dpwh-summary-value">₱${(totalCost / 1000000).toFixed(1)}M</span>
                     <span class="dpwh-summary-label">Total Investment</span>
                 </div>
                 <div class="dpwh-summary-item">
@@ -112,7 +148,7 @@
                     <span class="dpwh-summary-label">Completed</span>
                 </div>
                 <div class="dpwh-summary-item">
-                    <span class="dpwh-summary-value">${data.summary.totalProjects - completedCount}</span>
+                    <span class="dpwh-summary-value">${totalProjects - completedCount}</span>
                     <span class="dpwh-summary-label">Ongoing</span>
                 </div>
             </div>
@@ -160,15 +196,15 @@
                 <tr class="dpwh-row" tabindex="0">
                     <td class="col-desc">
                         <div class="dpwh-desc-wrap">
-                            <span class="dpwh-proj-id">${p.id}</span>
+                            <span class="dpwh-proj-id">${esc(p.id)}</span>
                             <span class="dpwh-cat-badge ${getCategoryClass(p.category)}">${getCategoryLabel(p.category)}</span>
                         </div>
-                        <span class="dpwh-proj-title" title="${p.name}">${truncateText(p.name, CONFIG.truncateLength)}</span>
-                        <span class="dpwh-proj-location"><i class="bi bi-geo-alt"></i>${p.location}</span>
+                        <span class="dpwh-proj-title" title="${esc(p.name)}">${esc(truncateText(p.name, CONFIG.truncateLength))}</span>
+                        <span class="dpwh-proj-location"><i class="bi bi-geo-alt"></i>${esc(p.location)}</span>
                     </td>
                     <td class="col-contractor">
-                        <span class="dpwh-contractor">${p.contractor}</span>
-                        <span class="dpwh-contractor-id">#${p.contractorId}</span>
+                        <span class="dpwh-contractor">${esc(p.contractor)}</span>
+                        ${p.contractorId ? `<span class="dpwh-contractor-id">#${esc(p.contractorId)}</span>` : ''}
                     </td>
                     <td class="col-cost">${formatCurrency(p.cost)}</td>
                     <td class="col-status">${getStatusBadge(p.status)}</td>

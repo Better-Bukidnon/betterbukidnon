@@ -1,7 +1,7 @@
 {
-  "name": "bs-web",
-  "version": "1.1.19",
-  "description": "BetterSolano.org - Official Portal for LGU Solano",
+  "name": "betterbukidnon-web",
+  "version": "2.0.0",
+  "description": "BetterBukidnon.org - volunteer civic portal for the Province of Bukidnon",
   "scripts": {
     "dev": "python3 -m http.server 8000",
     "build": "bash build.sh",
@@ -23,12 +23,21 @@
     "package:only": "bash scripts/package-cpanel.sh"
   },
   "keywords": [
-    "solano",
-    "nueva-vizcaya",
+    "bukidnon",
+    "northern-mindanao",
+    "province",
     "government",
     "lgu"
   ],
-  "author": "Ramon Logan Jr.",
+  "author": "BetterBukidnon contributors",
+  "contributors": [
+    "Ramon Logan Jr. (original BetterSolano template)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DMNCDLPRT/betterbukidnon.git"
+  },
+  "homepage": "https://betterbukidnon.org",
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.23.9",

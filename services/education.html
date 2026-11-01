@@ -1,65 +1,55 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8777S9SP9X"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      gtag('config', 'G-8777S9SP9X');
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Education services and scholarship programs in Solano, Nueva Vizcaya. Apply for educational assistance, scholarships, and student support from LGU Solano."
+      content="Education in Bukidnon: DepEd Division of Bukidnon, the Provincial School Board and Special Education Fund, Central Mindanao University and Bukidnon State University. A volunteer-run guide."
     />
-    <meta name="author" content="Ramon Logan Jr." />
+    <meta name="author" content="BetterBukidnon volunteers" />
     <meta
       name="keywords"
-      content="education Solano, scholarship programs, educational assistance, student support, LGU scholarship, Solano Nueva Vizcaya, education services, student aid"
+      content="Bukidnon education, scholarship, DepEd Bukidnon, Provincial School Board, Special Education Fund, CMU, BukSU"
     />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://bettersolano.org/services/education" />
+    <link rel="canonical" href="https://betterbukidnon.org/services/education" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://bettersolano.org/services/education" />
-    <meta property="og:title" content="Education & Scholarship Services | BetterSolano.org" />
+    <meta property="og:url" content="https://betterbukidnon.org/services/education" />
+    <meta property="og:title" content="Education & Scholarship Services | BetterBukidnon.org" />
     <meta
       property="og:description"
-      content="Education services and scholarship programs in Solano, Nueva Vizcaya. Apply for educational assistance, scholarships, and student support from LGU Solano."
+      content="Education in Bukidnon: DepEd Division of Bukidnon, the Provincial School Board and Special Education Fund, Central Mindanao University and Bukidnon State University. A volunteer-run guide."
     />
     <meta
       property="og:image"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:type" content="image/png" />
     <meta
       property="og:image:secure_url"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
     <meta property="og:locale" content="en_PH" />
-    <meta property="og:site_name" content="BetterSolano.org" />
+    <meta property="og:site_name" content="BetterBukidnon.org" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://bettersolano.org/services/education" />
-    <meta name="twitter:title" content="Education & Scholarship Services | BetterSolano.org" />
+    <meta name="twitter:url" content="https://betterbukidnon.org/services/education" />
+    <meta name="twitter:title" content="Education & Scholarship Services | BetterBukidnon.org" />
     <meta
       name="twitter:description"
-      content="Education services and scholarship programs in Solano, Nueva Vizcaya. Apply for educational assistance, scholarships, and student support from LGU Solano."
+      content="Education in Bukidnon: DepEd Division of Bukidnon, the Provincial School Board and Special Education Fund, Central Mindanao University and Bukidnon State University. A volunteer-run guide."
     />
     <meta
       name="twitter:image"
-      content="https://bettersolano.org/assets/images/banners/opengraph.png"
+      content="https://betterbukidnon.org/assets/images/banners/opengraph.png"
     />
-    <title>Education & Scholarship Services | BetterSolano.org</title>
+    <title>Education & Scholarship Services | BetterBukidnon.org</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/logo/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="../assets/images/logo/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -80,6 +70,106 @@
     <link rel="stylesheet" href="../assets/css/responsive.css" />
     <link rel="stylesheet" href="../assets/css/accessibility.css" />
     <link rel="stylesheet" href="../assets/css/footer.css" />
+
+    <style>
+      .bk-section-title {
+        font-size: 1.25rem;
+        margin: 0 0 4px;
+      }
+      .bk-section-intro {
+        color: var(--color-text-light);
+        margin: 0 0 var(--spacing-md, 16px);
+        max-width: 760px;
+      }
+      .bk-card {
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .bk-card h3 {
+        font-size: 1rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .bk-card h3 i {
+        color: var(--color-primary);
+      }
+      .bk-card p {
+        margin: 0;
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: var(--color-text);
+      }
+      .bk-card-link {
+        margin-top: auto;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+      .bk-card-link:hover {
+        text-decoration: underline;
+      }
+      .bk-contacts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .bk-contact {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
+        padding: 12px 16px;
+        text-decoration: none;
+        color: var(--color-text);
+        font-size: 0.875rem;
+      }
+      .bk-contact i {
+        color: var(--color-primary);
+        font-size: 1.125rem;
+      }
+      .bk-contact strong {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--color-text-light);
+        font-weight: 600;
+      }
+      .charter-note {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-left: 4px solid var(--color-primary);
+        border-radius: 8px;
+        padding: 14px 16px;
+        font-size: 0.8125rem;
+        line-height: 1.6;
+      }
+      .charter-note i {
+        color: var(--color-primary);
+        margin-top: 2px;
+      }
+      .charter-note p {
+        margin: 0;
+        font-size: inherit;
+        color: inherit;
+      }
+      .charter-note a {
+        color: var(--color-primary);
+        font-weight: 600;
+        text-decoration: underline;
+      }
+    </style>
   </head>
 
   <body>
@@ -92,29 +182,29 @@
       <div class="container">
         <div class="hotline-inner">
           <div class="hotline-items">
-            <a href="tel:09274008033" class="hotline-item">
-              <i class="bi bi-shield-fill"></i>
-              <span>Police: 0927 400 8033</span>
+            <a href="tel:911" class="hotline-item">
+              <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+              <span>Emergency: 911</span>
             </a>
-            <a href="tel:09162840885" class="hotline-item">
-              <i class="bi bi-heart-fill"></i>
-              <span>MSWDO: 0916 284 0885</span>
+            <a href="tel:+63888131262" class="hotline-item">
+              <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
+              <span>PDRRMD: (088) 813-1262</span>
             </a>
-            <a href="tel:09360620305" class="hotline-item">
-              <i class="bi bi-fire"></i>
-              <span>Fire: 0936 062 0305</span>
+            <a href="tel:+63888134263" class="hotline-item">
+              <i class="bi bi-shield-fill" aria-hidden="true"></i>
+              <span>Police: (088) 813-4263</span>
             </a>
-            <a href="tel:0906188086" class="hotline-item">
-              <i class="bi bi-building"></i>
-              <span>DILG: 0906 188 086</span>
+            <a href="tel:+63888135449" class="hotline-item">
+              <i class="bi bi-fire" aria-hidden="true"></i>
+              <span>Fire: (088) 813-5449</span>
             </a>
-            <a href="tel:09263833744" class="hotline-item">
-              <i class="bi bi-exclamation-triangle-fill"></i>
-              <span>MDRRMO: 0926 383 3744</span>
+            <a href="tel:+63888135631" class="hotline-item">
+              <i class="bi bi-heart-pulse-fill" aria-hidden="true"></i>
+              <span>PHO: (088) 813-5631</span>
             </a>
-            <a href="tel:09068195569" class="hotline-item">
-              <i class="bi bi-truck"></i>
-              <span>R2TMC: 0906 819 5569</span>
+            <a href="tel:+63888135734" class="hotline-item">
+              <i class="bi bi-heart-fill" aria-hidden="true"></i>
+              <span>PSWDO: (088) 813-5734</span>
             </a>
           </div>
         </div>
@@ -127,8 +217,8 @@
         <div class="logo-container">
           <a href="../"
             ><img
-              src="../assets/images/logo/better-solano-logo.svg"
-              alt="Municipality of Solano Logo"
+              src="../assets/images/logo/better-bukidnon-logo.svg"
+              alt="Province of Bukidnon Logo"
               class="logo-img"
           /></a>
         </div>
@@ -136,7 +226,14 @@
           <ul>
             <li><a href="../" data-i18n="nav-home">Home</a></li>
             <li class="has-dropdown">
-              <a href="./" class="active" data-i18n="nav-services" aria-haspopup="true" aria-expanded="false">Services</a>
+              <a
+                href="./"
+                class="active"
+                data-i18n="nav-services"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Services</a
+              >
               <ul class="dropdown-menu">
                 <li><a href="certificates" data-i18n="edu-certificates">Certificates</a></li>
                 <li><a href="business" data-i18n="edu-business">Business</a></li>
@@ -155,7 +252,13 @@
             <li><a href="../government/" data-i18n="nav-government">Government</a></li>
             <li><a href="../statistics/" data-i18n="nav-statistics">Statistics</a></li>
             <li class="has-dropdown">
-              <a href="../legislative/" data-i18n="nav-legislative" aria-haspopup="true" aria-expanded="false">Legislative</a>
+              <a
+                href="../legislative/"
+                data-i18n="nav-legislative"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Legislative</a
+              >
               <ul class="dropdown-menu">
                 <li>
                   <a href="../legislative/ordinance-framework" data-i18n="edu-ordinance-framework"
@@ -177,7 +280,7 @@
           <div class="lang-selector">
             <button class="btn btn-secondary btn-sm lang-btn" data-lang="en">EN</button>
             <button class="btn btn-secondary btn-sm lang-btn" data-lang="fil">FIL</button>
-            <button class="btn btn-secondary btn-sm lang-btn" data-lang="ilo">ILO</button>
+            <button class="btn btn-secondary btn-sm lang-btn" data-lang="ceb">CEB</button>
           </div>
         </div>
       </div>
@@ -193,9 +296,9 @@
               <span class="rate-display">1 USD = ₱ --</span>
             </span>
           </div>
-          <div class="info-bar-item info-bar-weather" aria-label="Current weather in Solano">
+          <div class="info-bar-item info-bar-weather" aria-label="Current weather in Bukidnon">
             <i class="bi bi-thermometer-half"></i>
-            <span class="weather-location">Solano</span>
+            <span class="weather-location">Malaybalay</span>
             <span class="weather-temp">--°C</span>
           </div>
           <div class="info-bar-item info-bar-datetime" aria-label="Philippine Date and Time">
@@ -215,7 +318,7 @@
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           <a href="../" data-i18n="edu-home">Home</a><span>/</span>
           <a href="./" data-i18n="edu-services">Services</a><span>/</span>
-          <span aria-current="page">Education</span>
+          <span aria-current="page" data-i18n="edu-bc">Education</span>
         </nav>
       </div>
       <section class="page-header">
@@ -223,357 +326,119 @@
           <div class="page-header-content">
             <span class="page-header-badge"
               ><i class="bi bi-mortarboard-fill"></i>
-              <span data-i18n="edu-page-badge">Education</span></span
+              <span data-i18n="edu-badge">Education</span></span
             >
-            <h1 data-i18n="edu-page-title">Education Services</h1>
-            <p class="page-header-desc" data-i18n="edu-page-desc">
-              Scholarship programs and educational assistance
+            <h1 data-i18n="edu-h1">Education Services</h1>
+            <p class="page-header-desc" data-i18n="edu-hdesc">
+              The Province's role in education, and who runs schools and scholarships in Bukidnon
             </p>
           </div>
         </div>
       </section>
       <section class="section">
         <div class="container">
+          <h2 class="bk-section-title" data-i18n="edu-x1">What the Province does</h2>
+          <p class="bk-section-intro" data-i18n="edu-x2">
+            Public schools are run by the national Department of Education. Provincial and city or
+            municipal governments support them in limited ways.
+          </p>
           <div class="grid grid-3">
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-award"></i>
-                <span data-i18n="edu-scholarship">Scholarship Programs</span>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-journal-bookmark" aria-hidden="true"></i>
+                <span data-i18n="edu-x3">Provincial School Board</span>
               </h3>
-              <p class="service-item-desc" data-i18n="edu-scholarship-desc">
-                Municipal scholarships for students
+              <p data-i18n="edu-x4">
+                Under the Local Government Code, the Provincial School Board decides how the
+                province uses its share of the Special Education Fund (SEF) for schools.
               </p>
-              <div class="service-item-meta">
-                <span
-                  ><strong data-i18n="label-fee">Fee:</strong>
-                  <span data-i18n="label-free">Free</span></span
-                >
-                <span><strong data-i18n="label-time">Time:</strong> Annual application</span>
-              </div>
             </div>
-            <div class="service-item-card">
-              <h3 class="service-item-title">
-                <i class="bi bi-book"></i>
-                <span data-i18n="edu-training">Educational Assistance</span>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-award" aria-hidden="true"></i>
+                <span data-i18n="edu-x6">Scholarships and student aid</span>
               </h3>
-              <p class="service-item-desc" data-i18n="edu-training-desc">
-                Financial aid for education
+              <p data-i18n="edu-x7">
+                The Province may offer scholarships or student assistance through its programs. Ask
+                the Provincial Governor's Office or the PSWDO for what is open now.
               </p>
-              <div class="service-item-meta">
-                <span
-                  ><strong data-i18n="label-fee">Fee:</strong>
-                  <span data-i18n="label-free">Free</span></span
-                >
-                <span><strong data-i18n="label-time">Time:</strong> Per semester</span>
-              </div>
+              <a class="bk-card-link" href="/service-details/pswdo"
+                ><span data-i18n="edu-x5">PSWDO</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
+            </div>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-cash-stack" aria-hidden="true"></i>
+                <span data-i18n="edu-x9">Provincial budget</span>
+              </h3>
+              <p data-i18n="edu-x10">Education support is part of the provincial budget.</p>
+              <a class="bk-card-link" href="/budget/"
+                ><span data-i18n="edu-x8">View the budget page</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
             </div>
           </div>
         </div>
       </section>
-
-      <!-- Education Statistics -->
-      <section class="section section-compact bg-alt">
+      <section class="section">
         <div class="container">
-          <div class="edu-stats-grid">
-            <div class="edu-stat-card">
-              <span class="edu-stat-num">22</span>
-              <span class="edu-stat-label" data-i18n="edu-primary-elementary"
-                >Primary & Elementary</span
-              >
+          <h2 class="bk-section-title" data-i18n="edu-x11">Who handles what</h2>
+          <p class="bk-section-intro" data-i18n="edu-x12">
+            Where to go depends on the school level.
+          </p>
+          <div class="grid grid-3">
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-backpack" aria-hidden="true"></i>
+                <span data-i18n="edu-x13">Public elementary and high schools</span>
+              </h3>
+              <p data-i18n="edu-x14">
+                Enrollment, records and school concerns go to your school and the DepEd Schools
+                Division Office of Bukidnon.
+              </p>
             </div>
-            <div class="edu-stat-card">
-              <span class="edu-stat-num">6</span>
-              <span class="edu-stat-label" data-i18n="edu-secondary-schools"
-                >Secondary Schools</span
-              >
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-building" aria-hidden="true"></i>
+                <span data-i18n="edu-x16">City and municipal governments</span>
+              </h3>
+              <p data-i18n="edu-x17">
+                They also receive a share of the Special Education Fund and may run local education
+                programs.
+              </p>
+              <a class="bk-card-link" href="/government/#lgus"
+                ><span data-i18n="edu-x15">Find your city or municipality</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i
+              ></a>
             </div>
-            <div class="edu-stat-card">
-              <span class="edu-stat-num">7</span>
-              <span class="edu-stat-label" data-i18n="edu-higher-education">Higher Education</span>
+            <div class="bk-card">
+              <h3>
+                <i class="bi bi-bank" aria-hidden="true"></i>
+                <span data-i18n="edu-x18">State universities</span>
+              </h3>
+              <p data-i18n="edu-x19">
+                Central Mindanao University (Musuan, Maramag) and Bukidnon State University
+                (Malaybalay City) handle their own admission and scholarships.
+              </p>
             </div>
           </div>
         </div>
       </section>
-
-      <!-- Schools Directory -->
       <section class="section section-compact">
         <div class="container">
-          <h2 class="section-title"><i class="bi bi-building"></i> Schools Directory</h2>
-
-          <!-- Primary and Elementary Schools -->
-          <div class="edu-category">
-            <button type="button" class="edu-category-header" aria-expanded="true">
-              <span
-                ><i class="bi bi-book"></i>
-                <span data-i18n="edu-primary-and-elementary-schools"
-                  >Primary and Elementary Schools</span
-                ></span
+          <div class="charter-note" role="note">
+            <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
+            <p>
+              <span data-i18n="edu-note"
+                >This page is a general guide written by volunteers. Requirements, fees and
+                processing times are set by each office and may vary, so confirm with the office
+                before you go. The official source is the</span
               >
-              <span class="edu-category-count" data-i18n="edu-22-schools">22 schools</span>
-            </button>
-            <div class="edu-category-content">
-              <div class="edu-school-grid">
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-aggub-elementary-school"
-                    >Aggub Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span
-                    class="edu-school-name"
-                    data-i18n="edu-aldersgate-college-elementary-department"
-                    >Aldersgate College - Elementary Department</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-bagahabag-elementary-school"
-                    >Bagahabag Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-bangaan-elementary-school"
-                    >Bangaan Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-bangar-elementary-school"
-                    >Bangar Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-bascaran-central-school"
-                    >Bascaran Central School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-calaoagan-elementary-school"
-                    >Calaoagan Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-concepcion-elementary-school"
-                    >Concepcion Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-curifang-elementary-school"
-                    >Curifang Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-dadap-elementary-school"
-                    >Dadap Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span
-                    class="edu-school-name"
-                    data-i18n="edu-isaiah-christian-academy-of-solano-inc"
-                    >Isaiah Christian Academy of Solano, Inc.</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-kids-workshop-learning-center"
-                    >Kids Workshop Learning Center</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-lactawan-elementary-school"
-                    >Lactawan Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-pilar-d-galima-elementary-school"
-                    >Pilar D. Galima Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span
-                    class="edu-school-name"
-                    data-i18n="edu-saint-louis-school-elementary-department"
-                    >Saint Louis School - Elementary Department</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-san-juan-elementary-school"
-                    >San Juan Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-san-luis-elementary-school"
-                    >San Luis Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-solano-east-central-school"
-                    >Solano East Central School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-solano-north-elementary-school"
-                    >Solano North Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-solano-south-central-school"
-                    >Solano South Central School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-solano-west-elementary-school"
-                    >Solano West Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-tucal-elementary-school"
-                    >Tucal Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-uddiawan-elementary-school"
-                    >Uddiawan Elementary School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-wacal-elementary-school"
-                    >Wacal Elementary School</span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Secondary Schools -->
-          <div class="edu-category">
-            <button type="button" class="edu-category-header" aria-expanded="false">
-              <span
-                ><i class="bi bi-bank"></i>
-                <span data-i18n="edu-secondary-schools">Secondary Schools</span></span
-              >
-              <span class="edu-category-count" data-i18n="edu-6-schools">6 schools</span>
-            </button>
-            <div class="edu-category-content" hidden>
-              <div class="edu-school-grid">
-                <div class="edu-school-item">
-                  <span
-                    class="edu-school-name"
-                    data-i18n="edu-aldersgate-college-high-school-department"
-                    >Aldersgate College - High School Department</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-bascaran-national-high-school"
-                    >Bascaran National High School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-dalton-high-school"
-                    >Dalton High School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-solano-high-school"
-                    >Solano High School</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span
-                    class="edu-school-name"
-                    data-i18n="edu-saint-louis-school-high-school-department"
-                    >Saint Louis School - High School Department</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-uddiawan-national-high-school"
-                    >Uddiawan National High School</span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Higher Educational Institutions -->
-          <div class="edu-category">
-            <button type="button" class="edu-category-header" aria-expanded="false">
-              <span
-                ><i class="bi bi-mortarboard-fill"></i>
-                <span data-i18n="edu-higher-educational-institutions"
-                  >Higher Educational Institutions</span
-                ></span
-              >
-              <span class="edu-category-count" data-i18n="edu-7-institutions">7 institutions</span>
-            </button>
-            <div class="edu-category-content" hidden>
-              <div class="edu-school-grid">
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-aldersgate-college"
-                    >Aldersgate College</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-cagayan-valley-maritime-studies"
-                    >Cagayan Valley Maritime Studies</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-fuzeko-polytechnic-college"
-                    >Fuzeko Polytechnic College</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-solano-institute-of-technology"
-                    >Solano Institute of Technology</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-nueva-vizcaya-caregiver-academy"
-                    >Nueva Vizcaya Caregiver Academy</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-nio-jesus-de-praga-learning"
-                    >Niño Jesus de Praga Learning</span
-                  >
-                </div>
-                <div class="edu-school-item">
-                  <span class="edu-school-name" data-i18n="edu-saint-louis-college-of-solano-inc"
-                    >Saint Louis College of Solano Inc</span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Abakada Education Tools CTA -->
-      <section class="section abakada-cta-section" aria-label="Free education tools from Abakada">
-        <div class="container">
-          <div class="abakada-cta-inner">
-            <img
-              src="../assets/images/logo/abakada-light.svg"
-              alt="Abakada.org logo"
-              class="abakada-cta-logo"
-              width="160"
-              height="40"
-              loading="lazy"
-            />
-            <p
-              class="abakada-cta-text"
-              data-i18n="edu-empowering-filipino-students-and-educators-with"
-            >
-              Empowering Filipino students and educators with 1,000+ free and open-source
-              productivity tools across 18 categories — from document processing and design to AI
-              and development.
+              <a href="https://bukidnon.gov.ph/" target="_blank" rel="noopener noreferrer"
+                ><span data-i18n="edu-note-link">Provincial Government of Bukidnon website</span></a
+              >.
             </p>
-            <a
-              href="https://abakada.org"
-              class="abakada-cta-btn"
-              target="_blank"
-              rel="noopener noreferrer"
-              ><i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
-              <span data-i18n="edu-free-tools-for-education">Free Tools for Education</span></a
-            >
           </div>
         </div>
       </section>
@@ -583,60 +448,41 @@
         <div class="footer-main-new">
           <div class="footer-brand">
             <img
-              src="../assets/images/logo/better-solano-logo-white.svg"
-              alt="Better Solano logo"
+              src="../assets/images/logo/better-bukidnon-logo-white.svg"
+              alt="Better Bukidnon logo"
               class="footer-logo"
             />
             <p
               class="footer-tagline"
-              data-i18n="edu-empowering-the-people-of-solano-with-transparent"
+              data-i18n="edu-empowering-the-people-of-bukidnon-with-transparent"
             >
-              Empowering the people of Solano with transparent access to the services, programs, and
-              public funds of LGU Solano.
+              Empowering the people of Bukidnon with transparent access to the services, programs,
+              and public funds of LGU Bukidnon.
             </p>
             <div class="footer-social-new">
               <a
-                href="https://www.facebook.com/bettersolano.org"
+                href="https://github.com/DMNCDLPRT/betterbukidnon"
                 class="footer-social-btn"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook"
-                ><i class="bi bi-facebook"></i
+                aria-label="GitHub"
+                ><i class="bi bi-github"></i
               ></a>
               <a
-                href="https://www.linkedin.com/company/bettersolano/"
+                href="mailto:volunteer@betterbukidnon.org"
                 class="footer-social-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                ><i class="bi bi-linkedin"></i
-              ></a>
-              <a
-                href="https://discord.com/invite/qeSu7RJkjQ"
-                class="footer-social-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Discord"
-                ><i class="bi bi-discord"></i
+                aria-label="Email the volunteers"
+                ><i class="bi bi-envelope-fill"></i
               ></a>
             </div>
           </div>
           <div class="footer-column">
             <h4 data-i18n="edu-quick-links">Quick Links</h4>
             <ul class="footer-links-new">
-              <li>
-                <a
-                  href="https://quiz.bettersolano.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-i18n="edu-solano-quiz"
-                  >Solano Quiz</a
-                >
-              </li>
               <li><a href="../sitemap/" data-i18n="edu-sitemap">Sitemap</a></li>
               <li>
                 <a
-                  href="https://solano.gov.ph/wp-content/uploads/2025/10/As-of-October-21-2025-2.pdf"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-i18n="edu-citizens-charter"
@@ -672,29 +518,29 @@
               </li>
               <li>
                 <a
-                  href="https://solano.gov.ph/"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="edu-official-lgu-solano-portal"
-                  >Official LGU Solano Portal</a
+                  data-i18n="edu-official-lgu-bukidnon-portal"
+                  >Official LGU Bukidnon Portal</a
                 >
               </li>
               <li>
                 <a
-                  href="https://sangguniangbayan.solano.gov.ph/"
+                  href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-i18n="edu-sangguniang-bayan"
-                  >Sangguniang Bayan</a
+                  >Sangguniang Panlalawigan</a
                 >
               </li>
               <li>
                 <a
-                  href="https://www.facebook.com/OfficialLguSolanoFanpage/"
+                  href="https://www.facebook.com/lgubukidnon"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="edu-lgu-solano-facebook"
-                  >LGU Solano Facebook</a
+                  data-i18n="edu-lgu-bukidnon-facebook"
+                  >LGU Bukidnon Facebook</a
                 >
               </li>
               <li>
@@ -717,16 +563,16 @@
             <div
               class="footer-cost"
               role="status"
-              aria-label="Cost to the People of Solano: Zero Pesos"
+              aria-label="Cost to the People of Bukidnon: Zero Pesos"
             >
-              Cost to the People of Solano = <span class="footer-cost-value">₱0</span>
+              Cost to the People of Bukidnon = <span class="footer-cost-value">₱0</span>
             </div>
-            <a href="mailto:volunteer@bettersolano.org" class="footer-contribute"
+            <a href="mailto:volunteer@betterbukidnon.org" class="footer-contribute"
               ><i class="bi bi-envelope-heart"></i>
               <span data-i18n="edu-volunteer-with-us">Volunteer with us</span></a
             >
             <a
-              href="https://github.com/BetterSolano/bettersolano"
+              href="https://github.com/DMNCDLPRT/betterbukidnon"
               class="footer-contribute"
               target="_blank"
               rel="noopener noreferrer"
@@ -734,32 +580,6 @@
               <span data-i18n="edu-contribute-code-with-us">Contribute code with us</span></a
             >
             <div class="footer-partners">
-              <a
-                href="https://abakada.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abakada.org"
-                ><img
-                  src="../assets/images/logo/abakada-footer.svg"
-                  alt="Abakada.org"
-                  class="footer-partner-logo"
-                  width="120"
-                  height="28"
-                  loading="lazy"
-              /></a>
-              <a
-                href="https://hivcareph.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="HIV Care Philippines"
-                ><img
-                  src="../assets/images/logo/hiv-care-logo-footer.svg"
-                  alt="HIV Care Philippines"
-                  class="footer-partner-logo"
-                  width="120"
-                  height="28"
-                  loading="lazy"
-              /></a>
               <a
                 href="https://bettergov.ph"
                 target="_blank"
@@ -778,12 +598,13 @@
         </div>
         <div class="footer-bottom-new">
           <div class="footer-copyright">
-            <span class="footer-copyright-text">&copy; 2026 BetterSolano.org</span>
+            <span class="footer-copyright-text">&copy; 2026 BetterBukidnon.org</span>
             <span class="footer-copyright-license">MIT | CC BY 4.0</span>
             <span class="footer-copyright-disclaimer"
-              >All public information sourced from official government portals.</span
+              >Volunteer civic project, not an official government website. Built on the
+              BetterSolano template (MIT).</span
             >
-            <span class="footer-version"><i class="bi bi-boxes"></i> Ver. 1.1.19</span>
+            <span class="footer-version"><i class="bi bi-boxes"></i> Ver. 2.0.0</span>
           </div>
         </div>
       </div>

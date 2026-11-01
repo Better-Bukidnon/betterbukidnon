@@ -1,6 +1,8 @@
 # Automated Facebook → News Sync
 
-Pulls the latest posts from the official LGU Solano Facebook Page, categorizes
+Pulls the latest posts from the Provincial Government of Bukidnon Facebook Page
+(<https://www.facebook.com/lgubukidnon>, marked **Verify** in
+[bukidnon-facts.md](bukidnon-facts.md)), categorizes
 them, and merges them into [`data/news.json`](../data/news.json) — which drives
 both the homepage **Latest Updates** and the **News** page. Runs on a schedule
 with no per-post manual work.
@@ -14,8 +16,8 @@ with no per-post manual work.
 Facebook only returns a page's posts to a caller holding a **Page access token**,
 and that token requires a **role on the page**. No code can bypass this.
 
-1. **Get an Editor role on the page.** Ask the LGU Solano page admin (via Meta
-   Business Suite → Settings → People) to add the BetterSolano account/app as an
+1. **Get an Editor role on the page.** Ask the Provincial Government of Bukidnon page admin (via Meta
+   Business Suite → Settings → People) to add the BetterBukidnon account/app as an
    **Editor**. Editor is enough for read access; full Admin is not required.
 2. **Create a Meta app** at developers.facebook.com → add the **Facebook Login**
    / **Pages** products, request `pages_read_engagement`.
@@ -41,11 +43,17 @@ In **GitHub → Settings → Secrets and variables → Actions**:
 | `FB_PAGE_ID`      | **Variable** | The page's numeric ID (public, safe as a variable) |
 | `FB_ACCESS_TOKEN` | **Secret**   | The Page / System User access token                |
 
-To auto-deploy the updated file to the live cPanel site, also add:
+> **Hosting note.** The site now deploys on Cloudflare Workers (`wrangler.jsonc`,
+> `npm run build`). The cPanel FTP deploy step in the workflow is **legacy**: it is
+> kept, but only runs when `FTP_SERVER` is set. On Cloudflare, commit the updated
+> `data/news.json` (download the `news-json` artifact the job uploads) and let the
+> normal build deploy it.
+
+Legacy only: to auto-deploy the updated file to an old cPanel host, also add:
 
 | Name              | Type         | Value                                               |
 | ----------------- | ------------ | --------------------------------------------------- |
-| `FTP_SERVER`      | Secret       | cPanel FTP host (e.g. `ftp.bettersolano.org`)       |
+| `FTP_SERVER`      | Secret       | cPanel FTP host (e.g. `ftp.betterbukidnon.org`)     |
 | `FTP_USERNAME`    | Secret       | FTP account username                                |
 | `FTP_PASSWORD`    | Secret       | FTP account password                                |
 | `FTP_REMOTE_PATH` | **Variable** | Path to the file, e.g. `public_html/data/news.json` |

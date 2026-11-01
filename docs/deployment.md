@@ -1,0 +1,75 @@
+# Deployment
+
+The site runs on **Cloudflare Workers** as static assets. There is no Worker script: Cloudflare
+serves the files in `dist/` directly. Configuration is in [`wrangler.jsonc`](../wrangler.jsonc).
+
+## Environments
+
+| Environment                                 | Branch         | Worker                             | Domain                                 |
+| ------------------------------------------- | -------------- | ---------------------------------- | -------------------------------------- |
+| Development (top level of `wrangler.jsonc`) | `develop`      | `betterbukidnon`                   | dev.betterbukidnon.org                 |
+| Production (`env.production`)               | `main`         | `betterbukidnon-production`        | betterbukidnon.org                     |
+| Previews                                    | other branches | `betterbukidnon` (preview version) | `*.workers.dev` preview URL, `noindex` |
+
+Asset settings shared by both environments:
+
+- `assets.directory: ./dist`
+- `html_handling: auto-trailing-slash`: `/services/health` serves `services/health.html`,
+  `/budget/` serves `budget/index.html`
+- `not_found_handling: 404-page`: unknown paths get `dist/404.html` with status 404
+
+Custom domains are declared in `routes` for each environment and applied on deploy. Do not
+add or remove them in the Cloudflare dashboard; change `wrangler.jsonc` instead. Production
+sets its own `routes` so it does not inherit `dev.betterbukidnon.org`.
+
+## Automatic deploys (Workers Builds)
+
+Each Worker is connected to this repository through Cloudflare Workers Builds and builds
+`dist/` with the project's build script before deploying:
+
+- `betterbukidnon` deploys `develop` with `npx wrangler deploy`
+- `betterbukidnon-production` deploys `main` with `npx wrangler deploy --env production`
+- For other branches, Workers Builds runs `npx wrangler preview`, which is why
+  `wrangler.jsonc` has a `previews` block and `preview_urls: true`
+
+The build and deploy commands themselves are stored in the Cloudflare dashboard (Workers &
+Pages → the Worker → Settings → Builds), not in this repository. Check there before changing
+the build script. A build command of `npm run build` bumps the patch version on every
+deploy; `bash build.sh --no-bump` does not.
+
+## Manual deploy
+
+```bash
+npm ci
+bash build.sh --no-bump
+npx wrangler login                      # once
+npx wrangler deploy                     # development → dev.betterbukidnon.org
+npx wrangler deploy --env production    # production  → betterbukidnon.org
+```
+
+## Before the first production launch
+
+- [ ] Confirm every **Verify** item in [bukidnon-facts.md](bukidnon-facts.md), especially
+      the hotline numbers in the hotline bar and the Provincial Government's Facebook page URL.
+- [ ] Regenerate `assets/images/banners/opengraph.png` from the finished homepage (a 1200×630
+      screenshot) if the homepage changed.
+- [ ] Set up email routing for `volunteer@betterbukidnon.org` (Cloudflare Email Routing on
+      the betterbukidnon.org zone). The address is used in the footer, the volunteer popup
+      and the legal pages.
+- [ ] Decide on analytics. None is installed. Cloudflare Web Analytics can be turned on for
+      the Worker without code changes; update `privacy/index.html` if you do.
+- [ ] Run Lighthouse on the dev site and keep accessibility at 90 or more.
+
+## Legacy: cPanel
+
+The template originally deployed to cPanel/Apache. These files remain for anyone hosting on
+Apache:
+
+- `.htaccess`: clean URLs, security headers, Content-Security-Policy, caching
+- `scripts/package-cpanel.sh` (`npm run package`): packs `dist/` into an archive to extract
+  in `public_html/`
+- `serve.py`: local server that mimics the `.htaccess` clean URLs
+
+Cloudflare does not read `.htaccess`. If you need security headers on Cloudflare, add a
+`_headers` file to `dist/` (supported by Workers static assets) or configure them in the
+dashboard.

@@ -1,0 +1,71 @@
+# Getting Started
+
+## Requirements
+
+- Node.js 20 or newer (the build uses `npx`, Babel, Terser, clean-css and html-minifier)
+- Python 3 (local web server)
+- Git
+- Optional: [Wrangler](https://developers.cloudflare.com/workers/wrangler/) for deploying
+  (`npx wrangler` works without a global install)
+
+## Run the site locally
+
+```bash
+git clone https://github.com/DMNCDLPRT/betterbukidnon.git
+cd betterbukidnon
+npm install
+npm run dev            # http://localhost:8000
+```
+
+`npm run dev` serves the source files as they are, with no build step. Pages link to each
+other with clean URLs (`/services/health`, not `/services/health.html`). Python's built-in
+server doesn't resolve those, so for clicking around use the clean-URL server instead:
+
+```bash
+python3 serve.py -d .  # source files on http://localhost:8888, resolves /page to /page.html
+python3 serve.py       # same for the built dist/ folder
+```
+
+## Build for production
+
+```bash
+npm run build          # bumps the patch version, then builds dist/
+bash build.sh --no-bump
+bash build.sh --no-react   # skip the Next.js build (faster)
+npm run serve:dist     # preview dist/ on http://localhost:8080
+```
+
+`build.sh` copies the site into `dist/` (leaving out development files such as `docs/`,
+`scripts/`, `tests/`, `admin/` and `react-app/`), builds the React app and merges its
+`/services/health` page, then minifies HTML, CSS and JavaScript. See
+[architecture.md](architecture.md#build-pipeline) for the details.
+
+## Tests and checks
+
+```bash
+npm run format:check   # Prettier
+npm test               # Playwright (volunteer popup specs); needs browsers:
+npx playwright install
+npm run lighthouse     # Lighthouse CI against a running dist/ server
+```
+
+GitHub Actions runs Lighthouse CI on pushes and pull requests to `main`
+(`.github/workflows/lighthouse.yml`). Accessibility must score 90 or more.
+
+## Branches
+
+| Branch           | Purpose                            | Deploys to                                              |
+| ---------------- | ---------------------------------- | ------------------------------------------------------- |
+| `main`           | Production                         | betterbukidnon.org (Worker `betterbukidnon-production`) |
+| `develop`        | Integration                        | dev.betterbukidnon.org (Worker `betterbukidnon`)        |
+| feature branches | Your work; open PRs into `develop` | preview URL on `*.workers.dev`                          |
+
+See [deployment.md](deployment.md).
+
+## Your first change
+
+1. Read [content-guide.md](content-guide.md) for where the text you want to change lives.
+2. Remember that most visible text is also in `assets/js/translations.js`. Changing only the
+   HTML is not enough (see [translations.md](translations.md)).
+3. Run the site, check the page in English, Filipino and Cebuano, and check it at phone width.
+4. Open a pull request into `develop`.

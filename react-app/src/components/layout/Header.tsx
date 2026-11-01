@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -121,13 +120,13 @@ export default function Header() {
     <header className="site-header">
       <div className="container header-inner">
         <div className="logo-container">
-          <Link href="/">
+          <a href="/">
             <img
-              src="/assets/images/logo/better-solano-logo.svg"
-              alt="Better Solano Logo"
+              src="/assets/images/logo/better-bukidnon-logo.svg"
+              alt="Better Bukidnon Logo"
               className="logo-img"
             />
-          </Link>
+          </a>
         </div>
 
         <nav
@@ -137,85 +136,83 @@ export default function Header() {
         >
           <ul>
             <li>
-              <Link href="/" className={pathname === '/' ? 'active' : ''}>
+              <a href="/" className={pathname === '/' ? 'active' : ''}>
                 {t('nav-home')}
-              </Link>
+              </a>
             </li>
             <li className={`has-dropdown ${openDropdown === 0 ? 'dropdown-open' : ''}`}>
-              <Link
+              <a
                 href="/services"
                 aria-haspopup="true"
                 aria-expanded={openDropdown === 0 ? 'true' : 'false'}
                 onClick={(e) => toggleDropdown(0, e)}
               >
                 {t('nav-services')}
-              </Link>
+              </a>
               <ul className="dropdown-menu">
                 <li>
-                  <Link href="/services/certificates">{t('dropdown-certificates')}</Link>
+                  <a href="/services/certificates">{t('dropdown-certificates')}</a>
                 </li>
                 <li>
-                  <Link href="/services/business">{t('dropdown-business')}</Link>
+                  <a href="/services/business">{t('dropdown-business')}</a>
                 </li>
                 <li>
-                  <Link href="/services/tax-payments">{t('dropdown-tax-payments')}</Link>
+                  <a href="/services/tax-payments">{t('dropdown-tax-payments')}</a>
                 </li>
                 <li>
-                  <Link href="/services/social-services">{t('dropdown-social-services')}</Link>
+                  <a href="/services/social-services">{t('dropdown-social-services')}</a>
                 </li>
                 <li>
-                  <Link href="/services/health">{t('dropdown-health')}</Link>
+                  <a href="/services/health">{t('dropdown-health')}</a>
                 </li>
                 <li>
-                  <Link href="/services/agriculture">{t('dropdown-agriculture')}</Link>
+                  <a href="/services/agriculture">{t('dropdown-agriculture')}</a>
                 </li>
                 <li>
-                  <Link href="/services/infrastructure">{t('dropdown-infrastructure')}</Link>
+                  <a href="/services/infrastructure">{t('dropdown-infrastructure')}</a>
                 </li>
                 <li>
-                  <Link href="/services/education">{t('dropdown-education')}</Link>
+                  <a href="/services/education">{t('dropdown-education')}</a>
                 </li>
                 <li>
-                  <Link href="/services/public-safety">{t('dropdown-public-safety')}</Link>
+                  <a href="/services/public-safety">{t('dropdown-public-safety')}</a>
                 </li>
                 <li>
-                  <Link href="/services/environment">{t('dropdown-environment')}</Link>
+                  <a href="/services/environment">{t('dropdown-environment')}</a>
                 </li>
               </ul>
             </li>
             <li>
-              <Link href="/government">{t('nav-government')}</Link>
+              <a href="/government">{t('nav-government')}</a>
             </li>
             <li>
-              <Link href="/statistics">{t('nav-statistics')}</Link>
+              <a href="/statistics">{t('nav-statistics')}</a>
             </li>
             <li className={`has-dropdown ${openDropdown === 1 ? 'dropdown-open' : ''}`}>
-              <Link
+              <a
                 href="/legislative"
                 aria-haspopup="true"
                 aria-expanded={openDropdown === 1 ? 'true' : 'false'}
                 onClick={(e) => toggleDropdown(1, e)}
               >
                 {t('nav-legislative')}
-              </Link>
+              </a>
               <ul className="dropdown-menu">
                 <li>
-                  <Link href="/legislative/ordinance-framework">
-                    {t('dropdown-ordinance-framework')}
-                  </Link>
+                  <a href="/legislative/ordinance-framework">{t('dropdown-ordinance-framework')}</a>
                 </li>
                 <li>
-                  <Link href="/legislative/resolution-framework">
+                  <a href="/legislative/resolution-framework">
                     {t('dropdown-resolution-framework')}
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </li>
             <li>
-              <Link href="/budget">{t('nav-transparency')}</Link>
+              <a href="/budget">{t('nav-transparency')}</a>
             </li>
             <li>
-              <Link href="/contact">{t('nav-contact')}</Link>
+              <a href="/contact">{t('nav-contact')}</a>
             </li>
           </ul>
         </nav>
@@ -240,11 +237,11 @@ export default function Header() {
             </button>
             <button
               type="button"
-              className={`btn btn-secondary btn-sm lang-btn ${language === 'ilo' ? 'active' : ''}`}
-              onClick={() => setLanguage('ilo')}
-              aria-label="Switch to Ilocano"
+              className={`btn btn-secondary btn-sm lang-btn ${language === 'ceb' ? 'active' : ''}`}
+              onClick={() => setLanguage('ceb')}
+              aria-label="Switch to Cebuano (Binisaya)"
             >
-              ILO
+              CEB
             </button>
           </div>
         </div>
