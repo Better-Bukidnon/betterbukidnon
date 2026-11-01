@@ -33,6 +33,8 @@ const EXCLUDED = new Set([
   '.prettierignore',
   '.editorconfig',
   'release',
+  'wrangler.jsonc',
+  '.wrangler',
 ]);
 
 const EXCLUDED_EXT = new Set(['.backup', '.md', '.zip', '.log']);

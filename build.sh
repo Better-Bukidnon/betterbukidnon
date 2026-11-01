@@ -91,6 +91,8 @@ if command -v rsync &>/dev/null; then
         --exclude='.env' \
         --exclude='.env.*' \
         --exclude='release' \
+        --exclude='wrangler.jsonc' \
+        --exclude='.wrangler' \
         --exclude='*.zip' \
         --exclude='*.tar.gz' \
         --exclude='*.log' \
