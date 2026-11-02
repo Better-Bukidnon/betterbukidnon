@@ -8,6 +8,13 @@ function isMobileNav(): boolean {
   return typeof window !== 'undefined' && window.matchMedia('(max-width: 1024px)').matches;
 }
 
+// Keep in sync with initLanguageMenu in assets/js/main.js
+const LANGUAGE_OPTIONS = [
+  { code: 'en', name: 'English' },
+  { code: 'fil', name: 'Filipino' },
+  { code: 'ceb', name: 'Cebuano (Binisaya)' },
+] as const;
+
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
@@ -15,6 +22,12 @@ export default function Header() {
   const { language, setLanguage, t } = useLanguage();
   const navRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const [langOpen, setLangOpen] = useState(false);
+  const langMenuRef = useRef<HTMLDivElement>(null);
+  const langToggleRef = useRef<HTMLButtonElement>(null);
+  const langOptionRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const currentLanguage =
+    LANGUAGE_OPTIONS.find((option) => option.code === language) ?? LANGUAGE_OPTIONS[0];
 
   const scrollYRef = useRef(0);
   const isAnimatingRef = useRef(false);
@@ -95,6 +108,40 @@ export default function Header() {
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
   }, [mobileMenuOpen, closeMenu]);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (langMenuRef.current && !langMenuRef.current.contains(e.target as Node)) {
+        setLangOpen(false);
+      }
+    }
+
+    if (langOpen) {
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+    }
+  }, [langOpen]);
+
+  const handleLangKeyDown = (e: React.KeyboardEvent) => {
+    const options = langOptionRefs.current;
+    const index = options.indexOf(document.activeElement as HTMLButtonElement);
+    if (e.key === 'Escape' && langOpen) {
+      e.stopPropagation();
+      setLangOpen(false);
+      langToggleRef.current?.focus();
+    } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      setLangOpen(true);
+      const step = e.key === 'ArrowDown' ? 1 : -1;
+      const start =
+        index === -1
+          ? LANGUAGE_OPTIONS.findIndex((option) => option.code === language)
+          : index + step;
+      const next = (start + options.length) % options.length;
+      // Wait for the list to render
+      requestAnimationFrame(() => options[next]?.focus());
+    }
+  };
 
   // Close mobile menu on resize to desktop (debounced)
   useEffect(() => {
@@ -218,31 +265,51 @@ export default function Header() {
         </nav>
 
         <div className="header-actions">
-          <div className="lang-selector">
+          <div
+            ref={langMenuRef}
+            className={`lang-selector lang-menu ${langOpen ? 'open' : ''}`}
+            onKeyDown={handleLangKeyDown}
+            onBlur={(e) => {
+              if (e.relatedTarget && !e.currentTarget.contains(e.relatedTarget as Node)) {
+                setLangOpen(false);
+              }
+            }}
+          >
             <button
+              ref={langToggleRef}
               type="button"
-              className={`btn btn-secondary btn-sm lang-btn ${language === 'en' ? 'active' : ''}`}
-              onClick={() => setLanguage('en')}
-              aria-label="Switch to English"
+              className="lang-toggle"
+              aria-expanded={langOpen}
+              aria-controls="lang-menu-list"
+              onClick={() => setLangOpen((prev) => !prev)}
             >
-              EN
+              <i className="bi bi-globe2" aria-hidden="true"></i>
+              <span className="lang-toggle-code">{currentLanguage.code.toUpperCase()}</span>
+              <span className="sr-only">, Language: {currentLanguage.name}</span>
+              <i className="bi bi-chevron-down lang-toggle-caret" aria-hidden="true"></i>
             </button>
-            <button
-              type="button"
-              className={`btn btn-secondary btn-sm lang-btn ${language === 'fil' ? 'active' : ''}`}
-              onClick={() => setLanguage('fil')}
-              aria-label="Switch to Filipino"
-            >
-              FIL
-            </button>
-            <button
-              type="button"
-              className={`btn btn-secondary btn-sm lang-btn ${language === 'ceb' ? 'active' : ''}`}
-              onClick={() => setLanguage('ceb')}
-              aria-label="Switch to Cebuano (Binisaya)"
-            >
-              CEB
-            </button>
+            <div id="lang-menu-list" className="lang-menu-list" hidden={!langOpen}>
+              {LANGUAGE_OPTIONS.map((option, i) => (
+                <button
+                  key={option.code}
+                  ref={(el) => {
+                    langOptionRefs.current[i] = el;
+                  }}
+                  type="button"
+                  lang={option.code}
+                  className={`lang-btn ${language === option.code ? 'active' : ''}`}
+                  aria-pressed={language === option.code}
+                  onClick={() => {
+                    setLanguage(option.code);
+                    setLangOpen(false);
+                    langToggleRef.current?.focus();
+                  }}
+                >
+                  <i className="bi bi-check2 lang-btn-check" aria-hidden="true"></i>
+                  <span>{option.name}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
