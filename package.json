@@ -16,6 +16,7 @@
     "test": "playwright test",
     "test:chrome": "playwright test --project=chrome",
     "test:report": "playwright show-report",
+    "screenshots:mobile": "node scripts/mobile-screenshots.mjs",
     "lighthouse": "lhci autorun",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
