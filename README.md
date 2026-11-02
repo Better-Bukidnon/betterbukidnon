@@ -34,7 +34,7 @@ official site is [bukidnon.gov.ph](https://bukidnon.gov.ph/).
 ## Quick start
 
 ```bash
-git clone https://github.com/DMNCDLPRT/betterbukidnon.git
+git clone https://github.com/Better-Bukidnon/betterbukidnon.git
 cd betterbukidnon
 npm install
 npm run dev            # http://localhost:8000
@@ -105,4 +105,4 @@ See [LICENSE](LICENSE).
 ## Contact
 
 - Email: volunteer@betterbukidnon.org
-- GitHub: [DMNCDLPRT/betterbukidnon](https://github.com/DMNCDLPRT/betterbukidnon)
+- GitHub: [Better-Bukidnon/betterbukidnon](https://github.com/Better-Bukidnon/betterbukidnon)
