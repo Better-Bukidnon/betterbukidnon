@@ -30,7 +30,7 @@ export default function Footer() {
             <p className="footer-tagline">{t('footer-tagline')}</p>
             <div className="footer-social-new">
               <a
-                href="https://github.com/DMNCDLPRT/betterbukidnon"
+                href="https://github.com/Better-Bukidnon/betterbukidnon"
                 className="footer-social-btn"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -130,7 +130,7 @@ export default function Footer() {
               <i className="bi bi-envelope-heart"></i> {t('footer-volunteer')}
             </a>
             <a
-              href="https://github.com/DMNCDLPRT/betterbukidnon"
+              href="https://github.com/Better-Bukidnon/betterbukidnon"
               className="footer-contribute"
               target="_blank"
               rel="noopener noreferrer"

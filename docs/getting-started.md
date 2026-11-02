@@ -11,7 +11,7 @@
 ## Run the site locally
 
 ```bash
-git clone https://github.com/DMNCDLPRT/betterbukidnon.git
+git clone https://github.com/Better-Bukidnon/betterbukidnon.git
 cd betterbukidnon
 npm install
 npm run dev            # http://localhost:8000
