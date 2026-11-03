@@ -17,6 +17,7 @@ time. Cloudflare Workers serves the built files as static assets.
 ├── legislative/               Sangguniang Panlalawigan + ordinance/resolution process pages
 ├── budget/                    Transparency: budget, SRE, DPWH projects
 ├── news/                      Curated updates (data/news.json)
+├── projects/                  Our Projects page (cards from data/projects.json)
 ├── contact/ faq/ terms/ privacy/ accessibility/ sitemap/
 ├── 403.html 404.html 500.html offline.html
 ├── assets/
@@ -74,6 +75,7 @@ All scripts are plain browser JavaScript loaded with `defer`. No bundler.
 | `news.js`                                                     | home, news     | Renders `data/news.json`                                                                                                  |
 | `fb-feed.js`                                                  | home           | Facebook page feed embed helpers                                                                                          |
 | `volunteer-popup.js`                                          | home           | Volunteer recruitment dialog                                                                                              |
+| `projects.js`                                                 | projects       | Renders `data/projects.json`: status tabs with counts, search, repo/category filters, card grid, View Details dialog      |
 | `officials.js`                                                | government     | Renders `data/officials.json`                                                                                             |
 | `statistics-new.js`                                           | statistics     | Charts (Chart.js) and animated counters from `data/demographics.json`                                                     |
 | `ordinances.js`, `resolutions.js`                             | legislative    | Render `data/ordinances.json`, `data/resolutions.json`                                                                    |
@@ -92,6 +94,7 @@ All scripts are plain browser JavaScript loaded with `defer`. No bundler.
 | `data/ordinances.json`, `data/resolutions.json` | Sangguniang Panlalawigan records                                    | Empty                           |
 | `data/fiscal_transparency.json`                 | Budget and SRE                                                      | Empty                           |
 | `data/dpwh-projects.json`                       | DPWH projects in Bukidnon                                           | Empty                           |
+| `data/projects.json`                            | Projects shown on the Our Projects page and nav dropdown            | Filled                          |
 | `data/news.json`                                | Curated news items                                                  | Empty until curated             |
 
 Pages must keep working when a data file is empty: they show an empty state that links to

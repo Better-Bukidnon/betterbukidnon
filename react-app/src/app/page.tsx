@@ -691,7 +691,7 @@ export default function HomePage() {
               <p className="quiz-cta-subtitle">{t('volunteer-subtitle')}</p>
               <p className="quiz-cta-description">{t('volunteer-description')}</p>
               <a
-                href="https://github.com/DMNCDLPRT/betterbukidnon"
+                href="https://github.com/Better-Bukidnon/betterbukidnon"
                 className="quiz-cta-btn"
                 target="_blank"
                 rel="noopener noreferrer"

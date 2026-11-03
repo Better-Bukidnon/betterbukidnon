@@ -101,7 +101,8 @@ require('vm').runInNewContext(head + ';this.t = translations;', ctx);
    headings; everything else falls back to English.
 2. In `TranslationEngine`, add the code to `supportedLangs`, `langNames` and `langCodes`, and
    to `detectBrowserLanguage` if browsers report it.
-3. Add a language button next to EN / FIL / CEB in the header of every page and in
-   `react-app/src/components/layout/Header.tsx`, plus a `hreflang` link in each page's
-   `<head>`.
+3. Add a `.lang-btn` button for it in the `.lang-selector` of every page's header, and its
+   name to `names` in `initLanguageMenu` (`assets/js/main.js`), which turns those buttons
+   into the globe language menu. In `react-app/src/components/layout/Header.tsx`, add it to
+   `LANGUAGE_OPTIONS`. Also add a `hreflang` link in each page's `<head>`.
 4. Add the language to `react-app/src/contexts/LanguageContext.tsx`.

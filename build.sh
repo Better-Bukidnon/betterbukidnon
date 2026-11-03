@@ -86,6 +86,7 @@ if command -v rsync &>/dev/null; then
         --exclude='playwright.config.js' \
         --exclude='playwright-report' \
         --exclude='test-results' \
+        --exclude='screenshots' \
         --exclude='.prettierrc' \
         --exclude='.prettierignore' \
         --exclude='.editorconfig' \
