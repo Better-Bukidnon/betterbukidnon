@@ -16,6 +16,15 @@ const entries: Record<string, [string, string, string]> = {
   'nav-legislative': ['Legislative', 'Lehislatura', 'Lehislatura'],
   'nav-transparency': ['Transparency', 'Transparensiya', 'Transparensya'],
   'nav-contact': ['Contact', 'Makipag-ugnayan', 'Kontaka'],
+  'nav-projects': ['Our Projects', 'Mga Proyekto Namin', 'Among mga Proyekto'],
+  'nav-projects-budget': ['Budget Tracker', 'Budget Tracker', 'Budget Tracker'],
+  'nav-projects-saln': ['SALN Tracker', 'SALN Tracker', 'SALN Tracker'],
+  'nav-projects-all': ['All Projects', 'Lahat ng Proyekto', 'Tanang Proyekto'],
+  'nav-opens-new-tab': [
+    '(opens in a new tab)',
+    '(magbubukas sa bagong tab)',
+    '(mo-abli sa bag-ong tab)',
+  ],
 
   // Services dropdown
   'dropdown-certificates': ['Certificates', 'Mga Sertipiko', 'Mga Sertipiko'],
