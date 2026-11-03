@@ -3,7 +3,7 @@
  * Enterprise-grade PWA with versioned caching, runtime strategies, and offline resilience.
  */
 
-var CACHE_VERSION = 'v7';
+var CACHE_VERSION = 'v8';
 var STATIC_CACHE = 'betterbukidnon-static-' + CACHE_VERSION;
 var RUNTIME_CACHE = 'betterbukidnon-runtime-' + CACHE_VERSION;
 var OFFLINE_URL = '/offline.html';
@@ -12,6 +12,10 @@ var OFFLINE_URL = '/offline.html';
 var PRECACHE_URLS = [
   '/',
   '/offline.html',
+  '/projects/',
+  '/data/projects.json',
+  '/assets/css/projects.css',
+  '/assets/js/projects.js',
   '/assets/css/style.css',
   '/assets/css/responsive.css',
   '/assets/css/footer.css',

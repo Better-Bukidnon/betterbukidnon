@@ -15,6 +15,12 @@ const LANGUAGE_OPTIONS = [
   { code: 'ceb', name: 'Cebuano (Binisaya)' },
 ] as const;
 
+// Keep in sync with the "Our Projects" dropdown in the static pages and data/projects.json
+const EXTERNAL_PROJECTS = [
+  { href: 'https://budget.betterbukidnon.org', labelKey: 'nav-projects-budget' },
+  { href: 'https://saln.betterbukidnon.org', labelKey: 'nav-projects-saln' },
+] as const;
+
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
@@ -257,6 +263,29 @@ export default function Header() {
             </li>
             <li>
               <a href="/budget">{t('nav-transparency')}</a>
+            </li>
+            <li className={`has-dropdown ${openDropdown === 2 ? 'dropdown-open' : ''}`}>
+              <a
+                href="/projects"
+                aria-haspopup="true"
+                aria-expanded={openDropdown === 2 ? 'true' : 'false'}
+                onClick={(e) => toggleDropdown(2, e)}
+              >
+                {t('nav-projects')}
+              </a>
+              <ul className="dropdown-menu">
+                {EXTERNAL_PROJECTS.map((project) => (
+                  <li key={project.href}>
+                    <a href={project.href} target="_blank" rel="noopener noreferrer">
+                      <span>{t(project.labelKey)}</span>{' '}
+                      <span className="sr-only">{t('nav-opens-new-tab')}</span>
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <a href="/projects">{t('nav-projects-all')}</a>
+                </li>
+              </ul>
             </li>
             <li>
               <a href="/contact">{t('nav-contact')}</a>
