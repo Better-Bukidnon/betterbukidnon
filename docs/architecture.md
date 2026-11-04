@@ -153,6 +153,12 @@ copies only `out/_next/` and `out/services/health.html` into `dist/`, so in prod
 **not** generated from `scripts/chrome/`: when you change shared chrome (nav items, hotlines,
 footer links, languages), change `Header.tsx`, `HotlineBar.tsx`, `Footer.tsx` and
 `LanguageContext.tsx` by hand as well.
+`npm run chrome:check` compares the links in `scripts/chrome/header.html` with the ones in
+`Header.tsx` and fails if either has a link the other lacks. It does not compare labels or
+translations.
+`npm run chrome:check` compares the links in `scripts/chrome/header.html` with the ones in
+`Header.tsx` and fails if either has a link the other lacks. It does not compare labels or
+translations.
 
 ## Build pipeline
 

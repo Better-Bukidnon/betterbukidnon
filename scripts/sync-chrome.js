@@ -111,6 +111,37 @@ function render(template, ctx, options, rel, name) {
   });
 }
 
+/**
+ * The React app has its own header (react-app/src/components/layout/Header.tsx). It is not
+ * generated, so compare the links of both and report any that exist in only one of them.
+ */
+function reactHeaderDrift(templates) {
+  const normalize = (href) => {
+    if (/^https?:/.test(href)) return href;
+    const clean = href.replace(/^\{\{(?:root|home)\}\}/, '/').replace(/^\/+/, '/');
+    return clean.length > 1 ? clean.replace(/\/$/, '') : clean;
+  };
+  const collect = (text, pattern) =>
+    new Set(
+      Array.from(text.matchAll(pattern), (m) => m[1])
+        .filter((href) => !href.startsWith('#'))
+        .map(normalize)
+    );
+  const tsx = fs.readFileSync(
+    path.join(ROOT, 'react-app', 'src', 'components', 'layout', 'Header.tsx'),
+    'utf8'
+  );
+  const inTemplate = collect(templates.header, /href="([^"]+)"/g);
+  const inReact = collect(tsx, /href(?:=|:\s*)['"]([^'"]+)['"]/g);
+  const problems = [];
+  for (const href of inTemplate)
+    if (!inReact.has(href)) problems.push(`Header.tsx is missing the link ${href}`);
+  for (const href of inReact)
+    if (!inTemplate.has(href))
+      problems.push(`scripts/chrome/header.html is missing the link ${href}`);
+  return problems;
+}
+
 async function main() {
   const check = process.argv.includes('--check');
   const prettier = require('prettier');
@@ -121,7 +152,7 @@ async function main() {
   );
 
   const stale = [];
-  const problems = [];
+  const problems = reactHeaderDrift(templates);
   const pages = findPages(ROOT, []).sort();
 
   for (const file of pages) {
