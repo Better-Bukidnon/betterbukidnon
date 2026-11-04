@@ -4,6 +4,7 @@ const { test, expect } = require('@playwright/test');
 const EXTERNAL = [
   { name: 'Budget Tracker', href: 'https://budget.betterbukidnon.org' },
   { name: 'SALN Tracker', href: 'https://saln.betterbukidnon.org' },
+  { name: 'Infrastructure Tracker', href: 'https://infra.betterbukidnon.org' },
 ];
 
 /** The "Our Projects" nav item (the dropdown trigger link). */
@@ -35,9 +36,7 @@ test.describe('Our Projects nav item', () => {
     });
   }
 
-  test('dropdown lists both external projects and the Our Projects page', async ({
-    page,
-  }, info) => {
+  test('dropdown lists the external projects and the Our Projects page', async ({ page }, info) => {
     test.skip(info.project.name.startsWith('mobile'), 'desktop hover behaviour');
     await page.goto('/index.html');
     await trigger(page).hover();
@@ -94,11 +93,15 @@ test.describe('Our Projects page', () => {
     page.locator('.projects-tab-count').evaluateAll((els) => els.map((e) => e.textContent));
   const titles = (page) => page.locator('#projects-grid .project-card-title').allTextContents();
 
-  test('shows both projects under Active with tab counts', async ({ page }) => {
+  test('shows all projects under Active with tab counts', async ({ page }) => {
     await page.goto('/projects/');
-    await expect(page.locator('#projects-grid .project-card')).toHaveCount(2);
-    expect(await counts(page)).toEqual(['2', '0', '0']);
-    expect((await titles(page)).sort()).toEqual(['Budget Tracker', 'SALN Tracker']);
+    await expect(page.locator('#projects-grid .project-card')).toHaveCount(3);
+    expect(await counts(page)).toEqual(['3', '0', '0']);
+    expect((await titles(page)).sort()).toEqual([
+      'Budget Tracker',
+      'Infrastructure Tracker',
+      'SALN Tracker',
+    ]);
     await expect(page.locator('#tab-active')).toHaveAttribute('aria-selected', 'true');
   });
 
@@ -189,6 +192,9 @@ test.describe('Our Projects page', () => {
     await page.fill('#projects-search', 'saln');
     expect(await titles(page)).toEqual(['SALN Tracker']);
     expect(await counts(page)).toEqual(['1', '0', '0']);
+
+    await page.fill('#projects-search', 'dpwh');
+    expect(await titles(page)).toEqual(['Infrastructure Tracker']);
 
     await page.fill('#projects-search', 'nothing-matches-this');
     await expect(page.locator('#projects-grid .project-card')).toHaveCount(0);

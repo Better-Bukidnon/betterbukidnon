@@ -50,6 +50,10 @@ fi
 
 VERSION=$(node -e "console.log(require('./version.json').version)")
 
+# The header, hotline bar and footer are copied into every page from scripts/chrome/.
+# Stop here if a page was edited by hand or the templates changed without `npm run chrome`.
+node scripts/sync-chrome.js --check
+
 # ── 2. Clean dist ────────────────────────────────────────────────────────────
 echo ""
 echo "▶ [2/6] Cleaning dist/..."

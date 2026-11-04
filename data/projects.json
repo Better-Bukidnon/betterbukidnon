@@ -31,6 +31,22 @@
       "category": "transparency",
       "status": "active",
       "icon": "bi-journal-text"
+    },
+    {
+      "id": "infra",
+      "name": "Infrastructure Tracker",
+      "description": "Every DPWH public works project in Bukidnon on Bisto.ph: roads, bridges, buildings, water and flood control, with budgets, contractors and status.",
+      "url": "https://infra.betterbukidnon.org",
+      "repos": [
+        {
+          "name": "Better-Bukidnon/infra-projects",
+          "url": "https://github.com/Better-Bukidnon/infra-projects"
+        }
+      ],
+      "type": "org",
+      "category": "transparency",
+      "status": "active",
+      "icon": "bi-cone-striped"
     }
   ]
 }
