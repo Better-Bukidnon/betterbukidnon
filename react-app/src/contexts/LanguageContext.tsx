@@ -19,6 +19,11 @@ const entries: Record<string, [string, string, string]> = {
   'nav-projects': ['Our Projects', 'Mga Proyekto Namin', 'Among mga Proyekto'],
   'nav-projects-budget': ['Budget Tracker', 'Budget Tracker', 'Budget Tracker'],
   'nav-projects-saln': ['SALN Tracker', 'SALN Tracker', 'SALN Tracker'],
+  'nav-projects-infra': [
+    'Infrastructure Tracker',
+    'Infrastructure Tracker',
+    'Infrastructure Tracker',
+  ],
   'nav-projects-all': ['All Projects', 'Lahat ng Proyekto', 'Tanang Proyekto'],
   'nav-opens-new-tab': [
     '(opens in a new tab)',
