@@ -219,7 +219,12 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
+
+// bump-version.js walks the same pages, so a new section folder never needs a second list.
+module.exports = { ROOT, findPages };
