@@ -85,11 +85,13 @@
   </head>
 
   <body>
-    <a href="#main-content" class="skip-link" data-i18n="reso-skip-to-main-content"
+    <!-- chrome:skip-link -->
+    <a href="#main-content" class="skip-link" data-i18n="nav-skip-to-main-content"
       >Skip to main content</a
     >
+    <!-- /chrome:skip-link -->
 
-    <!-- Hotline Bar -->
+    <!-- chrome:hotline -->
     <div class="hotline-bar">
       <div class="container">
         <div class="hotline-inner">
@@ -122,8 +124,10 @@
         </div>
       </div>
     </div>
+    <!-- /chrome:hotline -->
 
     <!-- Header -->
+    <!-- chrome:header -->
     <header class="site-header">
       <div class="container header-inner">
         <div class="logo-container">
@@ -149,34 +153,34 @@
               >
               <ul class="dropdown-menu">
                 <li>
-                  <a href="../services/certificates" data-i18n="reso-certificates">Certificates</a>
+                  <a href="../services/certificates" data-i18n="nav-certificates">Certificates</a>
                 </li>
-                <li><a href="../services/business" data-i18n="reso-business">Business</a></li>
+                <li><a href="../services/business" data-i18n="nav-business">Business</a></li>
                 <li>
-                  <a href="../services/tax-payments" data-i18n="reso-tax-payments">Tax Payments</a>
+                  <a href="../services/tax-payments" data-i18n="nav-tax-payments">Tax Payments</a>
                 </li>
                 <li>
-                  <a href="../services/social-services" data-i18n="reso-social-services"
+                  <a href="../services/social-services" data-i18n="nav-social-services"
                     >Social Services</a
                   >
                 </li>
-                <li><a href="../services/health" data-i18n="reso-health">Health</a></li>
+                <li><a href="../services/health" data-i18n="nav-health">Health</a></li>
                 <li>
-                  <a href="../services/agriculture" data-i18n="reso-agriculture">Agriculture</a>
+                  <a href="../services/agriculture" data-i18n="nav-agriculture">Agriculture</a>
                 </li>
                 <li>
-                  <a href="../services/infrastructure" data-i18n="reso-infrastructure"
+                  <a href="../services/infrastructure" data-i18n="nav-infrastructure"
                     >Infrastructure</a
                   >
                 </li>
-                <li><a href="../services/education" data-i18n="reso-education">Education</a></li>
+                <li><a href="../services/education" data-i18n="nav-education">Education</a></li>
                 <li>
-                  <a href="../services/public-safety" data-i18n="reso-public-safety"
+                  <a href="../services/public-safety" data-i18n="nav-public-safety"
                     >Public Safety</a
                   >
                 </li>
                 <li>
-                  <a href="../services/environment" data-i18n="reso-environment">Environment</a>
+                  <a href="../services/environment" data-i18n="nav-environment">Environment</a>
                 </li>
               </ul>
             </li>
@@ -184,7 +188,7 @@
             <li><a href="../statistics/" data-i18n="nav-statistics">Statistics</a></li>
             <li class="has-dropdown">
               <a
-                href="./"
+                href="../legislative/"
                 class="active"
                 data-i18n="nav-legislative"
                 aria-haspopup="true"
@@ -193,15 +197,15 @@
               >
               <ul class="dropdown-menu">
                 <li>
-                  <a href="ordinance-framework" data-i18n="reso-ordinance-framework"
+                  <a href="../legislative/ordinance-framework" data-i18n="nav-ordinance-framework"
                     >Ordinance Framework</a
                   >
                 </li>
                 <li>
                   <a
-                    href="resolution-framework"
+                    href="../legislative/resolution-framework"
                     class="active"
-                    data-i18n="reso-resolution-framework"
+                    data-i18n="nav-resolution-framework"
                     >Resolution Framework</a
                   >
                 </li>
@@ -248,19 +252,35 @@
 
         <div class="header-actions">
           <div class="lang-selector">
-            <button type="button" class="btn btn-secondary btn-sm lang-btn" data-lang="en">
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm lang-btn"
+              data-lang="en"
+              aria-label="Switch to English"
+            >
               EN
             </button>
-            <button type="button" class="btn btn-secondary btn-sm lang-btn" data-lang="fil">
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm lang-btn"
+              data-lang="fil"
+              aria-label="Switch to Filipino"
+            >
               FIL
             </button>
-            <button type="button" class="btn btn-secondary btn-sm lang-btn" data-lang="ceb">
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm lang-btn"
+              data-lang="ceb"
+              aria-label="Switch to Cebuano (Binisaya)"
+            >
               CEB
             </button>
           </div>
         </div>
       </div>
     </header>
+    <!-- /chrome:header -->
 
     <!-- Real-Time Info Bar -->
     <div class="info-bar" role="complementary" aria-label="Real-time information">
@@ -495,6 +515,7 @@
       </section>
     </main>
 
+    <!-- chrome:footer -->
     <footer class="site-footer">
       <div class="container">
         <div class="footer-main-new">
@@ -506,7 +527,7 @@
             />
             <p
               class="footer-tagline"
-              data-i18n="reso-empowering-the-people-of-bukidnon-with-transparent"
+              data-i18n="footer-empowering-the-people-of-bukidnon-with-transparent"
             >
               Empowering the people of Bukidnon with transparent access to the services, programs,
               and public funds of LGU Bukidnon.
@@ -529,33 +550,35 @@
             </div>
           </div>
           <div class="footer-column">
-            <h4 data-i18n="reso-quick-links">Quick Links</h4>
+            <h4 data-i18n="footer-quick-links">Quick Links</h4>
             <ul class="footer-links-new">
-              <li><a href="../sitemap/" data-i18n="reso-sitemap">Sitemap</a></li>
+              <li><a href="../sitemap/" data-i18n="footer-sitemap">Sitemap</a></li>
               <li>
                 <a
                   href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="reso-citizens-charter"
+                  data-i18n="footer-citizens-charter"
                   >Citizen's Charter</a
                 >
               </li>
-              <li><a href="../terms/" data-i18n="reso-terms-of-use">Terms of Use</a></li>
-              <li><a href="../privacy/" data-i18n="reso-privacy-policy">Privacy Policy</a></li>
-              <li><a href="../accessibility/" data-i18n="reso-accessibility">Accessibility</a></li>
-              <li><a href="../faq/">FAQ</a></li>
+              <li><a href="../terms/" data-i18n="footer-terms-of-use">Terms of Use</a></li>
+              <li><a href="../privacy/" data-i18n="footer-privacy-policy">Privacy Policy</a></li>
+              <li>
+                <a href="../accessibility/" data-i18n="footer-accessibility">Accessibility</a>
+              </li>
+              <li><a href="../faq/" data-i18n="footer-faq">FAQ</a></li>
             </ul>
           </div>
           <div class="footer-column">
-            <h4 data-i18n="reso-resources">Resources</h4>
+            <h4 data-i18n="footer-resources">Resources</h4>
             <ul class="footer-links-new">
               <li>
                 <a
                   href="https://data.gov.ph"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="reso-open-data-philippines"
+                  data-i18n="footer-open-data-philippines"
                   >Open Data Philippines</a
                 >
               </li>
@@ -564,7 +587,7 @@
                   href="https://www.foi.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="reso-freedom-of-information"
+                  data-i18n="footer-freedom-of-information"
                   >Freedom of Information</a
                 >
               </li>
@@ -573,7 +596,7 @@
                   href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="reso-official-lgu-bukidnon-portal"
+                  data-i18n="footer-official-lgu-bukidnon-portal"
                   >Official LGU Bukidnon Portal</a
                 >
               </li>
@@ -582,7 +605,7 @@
                   href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="reso-sangguniang-bayan"
+                  data-i18n="footer-sangguniang-bayan"
                   >Sangguniang Panlalawigan</a
                 >
               </li>
@@ -591,7 +614,7 @@
                   href="https://www.facebook.com/lgubukidnon"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="reso-lgu-bukidnon-facebook"
+                  data-i18n="footer-lgu-bukidnon-facebook"
                   >LGU Bukidnon Facebook</a
                 >
               </li>
@@ -600,7 +623,7 @@
                   href="https://blgf.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="reso-blgf-portal"
+                  data-i18n="footer-blgf-portal"
                   >BLGF Portal</a
                 >
               </li>
@@ -609,7 +632,7 @@
                   href="https://cmci.dti.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="reso-cmci-dti-portal"
+                  data-i18n="footer-cmci-dti-portal"
                   >CMCI DTI Portal</a
                 >
               </li>
@@ -624,16 +647,14 @@
               Cost to the People of Bukidnon = <span class="footer-cost-value">₱0</span>
             </div>
             <a href="mailto:volunteer@betterbukidnon.org" class="footer-contribute"
-              ><i class="bi bi-envelope-heart"></i>
-              <span data-i18n="reso-volunteer-with-us">Volunteer with us</span></a
+              ><i class="bi bi-envelope-heart"></i> Volunteer with us</a
             >
             <a
               href="https://github.com/Better-Bukidnon/betterbukidnon"
               class="footer-contribute"
               target="_blank"
               rel="noopener noreferrer"
-              ><i class="bi bi-github"></i>
-              <span data-i18n="reso-contribute-code-with-us">Contribute code with us</span></a
+              ><i class="bi bi-github"></i> Contribute code with us</a
             >
             <div class="footer-partners">
               <a
@@ -665,6 +686,7 @@
         </div>
       </div>
     </footer>
+    <!-- /chrome:footer -->
 
     <script defer src="../assets/js/translations.js"></script>
     <script defer src="../assets/js/info-bar.js"></script>
