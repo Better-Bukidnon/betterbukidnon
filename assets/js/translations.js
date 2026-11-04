@@ -17,6 +17,7 @@ const translations = {
     'nav-projects': 'Our Projects',
     'nav-projects-budget': 'Budget Tracker',
     'nav-projects-saln': 'SALN Tracker',
+    'nav-projects-infra': 'Infrastructure Tracker',
     'nav-projects-all': 'All Projects',
     'nav-opens-new-tab': '(opens in a new tab)',
     'nav-skip-to-main-content': 'Skip to main content',
@@ -83,6 +84,9 @@ const translations = {
     'proj-saln-name': 'SALN Tracker',
     'proj-saln-desc':
       'SALN transparency portal: public officials and their declared assets, liabilities and net worth, always linked to the source.',
+    'proj-infra-name': 'Infrastructure Tracker',
+    'proj-infra-desc':
+      'Every DPWH public works project in Bukidnon on Bisto.ph: roads, bridges, buildings, water and flood control, with budgets, contractors and status.',
     'stats-title': 'Provincial Statistics',
     'stats-subtitle':
       'Population, land area and local government units of the Province of Bukidnon',
@@ -3484,6 +3488,7 @@ const translations = {
     'nav-projects': 'Mga Proyekto Namin',
     'nav-projects-budget': 'Budget Tracker',
     'nav-projects-saln': 'SALN Tracker',
+    'nav-projects-infra': 'Infrastructure Tracker',
     'nav-projects-all': 'Lahat ng Proyekto',
     'nav-opens-new-tab': '(magbubukas sa bagong tab)',
     'nav-skip-to-main-content': 'Lumaktaw sa pangunahing nilalaman',
@@ -3550,6 +3555,9 @@ const translations = {
     'proj-saln-name': 'SALN Tracker',
     'proj-saln-desc':
       'Portal ng transparensiya sa SALN: mga opisyal ng pamahalaan at ang kanilang idineklarang ari-arian, utang at net worth, laging may link sa pinagmulan.',
+    'proj-infra-name': 'Infrastructure Tracker',
+    'proj-infra-desc':
+      'Bawat proyekto ng DPWH sa Bukidnon na nasa Bisto.ph: kalsada, tulay, gusali, tubig at flood control, kasama ang badyet, kontratista at katayuan.',
     'stats-title': 'Estadistika ng Lalawigan',
     'stats-subtitle':
       'Populasyon, sukat ng lupa at mga local government unit ng Lalawigan ng Bukidnon',
@@ -7046,6 +7054,7 @@ const translations = {
     'nav-projects': 'Among mga Proyekto',
     'nav-projects-budget': 'Budget Tracker',
     'nav-projects-saln': 'SALN Tracker',
+    'nav-projects-infra': 'Infrastructure Tracker',
     'nav-projects-all': 'Tanang Proyekto',
     'nav-opens-new-tab': '(mo-abli sa bag-ong tab)',
     'nav-skip-to-main-content': 'Laktaw sa panguna nga sulod',
@@ -7112,6 +7121,9 @@ const translations = {
     'proj-saln-name': 'SALN Tracker',
     'proj-saln-desc':
       'Portal sa transparensya sa SALN: mga opisyal sa gobyerno ug ilang gideklarar nga kabtangan, utang ug net worth, kanunay adunay link sa tinubdan.',
+    'proj-infra-name': 'Infrastructure Tracker',
+    'proj-infra-desc':
+      'Matag proyekto sa DPWH sa Bukidnon nga anaa sa Bisto.ph: dalan, taytayan, bilding, tubig ug flood control, uban ang badyet, kontraktor ug kahimtang.',
     'stats-title': 'Estadistika sa Probinsya',
     'stats-subtitle':
       'Populasyon, gilapdon sa yuta, ug local government unit sa Probinsya sa Bukidnon',
