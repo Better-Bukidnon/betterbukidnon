@@ -6,3 +6,4 @@ package-lock.json
 react-app/.next
 react-app/node_modules
 scripts/chrome
+.claude
