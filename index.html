@@ -157,11 +157,13 @@
   </head>
 
   <body>
-    <a href="#main-content" class="skip-link" data-i18n="home-skip-to-main-content"
+    <!-- chrome:skip-link -->
+    <a href="#main-content" class="skip-link" data-i18n="nav-skip-to-main-content"
       >Skip to main content</a
     >
+    <!-- /chrome:skip-link -->
 
-    <!-- Hotline Bar -->
+    <!-- chrome:hotline -->
     <div class="hotline-bar">
       <div class="container">
         <div class="hotline-inner">
@@ -194,12 +196,14 @@
         </div>
       </div>
     </div>
+    <!-- /chrome:hotline -->
 
     <!-- Header -->
+    <!-- chrome:header -->
     <header class="site-header">
       <div class="container header-inner">
         <div class="logo-container">
-          <a href="/">
+          <a href="./">
             <img
               src="assets/images/logo/better-bukidnon-logo.svg"
               alt="Better Bukidnon Logo"
@@ -210,7 +214,7 @@
 
         <nav class="main-nav" aria-label="Main Navigation">
           <ul>
-            <li><a href="/" class="active" data-i18n="nav-home">Home</a></li>
+            <li><a href="./" class="active" data-i18n="nav-home">Home</a></li>
             <li class="has-dropdown">
               <a
                 href="services/"
@@ -221,29 +225,33 @@
               >
               <ul class="dropdown-menu">
                 <li>
-                  <a href="services/certificates" data-i18n="home-certificates">Certificates</a>
+                  <a href="services/certificates" data-i18n="nav-certificates">Certificates</a>
                 </li>
-                <li><a href="services/business" data-i18n="home-business">Business</a></li>
+                <li><a href="services/business" data-i18n="nav-business">Business</a></li>
                 <li>
-                  <a href="services/tax-payments" data-i18n="home-tax-payments">Tax Payments</a>
+                  <a href="services/tax-payments" data-i18n="nav-tax-payments">Tax Payments</a>
                 </li>
                 <li>
-                  <a href="services/social-services" data-i18n="home-social-services"
+                  <a href="services/social-services" data-i18n="nav-social-services"
                     >Social Services</a
                   >
                 </li>
-                <li><a href="services/health" data-i18n="home-health">Health</a></li>
-                <li><a href="services/agriculture" data-i18n="home-agriculture">Agriculture</a></li>
+                <li><a href="services/health" data-i18n="nav-health">Health</a></li>
                 <li>
-                  <a href="services/infrastructure" data-i18n="home-infrastructure"
+                  <a href="services/agriculture" data-i18n="nav-agriculture">Agriculture</a>
+                </li>
+                <li>
+                  <a href="services/infrastructure" data-i18n="nav-infrastructure"
                     >Infrastructure</a
                   >
                 </li>
-                <li><a href="services/education" data-i18n="home-education">Education</a></li>
+                <li><a href="services/education" data-i18n="nav-education">Education</a></li>
                 <li>
-                  <a href="services/public-safety" data-i18n="home-public-safety">Public Safety</a>
+                  <a href="services/public-safety" data-i18n="nav-public-safety">Public Safety</a>
                 </li>
-                <li><a href="services/environment" data-i18n="home-environment">Environment</a></li>
+                <li>
+                  <a href="services/environment" data-i18n="nav-environment">Environment</a>
+                </li>
               </ul>
             </li>
             <li><a href="government/" data-i18n="nav-government">Government</a></li>
@@ -258,12 +266,12 @@
               >
               <ul class="dropdown-menu">
                 <li>
-                  <a href="legislative/ordinance-framework" data-i18n="home-ordinance-framework"
+                  <a href="legislative/ordinance-framework" data-i18n="nav-ordinance-framework"
                     >Ordinance Framework</a
                   >
                 </li>
                 <li>
-                  <a href="legislative/resolution-framework" data-i18n="home-resolution-framework"
+                  <a href="legislative/resolution-framework" data-i18n="nav-resolution-framework"
                     >Resolution Framework</a
                   >
                 </li>
@@ -338,6 +346,7 @@
         </div>
       </div>
     </header>
+    <!-- /chrome:header -->
 
     <!-- Real-Time Info Bar -->
     <div class="info-bar" role="complementary" aria-label="Real-time information">
@@ -1177,6 +1186,7 @@
       </section>
     </main>
 
+    <!-- chrome:footer -->
     <footer class="site-footer">
       <div class="container">
         <div class="footer-main-new">
@@ -1188,7 +1198,7 @@
             />
             <p
               class="footer-tagline"
-              data-i18n="home-empowering-the-people-of-bukidnon-with-transparent"
+              data-i18n="footer-empowering-the-people-of-bukidnon-with-transparent"
             >
               Empowering the people of Bukidnon with transparent access to the services, programs,
               and public funds of LGU Bukidnon.
@@ -1211,33 +1221,33 @@
             </div>
           </div>
           <div class="footer-column">
-            <h4 data-i18n="home-quick-links">Quick Links</h4>
+            <h4 data-i18n="footer-quick-links">Quick Links</h4>
             <ul class="footer-links-new">
-              <li><a href="sitemap/" data-i18n="home-sitemap">Sitemap</a></li>
+              <li><a href="sitemap/" data-i18n="footer-sitemap">Sitemap</a></li>
               <li>
                 <a
                   href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="home-citizens-charter"
+                  data-i18n="footer-citizens-charter"
                   >Citizen's Charter</a
                 >
               </li>
-              <li><a href="terms/" data-i18n="home-terms-of-use">Terms of Use</a></li>
-              <li><a href="privacy/" data-i18n="home-privacy-policy">Privacy Policy</a></li>
-              <li><a href="accessibility/" data-i18n="home-accessibility">Accessibility</a></li>
-              <li><a href="faq/">FAQ</a></li>
+              <li><a href="terms/" data-i18n="footer-terms-of-use">Terms of Use</a></li>
+              <li><a href="privacy/" data-i18n="footer-privacy-policy">Privacy Policy</a></li>
+              <li><a href="accessibility/" data-i18n="footer-accessibility">Accessibility</a></li>
+              <li><a href="faq/" data-i18n="footer-faq">FAQ</a></li>
             </ul>
           </div>
           <div class="footer-column">
-            <h4 data-i18n="home-resources">Resources</h4>
+            <h4 data-i18n="footer-resources">Resources</h4>
             <ul class="footer-links-new">
               <li>
                 <a
                   href="https://data.gov.ph"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="home-open-data-philippines"
+                  data-i18n="footer-open-data-philippines"
                   >Open Data Philippines</a
                 >
               </li>
@@ -1246,7 +1256,7 @@
                   href="https://www.foi.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="home-freedom-of-information"
+                  data-i18n="footer-freedom-of-information"
                   >Freedom of Information</a
                 >
               </li>
@@ -1255,7 +1265,7 @@
                   href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="home-official-lgu-bukidnon-portal"
+                  data-i18n="footer-official-lgu-bukidnon-portal"
                   >Official LGU Bukidnon Portal</a
                 >
               </li>
@@ -1264,7 +1274,7 @@
                   href="https://bukidnon.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="home-sangguniang-bayan"
+                  data-i18n="footer-sangguniang-bayan"
                   >Sangguniang Panlalawigan</a
                 >
               </li>
@@ -1273,7 +1283,7 @@
                   href="https://www.facebook.com/lgubukidnon"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="home-lgu-bukidnon-facebook"
+                  data-i18n="footer-lgu-bukidnon-facebook"
                   >LGU Bukidnon Facebook</a
                 >
               </li>
@@ -1282,7 +1292,7 @@
                   href="https://blgf.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="home-blgf-portal"
+                  data-i18n="footer-blgf-portal"
                   >BLGF Portal</a
                 >
               </li>
@@ -1291,7 +1301,7 @@
                   href="https://cmci.dti.gov.ph/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-i18n="home-cmci-dti-portal"
+                  data-i18n="footer-cmci-dti-portal"
                   >CMCI DTI Portal</a
                 >
               </li>
@@ -1345,6 +1355,7 @@
         </div>
       </div>
     </footer>
+    <!-- /chrome:footer -->
 
     <!-- Volunteer Recruitment Popup -->
     <div

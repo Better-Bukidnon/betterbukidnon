@@ -10,23 +10,23 @@ pages listed below.
 
 ## Where things live
 
-| What                                                    | Where                                                                                                                    |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Emergency hotline bar                                   | `<div class="hotline-items">` in every `*.html` file, plus `react-app/src/components/layout/HotlineBar.tsx`              |
-| Footer                                                  | bottom of every `*.html` file, plus `react-app/src/components/layout/Footer.tsx`                                         |
-| Homepage                                                | `index.html` and the `home-*` keys in `translations.js`                                                                  |
-| Governor, Vice Governor, Board Members, representatives | `data/officials.json` (rendered by `assets/js/officials.js`) and the cards in `government/index.html` and `index.html`   |
-| Cities, municipalities and districts                    | `government/index.html` (section `#lgus`) and `data/demographics.json`                                                   |
-| Population and area                                     | `data/demographics.json`, the homepage stat cards, `statistics/index.html`                                               |
-| Service categories                                      | `services/*.html`                                                                                                        |
-| Office pages and document guides                        | `service-details/*.html`                                                                                                 |
-| Search results                                          | `data/services.json` and `assets/js/search.js`                                                                           |
-| Capitol directory                                       | `contact/index.html`                                                                                                     |
-| Ordinances and resolutions                              | `data/ordinances.json`, `data/resolutions.json`                                                                          |
-| Budget, SRE and DPWH projects                           | `data/fiscal_transparency.json`, `data/dpwh-projects.json`                                                               |
-| News                                                    | `data/news.json` (see [news-curation.md](news-curation.md))                                                              |
-| Our Projects page and nav dropdown                      | `data/projects.json` (rendered by `assets/js/projects.js`), the "Our Projects" `<li>` in every page header, `Header.tsx` |
-| Sitemap                                                 | `sitemap.xml` and `sitemap/index.html`                                                                                   |
+| What                                                    | Where                                                                                                                                 |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Emergency hotline bar                                   | `scripts/chrome/hotline.html` (then `npm run chrome`), plus `react-app/src/components/layout/HotlineBar.tsx`                          |
+| Header, navigation and footer                           | `scripts/chrome/header.html`, `footer.html` (then `npm run chrome`), plus the React `Header.tsx` and `Footer.tsx`                     |
+| Homepage                                                | `index.html` and the `home-*` keys in `translations.js`                                                                               |
+| Governor, Vice Governor, Board Members, representatives | `data/officials.json` (rendered by `assets/js/officials.js`) and the cards in `government/index.html` and `index.html`                |
+| Cities, municipalities and districts                    | `government/index.html` (section `#lgus`) and `data/demographics.json`                                                                |
+| Population and area                                     | `data/demographics.json`, the homepage stat cards, `statistics/index.html`                                                            |
+| Service categories                                      | `services/*.html`                                                                                                                     |
+| Office pages and document guides                        | `service-details/*.html`                                                                                                              |
+| Search results                                          | `data/services.json` and `assets/js/search.js`                                                                                        |
+| Capitol directory                                       | `contact/index.html`                                                                                                                  |
+| Ordinances and resolutions                              | `data/ordinances.json`, `data/resolutions.json`                                                                                       |
+| Budget, SRE and DPWH projects                           | `data/fiscal_transparency.json`, `data/dpwh-projects.json`                                                                            |
+| News                                                    | `data/news.json` (see [news-curation.md](news-curation.md))                                                                           |
+| Our Projects page and nav dropdown                      | `data/projects.json` (rendered by `assets/js/projects.js`), the "Our Projects" dropdown in `scripts/chrome/header.html`, `Header.tsx` |
+| Sitemap                                                 | `sitemap.xml` and `sitemap/index.html`                                                                                                |
 
 ## Common tasks
 
@@ -41,11 +41,11 @@ pages listed below.
 
 ### A hotline number changes
 
-The hotline bar is copied into every page. Replace it everywhere with one command and check
-the diff:
+The hotline bar is generated from one template. Edit the number in
+`scripts/chrome/hotline.html`, then copy it into every page and check the diff:
 
 ```bash
-grep -rl "(088) 813-1262" --include=*.html . | xargs sed -i 's/(088) 813-1262/(088) 813-XXXX/g; s/+63888131262/+6388813XXXX/g'
+npm run chrome
 git diff --stat
 ```
 
@@ -71,9 +71,9 @@ Also update `react-app/src/components/layout/HotlineBar.tsx`, `contact/index.htm
    this file.
 2. Add `proj-<id>-name` and `proj-<id>-desc` to `en`, `fil` and `ceb` in `translations.js`
    (and `proj-cat-<category>` for a new category). The JSON text is the English fallback.
-3. If the project is `active`, also add it to the "Our Projects" dropdown. That is a copied
-   `<li>` in the header of every `*.html` file (use find/replace and check `git diff`) and
-   `EXTERNAL_PROJECTS` in `react-app/src/components/layout/Header.tsx`, plus a
+3. If the project is `active`, also add it to the "Our Projects" dropdown: add an `<li>` to
+   the dropdown in `scripts/chrome/header.html` and run `npm run chrome`, add
+   `EXTERNAL_PROJECTS` in `react-app/src/components/layout/Header.tsx`, and add a
    `nav-projects-<id>` key in `translations.js` and `LanguageContext.tsx`.
 4. Bump `CACHE_VERSION` in `sw.js` so browsers pick up the new data.
 
