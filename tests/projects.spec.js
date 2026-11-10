@@ -93,10 +93,10 @@ test.describe('Our Projects page', () => {
     page.locator('.projects-tab-count').evaluateAll((els) => els.map((e) => e.textContent));
   const titles = (page) => page.locator('#projects-grid .project-card-title').allTextContents();
 
-  test('shows all projects under Active with tab counts', async ({ page }) => {
+  test('shows active projects under Active with tab counts', async ({ page }) => {
     await page.goto('/projects/');
     await expect(page.locator('#projects-grid .project-card')).toHaveCount(3);
-    expect(await counts(page)).toEqual(['3', '0', '0']);
+    expect(await counts(page)).toEqual(['3', '1', '0']);
     expect((await titles(page)).sort()).toEqual([
       'Budget Tracker',
       'Infrastructure Tracker',
@@ -214,14 +214,15 @@ test.describe('Our Projects page', () => {
     await expect(page.locator('#projects-grid .project-card')).toHaveCount(0);
   });
 
-  test('other tabs are empty and tabs work with the keyboard', async ({ page }) => {
+  test('other tabs list their projects and work with the keyboard', async ({ page }) => {
     await page.goto('/projects/');
     await page.locator('#tab-active').focus();
     await page.keyboard.press('ArrowRight');
     await expect(page.locator('#tab-development')).toHaveAttribute('aria-selected', 'true');
+    expect(await titles(page)).toEqual(['Political Families']);
+    await page.locator('#tab-archived').click();
     await expect(page.locator('#projects-grid .project-card')).toHaveCount(0);
     await expect(page.locator('#projects-empty')).toBeVisible();
-    await page.locator('#tab-archived').click();
     await expect(page.locator('#projects-panel')).toHaveAttribute(
       'aria-labelledby',
       'tab-archived'
