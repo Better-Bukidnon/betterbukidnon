@@ -1,0 +1,70 @@
+const SERVICE_CATEGORIES = [
+  'agriculture',
+  'business',
+  'certificates',
+  'education',
+  'environment',
+  'health',
+  'infrastructure',
+  'public-safety',
+  'social-services',
+  'tax-payments',
+];
+
+const OFFICES = [
+  'business-permits-licensing',
+  'birth-certificate',
+  'civil-registrar',
+  'death-certificate',
+  'human-resource-management',
+  'marriage-certificate',
+  'pdrrmd',
+  'property-declaration',
+  'provincial-accounting',
+  'provincial-agriculture',
+  'provincial-assessor',
+  'provincial-budget',
+  'provincial-engineering',
+  'provincial-general-services',
+  'provincial-health-office',
+  'provincial-planning',
+  'provincial-treasurer',
+  'pswdo',
+];
+
+/** Every page URL of the site (spec §3.3). sitemap.xml and the route-coverage test read this. */
+export const ROUTES = [
+  '/',
+  '/services',
+  ...SERVICE_CATEGORIES.map((c) => `/services/${c}`),
+  ...OFFICES.map((o) => `/service-details/${o}`),
+  '/government',
+  '/government/officials',
+  '/statistics',
+  '/legislative',
+  '/legislative/ordinance-framework',
+  '/legislative/resolution-framework',
+  '/budget',
+  '/news',
+  '/projects',
+  '/contact',
+  '/faq',
+  '/terms',
+  '/privacy',
+  '/accessibility',
+  '/sitemap',
+];
+
+/** Served from the export root but not listed in the sitemap. */
+export const ROOT_FILES = [
+  '403.html',
+  '404.html',
+  '500.html',
+  'offline.html',
+  'robots.txt',
+  'sitemap.xml',
+  'manifest.webmanifest',
+  'sw.js',
+  'version.json',
+  'assets/images/banners/opengraph.png',
+];

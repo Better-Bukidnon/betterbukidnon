@@ -25,7 +25,7 @@ jobs:
 
       - name: Start server
         run: |
-          cd dist
+          cd out
           python3 -m http.server 8080 &
           sleep 3
 
@@ -34,8 +34,8 @@ jobs:
         with:
           urls: |
             http://localhost:8080/
-            http://localhost:8080/services/
-            http://localhost:8080/contact/
-            http://localhost:8080/government/
+            http://localhost:8080/services.html
+            http://localhost:8080/contact.html
+            http://localhost:8080/government.html
           configPath: .lighthouserc.json
           uploadArtifacts: true

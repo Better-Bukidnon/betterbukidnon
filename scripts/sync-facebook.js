@@ -5,8 +5,8 @@
  * Fetches the latest posts from the Provincial Government of Bukidnon Facebook Page
  * (https://www.facebook.com/lgubukidnon, marked "Verify" in docs/bukidnon-facts.md) via the
  * Graph API, derives a title/summary, categorizes each post, validates it, and
- * merges the result into data/news.json alongside any manually-curated entries.
- * The static front-end (assets/js/news.js) renders the merged file unchanged.
+ * merges the result into src/content/data/news.json alongside any manually-curated entries.
+ * The site imports the file at build time, so a change publishes on the next build.
  *
  * Designed to run unattended on a schedule (see .github/workflows/facebook-sync.yml).
  *
@@ -18,7 +18,7 @@
  *   FB_API_VERSION     Graph API version (default v21.0)
  *   FB_LIMIT           posts to request per run (default 25)
  *   MAX_FB_ITEMS       max Facebook items kept in the feed (default 30)
- *   NEWS_JSON_PATH     output path (default <repo>/data/news.json)
+ *   NEWS_JSON_PATH     output path (default <repo>/src/content/data/news.json)
  *   FB_FIXTURE         path to a saved Graph response JSON — bypasses the network
  *                      (for local testing / dry runs; no token needed)
  *
@@ -39,7 +39,9 @@ const CONFIG = {
   limit: parseInt(process.env.FB_LIMIT || '25', 10),
   maxFbItems: parseInt(process.env.MAX_FB_ITEMS || '30', 10),
   fixture: process.env.FB_FIXTURE || '',
-  newsPath: process.env.NEWS_JSON_PATH || path.resolve(__dirname, '..', 'data', 'news.json'),
+  newsPath:
+    process.env.NEWS_JSON_PATH ||
+    path.resolve(__dirname, '..', 'src', 'content', 'data', 'news.json'),
 };
 
 const BADGES = { info: 1, success: 1, warning: 1 };
