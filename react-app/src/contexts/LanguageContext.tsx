@@ -24,7 +24,7 @@ const entries: Record<string, [string, string, string]> = {
     'Infrastructure Tracker',
     'Infrastructure Tracker',
   ],
-  'nav-projects-dynasties': ['Political Families', 'Political Families', 'Political Families'],
+  'nav-projects-dynasties': ['Bukidnon Officials', 'Bukidnon Officials', 'Bukidnon Officials'],
   'nav-projects-all': ['All Projects', 'Lahat ng Proyekto', 'Tanang Proyekto'],
   'nav-opens-new-tab': [
     '(opens in a new tab)',

@@ -5,7 +5,7 @@ const EXTERNAL = [
   { name: 'Budget Tracker', href: 'https://budget.betterbukidnon.org' },
   { name: 'SALN Tracker', href: 'https://saln.betterbukidnon.org' },
   { name: 'Infrastructure Tracker', href: 'https://infra.betterbukidnon.org' },
-  { name: 'Political Families', href: 'https://dynasties.betterbukidnon.org' },
+  { name: 'Bukidnon Officials', href: 'https://dynasties.betterbukidnon.org' },
 ];
 
 /** The "Our Projects" nav item (the dropdown trigger link). */
@@ -100,8 +100,8 @@ test.describe('Our Projects page', () => {
     expect(await counts(page)).toEqual(['4', '0', '0']);
     expect((await titles(page)).sort()).toEqual([
       'Budget Tracker',
+      'Bukidnon Officials',
       'Infrastructure Tracker',
-      'Political Families',
       'SALN Tracker',
     ]);
     await expect(page.locator('#tab-active')).toHaveAttribute('aria-selected', 'true');

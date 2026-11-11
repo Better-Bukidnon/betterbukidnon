@@ -18,7 +18,7 @@ const translations = {
     'nav-projects-budget': 'Budget Tracker',
     'nav-projects-saln': 'SALN Tracker',
     'nav-projects-infra': 'Infrastructure Tracker',
-    'nav-projects-dynasties': 'Political Families',
+    'nav-projects-dynasties': 'Bukidnon Officials',
     'nav-projects-all': 'All Projects',
     'nav-opens-new-tab': '(opens in a new tab)',
     'nav-skip-to-main-content': 'Skip to main content',
@@ -88,9 +88,9 @@ const translations = {
     'proj-infra-name': 'Infrastructure Tracker',
     'proj-infra-desc':
       'Every DPWH public works project in Bukidnon on Bisto.ph: roads, bridges, buildings, water and flood control, with budgets, contractors and status.',
-    'proj-dynasties-name': 'Political Families',
+    'proj-dynasties-name': 'Bukidnon Officials',
     'proj-dynasties-desc':
-      'Every elected official in Bukidnon since 2001, from mayors and councilors to the governor and House members, and the family ties between them, each linked to its published source.',
+      'Find your barangay and see who represents you, from barangay and SK officials up to the governor, plus every elected official since 2001 and the documented family ties between them, each linked to its source.',
     'stats-title': 'Provincial Statistics',
     'stats-subtitle':
       'Population, land area and local government units of the Province of Bukidnon',
@@ -3493,7 +3493,7 @@ const translations = {
     'nav-projects-budget': 'Budget Tracker',
     'nav-projects-saln': 'SALN Tracker',
     'nav-projects-infra': 'Infrastructure Tracker',
-    'nav-projects-dynasties': 'Political Families',
+    'nav-projects-dynasties': 'Bukidnon Officials',
     'nav-projects-all': 'Lahat ng Proyekto',
     'nav-opens-new-tab': '(magbubukas sa bagong tab)',
     'nav-skip-to-main-content': 'Lumaktaw sa pangunahing nilalaman',
@@ -3563,9 +3563,9 @@ const translations = {
     'proj-infra-name': 'Infrastructure Tracker',
     'proj-infra-desc':
       'Bawat proyekto ng DPWH sa Bukidnon na nasa Bisto.ph: kalsada, tulay, gusali, tubig at flood control, kasama ang badyet, kontratista at katayuan.',
-    'proj-dynasties-name': 'Political Families',
+    'proj-dynasties-name': 'Bukidnon Officials',
     'proj-dynasties-desc':
-      'Bawat nahalal na opisyal sa Bukidnon mula 2001, mula sa mga mayor at konsehal hanggang sa gobernador at mga kinatawan, at ang ugnayang pampamilya sa pagitan nila, bawat isa may link sa nailathalang pinagmulan.',
+      'Hanapin ang iyong barangay at tingnan kung sino ang kumakatawan sa iyo, mula sa mga opisyal ng barangay at SK hanggang sa gobernador, kasama ang bawat nahalal na opisyal mula 2001 at ang dokumentadong ugnayang pampamilya sa pagitan nila, bawat isa may link sa pinagmulan.',
     'stats-title': 'Estadistika ng Lalawigan',
     'stats-subtitle':
       'Populasyon, sukat ng lupa at mga local government unit ng Lalawigan ng Bukidnon',
@@ -7063,7 +7063,7 @@ const translations = {
     'nav-projects-budget': 'Budget Tracker',
     'nav-projects-saln': 'SALN Tracker',
     'nav-projects-infra': 'Infrastructure Tracker',
-    'nav-projects-dynasties': 'Political Families',
+    'nav-projects-dynasties': 'Bukidnon Officials',
     'nav-projects-all': 'Tanang Proyekto',
     'nav-opens-new-tab': '(mo-abli sa bag-ong tab)',
     'nav-skip-to-main-content': 'Laktaw sa panguna nga sulod',
@@ -7133,9 +7133,9 @@ const translations = {
     'proj-infra-name': 'Infrastructure Tracker',
     'proj-infra-desc':
       'Matag proyekto sa DPWH sa Bukidnon nga anaa sa Bisto.ph: dalan, taytayan, bilding, tubig ug flood control, uban ang badyet, kontraktor ug kahimtang.',
-    'proj-dynasties-name': 'Political Families',
+    'proj-dynasties-name': 'Bukidnon Officials',
     'proj-dynasties-desc':
-      'Matag napiling opisyal sa Bukidnon sukad 2001, gikan sa mga mayor ug konsehal hangtod sa gobernador ug mga representante, ug ang relasyon sa pamilya tali kanila, matag usa adunay link sa gipatik nga tinubdan.',
+      'Pangitaa ang imong barangay ug tan-awa kinsa ang nagrepresentar kanimo, gikan sa mga opisyal sa barangay ug SK hangtod sa gobernador, lakip ang matag napiling opisyal sukad 2001 ug ang dokumentadong relasyon sa pamilya tali kanila, matag usa adunay link sa tinubdan.',
     'stats-title': 'Estadistika sa Probinsya',
     'stats-subtitle':
       'Populasyon, gilapdon sa yuta, ug local government unit sa Probinsya sa Bukidnon',
