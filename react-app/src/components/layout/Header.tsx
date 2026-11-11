@@ -20,6 +20,7 @@ const EXTERNAL_PROJECTS = [
   { href: 'https://budget.betterbukidnon.org', labelKey: 'nav-projects-budget' },
   { href: 'https://saln.betterbukidnon.org', labelKey: 'nav-projects-saln' },
   { href: 'https://infra.betterbukidnon.org', labelKey: 'nav-projects-infra' },
+  { href: 'https://dynasties.betterbukidnon.org', labelKey: 'nav-projects-dynasties' },
 ] as const;
 
 export default function Header() {

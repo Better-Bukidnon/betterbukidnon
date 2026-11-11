@@ -52,7 +52,7 @@
       "id": "dynasties",
       "name": "Political Families",
       "description": "Every elected official in Bukidnon since 2001, from mayors and councilors to the governor and House members, and the family ties between them, each linked to its published source.",
-      "url": "https://github.com/Better-Bukidnon/dynasties",
+      "url": "https://dynasties.betterbukidnon.org",
       "repos": [
         {
           "name": "Better-Bukidnon/dynasties",
@@ -61,7 +61,7 @@
       ],
       "type": "org",
       "category": "transparency",
-      "status": "development",
+      "status": "active",
       "icon": "bi-diagram-3"
     }
   ]

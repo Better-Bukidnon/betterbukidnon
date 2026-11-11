@@ -5,6 +5,7 @@ const EXTERNAL = [
   { name: 'Budget Tracker', href: 'https://budget.betterbukidnon.org' },
   { name: 'SALN Tracker', href: 'https://saln.betterbukidnon.org' },
   { name: 'Infrastructure Tracker', href: 'https://infra.betterbukidnon.org' },
+  { name: 'Political Families', href: 'https://dynasties.betterbukidnon.org' },
 ];
 
 /** The "Our Projects" nav item (the dropdown trigger link). */
@@ -95,11 +96,12 @@ test.describe('Our Projects page', () => {
 
   test('shows active projects under Active with tab counts', async ({ page }) => {
     await page.goto('/projects/');
-    await expect(page.locator('#projects-grid .project-card')).toHaveCount(3);
-    expect(await counts(page)).toEqual(['3', '1', '0']);
+    await expect(page.locator('#projects-grid .project-card')).toHaveCount(4);
+    expect(await counts(page)).toEqual(['4', '0', '0']);
     expect((await titles(page)).sort()).toEqual([
       'Budget Tracker',
       'Infrastructure Tracker',
+      'Political Families',
       'SALN Tracker',
     ]);
     await expect(page.locator('#tab-active')).toHaveAttribute('aria-selected', 'true');
@@ -214,17 +216,14 @@ test.describe('Our Projects page', () => {
     await expect(page.locator('#projects-grid .project-card')).toHaveCount(0);
   });
 
-  test('other tabs list their projects and work with the keyboard', async ({ page }) => {
+  test('other tabs are empty and tabs work with the keyboard', async ({ page }) => {
     await page.goto('/projects/');
     await page.locator('#tab-active').focus();
     await page.keyboard.press('ArrowRight');
     await expect(page.locator('#tab-development')).toHaveAttribute('aria-selected', 'true');
-    await expect(page.locator('#projects-grid .project-card-title')).toHaveText([
-      'Political Families',
-    ]);
-    await page.locator('#tab-archived').click();
     await expect(page.locator('#projects-grid .project-card')).toHaveCount(0);
     await expect(page.locator('#projects-empty')).toBeVisible();
+    await page.locator('#tab-archived').click();
     await expect(page.locator('#projects-panel')).toHaveAttribute(
       'aria-labelledby',
       'tab-archived'
