@@ -87,6 +87,9 @@ const translations = {
     'proj-infra-name': 'Infrastructure Tracker',
     'proj-infra-desc':
       'Every DPWH public works project in Bukidnon on Bisto.ph: roads, bridges, buildings, water and flood control, with budgets, contractors and status.',
+    'proj-dynasties-name': 'Political Families',
+    'proj-dynasties-desc':
+      'Every elected official in Bukidnon since 2001, from mayors and councilors to the governor and House members, and the family ties between them, each linked to its published source.',
     'stats-title': 'Provincial Statistics',
     'stats-subtitle':
       'Population, land area and local government units of the Province of Bukidnon',
@@ -3558,6 +3561,9 @@ const translations = {
     'proj-infra-name': 'Infrastructure Tracker',
     'proj-infra-desc':
       'Bawat proyekto ng DPWH sa Bukidnon na nasa Bisto.ph: kalsada, tulay, gusali, tubig at flood control, kasama ang badyet, kontratista at katayuan.',
+    'proj-dynasties-name': 'Political Families',
+    'proj-dynasties-desc':
+      'Bawat nahalal na opisyal sa Bukidnon mula 2001, mula sa mga mayor at konsehal hanggang sa gobernador at mga kinatawan, at ang ugnayang pampamilya sa pagitan nila, bawat isa may link sa nailathalang pinagmulan.',
     'stats-title': 'Estadistika ng Lalawigan',
     'stats-subtitle':
       'Populasyon, sukat ng lupa at mga local government unit ng Lalawigan ng Bukidnon',
@@ -7124,6 +7130,9 @@ const translations = {
     'proj-infra-name': 'Infrastructure Tracker',
     'proj-infra-desc':
       'Matag proyekto sa DPWH sa Bukidnon nga anaa sa Bisto.ph: dalan, taytayan, bilding, tubig ug flood control, uban ang badyet, kontraktor ug kahimtang.',
+    'proj-dynasties-name': 'Political Families',
+    'proj-dynasties-desc':
+      'Matag napiling opisyal sa Bukidnon sukad 2001, gikan sa mga mayor ug konsehal hangtod sa gobernador ug mga representante, ug ang relasyon sa pamilya tali kanila, matag usa adunay link sa gipatik nga tinubdan.',
     'stats-title': 'Estadistika sa Probinsya',
     'stats-subtitle':
       'Populasyon, gilapdon sa yuta, ug local government unit sa Probinsya sa Bukidnon',

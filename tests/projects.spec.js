@@ -219,7 +219,9 @@ test.describe('Our Projects page', () => {
     await page.locator('#tab-active').focus();
     await page.keyboard.press('ArrowRight');
     await expect(page.locator('#tab-development')).toHaveAttribute('aria-selected', 'true');
-    expect(await titles(page)).toEqual(['Political Families']);
+    await expect(page.locator('#projects-grid .project-card-title')).toHaveText([
+      'Political Families',
+    ]);
     await page.locator('#tab-archived').click();
     await expect(page.locator('#projects-grid .project-card')).toHaveCount(0);
     await expect(page.locator('#projects-empty')).toBeVisible();
