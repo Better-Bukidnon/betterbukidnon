@@ -5,7 +5,7 @@ const EXTERNAL = [
   { name: 'Budget Tracker', href: 'https://budget.betterbukidnon.org' },
   { name: 'SALN Tracker', href: 'https://saln.betterbukidnon.org' },
   { name: 'Infrastructure Tracker', href: 'https://infra.betterbukidnon.org' },
-  { name: 'Bukidnon Officials', href: 'https://dynasties.betterbukidnon.org' },
+  { name: 'Bukidnon Officials', href: 'https://officials.betterbukidnon.org' },
 ];
 
 /** The "Our Projects" nav item (the dropdown trigger link). */
