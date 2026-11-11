@@ -1,88 +1,126 @@
 # Translations
 
-The site is available in three languages:
+The site is available in three languages on the **same URLs**:
 
-| Code  | Language           | Coverage                                                                                   |
-| ----- | ------------------ | ------------------------------------------------------------------------------------------ |
-| `en`  | English            | Complete; the fallback for everything                                                      |
-| `fil` | Filipino           | Near complete                                                                              |
-| `ceb` | Cebuano (Binisaya) | Navigation, buttons, headings, footer and shared page text; the rest falls back to English |
+| Code  | Language           | Coverage                                                                         |
+| ----- | ------------------ | -------------------------------------------------------------------------------- |
+| `en`  | English            | Complete; the fallback for everything                                            |
+| `fil` | Filipino           | Nearly all interface text; all 18 office pages                                   |
+| `ceb` | Cebuano (Binisaya) | About four fifths of interface text, including all of the chrome; 4 office pages |
 
 Cebuano replaced the upstream template's Ilocano because it is the language most widely
 spoken in Bukidnon. Binukid, Higaonon and other indigenous languages would be welcome
-additions. See "Adding a language" below.
+additions (see [Adding a language](#adding-a-language)).
 
 ## How it works
 
-All dictionaries and the engine live in `assets/js/translations.js`:
+- **Pre-rendered HTML is English.** A short script in `<head>` (`localeScript` in
+  `src/features/i18n/locales.ts`) picks the language before the page paints and sets
+  `<html lang>` and `data-locale`. The order is: the saved choice in
+  `localStorage.selectedLang`, then the browser language (`tl`/`fil` → Filipino,
+  `ceb`/`bis` → Cebuano), then English. The storage key is the same as on the old site, so
+  returning visitors keep their choice.
+- **`LanguageProvider`** (`src/features/i18n/LanguageProvider.tsx`) reads that choice on
+  hydration and exposes `useLocale()`. The globe menu (`LanguageMenu.tsx`) calls
+  `setLocale`, which updates `<html lang>` and saves the choice.
+- **Each feature owns its strings** in `src/features/<feature>/i18n/en.json`, `fil.json` and
+  `ceb.json`. The shared chrome (skip link, navigation, footer, common labels) uses
+  `src/features/i18n/i18n/*.json`.
+- **English is bundled; other languages load on demand.** Each feature has a dictionary
+  module that imports `en.json` directly and the others lazily:
 
-```js
-const translations = {
-  en:  { 'nav-home': 'Home', ... },
-  fil: { 'nav-home': 'Tahanan', ... },
-  ceb: { 'nav-home': 'Panguna', ... },
+```ts
+// src/features/news/newsDictionary.ts
+import en from '@/features/news/i18n/en.json';
+import type { Dictionary } from '@/features/i18n/useT';
+
+export type NewsKey = keyof typeof en;
+
+export const newsDictionary: Dictionary<NewsKey> = {
+  en,
+  load: {
+    fil: () => import('@/features/news/i18n/fil.json'),
+    ceb: () => import('@/features/news/i18n/ceb.json'),
+  },
 };
-const TranslationEngine = { ... };
 ```
 
-On page load, `TranslationEngine.init()` picks the language: the saved choice in
-`localStorage.selectedLang`, then the browser language (`tl`/`fil` → Filipino,
-`ceb`/`bis` → Cebuano), then English. It then walks the page:
+- **Components call `useT()`** with their dictionary:
 
-| Attribute                     | What gets replaced          |
-| ----------------------------- | --------------------------- |
-| `data-i18n="key"`             | the element's `textContent` |
-| `data-i18n-placeholder="key"` | `placeholder`               |
-| `data-i18n-title="key"`       | `title`                     |
-| `data-i18n-aria="key"`        | `aria-label`                |
-| `data-i18n-alt="key"`         | `alt`                       |
+```tsx
+const t = useT(newsDictionary);
+return <h1>{t('news-news-updates')}</h1>;
+```
 
-A missing key in `fil` or `ceb` falls back to `en`. A key missing everywhere leaves the HTML
-text as it is.
+### Typed keys
 
-## Rules that trip people up
+Key types come from the English JSON (`keyof typeof en`). Calling `t()` with a key that is
+not in `en.json` is a type error, so `npm run typecheck` and `npm run build` catch typos and
+missing English strings.
 
-1. **The dictionary wins over the HTML, even in English.** If you change the text inside a
-   `data-i18n` element but not the dictionary, visitors still see the old text. Change the
-   `en` value (and `fil`, `ceb`) for that key, or give the element a new key.
-2. **`textContent` wipes child elements.** `<p data-i18n="x">Call <a href="…">911</a></p>`
-   loses its link once translated. Put the attribute on a `<span>` that holds plain text
-   only, and keep links and `<strong>` outside it.
-3. **Keys are per page.** Most keys carry a page prefix (`treas-`, `pswdo-`, `gov-`,
-   `home-`). The skip link, header and footer are the exception: they are shared across all
-   pages and use `nav-*` and `footer-*`, so reword them once (see
-   [architecture.md](architecture.md#shared-page-chrome)).
-4. **Keep placeholders.** Strings like `Showing {{count}} results` are interpolated. Leave
-   `{{count}}` untouched in every language.
+### Fallback
+
+A key missing from `fil.json` or `ceb.json` shows the English value. A language with no
+loader for a feature shows English for that whole feature. While a language file is still
+loading, the English text stays on screen.
+
+### Placeholders
+
+`{{name}}` placeholders are filled from the second argument:
+
+```tsx
+t('results-count', { count: 12 }); // "Showing {{count}} results" → "Showing 12 results"
+```
+
+Keep every `{{placeholder}}` unchanged in each language. A placeholder with no value is left
+as written.
+
+### Links and bold text inside a sentence
+
+There is no `<Trans>` helper, and strings are plain text: never put HTML in a JSON value. When
+a sentence needs a link or bold text, split it into separate keys and compose them in the
+component, for example `{t('x-before')} <a href="…">{t('x-link')}</a> {t('x-after')}`.
+
+### Tests
+
+`src/features/i18n/i18n.test.tsx` covers detection order, interpolation, lazy loading and
+fallback, and fails if the chrome `fil.json` or `ceb.json` has a key that is not in English.
 
 ## Editing translations
 
-For a few strings, edit `assets/js/translations.js` directly. Each language block is a flat
-list of `'key': 'value',` lines, with `en` first, then `fil`, then `ceb`.
+1. Find the key. Search the component for the text you see, or search the JSON files:
+   `git grep -n "Provincial Treasurer" src/features`.
+2. Change `en.json` first, then the same key in `fil.json` and `ceb.json`.
+3. To add a string, add the key to `en.json` (keys keep their feature prefix, such as
+   `news-`, `gov-`, `proj-`), then to the other languages if you can. Untranslated keys fall
+   back to English, so adding English only is fine.
+4. Check the page with `npm run dev` in all three languages.
 
-For many strings, write a patch file and merge it with a small Node script that loads the
-dictionaries, changes them and writes the file back. That was how the Bukidnon conversion
-was done: each change set was a JSON patch of this shape:
+Keys removed from `en.json` should be removed from `fil.json` and `ceb.json` too.
 
-```json
-{
-  "en": { "home-volunteer-cta": "Contribute on GitHub" },
-  "fil": { "home-volunteer-cta": "Mag-ambag sa GitHub" },
-  "ceb": { "home-volunteer-cta": "Motabang sa GitHub" },
-  "remove": ["home-take-the-quiz"]
-}
+## Office pages (MDX)
+
+Office pages are translated as whole files, not as keys:
+
+```
+src/content/service-details/<slug>/
+├── en.mdx    required
+├── fil.mdx   optional
+└── ceb.mdx   optional
 ```
 
-To load the dictionaries in Node, evaluate the part of the file before
-`const TranslationEngine` (the rest touches `document` and fails outside a browser):
+A translated file has only `title`, `summary` and `badge` in its frontmatter, followed by the
+translated body. The office details (address, phone, sources) always come from `en.mdx`. See
+[content-guide.md](content-guide.md#office-pages-mdx) for the full frontmatter.
 
-```js
-const src = require('fs').readFileSync('assets/js/translations.js', 'utf8');
-const head = src.slice(0, src.indexOf('\nconst TranslationEngine'));
-const ctx = {};
-require('vm').runInNewContext(head + ';this.t = translations;', ctx);
-// ctx.t.en, ctx.t.fil, ctx.t.ceb
-```
+English is rendered into the HTML. A translated file is a separate chunk that loads when the
+visitor switches to that language. If an office has no file for the current language, the
+page shows English with a small "Not yet translated" note. The note's wording is the
+`sd-not-translated` key in `src/features/service-details/i18n/`.
+
+To translate an office, copy `en.mdx` to `fil.mdx` or `ceb.mdx`, delete every frontmatter
+field except `title`, `summary` and `badge`, and translate the text. Keep component names and
+props (`<Service title={…}>`) and links as they are; translate only the text.
 
 ## Style
 
@@ -97,13 +135,15 @@ require('vm').runInNewContext(head + ';this.t = translations;', ctx);
 
 ## Adding a language
 
-1. Add a block to `translations` (e.g. `bkd: { … }`). Start with navigation, buttons and
-   headings; everything else falls back to English.
-2. In `TranslationEngine`, add the code to `supportedLangs`, `langNames` and `langCodes`, and
-   to `detectBrowserLanguage` if browsers report it.
-3. Add a `.lang-btn` button for it in the `.lang-selector` of `scripts/chrome/header.html`
-   (then run `npm run chrome`), and its
-   name to `names` in `initLanguageMenu` (`assets/js/main.js`), which turns those buttons
-   into the globe language menu. In `react-app/src/components/layout/Header.tsx`, add it to
-   `LANGUAGE_OPTIONS`. Also add a `hreflang` link in each page's `<head>`.
-4. Add the language to `react-app/src/contexts/LanguageContext.tsx`.
+For example, Binukid (`bkd`):
+
+1. Add it to `LOCALES` in `src/features/i18n/locales.ts`:
+   `{ code: 'bkd', name: 'Binukid' }`. The language menu and the `Locale` type pick it up from
+   there.
+2. If browsers report a language code for it, map that code in `detectLocale` in the same
+   file. Otherwise visitors choose it from the menu.
+3. Add `bkd.json` next to each feature's `en.json` and a `bkd: () => import(…/bkd.json)` line
+   in that feature's `<feature>Dictionary.ts`. Start with the chrome dictionary
+   (`src/features/i18n/`); every key you leave out falls back to English.
+4. Optionally add `bkd.mdx` files for office pages.
+5. Run `npm run typecheck` and `npm test`, then check the site in the new language.

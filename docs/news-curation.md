@@ -1,50 +1,60 @@
-# News Curation Workflow
+# News Curation
 
-How the **Latest Updates** (homepage) and **News** page are kept up to date.
+How the **Latest Updates** section on the homepage and the **News** page are kept up to date.
 
 ## How it works
 
-Both sections are rendered by [`assets/js/news.js`](../assets/js/news.js) from a single
-file: [`data/news.json`](../data/news.json). The homepage shows the 3 most recent items;
-the News page shows all of them, newest first. No backend is involved — it is a static
-JSON file served by the Cloudflare Workers deployment (previously cPanel).
+Both sections read one file, `src/content/data/news.json`, through
+`src/features/news/newsData.ts`. The homepage shows the 3 newest items; the News page shows
+all of them, newest first. There is no backend: the file is imported at build time and baked
+into the HTML.
 
-`data/news.json` starts empty (`{ "news": [] }`). While it has no items, the News page and the
-homepage feed show: "No updates yet. Follow the Provincial Government of Bukidnon on Facebook",
-linking to <https://www.facebook.com/lgubukidnon>.
+That means **a news change is published only by a commit and a rebuild**. Editing the file
+changes nothing on the live site until the commit reaches `develop` (dev site) or `main`
+(production) and Workers Builds redeploys.
 
-To avoid hand-editing JSON, use the curation tool:
+While the file has no items (`{ "news": [] }`), both sections show an empty state: "No updates
+yet. Follow the Provincial Government of Bukidnon on Facebook", linking to
+<https://www.facebook.com/lgubukidnon>.
 
-```
-admin/news-editor.html
-```
+Entries come from two places, which merge in the same file:
 
-This is an **internal tool**. It is excluded from the production build
-([`build.sh`](../build.sh)), so it is never deployed publicly. You run it locally.
+- **Curated** entries, written with the editor below. Their `id` must not start with `fb-`.
+- **Facebook** entries (`id` starting with `fb-`), written by the automatic sync. See
+  [facebook-sync.md](facebook-sync.md).
 
-## Adding or editing an update
+## The news editor (development only)
 
-1. Start the local server from the project root:
+To avoid hand-editing JSON, use the editor at `/admin/news-editor`. It exists only under
+`npm run dev`; it is never built or deployed (see
+[architecture.md](architecture.md#dev-only-admin-news-editor)).
+
+1. Start the development server:
    ```bash
-   npm run dev          # serves on http://localhost:8000
+   npm run dev
    ```
-2. Open **http://localhost:8000/admin/news-editor.html**. It loads the current
-   `data/news.json` automatically.
-3. Click **Add new update** (or **Edit** on an existing entry) and fill in:
-   - **Title** (≤120 chars) and **Summary** (≤300 chars)
-   - **Date**, **Category label**, and **Badge color** (`info` blue / `success` green
-     / `warning` amber — common categories auto-pick a color)
-   - **Link URL** (optional) — e.g. the original Facebook post; adds a "Read more" link
-     on the News page card and makes the homepage title link out
-   - **ID** auto-fills from the title and must be unique
-     The live preview shows the resulting News-page card. Validation blocks bad entries.
-4. Click **Save update**.
-5. Click **Download news.json**.
-6. Replace [`data/news.json`](../data/news.json) with the downloaded file, commit, and
-   deploy (`npm run build` → upload `dist/`).
+2. Open <http://localhost:3000/admin/news-editor>. It loads the current `news.json`.
+3. Click **+ Add new update** (or **Edit** on an existing entry) and fill in:
+   - **Title** (up to 120 characters) and **Summary** (up to 300)
+   - **Date**, **Category** label and **Badge** color (`info` blue, `success` green,
+     `warning` amber). Common categories pick a badge color automatically.
+   - **Link URL** (optional), for example the original Facebook post. Must be `http(s)`.
+   - **Link label** (optional), shown instead of "Read more"
+   - **ID**, filled in from the title. It must be unique.
 
-`Copy JSON` and `Import file…` are available if you prefer pasting, or want to resume
-editing a file you saved earlier.
+   The live preview uses the site's own `NewsCard`, so it shows exactly what will ship.
+   Validation blocks entries that would fail the build.
+
+4. Click **Save update**. Repeat for other entries.
+5. Click **Download news.json**.
+6. Replace `src/content/data/news.json` with the downloaded file, then commit it and open a
+   pull request into `develop`.
+
+**Copy JSON** puts the file on the clipboard instead. **Import file…** loads a `news.json`
+you saved earlier, and **Reload from news.json** discards your unsaved changes.
+
+The editor works on an in-memory copy. Nothing is written to disk until you replace the file
+yourself.
 
 ## Schema
 
@@ -52,12 +62,12 @@ editing a file you saved earlier.
 {
   "news": [
     {
-      "id": "unique-slug", // required, lowercase + dashes
-      "title": "string", // required, ≤120 chars
+      "id": "unique-slug", // required, lowercase + dashes; "fb-…" is reserved for the sync
+      "title": "string", // required, ≤ 120 characters
       "date": "YYYY-MM-DD", // required
-      "category": "Announcement", // required label shown on the badge
+      "category": "Announcement", // required, label shown on the badge
       "badge": "info", // required: info | success | warning
-      "summary": "string", // required, ≤300 chars
+      "summary": "string", // required, ≤ 300 characters
       "url": "https://...", // optional outbound link (or null)
       "source": "View on Facebook", // optional link label (defaults to "Read more")
     },
@@ -65,8 +75,9 @@ editing a file you saved earlier.
 }
 ```
 
-`news.js` escapes all fields before rendering and ignores non-`http(s)` URLs, so the
-feed is safe even if a future automated source (e.g. a Facebook Graph API sync) appends
-items in the same shape. When that access becomes available, the sync writes
-Facebook-sourced entries into the same array and they merge automatically with the
-manually curated ones.
+`parseNews` in `newsData.ts` checks every entry at build time. A missing field, a bad date, an
+unknown badge or a non-`http(s)` URL fails `npm run build` and `npm test` with a message
+naming the entry, so a broken file cannot reach the live site. The length limits are
+enforced by the editor and by the Facebook sync, not by the build.
+
+React renders all fields as text, so no HTML in an entry is ever interpreted.
