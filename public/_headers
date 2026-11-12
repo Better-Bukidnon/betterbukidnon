@@ -2,10 +2,10 @@
 #
 # CSP decision (M1): script-src keeps 'unsafe-inline'. Next's static export inlines per-page
 # bootstrap scripts (self.__next_f.push) whose hashes change on every build; hashes would
-# need a post-build rewrite of this file. Fonts, icons and Lottie are self-hosted,
-# so no CDN origins are listed.
+# need a post-build rewrite of this file. Fonts and icons are self-hosted, so no CDN origins
+# are listed. Third parties: Open-Meteo (fetch), Google Maps and the Facebook page plugin (iframes).
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://*.fbcdn.net; font-src 'self'; img-src 'self' data: blob: https:; connect-src 'self' blob: https://api.open-meteo.com https://open.er-api.com https://www.facebook.com https://graph.facebook.com https://connect.facebook.net; frame-src 'self' https://www.google.com https://www.facebook.com https://web.facebook.com https://staticxx.facebook.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https:; connect-src 'self' blob: https://api.open-meteo.com; frame-src 'self' https://www.google.com https://www.facebook.com https://web.facebook.com https://staticxx.facebook.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()

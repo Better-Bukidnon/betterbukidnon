@@ -6,7 +6,7 @@ interface Cached<T> {
 
 /**
  * Fresh cache, else network, else the last known value (even if stale), else null.
- * Cache keys and shape match legacy/assets/js/info-bar.js, so both share one cache.
+ * Used by the homepage WeatherWidget (Open-Meteo).
  */
 export async function cachedFetch<T>(
   key: string,

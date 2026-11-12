@@ -9,7 +9,7 @@ import { buttonPrimary } from '@/shared/ui';
 const external = { target: '_blank', rel: 'noopener noreferrer' } as const;
 
 /**
- * View Details, as a native modal <dialog> like VolunteerPopup: the browser traps focus, makes
+ * View Details, as a native modal <dialog>: the browser traps focus, makes
  * the page inert and closes on Escape; focus goes back to the button that opened it.
  */
 export function ProjectDialog({

@@ -100,8 +100,8 @@ Everything else is in [docs/](docs/README.md):
   quality gates
 - **Cloudflare Workers** static assets for hosting
 - Chart.js (`react-chartjs-2`) for charts, keyless Google Maps embeds for
-  maps, Bootstrap Icons (`react-bootstrap-icons`), self-hosted Inter, weather from
-  Open-Meteo and exchange rates from open.er-api.com
+  maps, Bootstrap Icons (`react-bootstrap-icons`), self-hosted Inter and weather from
+  Open-Meteo
 
 All data is compiled in at build time; there is no backend and no analytics. The site is an
 installable PWA with an offline page.

@@ -116,7 +116,6 @@ export function PrivacyPage() {
                 <h3>{t('privacy-types-of-cookies-we-use')}</h3>
                 <ul>
                   <li>{t('privacy-storage-language')}</li>
-                  <li>{t('privacy-storage-popup')}</li>
                   <li>{t('privacy-storage-cache')}</li>
                   <li>{t('privacy-storage-session')}</li>
                   <li>{t('privacy-storage-offline')}</li>
@@ -138,11 +137,8 @@ export function PrivacyPage() {
                 <p>{t('privacy-hosting-text')}</p>
                 <p>{t('privacy-third-party-intro')}</p>
                 <ul>
-                  <li>{t('privacy-tp-fonts')}</li>
-                  <li>{t('privacy-tp-cdn')}</li>
                   <li>{t('privacy-tp-maps')}</li>
                   <li>{t('privacy-tp-weather')}</li>
-                  <li>{t('privacy-tp-rates')}</li>
                   <li>{t('privacy-tp-facebook')}</li>
                 </ul>
                 <p>{t('privacy-tp-policies')}</p>

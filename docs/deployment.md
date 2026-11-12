@@ -87,15 +87,15 @@ policy is strict: `default-src 'self'`, `object-src 'none'`, `base-uri 'self'`,
 
 The policy allow-lists the third parties the site uses:
 
-| Directive     | Allows                                                                      |
-| ------------- | --------------------------------------------------------------------------- |
-| `connect-src` | Open-Meteo, open.er-api.com, Facebook Graph and plugin                      |
-| `img-src`     | `'self'`, `data:`, `blob:` and any `https:` source (map tiles, Facebook)    |
-| `frame-src`   | Google (Maps embed), Facebook plugin domains                                |
-| `script-src`  | `'self'`, `'unsafe-inline'`, `connect.facebook.net`                         |
+| Directive     | Allows                                                                   |
+| ------------- | ------------------------------------------------------------------------ |
+| `connect-src` | Open-Meteo                                                               |
+| `img-src`     | `'self'`, `data:`, `blob:` and any `https:` source (map tiles, Facebook) |
+| `frame-src`   | Google (Maps embed), Facebook plugin domains                             |
+| `script-src`  | `'self'`, `'unsafe-inline'`                                              |
 
-Origins that only the legacy pages needed (jsDelivr, unpkg, Google Fonts) are not used by the
-React site; remove any that remain in `_headers`.
+The Facebook feed is a plain iframe (no SDK), so it needs only `frame-src`. Origins that only
+the legacy pages needed (jsDelivr, unpkg, Google Fonts, exchange-rate APIs) are not listed.
 
 When you add a new third-party service, add its origin to the right directive, or the
 browser will block it. Check the browser console on the dev site after deploying: CSP
@@ -132,7 +132,7 @@ npx wrangler deploy --env production    # production  → betterbukidnon.org
 - [ ] Regenerate `public/assets/images/banners/opengraph.png` from the finished homepage (a
       1200×630 screenshot) if the homepage changed.
 - [ ] Set up email routing for `volunteer@betterbukidnon.org` (Cloudflare Email Routing on
-      the betterbukidnon.org zone). The address is used in the footer, the volunteer popup
+      the betterbukidnon.org zone). The address is used in the footer, the contact page
       and the legal pages.
 - [ ] Decide on analytics. None is installed. Cloudflare Web Analytics can be turned on for
       the Worker without code changes; update the privacy page (`src/features/legal/`) if you
