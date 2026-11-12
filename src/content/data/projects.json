@@ -47,6 +47,22 @@
       "category": "transparency",
       "status": "active",
       "icon": "bi-cone-striped"
+    },
+    {
+      "id": "dynasties",
+      "name": "Bukidnon Officials",
+      "description": "Find your barangay and see who represents you, from barangay and SK officials up to the governor, plus every elected official since 2001 and the documented family ties between them, each linked to its source.",
+      "url": "https://officials.betterbukidnon.org",
+      "repos": [
+        {
+          "name": "Better-Bukidnon/officials",
+          "url": "https://github.com/Better-Bukidnon/officials"
+        }
+      ],
+      "type": "org",
+      "category": "transparency",
+      "status": "active",
+      "icon": "bi-diagram-3"
     }
   ]
 }
