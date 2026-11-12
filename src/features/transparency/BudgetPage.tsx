@@ -86,7 +86,7 @@ function ExplainGrid({ items }: { items: Explain[] }) {
   );
 }
 
-/** Section order matches legacy/budget/index.html. */
+/** Section order matches fce5da9:budget/index.html. */
 export function BudgetPage() {
   const nav = useT(chromeDictionary);
   const t = useT(transparencyDictionary);

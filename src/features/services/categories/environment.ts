@@ -1,6 +1,6 @@
 import type { Category } from '@/features/services/types';
 
-/** Converted from legacy/services/environment.html. */
+/** Converted from fce5da9:services/environment.html. */
 export const environment: Category = {
   crumb: 'env-bc',
   icon: 'globe-americas',

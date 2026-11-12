@@ -36,7 +36,7 @@ interface Office {
   phones: { number: string; note?: GovernmentKey }[];
 }
 
-/** Phone numbers from the official directory, as listed on legacy/government/index.html. */
+/** Phone numbers from the official directory, as listed on fce5da9:government/index.html. */
 const OFFICES: Office[] = [
   {
     slug: 'provincial-health-office',

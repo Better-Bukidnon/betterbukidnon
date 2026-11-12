@@ -124,7 +124,7 @@ function ProvincialBoard() {
   );
 }
 
-/** Section order matches legacy/government/index.html. */
+/** Section order matches fce5da9:government/index.html. */
 export function GovernmentPage() {
   const nav = useT(chromeDictionary);
   const t = useT(governmentDictionary);

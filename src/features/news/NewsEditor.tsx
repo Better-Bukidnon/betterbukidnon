@@ -24,7 +24,7 @@ const button =
   'min-h-11 rounded-base border border-black/15 bg-bg px-sm font-medium hover:border-primary';
 
 /**
- * Dev-only news curation tool (port of legacy/admin/news-editor.html). Exists only under
+ * Dev-only news curation tool (port of fce5da9:admin/news-editor.html). Exists only under
  * `next dev` (app/admin/news-editor/page.dev.tsx); the preview is the NewsCard the site ships.
  */
 export function NewsEditor() {

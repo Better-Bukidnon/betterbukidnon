@@ -38,7 +38,7 @@ export interface ProjectText {
   newTab: string;
 }
 
-/** Same keys as legacy projects.js: `proj-<id>-name|desc`, `proj-cat-<slug>`, JSON text as fallback. */
+/** Same keys as fce5da9:assets/js/projects.js: `proj-<id>-name|desc`, `proj-cat-<slug>`, JSON fallback. */
 export function useProjectText(): ProjectText {
   const t = useT(projectsDictionary);
   const nav = useT(chromeDictionary);

@@ -45,7 +45,7 @@ const action =
 
 /**
  * Registers /sw.js in production builds only, and shows the install and "new version" banners
- * with the same rules as legacy/assets/js/main.js.
+ * with the same rules as fce5da9:assets/js/main.js.
  */
 export function PwaBanners() {
   const t = useT(chromeDictionary);

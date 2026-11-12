@@ -1,6 +1,6 @@
 import type { Category } from '@/features/services/types';
 
-/** Converted from legacy/services/certificates.html. */
+/** Converted from fce5da9:services/certificates.html. */
 export const certificates: Category = {
   crumb: 'cert-bc',
   icon: 'file-earmark-text-fill',

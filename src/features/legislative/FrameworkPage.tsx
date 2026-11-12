@@ -75,7 +75,7 @@ const CONFIG: Record<
   },
 };
 
-/** One template for legacy/legislative/{ordinance,resolution}-framework.html; content verbatim. */
+/** One template for fce5da9:legislative/{ordinance,resolution}-framework.html; content verbatim. */
 export function FrameworkPage({ kind: k }: { kind: Kind }) {
   const nav = useT(chromeDictionary);
   const t = useT(legislativeDictionary);

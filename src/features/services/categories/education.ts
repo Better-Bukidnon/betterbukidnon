@@ -1,6 +1,6 @@
 import type { Category } from '@/features/services/types';
 
-/** Converted from legacy/services/education.html. */
+/** Converted from fce5da9:services/education.html. */
 export const education: Category = {
   crumb: 'edu-bc',
   icon: 'mortarboard-fill',

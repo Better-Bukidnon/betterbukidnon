@@ -1,6 +1,6 @@
 import type { Category } from '@/features/services/types';
 
-/** Converted from legacy/services/infrastructure.html. */
+/** Converted from fce5da9:services/infrastructure.html. */
 export const infrastructure: Category = {
   crumb: 'infra-bc',
   icon: 'building-fill-gear',

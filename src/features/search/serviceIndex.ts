@@ -39,7 +39,7 @@ export function parseServices(data: unknown): Service[] {
 
 export const services = parseServices(raw);
 
-// Matching and scoring below are ported as-is from legacy/assets/js/search.js.
+// Matching and scoring below are ported as-is from fce5da9:assets/js/search.js.
 
 export function tokenize(text: string | undefined): string[] {
   if (!text) return [];

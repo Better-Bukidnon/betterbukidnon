@@ -16,7 +16,7 @@ const field =
   'min-h-11 w-full rounded-base border border-black/15 bg-bg px-sm text-text focus:border-primary';
 
 /**
- * Status tabs, search and repo/category filters (port of legacy projects.js). Search and both
+ * Status tabs, search and repo/category filters (port of fce5da9:assets/js/projects.js). Search and both
  * filters combine with the selected tab, and the tab counts reflect the search and filters.
  */
 export function ProjectsPage({ items = projects }: { items?: Project[] }) {

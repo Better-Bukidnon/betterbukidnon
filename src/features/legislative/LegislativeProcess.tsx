@@ -87,7 +87,7 @@ const TABS = [
   { id: 'resolutions', Icon: FileEarmarkRuledFill, label: 'leg-for-resolutions' },
 ] as const;
 
-/** The two flowcharts from legacy/legislative/index.html; the toggles are aria-pressed buttons. */
+/** The two flowcharts from fce5da9:legislative/index.html; the toggles are aria-pressed buttons. */
 export function LegislativeProcess() {
   const t = useT(legislativeDictionary);
   const [active, setActive] = useState<keyof typeof FLOWS>('ordinances');

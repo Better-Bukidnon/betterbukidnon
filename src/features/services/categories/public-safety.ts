@@ -1,6 +1,6 @@
 import type { Category } from '@/features/services/types';
 
-/** Converted from legacy/services/public-safety.html. */
+/** Converted from fce5da9:services/public-safety.html. */
 export const publicSafety: Category = {
   crumb: 'safety-bc',
   icon: 'shield-fill-check',

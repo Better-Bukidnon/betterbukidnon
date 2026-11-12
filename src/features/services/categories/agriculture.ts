@@ -1,6 +1,6 @@
 import type { Category } from '@/features/services/types';
 
-/** Converted from legacy/services/agriculture.html. */
+/** Converted from fce5da9:services/agriculture.html. */
 export const agriculture: Category = {
   crumb: 'agri-bc',
   icon: 'tree-fill',

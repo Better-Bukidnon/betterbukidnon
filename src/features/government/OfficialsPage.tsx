@@ -23,7 +23,7 @@ function Member({ name, children }: { name: string; children: ReactNode }) {
   );
 }
 
-/** Same groups and order as legacy/assets/js/officials.js, rendered at build time. */
+/** Same groups and order as fce5da9:assets/js/officials.js, rendered at build time. */
 export function OfficialsPage() {
   const t = useT(governmentDictionary);
   const { governor, vice_governor: vice } = officials;

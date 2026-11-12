@@ -12,7 +12,7 @@ const withMDX = createMDX({
 
 export default function config(phase: string): NextConfig {
   return withMDX({
-    // Fully static: `next build` writes out/, and scripts/merge-legacy.js turns it into dist/.
+    // Fully static: `next build` writes out/; scripts/postbuild.js then finishes it in place.
     output: 'export',
     // /services/health is exported as services/health.html, which Cloudflare's
     // html_handling "auto-trailing-slash" serves at the same clean URL as before.

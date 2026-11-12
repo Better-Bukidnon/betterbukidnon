@@ -185,7 +185,7 @@ function Pending() {
   );
 }
 
-/** Section order matches legacy/statistics/index.html. */
+/** Section order matches fce5da9:statistics/index.html. */
 export function StatisticsPage() {
   const nav = useT(chromeDictionary);
   const t = useT(statisticsDictionary);

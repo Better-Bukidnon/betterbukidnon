@@ -1,6 +1,6 @@
 import type { Category } from '@/features/services/types';
 
-/** Converted from legacy/services/business.html. */
+/** Converted from fce5da9:services/business.html. */
 export const business: Category = {
   crumb: 'biz-bc',
   icon: 'shop',

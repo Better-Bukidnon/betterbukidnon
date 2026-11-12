@@ -139,7 +139,7 @@ function Members() {
   );
 }
 
-/** Section order matches legacy/legislative/index.html. */
+/** Section order matches fce5da9:legislative/index.html. */
 export function LegislativePage() {
   const nav = useT(chromeDictionary);
   const t = useT(legislativeDictionary);

@@ -20,7 +20,7 @@ import { cachedFetch } from '@/features/layout/cachedFetch';
 
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 
-// WMO weather codes, as in legacy/assets/js/weather-map.js.
+// WMO weather codes, as in fce5da9:assets/js/weather-map.js.
 const CODES: Record<number, [string, Icon]> = {
   0: ['Clear sky', SunFill],
   1: ['Mainly clear', CloudSunFill],

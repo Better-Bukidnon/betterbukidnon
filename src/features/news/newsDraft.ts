@@ -1,6 +1,6 @@
 import { BADGES, parseNews, type Badge, type NewsItem } from '@/features/news/newsData';
 
-/** Same limits and presets as legacy/admin/news-editor.html. */
+/** Same limits and presets as fce5da9:admin/news-editor.html. */
 export const LIMITS = { title: 120, summary: 300, category: 32, source: 40, id: 80 } as const;
 
 export const PRESET_BADGE: Record<string, Badge> = {

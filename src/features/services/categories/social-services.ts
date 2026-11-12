@@ -1,6 +1,6 @@
 import type { Category } from '@/features/services/types';
 
-/** Converted from legacy/services/social-services.html. */
+/** Converted from fce5da9:services/social-services.html. */
 export const socialServices: Category = {
   crumb: 'social-bc',
   icon: 'people-fill',
