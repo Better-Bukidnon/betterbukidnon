@@ -2,11 +2,11 @@
 
 The site is available in three languages on the **same URLs**:
 
-| Code  | Language           | Coverage                                                                         |
-| ----- | ------------------ | -------------------------------------------------------------------------------- |
-| `en`  | English            | Complete; the fallback for everything                                            |
-| `fil` | Filipino           | Nearly all interface text; all 18 office pages                                   |
-| `ceb` | Cebuano (Binisaya) | About four fifths of interface text, including all of the chrome; 4 office pages |
+| Code  | Language           | Coverage                                                                              |
+| ----- | ------------------ | ------------------------------------------------------------------------------------- |
+| `en`  | English            | Complete; the fallback for everything                                                 |
+| `fil` | Filipino           | Nearly all interface text; all 18 office pages                                        |
+| `ceb` | Cebuano (Binisaya) | About four fifths of interface text, including all of the chrome; all 18 office pages |
 
 Cebuano replaced the upstream template's Ilocano because it is the language most widely
 spoken in Bukidnon. Binukid, Higaonon and other indigenous languages would be welcome
