@@ -8,6 +8,9 @@ const PAGES = [
   '/services/health',
   '/service-details/birth-certificate',
   '/service-details/pdrrmd',
+  // Wide tables that made the old site scroll sideways on phones (#31).
+  '/service-details/civil-registrar',
+  '/service-details/provincial-health-office',
   '/government',
   '/government/officials',
   '/statistics',

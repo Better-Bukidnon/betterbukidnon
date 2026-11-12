@@ -22,6 +22,7 @@ describe('active nav item', () => {
       'https://budget.betterbukidnon.org',
       'https://saln.betterbukidnon.org',
       'https://infra.betterbukidnon.org',
+      'https://officials.betterbukidnon.org',
     ]);
   });
 });

@@ -3,6 +3,7 @@
 import {
   CashCoin,
   ConeStriped,
+  Diagram3,
   Grid3x3GapFill,
   JournalText,
   type Icon,
@@ -22,6 +23,7 @@ const ICONS: Record<string, Icon> = {
   'bi-cash-coin': CashCoin,
   'bi-journal-text': JournalText,
   'bi-cone-striped': ConeStriped,
+  'bi-diagram-3': Diagram3,
 };
 
 export function ProjectIcon({ project, className }: { project: Project; className?: string }) {
