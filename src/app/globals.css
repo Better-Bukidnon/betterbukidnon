@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-/* Palette and design tokens, one to one with legacy/assets/css/style.css :root. */
+/* Palette and design tokens, one to one with fce5da9:assets/css/style.css :root. */
 @theme {
   --font-sans: var(--font-inter), system-ui, -apple-system, 'Segoe UI', sans-serif;
 
@@ -61,6 +61,14 @@
   }
   a {
     @apply text-primary;
+  }
+  /*
+   * Links inside running text are underlined, not told apart by color alone (WCAG 1.4.1, axe
+   * link-in-text-block). :where() keeps specificity at zero, so `no-underline` still wins.
+   */
+  :where(p, dd, td, span) > a {
+    text-decoration-line: underline;
+    text-underline-offset: 2px;
   }
   /*
    * Focus ring: primary on light surfaces (about 11:1 on white). The orange accent was only about

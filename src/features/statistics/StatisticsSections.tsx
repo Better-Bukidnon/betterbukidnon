@@ -108,7 +108,8 @@ export function LguTableSection() {
         <SectionHeading title={t('stats-lgus-title')}>
           <p>{t('stats-lgus-desc')}</p>
         </SectionHeading>
-        <div className={tableWrap}>
+        {/* Focusable so keyboard users can scroll the table sideways on small screens. */}
+        <div className={tableWrap} role="region" aria-label={t('stats-lgus-caption')} tabIndex={0}>
           <table className={table}>
             <caption className="sr-only">{t('stats-lgus-caption')}</caption>
             <thead>
@@ -211,7 +212,12 @@ export function CmciSection() {
           <p>{t('stats-cities-and-municipalities-competitiveness-index')}</p>
         </SectionHeading>
         {hasCmci(cmci) ? (
-          <div className={tableWrap}>
+          <div
+            className={tableWrap}
+            role="region"
+            aria-label={t('stats-bukidnon-competitive-index')}
+            tabIndex={0}
+          >
             <table className={table}>
               <thead>
                 <tr>

@@ -149,7 +149,7 @@ export function ContactPage() {
         <section id="hotlines" className={section}>
           <div className="mb-sm">
             <div className="mb-sm flex flex-wrap items-center gap-xs [&_h2]:mb-0!">
-              <span className="inline-flex items-center gap-1 rounded-sm bg-danger/10 px-2.5 py-1 text-xs font-semibold text-danger">
+              <span className="inline-flex items-center gap-1 rounded-sm bg-danger/10 px-2.5 py-1 text-xs font-semibold text-[color-mix(in_srgb,var(--color-danger)_75%,black)]">
                 <ExclamationTriangleFill aria-hidden className="shrink-0" />
                 {t('contact-emergency')}
               </span>
@@ -197,7 +197,7 @@ export function ContactPage() {
         <section className={section}>
           <div className="mb-sm">
             <div className="mb-sm flex flex-wrap items-center gap-xs [&_h2]:mb-0!">
-              <span className="inline-flex items-center gap-1 rounded-sm bg-danger/10 px-2.5 py-1 text-xs font-semibold text-danger">
+              <span className="inline-flex items-center gap-1 rounded-sm bg-danger/10 px-2.5 py-1 text-xs font-semibold text-[color-mix(in_srgb,var(--color-danger)_75%,black)]">
                 <BuildingFill aria-hidden className="shrink-0" />
                 {t('contact-directory-badge')}
               </span>
@@ -322,7 +322,7 @@ export function ContactPage() {
         <section className={section}>
           <div className="mb-sm">
             <div className="mb-sm flex flex-wrap items-center gap-xs [&_h2]:mb-0!">
-              <span className="inline-flex items-center gap-1 rounded-sm bg-danger/10 px-2.5 py-1 text-xs font-semibold text-danger">
+              <span className="inline-flex items-center gap-1 rounded-sm bg-danger/10 px-2.5 py-1 text-xs font-semibold text-[color-mix(in_srgb,var(--color-danger)_75%,black)]">
                 <MapFill aria-hidden className="shrink-0" /> {t('contact-map-badge')}
               </span>
               <h2>{t('contact-map-title')}</h2>
@@ -353,7 +353,7 @@ export function ContactPage() {
         <section className={section}>
           <div className="mb-sm">
             <div className="mb-sm flex flex-wrap items-center gap-xs [&_h2]:mb-0!">
-              <span className="inline-flex items-center gap-1 rounded-sm bg-danger/10 px-2.5 py-1 text-xs font-semibold text-danger">
+              <span className="inline-flex items-center gap-1 rounded-sm bg-danger/10 px-2.5 py-1 text-xs font-semibold text-[color-mix(in_srgb,var(--color-danger)_75%,black)]">
                 <PeopleFill aria-hidden className="shrink-0" />
                 {t('contact-volunteers-badge')}
               </span>

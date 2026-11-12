@@ -75,7 +75,8 @@ export function LguSection() {
         <SectionHeading title={t('gov-lgus-title')}>
           <p>{t('gov-lgus-subtitle')}</p>
         </SectionHeading>
-        <div className={tableWrap}>
+        {/* Focusable so keyboard users can scroll the table sideways on small screens. */}
+        <div className={tableWrap} role="region" aria-label={t('gov-lgus-caption')} tabIndex={0}>
           <table className={table}>
             <caption className="sr-only">{t('gov-lgus-caption')}</caption>
             <thead>
