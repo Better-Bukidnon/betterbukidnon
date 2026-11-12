@@ -3,6 +3,10 @@ node_modules/
 .next/
 
 out/
+
+# Playwright output
+test-results/
+playwright-report/
 *.backup
 
 # Build-time config (see .env.example) and release archives

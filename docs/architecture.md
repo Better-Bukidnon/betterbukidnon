@@ -41,6 +41,9 @@ Workers serves that folder as static assets (see [deployment.md](deployment.md))
 └── wrangler.jsonc              Cloudflare Workers config (development + production)
 ```
 
+Code comments that cite `fce5da9:<path>` point at the pre-Next.js static site; read the file
+with `git show fce5da9:<path>` (for example `git show fce5da9:government/index.html`).
+
 Imports use the `@/` alias for `src/` and go straight to the module. There are no `index.ts`
 barrel files. Components use PascalCase file names (`NewsCard.tsx`); hooks, loaders and
 utilities use camelCase (`newsData.ts`, `useT.ts`); content and route folders use
@@ -51,18 +54,18 @@ kebab-case.
 Route files stay thin. They set metadata, list static params and render one feature
 component. For example, `src/app/news/page.tsx` renders `NewsPage` from `src/features/news/`.
 
-| Route                                                                  | Feature                                                                     |
-| ---------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `/`                                                                    | `home` (plus `search`, `weather-map`, `facebook-feed`, `news`, `volunteer`) |
-| `/services`, `/services/[category]`                                    | `services`                                                                  |
-| `/service-details/[slug]`                                              | `service-details`                                                           |
-| `/government`, `/government/officials`                                 | `government`                                                                |
-| `/statistics`                                                          | `statistics`                                                                |
-| `/legislative`, `/legislative/{ordinance,resolution}-framework`        | `legislative`                                                               |
-| `/budget`                                                              | `transparency`                                                              |
-| `/news`, `/projects`                                                   | `news`, `projects`                                                          |
-| `/contact`, `/faq`, `/terms`, `/privacy`, `/accessibility`, `/sitemap` | `legal`                                                                     |
-| `404`, `/403`, `/500`, `/offline`                                      | `errors`                                                                    |
+| Route                                                                  | Feature                                                        |
+| ---------------------------------------------------------------------- | -------------------------------------------------------------- |
+| `/`                                                                    | `home` (plus `search`, `weather-map`, `facebook-feed`, `news`) |
+| `/services`, `/services/[category]`                                    | `services`                                                     |
+| `/service-details/[slug]`                                              | `service-details`                                              |
+| `/government`, `/government/officials`                                 | `government`                                                   |
+| `/statistics`                                                          | `statistics`                                                   |
+| `/legislative`, `/legislative/{ordinance,resolution}-framework`        | `legislative`                                                  |
+| `/budget`                                                              | `transparency`                                                 |
+| `/news`, `/projects`                                                   | `news`, `projects`                                             |
+| `/contact`, `/faq`, `/terms`, `/privacy`, `/accessibility`, `/sitemap` | `legal`                                                        |
+| `404`, `/403`, `/500`, `/offline`                                      | `errors`                                                       |
 
 With `trailingSlash: false`, `/services/health` is exported as `services/health.html`.
 Cloudflare's `html_handling: auto-trailing-slash` serves it at the same clean URL the old
@@ -82,39 +85,36 @@ site used. Every URL is listed once in `src/features/seo/routes.ts` (`ROUTES`), 
    URL sections that mark it active (`services` and `service-details` highlight Services,
    `budget` highlights Transparency). The "Our Projects" dropdown is built from
    `projects.json`.
-4. `InfoBar`: exchange rates (open.er-api.com), Malaybalay weather (Open-Meteo) and
-   Philippine time
-5. `<main id="main-content">` with the page
-6. `Footer`: tagline, links, resources, "Cost to the People of Bukidnon = ₱0", partners and
+4. `<main id="main-content">` with the page
+5. `Footer`: tagline, links, resources, "Cost to the People of Bukidnon = ₱0", partners and
    the version from `public/version.json`
-7. `PwaBanners`: install and "update available" banners
+6. `PwaBanners`: install and "update available" banners
 
-The volunteer popup (`src/features/volunteer/`) is rendered by the homepage only. Because the
-chrome exists once, in React, there is nothing to copy into each page.
+Because the chrome exists once, in React, there is nothing to copy into each page. Malaybalay
+weather (Open-Meteo) is a homepage section (`WeatherWidget`), not part of the chrome.
 
 ## Features (`src/features/`)
 
-| Feature           | Contents                                                                    |
-| ----------------- | --------------------------------------------------------------------------- |
-| `layout`          | Skip link, hotline bar, header, navigation, language menu, info bar, footer |
-| `i18n`            | `LanguageProvider`, `useT()`, `locales.ts`, chrome dictionary               |
-| `home`            | Homepage sections and the Lottie animations                                 |
-| `search`          | Service search with autocomplete over `services.json`                       |
-| `services`        | `/services` and the category pages (`categories/*.ts`, `HealthPage.tsx`)    |
-| `service-details` | Office page template, MDX components, frontmatter validation                |
-| `government`      | Officials, districts, provincial offices, cities and municipalities         |
-| `statistics`      | Charts (react-chartjs-2), animated counters, per-LGU table, CMCI            |
-| `legislative`     | Ordinance and resolution lists, the two framework pages                     |
-| `transparency`    | Fiscal report and DPWH projects on `/budget`                                |
-| `news`            | News list and card, `news.json` loader, dev-only news editor                |
-| `projects`        | Status tabs, search, filters, card grid and details dialog                  |
-| `weather-map`     | Weather widget and the Google Maps embed                                    |
-| `facebook-feed`   | Facebook page plugin embed                                                  |
-| `volunteer`       | Volunteer popup dialog                                                      |
-| `pwa`             | Service-worker registration and banners                                     |
-| `seo`             | Route list (`routes.ts`) and the route-coverage test                        |
-| `legal`           | Contact, FAQ, terms, privacy, accessibility and HTML sitemap pages          |
-| `errors`          | 403, 404, 500 and offline pages                                             |
+| Feature           | Contents                                                                 |
+| ----------------- | ------------------------------------------------------------------------ |
+| `layout`          | Skip link, hotline bar, header, navigation, language menu, footer        |
+| `i18n`            | `LanguageProvider`, `useT()`, `locales.ts`, chrome dictionary            |
+| `home`            | Homepage sections                                                        |
+| `search`          | Service search with autocomplete over `services.json`                    |
+| `services`        | `/services` and the category pages (`categories/*.ts`, `HealthPage.tsx`) |
+| `service-details` | Office page template, MDX components, frontmatter validation             |
+| `government`      | Officials, districts, provincial offices, cities and municipalities      |
+| `statistics`      | Charts (react-chartjs-2), animated counters, per-LGU table, CMCI         |
+| `legislative`     | Ordinance and resolution lists, the two framework pages                  |
+| `transparency`    | Fiscal report and DPWH projects on `/budget`                             |
+| `news`            | News list and card, `news.json` loader, dev-only news editor             |
+| `projects`        | Status tabs, search, filters, card grid and details dialog               |
+| `weather-map`     | Weather widget and the Google Maps embed                                 |
+| `facebook-feed`   | Facebook page plugin embed                                               |
+| `pwa`             | Service-worker registration and banners                                  |
+| `seo`             | Route list (`routes.ts`) and the route-coverage test                     |
+| `legal`           | Contact, FAQ, terms, privacy, accessibility and HTML sitemap pages       |
+| `errors`          | 403, 404, 500 and offline pages                                          |
 
 A feature folder holds its own components, `<feature>Data.ts` loaders, an `i18n/` folder with
 `en.json`, `fil.json` and `ceb.json`, a `<feature>Dictionary.ts`, and co-located `*.test.ts(x)`
@@ -127,12 +127,12 @@ files. `src/shared/` holds only code that three or more features need: `EmptySta
 - Every page is pre-rendered. English HTML contains the full content, nav links and footer,
   so the site is readable without JavaScript.
 - Interactive pieces are client components (`'use client'`): language menu, mobile nav,
-  dropdowns, info bar, search, projects filters and dialog, volunteer popup, PWA banners.
+  dropdowns, weather widget, search, projects filters and dialog, PWA banners.
 - Browser-only libraries load with `next/dynamic` and `ssr: false` behind a placeholder of
   fixed size, so they cause no layout shift: the Chart.js charts (`StatisticsSections.tsx`).
-  Lottie, the Facebook plugin and the Google Maps iframe (`MapCard.tsx`, no API key) also load only
+  The Facebook plugin and the Google Maps iframe (`MapCard.tsx`, no API key) also load only
   in the browser.
-- Under `prefers-reduced-motion`, the marquee, Lottie animations, counters and charts do not
+- Under `prefers-reduced-motion`, the marquee, counters and charts do not
   animate.
 
 ## Data files
@@ -203,7 +203,10 @@ icons come from `react-bootstrap-icons`. Neither needs a CDN or network access a
    pre-renders all routes and writes `out/`. `src/app/sitemap.ts` writes `out/sitemap.xml`
    from `ROUTES`. Files in `public/` are copied to the root of `out/`.
 2. `scripts/postbuild.js` then:
-   - fails the build if a dev-only route (`out/admin`) was exported
+   - fails the build if a dev-only route (`out/admin`) was exported, or if `out/_headers`
+     (CSP, HSTS, X-Frame-Options) is missing
+   - copies `src/content/data/*.json` to `out/data/`, so the public data URLs from the old
+     site (`/data/news.json`, `/data/projects.json`, `/data/officials.json`, …) keep working
    - strips every `<script>` from `out/offline.html`, so the offline fallback is plain
      HTML and CSS and works without any JS chunk
    - writes `out/sw.js` from the `public/sw.js` template, filling `PRECACHE_URLS` with the
@@ -241,25 +244,31 @@ nothing to update by hand when pages or assets change.
 | `npm run lint`         | ESLint with `eslint-config-next` and `jsx-a11y`                                                             |
 | `npm run typecheck`    | `tsc --noEmit` (strict, no `any`)                                                                           |
 | `npm run format:check` | Prettier                                                                                                    |
+| `npm run test:e2e`     | After a build: Playwright smoke tests on `out/` (menus, projects dialog, 375px overflow, axe scan)          |
 | `npm run lighthouse`   | Lighthouse CI; accessibility must score 90 or more                                                          |
 
 The tests cover i18n detection, fallback and interpolation, every data validator (real files
 pass, malformed fixtures fail), search ranking and keyboard use, navigation, the projects
-page, the volunteer popup, news sorting and URL rules, and the office template (every MDX
-file renders, missing frontmatter is rejected). `vitest.config.mts` compiles MDX with the
-same plugins as `next.config.ts`, so tests render office files exactly as the build does.
+page, news sorting and URL rules, and the office template (every MDX file renders, missing
+frontmatter is rejected). `vitest.config.mts` compiles MDX with the same plugins as
+`next.config.ts`, so tests render office files exactly as the build does.
 
-GitHub Actions runs lint, typecheck, test and build on pull requests and pushes to `develop`
-(`ci.yml`), and Lighthouse CI on pull requests and pushes to `main` (`lighthouse.yml`).
+The Playwright smoke suite (`e2e/`, `playwright.config.ts`) covers what jsdom cannot: it
+serves `out/` with `scripts/serve-out.js` (clean URLs and the 404 page, like Cloudflare) and
+checks the header and mobile menu, the projects dialog, horizontal overflow at 375px and an
+axe scan of key pages. Install the browser once with `npx playwright install chromium`.
+
+GitHub Actions runs lint, typecheck, test, build, `check:routes` and the Playwright smoke suite
+on pull requests and pushes to `develop` (`ci.yml`), and Lighthouse CI on pull requests and
+pushes to `main` (`lighthouse.yml`).
 
 ## Third-party services
 
 | Service              | Purpose             | Data sent               |
 | -------------------- | ------------------- | ----------------------- |
 | Open-Meteo           | Weather             | Malaybalay coordinates  |
-| open.er-api.com      | Exchange rates      | none                    |
 | Google Maps          | Embedded map        | map coordinates         |
 | Facebook page plugin | Latest updates feed | standard Facebook embed |
 
-Fonts, icons, Chart.js and Lottie are npm packages bundled into the site, so no CDN
+Fonts, icons and Chart.js are npm packages bundled into the site, so no CDN
 is involved. There is no analytics script.
