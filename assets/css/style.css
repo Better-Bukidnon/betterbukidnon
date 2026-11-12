@@ -3117,12 +3117,10 @@ h6 {
   opacity: 1;
 }
 
-/* Mobile card-based layout - viewport < 768px */
+/* Mobile card-based layout - viewport < 768px.
+   The wrapper keeps overflow-x: auto here, so a table that is still wider than the
+   screen scrolls inside its own box and never widens the page. */
 @media (max-width: 767px) {
-  .table-responsive {
-    overflow-x: visible;
-  }
-
   .table-responsive::after {
     display: none;
   }
@@ -3196,14 +3194,16 @@ h6 {
   }
 }
 
-/* Minimum column widths to prevent truncation */
-.table-responsive th,
-.table-responsive td {
+/* Minimum column widths to prevent truncation. Only for the ordinance and resolution
+   tables (number, title, session date): other tables in a .table-responsive wrapper set
+   their own column widths. */
+.leg-table-wrap th,
+.leg-table-wrap td {
   min-width: 100px;
 }
 
-.table-responsive th:nth-child(2),
-.table-responsive td:nth-child(2) {
+.leg-table-wrap th:nth-child(2),
+.leg-table-wrap td:nth-child(2) {
   min-width: 300px;
 }
 
