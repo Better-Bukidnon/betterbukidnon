@@ -47,4 +47,13 @@ describe('validateFrontmatter', () => {
     expect(() => validateFrontmatter({ ...valid(), office: undefined }, 'x')).toThrow('office');
     expect(() => validateFrontmatter(undefined, 'x')).toThrow('no frontmatter');
   });
+
+  it('accepts an http(s) mapLink and rejects other schemes', () => {
+    const withMap = (mapLink: string) => ({ ...valid(), office: { ...valid().office, mapLink } });
+    expect(validateFrontmatter(withMap('https://maps.google.com/?q=x'), 'x').office.mapLink).toBe(
+      'https://maps.google.com/?q=x'
+    );
+    expect(() => validateFrontmatter(withMap('javascript:alert(1)'), 'x')).toThrow('mapLink');
+    expect(() => validateFrontmatter(withMap('data:text/html,x'), 'x')).toThrow('mapLink');
+  });
 });

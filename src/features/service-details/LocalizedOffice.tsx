@@ -44,15 +44,21 @@ export function LocalizedOffice({
   const s = useT(servicesDictionary);
   const t = useT(serviceDetailsDictionary);
   const [loaded, setLoaded] = useState<Loaded>();
+  // Locale whose chunk failed to load (offline, or a stale chunk after a deploy)
+  const [failed, setFailed] = useState<Locale>();
   const hasFile = locale !== 'en' && translated.includes(locale);
 
   useEffect(() => {
     if (!hasFile) return;
     let live = true;
-    loadOfficeModule(slug, locale).then((mod) => {
-      const fm = validateTranslation(mod.frontmatter, `${slug}/${locale}.mdx`);
-      if (live) setLoaded({ locale, head: fm, Body: mod.default });
-    });
+    loadOfficeModule(slug, locale)
+      .then((mod) => {
+        const fm = validateTranslation(mod.frontmatter, `${slug}/${locale}.mdx`);
+        if (live) setLoaded({ locale, head: fm, Body: mod.default });
+      })
+      .catch(() => {
+        if (live) setFailed(locale);
+      });
     return () => {
       live = false;
     };
@@ -76,7 +82,7 @@ export function LocalizedOffice({
         description={shown.summary}
       />
       <div className="mx-auto max-w-site px-sm py-lg">
-        {locale !== 'en' && !hasFile && (
+        {locale !== 'en' && !current && (!hasFile || failed === locale) && (
           <p role="note" className="mb-md rounded-base bg-bg-alt p-sm text-sm text-text-light">
             {t('sd-not-translated')}
           </p>

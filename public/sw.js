@@ -51,12 +51,6 @@ function putRuntime(request, response) {
   });
 }
 
-const networkFirst = (request) =>
-  fetch(request).then(
-    (response) => (putRuntime(request, response), response),
-    () => caches.match(request)
-  );
-
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
@@ -72,10 +66,9 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  if (url.origin !== self.location.origin) {
-    event.respondWith(networkFirst(request));
-    return;
-  }
+  // Cross-origin (Open-Meteo): left to the browser. WeatherWidget already caches it in
+  // localStorage, and a second copy here could serve stale data.
+  if (url.origin !== self.location.origin) return;
 
   // Hashed build output never changes: cache first.
   if (url.pathname.startsWith('/_next/static/')) {

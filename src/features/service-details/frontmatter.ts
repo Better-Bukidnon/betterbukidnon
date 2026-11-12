@@ -1,4 +1,5 @@
 import { isCategorySlug, type CategorySlug } from '@/features/services/categories';
+import { isHttpUrl } from '@/shared/validate';
 
 /** Parent crumb of an office: a services category, or the government page. */
 export type OfficeCategory = CategorySlug | 'government';
@@ -73,6 +74,8 @@ export function validateFrontmatter(data: unknown, file: string): OfficeFrontmat
     fail(file, '"sources" must list at least one http(s) URL');
 
   const at = `${file} office`;
+  const mapLink = text(office, 'mapLink', at, true);
+  if (mapLink && !isHttpUrl(mapLink)) fail(at, '"mapLink" must be an http(s) URL');
   return {
     ...validateTranslation(data, file),
     slug: text(data, 'slug', file),
@@ -86,7 +89,7 @@ export function validateFrontmatter(data: unknown, file: string): OfficeFrontmat
       phone: text(office, 'phone', at, true),
       email: text(office, 'email', at, true),
       hours: text(office, 'hours', at),
-      mapLink: text(office, 'mapLink', at, true),
+      mapLink,
     },
   };
 }
