@@ -2,7 +2,9 @@
 /**
  * Runs after `next build` on out/, the deploy directory:
  *
- *   1. Fails if a dev-only route (app/admin, see pageExtensions in next.config.ts) was exported.
+ *   1. Fails if a dev-only route (app/admin, see pageExtensions in next.config.ts) was exported,
+ *      or if out/_headers (CSP, HSTS, X-Frame-Options; copied from public/) is missing: without
+ *      it the site would deploy with no security headers and the build would still pass.
  *   2. Copies each nested segment-prefetch file (x/__next.a/b/__PAGE__.txt) to the flat name the
  *      router requests (x/__next.a.b.__PAGE__.txt). Without it every <Link> prefetch 404s.
  *      ponytail: workaround for vercel/next.js#85374; delete once Next exports flat names.
@@ -10,6 +12,8 @@
  *      it needs no JS chunk and never hydrates under the URL it is served for.
  *   4. Writes out/sw.js from public/sw.js with the precache list (core routes, /offline and the
  *      /_next/static files they load) and a CACHE_VERSION hashed from those files.
+ *   5. Copies src/content/data/*.json to out/data/, so the public data URLs the old site served
+ *      (/data/news.json, /data/projects.json, /data/officials.json, ...) keep working.
  */
 'use strict';
 
@@ -19,6 +23,7 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const OUT = path.join(ROOT, 'out');
+const DATA = path.join(ROOT, 'src', 'content', 'data');
 const CORE_ROUTES = ['/', '/services', '/news', '/projects', '/contact', '/offline'];
 const STATIC_FILES = [
   '/manifest.webmanifest',
@@ -83,6 +88,10 @@ function main() {
     }
   }
 
+  if (!fs.existsSync(path.join(OUT, '_headers'))) {
+    throw new Error('out/_headers not found: the site would ship without CSP or HSTS');
+  }
+
   console.log(`Flattened ${flattenSegments(OUT)} segment-prefetch files (vercel/next.js#85374)`);
 
   const offline = fileOf('/offline');
@@ -112,6 +121,11 @@ function main() {
   }
   fs.writeFileSync(path.join(OUT, 'sw.js'), sw);
   console.log(`sw.js ${version}: precaching ${urls.length} files (${routes.join(', ')})`);
+
+  const dataFiles = fs.readdirSync(DATA).filter((f) => f.endsWith('.json'));
+  fs.mkdirSync(path.join(OUT, 'data'), { recursive: true });
+  for (const f of dataFiles) fs.copyFileSync(path.join(DATA, f), path.join(OUT, 'data', f));
+  console.log(`Copied ${dataFiles.length} data files to out/data/`);
 }
 
 main();

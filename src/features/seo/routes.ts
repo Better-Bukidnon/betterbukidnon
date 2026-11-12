@@ -67,4 +67,11 @@ export const ROOT_FILES = [
   'sw.js',
   'version.json',
   'assets/images/banners/opengraph.png',
+  // Security headers for Cloudflare (public/_headers); postbuild.js also fails without it.
+  '_headers',
+  // Public data, same URLs as the pre-Next.js site (copied by scripts/postbuild.js).
+  'data/news.json',
+  'data/projects.json',
+  'data/services.json',
+  'data/officials.json',
 ];
