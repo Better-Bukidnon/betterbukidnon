@@ -15,6 +15,12 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const headerRef = useRef<HTMLElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const closeAll = () => {
+    setOpenDropdown(null);
+    setMenuOpen(false);
+  };
   const label = (link: NavLink) =>
     typeof link.label === 'string' ? t(link.label) : link.label.text;
 
@@ -23,14 +29,21 @@ export function Header() {
     if (!menuOpen && !openDropdown) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return;
-      setOpenDropdown(null);
-      setMenuOpen(false);
+      // Focus inside what is about to hide would drop to <body>: hand it to the control that
+      // opened it (the menu toggle on mobile, the submenu's chevron on desktop).
+      const focused = document.activeElement;
+      if (focused && navRef.current?.contains(focused)) {
+        const submenu = focused.closest('ul[id]');
+        const opener =
+          menuOpen || !submenu
+            ? toggleRef.current
+            : navRef.current.querySelector<HTMLElement>(`[aria-controls="${submenu.id}"]`);
+        opener?.focus();
+      }
+      closeAll();
     };
     const onClick = (e: MouseEvent) => {
-      if (!headerRef.current?.contains(e.target as Node)) {
-        setOpenDropdown(null);
-        setMenuOpen(false);
-      }
+      if (!headerRef.current?.contains(e.target as Node)) closeAll();
     };
     document.addEventListener('keydown', onKey);
     document.addEventListener('click', onClick);
@@ -44,7 +57,8 @@ export function Header() {
     // Sticky, so it floats over scrolling content: the one place a shadow marks real elevation.
     <header ref={headerRef} className="sticky top-0 z-40 bg-bg shadow-sm">
       <div className="mx-auto flex max-w-site items-center gap-sm px-sm py-xs">
-        <Link href="/" className="mr-auto shrink-0">
+        {/* Client-side navigation keeps this component mounted, so close the menu here. */}
+        <Link href="/" className="mr-auto shrink-0" onClick={closeAll}>
           {/* eslint-disable-next-line @next/next/no-img-element -- static export, unoptimized images */}
           <img
             src="/assets/images/logo/better-bukidnon-logo.svg"
@@ -56,6 +70,7 @@ export function Header() {
         </Link>
 
         <nav
+          ref={navRef}
           id="main-nav"
           aria-label={t('nav-main-label')}
           // Desktop nav from xl: eight items plus the language menu do not fit at lg.
@@ -138,6 +153,7 @@ export function Header() {
         <LanguageMenu />
 
         <button
+          ref={toggleRef}
           type="button"
           className="flex size-11 items-center justify-center rounded-base bg-secondary text-white transition-[background-color,transform] duration-150 ease-out hover:bg-primary-dark active:scale-[0.97] xl:hidden"
           aria-label={t('nav-toggle')}
