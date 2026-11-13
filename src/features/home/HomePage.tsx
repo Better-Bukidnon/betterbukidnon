@@ -83,9 +83,13 @@ function Hero() {
   const t = useT(homeDictionary);
   return (
     <section data-surface="dark" className="bg-primary text-white">
-      <div className={`${container} ${sectionPad} grid items-center gap-lg lg:grid-cols-2`}>
+      <div
+        className={`${container} ${sectionPad} grid grid-cols-1 items-center gap-lg lg:grid-cols-2`}
+      >
         <div>
-          <h1 className="mb-sm text-display font-bold">{t('hero-welcome')}</h1>
+          <h1 className="mb-sm text-display font-bold [overflow-wrap:anywhere]">
+            {t('hero-welcome')}
+          </h1>
           <p className="mb-md max-w-[36rem] text-lg text-white/90">{t('hero-subtitle')}</p>
           <div className="flex flex-wrap gap-sm">
             <Link href="/services" className={buttonOnDark}>
