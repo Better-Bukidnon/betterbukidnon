@@ -33,6 +33,7 @@ describe('parseNews', () => {
     expect(() => parseNews({ news: [item({ date: '10/03/2026' })] })).toThrow(/date/);
     expect(() => parseNews({ news: [item({ title: ' ' })] })).toThrow(/title/);
     expect(() => parseNews({})).toThrow(/array/);
+    expect(() => parseNews({ news: [item(), item()] })).toThrow(/used twice/);
   });
 
   it('formats dates without a timezone shift', () => {

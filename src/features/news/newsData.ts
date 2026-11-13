@@ -23,11 +23,15 @@ const isText = (v: unknown): v is string => typeof v === 'string' && v.trim() !=
 export function parseNews(data: unknown): NewsItem[] {
   const list = (data as { news?: unknown })?.news;
   if (!Array.isArray(list)) throw new Error('news.json: "news" must be an array');
+  // The editor finds items by id, so a duplicate would make one edit overwrite both.
+  const ids = new Set<string>();
   const items = list.map((n, i): NewsItem => {
     const where = `news.json: news[${i}]`;
     for (const field of ['id', 'title', 'category', 'summary']) {
       if (!isText(n?.[field])) throw new Error(`${where}.${field} must be a non-empty string`);
     }
+    if (ids.has(n.id)) throw new Error(`${where}.id "${n.id}" is used twice`);
+    ids.add(n.id);
     if (!/^\d{4}-\d{2}-\d{2}$/.test(n.date)) throw new Error(`${where}.date must be YYYY-MM-DD`);
     if (!BADGES.includes(n.badge)) throw new Error(`${where}.badge must be ${BADGES.join('|')}`);
     // null is what the Facebook sync writes for a post without a permalink.
