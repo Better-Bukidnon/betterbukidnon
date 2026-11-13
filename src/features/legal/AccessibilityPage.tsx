@@ -106,12 +106,15 @@ export function AccessibilityPage() {
               <div className="grid gap-sm sm:grid-cols-2">
                 <a
                   href="mailto:volunteer@betterbukidnon.org"
-                  className={`${card} flex items-start gap-sm`}
+                  className={`${card} flex min-w-0 items-start gap-sm [overflow-wrap:anywhere]`}
                 >
                   <EnvelopeFill aria-hidden className="shrink-0 text-primary" />{' '}
                   {t('a11y-volunteerbetterbukidnonorg')}
                 </a>
-                <a href="tel:+63888135741" className={`${card} flex items-start gap-sm`}>
+                <a
+                  href="tel:+63888135741"
+                  className={`${card} flex min-w-0 items-start gap-sm [overflow-wrap:anywhere]`}
+                >
                   <TelephoneFill aria-hidden className="shrink-0 text-primary" />{' '}
                   {t('a11y-capitol-phone')}
                 </a>

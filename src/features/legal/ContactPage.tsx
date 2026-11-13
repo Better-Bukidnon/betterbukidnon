@@ -77,7 +77,7 @@ export function ContactPage() {
               href="https://bukidnon.gov.ph/"
               target="_blank"
               rel="noopener noreferrer"
-              className={`${card} flex items-start gap-sm`}
+              className={`${card} flex min-w-0 items-start gap-sm [overflow-wrap:anywhere]`}
             >
               <div>
                 <Globe2 aria-hidden className="shrink-0 text-primary" />
@@ -364,7 +364,7 @@ export function ContactPage() {
           <div className="grid gap-md md:grid-cols-2">
             <a
               href="mailto:volunteer@betterbukidnon.org"
-              className={`${card} flex items-start gap-sm`}
+              className={`${card} flex min-w-0 items-start gap-sm [overflow-wrap:anywhere]`}
             >
               <div>
                 <EnvelopeFill aria-hidden className="shrink-0 text-primary" />
@@ -381,7 +381,7 @@ export function ContactPage() {
               href="https://github.com/Better-Bukidnon/betterbukidnon"
               target="_blank"
               rel="noopener noreferrer"
-              className={`${card} flex items-start gap-sm`}
+              className={`${card} flex min-w-0 items-start gap-sm [overflow-wrap:anywhere]`}
             >
               <div>
                 <Github aria-hidden className="shrink-0 text-primary" />
