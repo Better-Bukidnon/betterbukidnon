@@ -73,6 +73,8 @@ export function PwaBanners() {
       .register('/sw.js')
       .then((reg) => {
         timer = setInterval(() => reg.update(), 30 * 60_000);
+        // A version installed on an earlier visit is still waiting for the visitor's OK.
+        if (reg.waiting && navigator.serviceWorker.controller) setWaiting(reg.waiting);
         reg.addEventListener('updatefound', () => {
           const worker = reg.installing;
           worker?.addEventListener('statechange', () => {

@@ -11,13 +11,10 @@ const RUNTIME_CACHE = `bb-runtime-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline';
 const RUNTIME_LIMIT = 80;
 
+// No skipWaiting() here: a new version waits until the visitor accepts the update banner
+// (PwaBanners posts SKIP_WAITING), so a deploy never reloads a tab mid-task.
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches
-      .open(STATIC_CACHE)
-      .then((cache) => cache.addAll(PRECACHE_URLS))
-      .then(() => self.skipWaiting())
-  );
+  event.waitUntil(caches.open(STATIC_CACHE).then((cache) => cache.addAll(PRECACHE_URLS)));
 });
 
 self.addEventListener('activate', (event) => {
