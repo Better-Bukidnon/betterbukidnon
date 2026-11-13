@@ -1,43 +1,15 @@
-const SERVICE_CATEGORIES = [
-  'agriculture',
-  'business',
-  'certificates',
-  'education',
-  'environment',
-  'health',
-  'infrastructure',
-  'public-safety',
-  'social-services',
-  'tax-payments',
-];
+import { officeSlugs } from '@/features/service-details/officeData';
+import { CATEGORY_SLUGS } from '@/features/services/categories';
 
-const OFFICES = [
-  'business-permits-licensing',
-  'birth-certificate',
-  'civil-registrar',
-  'death-certificate',
-  'human-resource-management',
-  'marriage-certificate',
-  'pdrrmd',
-  'property-declaration',
-  'provincial-accounting',
-  'provincial-agriculture',
-  'provincial-assessor',
-  'provincial-budget',
-  'provincial-engineering',
-  'provincial-general-services',
-  'provincial-health-office',
-  'provincial-planning',
-  'provincial-treasurer',
-  'pswdo',
-];
-
-/** Every page URL of the site (spec §3.3). sitemap.xml and the route-coverage test read this. */
+/**
+ * Every page URL of the site (spec §3.3). sitemap.xml and the route-coverage test read this.
+ * Category and office routes come from the same sources their pages are generated from.
+ */
 export const ROUTES = [
   '/',
   '/services',
-  ...SERVICE_CATEGORIES.map((c) => `/services/${c}`),
-  ...OFFICES.map((o) => `/service-details/${o}`),
+  ...CATEGORY_SLUGS.map((c) => `/services/${c}`),
+  ...officeSlugs().map((o) => `/service-details/${o}`),
   '/government',
   '/government/officials',
   '/statistics',
