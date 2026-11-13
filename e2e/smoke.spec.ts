@@ -21,7 +21,13 @@ const PAGES = [
   '/projects',
   '/contact',
   '/faq',
+  '/privacy',
+  '/accessibility',
+  '/terms',
 ];
+
+// 360px is a common Android width; 320px is the smallest phone we support.
+const WIDTHS = [375, 360, 320];
 
 // Third parties (Google Maps, Facebook, Open-Meteo) are blocked so the suite is deterministic
 // and offline-safe; the site must still lay out and pass axe without them.
@@ -33,29 +39,34 @@ const isDesktop = (name: string) => name === 'desktop';
 
 test.describe('every key page', () => {
   for (const url of PAGES) {
-    test(`${url}: no sideways scroll at 375px`, async ({ page }, info) => {
+    test(`${url}: no sideways scroll at ${WIDTHS.join(', ')}px`, async ({ page }, info) => {
       test.skip(!isDesktop(info.project.name), 'viewport is set explicitly; run once');
-      await page.setViewportSize({ width: 375, height: 812 });
-      await page.goto(url);
-      const overflow = await page.evaluate(() => {
-        const width = document.documentElement.clientWidth;
-        const wide = [...document.querySelectorAll<HTMLElement>('body *')]
-          .filter((el) => el.getBoundingClientRect().right > width + 1)
-          // Elements inside a scroll container (tables, marquee) are fine.
-          .filter((el) => {
-            for (let p = el.parentElement; p; p = p.parentElement) {
-              const { overflowX } = getComputedStyle(p);
-              if (overflowX === 'auto' || overflowX === 'scroll' || overflowX === 'hidden')
-                return false;
-            }
-            return true;
-          })
-          .slice(0, 5)
-          .map((el) => `${el.tagName.toLowerCase()}.${el.className}`.slice(0, 120));
-        return { scrollWidth: document.documentElement.scrollWidth, width, wide };
-      });
-      expect(overflow.wide, `elements wider than the viewport on ${url}`).toEqual([]);
-      expect(overflow.scrollWidth).toBeLessThanOrEqual(overflow.width);
+      test.slow(); // one page load per width
+      for (const vw of WIDTHS) {
+        await page.setViewportSize({ width: vw, height: 812 });
+        await page.goto(url);
+        const overflow = await page.evaluate(() => {
+          const width = document.documentElement.clientWidth;
+          const wide = [...document.querySelectorAll<HTMLElement>('body *')]
+            .filter((el) => el.getBoundingClientRect().right > width + 1)
+            // Elements inside a scroll container (tables, marquee) are fine.
+            .filter((el) => {
+              for (let p = el.parentElement; p; p = p.parentElement) {
+                const { overflowX } = getComputedStyle(p);
+                if (overflowX === 'auto' || overflowX === 'scroll' || overflowX === 'hidden')
+                  return false;
+              }
+              return true;
+            })
+            .slice(0, 5)
+            .map((el) => `${el.tagName.toLowerCase()}.${el.className}`.slice(0, 120));
+          return { scrollWidth: document.documentElement.scrollWidth, width, wide };
+        });
+        expect(overflow.wide, `elements wider than ${vw}px on ${url}`).toEqual([]);
+        expect(overflow.scrollWidth, `scrollWidth at ${vw}px on ${url}`).toBeLessThanOrEqual(
+          overflow.width
+        );
+      }
     });
 
     test(`${url}: axe finds no serious or critical WCAG A/AA violations`, async ({ page }) => {
