@@ -11,12 +11,12 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [['github'], ['list']] : [['list']],
   use: {
-    baseURL: `http://localhost:${PORT}`,
+    baseURL: `http://127.0.0.1:${PORT}`,
     trace: 'retain-on-failure',
   },
   webServer: {
     command: `node scripts/serve-out.js ${PORT}`,
-    url: `http://localhost:${PORT}/`,
+    url: `http://127.0.0.1:${PORT}/`,
     reuseExistingServer: !process.env.CI,
     timeout: 30_000,
   },

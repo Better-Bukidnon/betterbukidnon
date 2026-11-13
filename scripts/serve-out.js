@@ -66,4 +66,5 @@ http
     });
     fs.createReadStream(file).pipe(res);
   })
-  .listen(PORT, () => console.log(`Serving out/ at http://localhost:${PORT}`));
+  // Loopback only, so `out/` isn't exposed on the LAN. Doesn't send `_headers` (no CSP/HSTS).
+  .listen(PORT, '127.0.0.1', () => console.log(`Serving out/ at http://127.0.0.1:${PORT}`));

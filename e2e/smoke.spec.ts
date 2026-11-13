@@ -26,7 +26,7 @@ const PAGES = [
 // Third parties (Google Maps, Facebook, Open-Meteo) are blocked so the suite is deterministic
 // and offline-safe; the site must still lay out and pass axe without them.
 test.beforeEach(async ({ page }) => {
-  await page.route(/^https?:\/\/(?!localhost[:/])/, (route) => route.abort());
+  await page.route(/^https?:\/\/(?!127\.0\.0\.1[:/])/, (route) => route.abort());
 });
 
 const isDesktop = (name: string) => name === 'desktop';
