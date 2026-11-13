@@ -1,0 +1,119 @@
+@import 'tailwindcss';
+
+/* Palette and design tokens, one to one with fce5da9:assets/css/style.css :root. */
+@theme {
+  --font-sans: var(--font-inter), system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --color-primary: #0032a0;
+  --color-primary-dark: #002170;
+  --color-secondary: #003d82;
+  --color-accent: #f77f00;
+  --color-success: #06a77d;
+  --color-danger: #d62828;
+  --color-info: #0077be;
+  --color-bg: #ffffff;
+  --color-bg-alt: #f8f9fa;
+  --color-text: #1a1a1a;
+  --color-text-light: #666666;
+
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+
+  --container-site: 1200px;
+  --radius-base: 8px;
+  /* Elevation is for things that float above the page (header, popovers); cards stay flat. */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  /* Fluid type for the three heading levels; tracking tightens as size grows. */
+  --text-display: clamp(2rem, 1.2rem + 3vw, 3.25rem);
+  --text-display--line-height: 1.1;
+  --text-display--letter-spacing: -0.02em;
+  --text-title: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+  --text-title--line-height: 1.15;
+  --text-title--letter-spacing: -0.015em;
+  --text-heading: clamp(1.375rem, 1.1rem + 1vw, 1.875rem);
+  --text-heading--line-height: 1.25;
+  --text-heading--letter-spacing: -0.01em;
+
+  /* One strong ease-out for every UI transition; the built-in curve is too weak to feel responsive. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  --animate-pop: pop 220ms cubic-bezier(0.23, 1, 0.32, 1);
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.97);
+    }
+  }
+}
+
+@layer base {
+  /* Reserve the scrollbar so locking scroll behind a dialog does not shift the page. */
+  html {
+    scrollbar-gutter: stable;
+  }
+  body {
+    @apply bg-bg font-sans text-text antialiased;
+  }
+  a {
+    @apply text-primary;
+  }
+  /*
+   * Links inside running text are underlined, not told apart by color alone (WCAG 1.4.1, axe
+   * link-in-text-block). :where() keeps specificity at zero, so `no-underline` still wins.
+   */
+  :where(p, dd, td, span) > a {
+    text-decoration-line: underline;
+    text-underline-offset: 2px;
+  }
+  /*
+   * Focus ring: primary on light surfaces (about 11:1 on white). The orange accent was only about
+   * 2.6:1 on white, under the 3:1 that non-text indicators need. Dark surfaces (hotline bar, home
+   * hero, footer) get a white ring; a light card nested inside one switches back to primary.
+   */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+  [data-surface='dark'] :focus-visible,
+  [data-surface='dark']:focus-visible {
+    outline-color: #fff;
+  }
+  [data-surface='light'] :focus-visible,
+  [data-surface='light']:focus-visible {
+    outline-color: var(--color-primary);
+  }
+  /* No page scroll behind an open modal dialog (iOS Safari 16+ honours this too). */
+  html:has(dialog[open]:modal) {
+    overflow: hidden;
+  }
+}
+
+.skip-link {
+  @apply absolute top-0 left-0 z-50 -translate-y-full bg-primary px-sm py-xs font-semibold text-white focus:translate-y-0;
+}
+
+/* Dim the page behind a modal with the same curve as the dialog's own entrance. */
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  dialog[open]::backdrop {
+    animation: backdrop-in 220ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-play-state: paused !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

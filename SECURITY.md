@@ -51,7 +51,7 @@ Include in your report:
 - No user authentication or data collection
 - No database or server-side processing
 - Static site with client-side rendering only
-- External API calls limited to weather and exchange rates
+- External API calls limited to weather (Open-Meteo)
 - No cookies or local storage for sensitive data
 
 **Data Security:**
@@ -62,11 +62,11 @@ Include in your report:
 
 ### Third-Party Services
 
-| Service          | Purpose        | Data Shared         |
-| ---------------- | -------------- | ------------------- |
-| Open-Meteo API   | Weather data   | Location (Bukidnon) |
-| ExchangeRate API | Currency rates | None                |
-| OpenStreetMap    | Map tiles      | None                |
+| Service              | Purpose            | Data Shared             |
+| -------------------- | ------------------ | ----------------------- |
+| Open-Meteo API       | Weather data       | Location (Malaybalay)   |
+| Google Maps (iframe) | Embedded maps      | Map coordinates         |
+| Facebook page plugin | Latest LGU updates | Standard Facebook embed |
 
 ## Best Practices for Contributors
 
@@ -88,7 +88,7 @@ This security policy covers:
 
 Out of scope:
 
-- Third-party services and APIs (Open-Meteo, exchange rates, OpenStreetMap, Facebook embed)
+- Third-party services and APIs (Open-Meteo, Google Maps, Facebook embed)
 - User's local environment
 - Social media accounts
 

@@ -13,7 +13,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const VERSION_FILE = path.join(__dirname, '..', 'version.json');
+// The footer reads this at build time, so bumping it here is all a release needs.
+const VERSION_FILE = path.join(__dirname, '..', 'public', 'version.json');
 const PACKAGE_FILE = path.join(__dirname, '..', 'package.json');
 
 // Read current version
@@ -77,46 +78,6 @@ try {
   fs.writeFileSync(PACKAGE_FILE, JSON.stringify(pkg, null, 2) + '\n');
 } catch (e) {
   console.warn('Warning: Could not update package.json:', e.message);
-}
-
-// Update the "Ver. X.X.X" in every page footer. The page list comes from sync-chrome.js,
-// so pages in a new section folder are found without editing this file.
-const { ROOT, findPages } = require('./sync-chrome');
-
-let filesUpdated = 0;
-const versionPattern = new RegExp('Ver\\. ' + oldVersion.replace(/\./g, '\\.'), 'g');
-
-findPages(ROOT, []).forEach(function (filePath) {
-  let content = fs.readFileSync(filePath, 'utf8');
-  if (versionPattern.test(content)) {
-    content = content.replace(versionPattern, 'Ver. ' + newVersion);
-    fs.writeFileSync(filePath, content);
-    filesUpdated++;
-  }
-  // Reset regex lastIndex
-  versionPattern.lastIndex = 0;
-});
-
-console.log('Updated ' + filesUpdated + ' HTML file(s)');
-
-// Sync version.json to react-app/public/ (consumed by React Footer at runtime)
-var reactPublicVersion = path.join(__dirname, '..', 'react-app', 'public', 'version.json');
-if (fs.existsSync(path.dirname(reactPublicVersion))) {
-  fs.copyFileSync(VERSION_FILE, reactPublicVersion);
-  console.log('Synced version.json → react-app/public/version.json');
-}
-
-// Sync version field in react-app/package.json
-var reactPkgFile = path.join(__dirname, '..', 'react-app', 'package.json');
-try {
-  if (fs.existsSync(reactPkgFile)) {
-    var reactPkg = JSON.parse(fs.readFileSync(reactPkgFile, 'utf8'));
-    reactPkg.version = newVersion;
-    fs.writeFileSync(reactPkgFile, JSON.stringify(reactPkg, null, 2) + '\n');
-    console.log('Synced version → react-app/package.json');
-  }
-} catch (e) {
-  console.warn('Warning: Could not update react-app/package.json:', e.message);
 }
 
 console.log('Done! Version is now ' + newVersion);

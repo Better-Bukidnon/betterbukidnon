@@ -7,9 +7,11 @@ one easy-to-read site, in English, Filipino and Cebuano (Binisaya). It is part o
 government website. The official site of the Provincial Government is
 [bukidnon.gov.ph](https://bukidnon.gov.ph/).
 
-The code started as a fork of the [BetterSolano](https://github.com/BetterSolano/bettersolano)
-template by Ramon Logan Jr. (MIT / CC BY 4.0). See [rebrand-from-bettersolano.md](rebrand-from-bettersolano.md)
-for what changed.
+The site is a Next.js (React 19, TypeScript) static export served by Cloudflare Workers. It
+started as a fork of the [BetterSolano](https://github.com/BetterSolano/bettersolano)
+template by Ramon Logan Jr. (MIT / CC BY 4.0) and was later rewritten in React. See
+[rebrand-from-bettersolano.md](rebrand-from-bettersolano.md) for what changed from the
+template.
 
 ## Start here
 
@@ -19,15 +21,15 @@ for what changed.
 | Understand how the code is organized               | [architecture.md](architecture.md)                           |
 | Change text, officials, hotlines, services or data | [content-guide.md](content-guide.md)                         |
 | Check or update a fact about Bukidnon              | [bukidnon-facts.md](bukidnon-facts.md)                       |
-| Add or fix a translation                           | [translations.md](translations.md)                           |
+| Add or fix a translation, or add a language        | [translations.md](translations.md)                           |
 | Deploy to betterbukidnon.org                       | [deployment.md](deployment.md)                               |
-| Use the Claude Code subagents in this repo         | [claude-code.md](claude-code.md)                             |
 | Curate the News page                               | [news-curation.md](news-curation.md)                         |
 | Pull posts from Facebook automatically             | [facebook-sync.md](facebook-sync.md)                         |
+| Use the Claude Code subagents in this repo         | [claude-code.md](claude-code.md)                             |
 | Know what was carried over from BetterSolano       | [rebrand-from-bettersolano.md](rebrand-from-bettersolano.md) |
 
-[upstream/](upstream/) holds the BetterSolano project's own migration and rollout documents,
-kept unchanged for reference. They describe Solano, not Bukidnon.
+The fork no longer tracks the BetterSolano upstream. Upstream content changes (officials,
+hotlines, facts) are ported by hand when they apply to Bukidnon.
 
 ## Ground rules
 
@@ -41,5 +43,6 @@ kept unchanged for reference. They describe Solano, not Bukidnon.
 3. **Empty is better than wrong.** Where we do not have verified Bukidnon data yet (budget,
    ordinances, DPWH projects, news), the page shows an empty state that links to the official
    source.
-4. **Accessible and light.** Plain HTML, CSS and vanilla JavaScript; works on old phones and
-   slow connections; WCAG 2.1 AA; Lighthouse accessibility score of 90 or higher.
+4. **Accessible and light.** Pre-rendered HTML that is readable without JavaScript, works on
+   old phones and slow connections, meets WCAG 2.1 AA and scores 90 or more for accessibility
+   in Lighthouse.

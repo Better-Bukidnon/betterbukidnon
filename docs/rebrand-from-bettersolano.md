@@ -5,6 +5,10 @@ a civic portal for the **Municipality of Solano, Nueva Vizcaya**. It was convert
 for the **Province of Bukidnon** on 2026-11-01. This page records what changed, and why, so the
 next person does not have to reverse-engineer it.
 
+The site was later rewritten in React (Next.js), so the HTML pages, `assets/js/` scripts and
+`translations.js` mentioned below no longer exist. Data file paths have been updated to the
+current layout; see [architecture.md](architecture.md) for how the site works now.
+
 ## Scope change: municipality → province
 
 A province does different work from a municipality. The conversion did more than swap names:
@@ -23,7 +27,7 @@ A province does different work from a municipality. The conversion did more than
 ### Branding
 
 - BetterSolano.org → BetterBukidnon.org everywhere (titles, meta tags, canonical URLs,
-  sitemap, manifest, service worker cache names, React app).
+  sitemap, manifest, service worker cache names).
 - New logo and favicon: the Philippine sun over a silhouette of Bukidnon province (outline
   from OpenStreetMap data, © OpenStreetMap contributors, ODbL). The sun was later replaced
   with a panika, the fan-shaped headdress Bukidnon women wear at rituals and festivities,
@@ -46,7 +50,7 @@ A province does different work from a municipality. The conversion did more than
 - Map and weather point to the Provincial Capitol in Malaybalay City (8.1575° N, 125.1278° E).
 - Removed Solano's Mayor's Office appointment system link and the Solano Quiz.
 
-### Pages renamed, added and removed (`service-details/`)
+### Pages renamed, added and removed (`/service-details/`)
 
 | Before                                                                                                                                                                                        | After                                      |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
@@ -63,12 +67,12 @@ Solano's records were removed rather than relabelled. These data files are now *
 their pages show an empty state that links to the official source, until someone adds
 verified Bukidnon data:
 
-- `data/ordinances.json`, `data/resolutions.json`
-- `data/fiscal_transparency.json`, `data/dpwh-projects.json`
-- `data/competitive-index.json`
-- `data/news.json`
+- `src/content/data/ordinances.json`, `resolutions.json`
+- `src/content/data/fiscal_transparency.json`, `dpwh-projects.json`
+- `src/content/data/competitive-index.json`
+- `src/content/data/news.json`
 
-`data/officials.json`, `data/demographics.json` and `data/services.json` hold Bukidnon data.
+`src/content/data/officials.json`, `demographics.json` and `services.json` hold Bukidnon data.
 
 ### Languages
 
@@ -83,18 +87,19 @@ verified Bukidnon data:
   Bukidnon visitors would have been reported into another project's analytics.
 - Office emails on `@solano.gov.ph` were removed. No `@bukidnon.gov.ph` addresses could be
   verified, so none were added.
-- Deployment is Cloudflare Workers (see [deployment.md](deployment.md)); the cPanel files remain
-  as a legacy option.
+- Deployment is Cloudflare Workers (see [deployment.md](deployment.md)). The cPanel files were
+  removed in the React cutover.
 
 ### Repository
 
 - Added `docs/` (this folder), `docs/bukidnon-facts.md` as the single source of province facts,
   and `.claude/agents/` with 32 Claude Code subagents (see [claude-code.md](claude-code.md)).
-- Moved BetterSolano's own migration and rollout documents to [upstream/](upstream/).
+- Kept BetterSolano's own migration and rollout documents in `docs/upstream/` until the React
+  cutover, which deleted them because they describe Solano. Git history still has them.
 - Removed BetterSolano's one-off Python translation scripts (`scripts/translate-pass*.py`,
   `translate-remaining.py`, `i18n-upgrade.py`, `add-missing-keys.py`, `add-quiz-keys.py`,
   `fix-footer-quiz-copyright.py`). They edited the Ilocano dictionary and the quiz links,
-  neither of which exists any more, and would damage `translations.js` if run.
+  neither of which exists any more.
 - Removed the unused `assets/js/statistics.js`, which still held Solano barangay data.
 - `LICENSE` keeps Ramon Logan Jr.'s copyright notice, as the MIT and CC BY 4.0 licenses
   require, and adds the BetterBukidnon contributors.

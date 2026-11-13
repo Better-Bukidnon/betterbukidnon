@@ -2,11 +2,13 @@
 
 ## Requirements
 
-- Node.js 20 or newer (the build uses `npx`, Babel, Terser, clean-css and html-minifier)
-- Python 3 (local web server)
+- Node.js 20.9 or newer (CI uses Node 22)
 - Git
-- Optional: [Wrangler](https://developers.cloudflare.com/workers/wrangler/) for deploying
-  (`npx wrangler` works without a global install)
+- Optional: [Wrangler](https://developers.cloudflare.com/workers/wrangler/) for previewing
+  and deploying (`npx wrangler` works without a global install)
+
+No Python, no global build tools and no network access are needed for a build: fonts, icons
+and all site data are local.
 
 ## Run the site locally
 
@@ -14,64 +16,49 @@
 git clone https://github.com/Better-Bukidnon/betterbukidnon.git
 cd betterbukidnon
 npm install
-npm run dev            # http://localhost:8000
+npm run dev            # http://localhost:3000
 ```
 
-`npm run dev` serves the source files as they are, with no build step. Pages link to each
-other with clean URLs (`/services/health`, not `/services/health.html`). Python's built-in
-server doesn't resolve those, so for clicking around use the clean-URL server instead:
+`npm run dev` starts the Next.js development server with hot reload. Clean URLs
+(`/services/health`, `/service-details/pswdo`) work as they do in production. The dev-only
+news editor is at `/admin/news-editor` (see [news-curation.md](news-curation.md)).
 
-```bash
-python3 serve.py -d .  # source files on http://localhost:8888, resolves /page to /page.html
-python3 serve.py       # same for the built dist/ folder
-```
+The service worker is registered only in production builds, so it never caches anything
+while you develop.
 
 ## Build for production
 
 ```bash
-npm run build          # bumps the patch version, then builds dist/
-bash build.sh --no-bump
-bash build.sh --no-react   # skip the Next.js build (faster)
-npm run serve:dist     # preview dist/ on http://localhost:8080
+npm run build          # next build + scripts/postbuild.js, writes out/
+npm run check:routes   # checks that every route and root file exists in out/
 ```
 
-`build.sh` copies the site into `dist/` (leaving out development files such as `docs/`,
-`scripts/`, `tests/`, `admin/` and `react-app/`), builds the React app and merges its
-`/services/health` page, then minifies HTML, CSS and JavaScript. See
-[architecture.md](architecture.md#build-pipeline) for the details.
+`out/` is the complete static site. To preview it with the same URL handling Cloudflare uses
+(`html_handling` and the 404 page from `wrangler.jsonc`):
+
+```bash
+npx wrangler dev
+```
+
+The build does not bump the version. See [architecture.md](architecture.md#build-pipeline)
+for what each step does.
 
 ## Tests and checks
 
 ```bash
-npm run format:check   # Prettier
-npm test               # Playwright (volunteer popup specs); needs browsers:
-npx playwright install
-npm run lighthouse     # Lighthouse CI against a running dist/ server
+npm test               # Vitest + React Testing Library
+npm run lint           # ESLint (next + jsx-a11y)
+npm run typecheck      # tsc --noEmit
+npm run format:check   # Prettier (npm run format to fix)
+npm run lighthouse     # Lighthouse CI (lhci autorun)
 ```
 
-GitHub Actions runs Lighthouse CI on pushes and pull requests to `main`
-(`.github/workflows/lighthouse.yml`). Accessibility must score 90 or more.
+Run one test file while you work, for example `npx vitest run src/features/news`, or
+`npx vitest` for watch mode.
 
-### Phone screenshots
-
-```bash
-npm run screenshots:mobile
-```
-
-Saves the first screen and the full page of every page at 320, 375 and 412 px wide to
-`screenshots/` (ignored by git and left out of the build), and lists any page that scrolls
-sideways. It uses your installed Google Chrome; pass `--browser=chromium` or
-`--browser=firefox` to use a browser from `npx playwright install` instead. Narrow it down with
-`--pages=home,services,service-details/civil-registrar` and `--widths=375`: a folder name is
-that folder's index page, and `folder/name` is another page in it.
-
-For before/after images in a pull request, run it on `develop` and on your branch with
-different output folders:
-
-```bash
-git switch develop && npm run screenshots:mobile -- --out=screenshots/before
-git switch my-branch && npm run screenshots:mobile -- --out=screenshots/after
-```
+GitHub Actions runs lint, typecheck, test and build on pull requests to `develop`
+(`.github/workflows/ci.yml`). Lighthouse CI runs on pushes and pull requests to `main`
+(`.github/workflows/lighthouse.yml`); accessibility must score 90 or more.
 
 ## Branches
 
@@ -85,8 +72,12 @@ See [deployment.md](deployment.md).
 
 ## Your first change
 
-1. Read [content-guide.md](content-guide.md) for where the text you want to change lives.
-2. Remember that most visible text is also in `assets/js/translations.js`. Changing only the
-   HTML is not enough (see [translations.md](translations.md)).
-3. Run the site, check the page in English, Filipino and Cebuano, and check it at phone width.
-4. Open a pull request into `develop`.
+1. Read [architecture.md](architecture.md) for where code lives and
+   [content-guide.md](content-guide.md) for where content lives.
+2. Visible text lives in each feature's `i18n/en.json` (and `fil.json`, `ceb.json`), not in
+   the components. Change all three languages, or at least English (see
+   [translations.md](translations.md)).
+3. Run `npm run dev`, check the page in English, Filipino and Cebuano, and at phone width
+   (320–412px).
+4. Run `npm test`, `npm run lint` and `npm run typecheck`.
+5. Open a pull request into `develop`.

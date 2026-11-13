@@ -1,0 +1,19 @@
+# Cloudflare static-assets headers.
+#
+# CSP decision (M1): script-src keeps 'unsafe-inline'. Next's static export inlines per-page
+# bootstrap scripts (self.__next_f.push) whose hashes change on every build; hashes would
+# need a post-build rewrite of this file. Fonts and icons are self-hosted, so no CDN origins
+# are listed. Third parties: Open-Meteo (fetch), Google Maps and the Facebook page plugin (iframes).
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https:; connect-src 'self' blob: https://api.open-meteo.com; frame-src 'self' https://www.google.com https://www.facebook.com https://web.facebook.com https://staticxx.facebook.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+  X-Frame-Options: SAMEORIGIN
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/sw.js
+  Cache-Control: no-cache

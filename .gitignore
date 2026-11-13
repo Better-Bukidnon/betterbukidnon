@@ -1,19 +1,13 @@
 .DS_Store
 node_modules/
-dist/
 .next/
-react-app/out/
-out/
-*.backup
 
-# Playwright
+out/
+
+# Playwright output
 test-results/
 playwright-report/
-blob-report/
-.playwright/
-
-# Output of npm run screenshots:mobile
-screenshots/
+*.backup
 
 # Build-time config (see .env.example) and release archives
 .env

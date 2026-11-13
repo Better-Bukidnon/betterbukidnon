@@ -6,8 +6,8 @@ are available alongside your own. Claude picks one automatically when a task mat
 description, or you can ask for one by name:
 
 ```
-> Use the accessibility-tester agent to audit service-details/pswdo.html
-> Have the seo-specialist review the meta tags on the homepage
+> Use the accessibility-tester agent to audit src/features/service-details/OfficePage.tsx
+> Have the seo-specialist review the metadata in src/app/layout.tsx
 ```
 
 The agent files are copied unmodified from
@@ -16,18 +16,18 @@ The agent files are copied unmodified from
 
 ## What's included and when to use it
 
-| Area                          | Agents                                                                                                   | Typical use here                                                  |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| Front end                     | `frontend-developer`, `ui-designer`, `javascript-pro`                                                    | Page layout, CSS, the vanilla JS in `assets/js/`                  |
-| React app                     | `react-specialist`, `nextjs-developer`, `typescript-pro`                                                 | `react-app/` (the `/services/health` page)                        |
-| Scripts                       | `python-pro`                                                                                             | Maintenance scripts in `scripts/`                                 |
-| Quality                       | `code-reviewer`, `debugger`, `qa-expert`, `test-automator`, `ui-ux-tester`                               | Reviews, bug hunts, Playwright tests in `tests/`                  |
-| Accessibility and performance | `accessibility-tester`, `performance-engineer`                                                           | WCAG 2.1 AA checks, Lighthouse scores, page weight                |
-| Security                      | `security-auditor`                                                                                       | Read-only audits (CSP, third-party scripts, data exposure)        |
-| Build and deploy              | `build-engineer`, `deployment-engineer`, `devops-engineer`, `dependency-manager`, `git-workflow-manager` | `build.sh`, `wrangler.jsonc`, GitHub Actions, npm updates         |
-| Docs                          | `documentation-engineer`, `technical-writer`, `readme-generator`, `docs-drift-editor`                    | Keeping `docs/` and `README.md` accurate                          |
-| Content                       | `content-quality-editor`, `ux-microcopy-reviewer`, `seo-specialist`, `ux-researcher`                     | Plain-language page text, button labels, meta tags, user research |
-| Research                      | `research-analyst`, `data-researcher`, `search-specialist`                                               | Finding and verifying public data about Bukidnon                  |
+| Area                          | Agents                                                                                                   | Typical use here                                                    |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Front end                     | `frontend-developer`, `ui-designer`, `javascript-pro`                                                    | Page layout, Tailwind styling, client components                    |
+| React app                     | `react-specialist`, `nextjs-developer`, `typescript-pro`                                                 | Routes in `src/app/`, features in `src/features/`                   |
+| Scripts                       | `python-pro`                                                                                             | General scripting help (the scripts in `scripts/` are Node.js)      |
+| Quality                       | `code-reviewer`, `debugger`, `qa-expert`, `test-automator`, `ui-ux-tester`                               | Reviews, bug hunts, Vitest + React Testing Library tests            |
+| Accessibility and performance | `accessibility-tester`, `performance-engineer`                                                           | WCAG 2.1 AA checks, Lighthouse scores, page weight                  |
+| Security                      | `security-auditor`                                                                                       | Read-only audits (CSP in `public/_headers`, third parties, data)    |
+| Build and deploy              | `build-engineer`, `deployment-engineer`, `devops-engineer`, `dependency-manager`, `git-workflow-manager` | `next.config.ts`, `scripts/postbuild.js`, `wrangler.jsonc`, Actions |
+| Docs                          | `documentation-engineer`, `technical-writer`, `readme-generator`, `docs-drift-editor`                    | Keeping `docs/` and `README.md` accurate                            |
+| Content                       | `content-quality-editor`, `ux-microcopy-reviewer`, `seo-specialist`, `ux-researcher`                     | Plain-language page text, button labels, metadata, user research    |
+| Research                      | `research-analyst`, `data-researcher`, `search-specialist`                                               | Finding and verifying public data about Bukidnon                    |
 
 ## Using research agents responsibly
 
