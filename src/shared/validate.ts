@@ -7,9 +7,11 @@ export const isText = (v: unknown): v is string => typeof v === 'string' && v.tr
 export const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 /** External links must be http(s) (no javascript:, data: …). */
 export const isHttpUrl = (v: unknown): v is string => isText(v) && /^https?:\/\//i.test(v);
+/** The href as a browser parses it: tabs and newlines removed, outer whitespace trimmed. */
+export const normalizeHref = (v: string) => v.replace(/[\t\n\r]/g, '').trim();
 /** Hrefs content may use: site paths (not `//host` or `/\host`), fragments, http(s), mailto:, tel:. */
 export const isSafeHref = (v: unknown): v is string =>
-  isText(v) && /^(\/(?![/\\])|#|https?:\/\/|mailto:|tel:)/i.test(v.trim());
+  isText(v) && /^(\/(?![/\\])|#|https?:\/\/|mailto:|tel:)/i.test(normalizeHref(v));
 export const isIsoDate = (v: unknown): v is string =>
   isText(v) && /^\d{4}-\d{2}-\d{2}$/.test(v) && !Number.isNaN(Date.parse(v));
 

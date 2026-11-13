@@ -14,6 +14,10 @@ describe('isSafeHref', () => {
   it.each([
     '//evil.example',
     '/\\evil.example',
+    // Browsers drop tabs and newlines, which would turn these into //evil.example.
+    '/\t/evil.example',
+    '/\n/evil.example',
+    '\t//evil.example',
     'javascript:alert(1)',
     'data:text/html,x',
     'www.x.org',

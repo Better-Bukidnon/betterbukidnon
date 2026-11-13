@@ -2,16 +2,17 @@ import type { MDXComponents } from 'mdx/types';
 import type { ComponentProps, ReactNode } from 'react';
 import { InfoCircleFill } from 'react-bootstrap-icons';
 import { card, tableWrap } from '@/shared/ui';
-import { isSafeHref } from '@/shared/validate';
+import { isSafeHref, normalizeHref } from '@/shared/validate';
 
 type Titled = { title?: string; children?: ReactNode };
 
 /** Renders only allowlisted schemes; anything else (javascript:, data: …) becomes plain text. */
 function Link({ href = '', children, ...rest }: ComponentProps<'a'>) {
-  if (!isSafeHref(href)) return <span>{children}</span>;
-  const external = /^https?:/i.test(href);
+  const url = normalizeHref(href);
+  if (!isSafeHref(url)) return <span>{children}</span>;
+  const external = /^https?:/i.test(url);
   return (
-    <a href={href} {...(external && { target: '_blank', rel: 'noopener noreferrer' })} {...rest}>
+    <a href={url} {...(external && { target: '_blank', rel: 'noopener noreferrer' })} {...rest}>
       {children}
     </a>
   );
