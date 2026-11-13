@@ -9,7 +9,7 @@ type Titled = { title?: string; children?: ReactNode };
 /** Renders only allowlisted schemes; anything else (javascript:, data: …) becomes plain text. */
 function Link({ href = '', children, ...rest }: ComponentProps<'a'>) {
   if (!isSafeHref(href)) return <span>{children}</span>;
-  const external = /^https?:/.test(href);
+  const external = /^https?:/i.test(href);
   return (
     <a href={href} {...(external && { target: '_blank', rel: 'noopener noreferrer' })} {...rest}>
       {children}
