@@ -34,25 +34,25 @@
     {
       "name": "Services",
       "short_name": "Services",
-      "url": "/services/?source=pwa",
+      "url": "/services?source=pwa",
       "icons": [{ "src": "/assets/images/logo/favicon.svg", "sizes": "any" }]
     },
     {
       "name": "Contact & Hotlines",
       "short_name": "Contact",
-      "url": "/contact/?source=pwa",
+      "url": "/contact?source=pwa",
       "icons": [{ "src": "/assets/images/logo/favicon.svg", "sizes": "any" }]
     },
     {
       "name": "Government",
       "short_name": "Government",
-      "url": "/government/?source=pwa",
+      "url": "/government?source=pwa",
       "icons": [{ "src": "/assets/images/logo/favicon.svg", "sizes": "any" }]
     },
     {
       "name": "Transparency",
       "short_name": "Budget",
-      "url": "/budget/?source=pwa",
+      "url": "/budget?source=pwa",
       "icons": [{ "src": "/assets/images/logo/favicon.svg", "sizes": "any" }]
     }
   ],

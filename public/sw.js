@@ -53,12 +53,17 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
   if (request.method !== 'GET' || !url.protocol.startsWith('http')) return;
 
-  // Pages: network first, then the cached copy, then offline.html.
+  // Pages: network first, then the cached copy, then offline.html. ignoreSearch so a PWA shortcut
+  // like /services?source=pwa still finds the precached /services.
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
         .then((response) => (putRuntime(request, response), response))
-        .catch(() => caches.match(request).then((cached) => cached || caches.match(OFFLINE_URL)))
+        .catch(() =>
+          caches
+            .match(request, { ignoreSearch: true })
+            .then((cached) => cached || caches.match(OFFLINE_URL))
+        )
     );
     return;
   }
