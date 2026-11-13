@@ -56,7 +56,8 @@ export function LocalizedOffice({
         const fm = validateTranslation(mod.frontmatter, `${slug}/${locale}.mdx`);
         if (live) setLoaded({ locale, head: fm, Body: mod.default });
       })
-      .catch(() => {
+      .catch((err: unknown) => {
+        console.warn(`Could not load the ${locale} text for ${slug}`, err);
         if (live) setFailed(locale);
       });
     return () => {
