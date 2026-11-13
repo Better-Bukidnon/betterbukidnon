@@ -31,7 +31,10 @@ export function useT<K extends string>(dict: Dictionary<K>) {
     const load = locale === 'en' ? undefined : dict.load[locale];
     if (!load) return;
     let live = true;
-    load().then((mod) => live && setLoaded({ locale, strings: mod.default }));
+    // On failure (offline, stale chunk after a deploy) the English strings stay.
+    load()
+      .then((mod) => live && setLoaded({ locale, strings: mod.default }))
+      .catch((err) => console.warn(`useT: ${locale} strings failed to load`, err));
     return () => {
       live = false;
     };
