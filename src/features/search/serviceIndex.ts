@@ -16,8 +16,13 @@ export interface Service {
 
 const isText = (v: unknown): v is string => typeof v === 'string' && v.trim() !== '';
 
-/** "../service-details/pswdo.html" or "../government/" -> "/service-details/pswdo", "/government". */
-const cleanUrl = (url: string) => '/' + url.replace(/^\.\.\//, '').replace(/(\.html|\/)$/, '');
+/**
+ * "../service-details/pswdo.html", "/service-details/pswdo.html" or "../government/" ->
+ * "/service-details/pswdo", "/government". Every leading "../" and "/" goes, so the result
+ * can never be a protocol-relative //host URL.
+ */
+const cleanUrl = (url: string) =>
+  '/' + url.replace(/^(\.\.\/|\/)+/, '').replace(/(\.html|\/)$/, '');
 
 /** Throws at build time, so a malformed services.json never ships a broken search. */
 export function parseServices(data: unknown): Service[] {

@@ -29,6 +29,17 @@ describe('parseServices', () => {
       })
     ).toThrow(/site path/);
   });
+
+  it('never produces a protocol-relative //host URL', () => {
+    const base = { id: 'x', title: 'X', category: 'C', categoryId: 'c', description: 'D' };
+    const parse = (url: string) =>
+      parseServices({ services: [{ ...base, keywords: ['k'], url }] })[0].url;
+    expect(['/service-details/pswdo.html', '//evil', '../../x/'].map(parse)).toEqual([
+      '/service-details/pswdo',
+      '/evil',
+      '/x',
+    ]);
+  });
 });
 
 describe('searchServices', () => {
