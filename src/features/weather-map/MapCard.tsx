@@ -21,7 +21,6 @@ export function MapCard() {
         title={t('home-map-iframe-title')}
         src={EMBED_SRC}
         loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
         allowFullScreen
         className="size-full border-0"
       />
