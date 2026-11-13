@@ -26,7 +26,7 @@ export function PrivacyPage() {
       />
       <div className={prose}>
         <section className={section}>
-          <div className="grid gap-lg lg:grid-cols-[16rem_1fr]">
+          <div className="grid grid-cols-1 gap-lg lg:grid-cols-[16rem_1fr]">
             <aside className={`${card} self-start lg:sticky lg:top-md`}>
               <h4>
                 <ListUl aria-hidden className="shrink-0 text-primary" /> {t('privacy-contents')}
@@ -228,12 +228,12 @@ export function PrivacyPage() {
                     or unauthorized use of personal data
                   </li>
                 </ul>
-                <div className="mb-md flex gap-sm rounded-base border-l-4 border-primary bg-bg-alt p-md">
+                <div className="mb-md flex flex-wrap gap-sm rounded-base border-l-4 border-primary bg-bg-alt p-md">
                   <h4>
                     <PersonCheck aria-hidden className="shrink-0 text-primary" />{' '}
                     {t('privacy-exercising-your-rights')}
                   </h4>
-                  <p>
+                  <p className="min-w-0 [overflow-wrap:anywhere]">
                     {t('privacy-exercise-rights-1')}{' '}
                     <a href="mailto:volunteer@betterbukidnon.org">
                       {t('privacy-volunteerbetterbukidnonorg')}
