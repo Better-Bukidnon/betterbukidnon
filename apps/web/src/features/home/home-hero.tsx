@@ -27,7 +27,7 @@ function HeroSearch() {
         <button
           type="submit"
           aria-label="Search"
-          className="flex size-12 shrink-0 cursor-pointer items-center justify-center rounded-[10px] border-0 bg-linear-135 from-primary to-[#0044cc] text-[1.125rem] text-white shadow-[0_2px_8px_rgba(0,50,160,0.3)] transition-all hover:-translate-y-px hover:from-primary-dark hover:to-[#003399] hover:shadow-[0_4px_12px_rgba(0,50,160,0.4)] active:translate-y-0"
+          className="flex size-12 shrink-0 cursor-pointer items-center justify-center rounded-[10px] border-0 bg-linear-135 from-primary to-[#0044cc] text-[1.125rem] leading-[normal] text-white shadow-[0_2px_8px_rgba(0,50,160,0.3)] transition-all hover:-translate-y-px hover:from-primary-dark hover:to-[#003399] hover:shadow-[0_4px_12px_rgba(0,50,160,0.4)] active:translate-y-0"
         >
           <Icon name="arrow-right" />
         </button>
