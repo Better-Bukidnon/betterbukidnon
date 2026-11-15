@@ -317,7 +317,9 @@ function CapitolMap() {
       <div
         role="application"
         aria-label="Interactive map of Bukidnon"
-        className="relative z-0 h-75 bg-[#f5f5f5] max-sm:h-60"
+        // Legacy #map-container: flex: 1 from a 300px minimum, so the map fills the card when the
+        // weather card beside it is taller.
+        className="relative z-0 min-h-75 flex-1 bg-[#f5f5f5] max-sm:min-h-60"
       >
         {/* Leaflet owns this element; the iframe below covers it until Leaflet is ready. */}
         <div ref={container} className="h-full" />
