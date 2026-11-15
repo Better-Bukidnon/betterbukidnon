@@ -63,10 +63,14 @@ function showInstallBanner() {
 // ─── Register Service Worker with seamless updates ──────────────────────────
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function () {
-    if (
-      window.location.hostname === 'localhost' ||
-      window.location.hostname === '127.0.0.1'
-    ) {
+    var disableSwFlag = false;
+    try {
+      disableSwFlag = new URLSearchParams(window.location.search).get('no-sw') === '1';
+    } catch (e) {
+      disableSwFlag = false;
+    }
+
+    if (disableSwFlag) {
       var hadSw = !!navigator.serviceWorker.controller;
       navigator.serviceWorker.getRegistrations().then(function (regs) {
         return Promise.all(

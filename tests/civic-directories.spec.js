@@ -33,6 +33,22 @@ test.describe('Civic Directories & Route Smoke Tests', () => {
     await expect(attribution).toContainText('OpenStreetMap');
   });
 
+  test('Weather widget shows live weather unavailable state for non-default LGU when API fails', async ({
+    page,
+  }) => {
+    await page.route('**/api.open-meteo.com/**', (route) => route.abort('failed'));
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.evaluate(() => {
+      if (typeof window.updateBukidnonWeather === 'function') {
+        window.updateBukidnonWeather(7.9042, 125.0928, 'Valencia City, Bukidnon');
+      }
+    });
+    const widget = page.locator('#weather-container .weather-widget--unavailable');
+    await expect(widget).toBeVisible();
+    await expect(widget).toContainText('Live weather unavailable');
+    await expect(widget).toContainText('Valencia City, Bukidnon');
+  });
+
   test('Contact directory renders cards, filters, and supports copy', async ({ page }) => {
     await page.goto('/contact/', { waitUntil: 'domcontentloaded' });
     const cards = page.locator('#contacts-directory-grid .bb-card');
