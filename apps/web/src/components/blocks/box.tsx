@@ -16,11 +16,14 @@ export function Prose({ children }: { children: React.ReactNode }) {
 }
 
 type ListOptions = {
-  icon: IconName
+  icon?: IconName
   note?: string
   boxed?: boolean
-  /** `checklist`: tiles with a green check; `links`: a plain list of links. */
-  variant?: 'checklist' | 'links'
+  /**
+   * `checklist`: tiles with a green check; `links`: a plain list of links; `compact`: the
+   * certificate pages' tighter list (decimal numbers for steps, a small icon for bullets).
+   */
+  variant?: 'checklist' | 'links' | 'compact' | 'plain'
 }
 const ListContext = createContext<ListOptions>({ icon: 'check-circle-fill' })
 
@@ -65,10 +68,11 @@ export function BulletList({ children }: { children?: React.ReactNode }) {
   const { note, variant } = useContext(ListContext)
   if (variant === 'checklist')
     return (
-      <ul className="checklist mt-6 grid list-none grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 p-0">
+      <ul className="checklist mt-6 grid list-none first:mt-0 grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 p-0">
         {children}
       </ul>
     )
+  if (variant === 'plain') return <ul>{children}</ul>
   if (variant === 'links') return <ul className="m-0 list-none p-0 text-[0.8125rem]">{children}</ul>
   return (
     <ul className={listClass}>
@@ -79,7 +83,18 @@ export function BulletList({ children }: { children?: React.ReactNode }) {
 }
 
 export function NumberedList({ children }: { children?: React.ReactNode }) {
+  const { variant } = useContext(ListContext)
   let number = 0
+  if (variant === 'compact')
+    return (
+      <ol className="m-0 list-decimal pl-[18px] text-[0.75rem] text-ink">
+        {Children.map(children, (child) =>
+          isValidElement<{ ordered?: boolean }>(child)
+            ? cloneElement(child, { ordered: true })
+            : child,
+        )}
+      </ol>
+    )
   return (
     <ol className={listClass}>
       {Children.map(children, (child) =>
@@ -94,8 +109,11 @@ export function NumberedList({ children }: { children?: React.ReactNode }) {
 export function ListItem({
   icon,
   bare = false,
+  ordered = false,
   children,
 }: {
+  /** Set by a compact numbered list: a plain numbered item. */
+  ordered?: boolean
   icon?: IconName
   /** Put the children in the list item directly instead of in a span. */
   bare?: boolean
@@ -105,16 +123,29 @@ export function ListItem({
   if (list.variant === 'checklist')
     return (
       <li className="flex items-center gap-2 rounded-site bg-surface-alt px-3 py-2.5 text-[0.875rem]">
-        <Icon name="check-circle-fill" className="text-success" />
+        <Icon name={list.icon ?? 'check-circle-fill'} className="text-success" />
         <span>{children}</span>
       </li>
     )
+  if (list.variant === 'plain') return <li>{children}</li>
   if (list.variant === 'links')
     return <li className="mb-2 [&_a]:flex [&_a]:items-center [&_a]:gap-1.5">{children}</li>
+  if (list.variant === 'compact') {
+    if (ordered) return <li className="py-[3px] leading-[1.45]">{children}</li>
+    const itemIcon = icon ?? list.icon
+    return (
+      <li className="flex items-start gap-1.5 py-1 text-[0.75rem] text-ink">
+        {itemIcon && (
+          <Icon name={itemIcon} className="mt-[3px] shrink-0 text-[0.625rem] text-primary" />
+        )}
+        {isLink(children) ? children : <span>{children}</span>}
+      </li>
+    )
+  }
   return (
     <li className="flex items-start gap-2 border-b border-black/4 py-1.5 text-[0.75rem] text-ink last:border-b-0">
       <Icon
-        name={icon ?? list.icon}
+        name={icon ?? list.icon ?? 'check-circle-fill'}
         className={cn(
           'mt-0.5 shrink-0 text-[0.6875rem] text-primary',
           // Legacy `.info-box i` adds a 16px bottom margin to list icons in boxes, not in cards.
@@ -122,11 +153,7 @@ export function ListItem({
         )}
       />
       {/* Legacy wraps item text in a span, but puts links in the list item directly. */}
-      {bare || (isValidElement(children) && children.type === 'a') ? (
-        children
-      ) : (
-        <span>{children}</span>
-      )}
+      {bare || isLink(children) ? children : <span>{children}</span>}
     </li>
   )
 }
@@ -166,4 +193,9 @@ export function Phone({ number, children }: { number: string; children?: React.R
       {children && <span>{children}</span>}
     </ListItem>
   )
+}
+
+/** A list item that is only a link (an `<a>` or a Markdown link) is not wrapped in a span. */
+function isLink(children: React.ReactNode) {
+  return isValidElement<{ href?: string }>(children) && Boolean(children.props.href)
 }

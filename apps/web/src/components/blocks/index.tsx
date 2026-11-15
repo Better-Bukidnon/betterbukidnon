@@ -4,7 +4,23 @@ import type { BlockName } from '@/lib/documents'
 import { BulletList, Box, ListItem, NumberedList, OfficeInfo, Phone, Prose } from './box'
 import { Card, Cards, Stat, Stats } from './cards'
 import { CharterNote, LinkButton } from './notes'
-import { Columns, Section } from './section'
+import { Columns, Section, SectionHeading } from './section'
+import {
+  ButtonLink,
+  Faq,
+  Hours,
+  InfoGrid,
+  InfoMain,
+  InfoSide,
+  ListBox,
+  ListNote,
+  Notice,
+  ProcessCard,
+  ProcessCards,
+  RouteGrid,
+  SideCard,
+  SideLink,
+} from './certificate'
 import {
   Checklist,
   Contact,
@@ -20,6 +36,13 @@ import {
   TopicLink,
   TopicNav,
   Topics,
+  ContactButton,
+  Fineprint,
+  Lead,
+  Note,
+  SideNotes,
+  TopicFact,
+  TopicFacts,
 } from './guide'
 import { Danger, Table, TableCell, TableHeading, TableNote } from './table'
 
@@ -28,6 +51,28 @@ import { Danger, Table, TableCell, TableHeading, TableNote } from './table'
  * restyle. The content tests check documents against `blockNames`.
  */
 const blocks = {
+  ContactButton,
+  Fineprint,
+  Lead,
+  Note,
+  SideNotes,
+  TopicFact,
+  TopicFacts,
+  ButtonLink,
+  Faq,
+  Hours,
+  InfoGrid,
+  InfoMain,
+  InfoSide,
+  ListBox,
+  ListNote,
+  Notice,
+  ProcessCard,
+  ProcessCards,
+  RouteGrid,
+  SectionHeading,
+  SideCard,
+  SideLink,
   Checklist,
   Contact,
   ContactCard,
