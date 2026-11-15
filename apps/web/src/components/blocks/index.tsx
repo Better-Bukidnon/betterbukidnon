@@ -44,13 +44,37 @@ import {
   TopicFact,
   TopicFacts,
 } from './guide'
-import { Danger, Table, TableCell, TableHeading, TableNote } from './table'
+import { Danger, ProcessTable, StepBadge, Table, TableCell, TableHeading, TableNote } from './table'
+import {
+  CardGrid,
+  ContactBox,
+  FieldGroup,
+  FieldGroups,
+  IconItem,
+  IconList,
+  InfoCard,
+  RequirementCard,
+  Tile,
+  Tiles,
+} from './cards-grid'
 
 /**
  * The blocks a document (`content/**\/*.mdx`) may use, plus the Markdown elements they
  * restyle. The content tests check documents against `blockNames`.
  */
 const blocks = {
+  CardGrid,
+  ContactBox,
+  FieldGroup,
+  FieldGroups,
+  IconItem,
+  IconList,
+  InfoCard,
+  ProcessTable,
+  RequirementCard,
+  StepBadge,
+  Tile,
+  Tiles,
   ContactButton,
   Fineprint,
   Lead,
