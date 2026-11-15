@@ -213,7 +213,7 @@
       pbName +
       '</h3><p class="bb-card-subtitle">Barangay Chief Executive &middot; Term ' +
       esc(pbTerm) +
-      '</p></div>' +
+      ' (DILG Directory &middot; Historical record)</p></div>' +
       '</div>' +
       '</article>' +
       '<article class="bb-card" style="border-top:3px solid var(--color-primary)"><div class="bb-card-top"><div class="bb-seal-frame bb-seal-frame--sm bb-seal-frame--fallback" aria-hidden="true"><i class="bi bi-people-fill"></i></div><div class="bb-card-heading"><span class="bb-badge bb-badge--muni" style="margin-bottom:4px">Legislative Council</span><h3 class="bb-card-title">Sangguniang Barangay</h3><p class="bb-card-subtitle">7 Elected Barangay Kagawads &amp; Lupong Tagapamayapa</p></div></div></article>' +

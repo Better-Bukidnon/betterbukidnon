@@ -1029,9 +1029,22 @@
   max-width: 80ch;
 }
 
-/* Custom Map Pins & Attribution Hiding */
+/* Custom Map Pins & Subtle Restyled Attribution */
 .leaflet-control-attribution {
-  display: none !important;
+  font-size: 0.68rem !important;
+  background: rgba(255, 255, 255, 0.78) !important;
+  color: var(--color-text-light) !important;
+  padding: 2px 6px !important;
+  border-radius: 4px 0 0 0;
+}
+
+.leaflet-control-attribution a {
+  color: var(--color-primary) !important;
+  text-decoration: none;
+}
+
+.leaflet-control-attribution a:hover {
+  text-decoration: underline;
 }
 
 .bb-map-pin-wrapper {

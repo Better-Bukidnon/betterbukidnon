@@ -48,3 +48,6 @@ Every civic record in BetterBukidnon (LGUs, barangays, officials, government off
 - Never publish personal phone numbers or private email addresses.
 - Preserve original spellings, titles, and official designations.
 - Keep source history when updating or correcting records (`source_history` array).
+- Never mark a 2025–2028 LGU official as `verified` unless confirmed directly on an official `.gov.ph` LGU or national government portal; records compiled from secondary 2025 election results trackers must use `status: "pending_verification"` (Tier 3) until confirmed against an official LGU or DILG Region X directory.
+- Barangay leadership sourced from the 2023–2025 DILG Region X Punong Barangay Directory must use `status: "historical"` (`term: "2023 - 2025"`) until current-term barangay rosters are officially published.
+- Never publish mobile phone numbers (`09xx` / `+639xx`) in `data/contacts.json` unless verified on an official Tier-1 source as a permanent institutional agency line rather than an individual officer's personal phone.

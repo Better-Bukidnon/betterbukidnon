@@ -390,8 +390,8 @@
       "category": "emergency",
       "coverage": "Valencia City (31 barangays)",
       "responsibilities": "City disaster risk reduction, emergency medical response, and rescue operations.",
-      "phone": "0917-703-9111",
-      "tel_href": "tel:+639177039111",
+      "phone": null,
+      "tel_href": null,
       "email": null,
       "website": "https://cityofvalencia.gov.ph",
       "location": "Valencia City, Bukidnon 8709",
@@ -407,7 +407,7 @@
           "tier": 3,
           "last_verified": "2026-11-15",
           "status": "pending_verification",
-          "scope": "Mobile hotline requires direct confirmation with Valencia City Hall"
+          "scope": "Mobile number withheld until confirmed as an official institutional hotline rather than an officer's personal line"
         }
       ]
     },
@@ -420,9 +420,9 @@
       "category": "emergency",
       "coverage": "Municipality of Manolo Fortich (22 barangays)",
       "responsibilities": "Municipal disaster response, emergency rescue, and weather monitoring.",
-      "phone": "0915-813-9494",
-      "tel_href": "tel:+639158139494",
-      "email": null,
+      "phone": null,
+      "tel_href": null,
+      "email": "ldrrmo@manolofortich.gov.ph",
       "website": "https://www.manolofortich.gov.ph",
       "location": "Tankulan, Manolo Fortich, Bukidnon 8703",
       "coordinates": { "lat": 8.3678, "lon": 124.8663 },
@@ -437,7 +437,7 @@
           "tier": 1,
           "last_verified": "2026-11-15",
           "status": "verified",
-          "scope": "Official LDRRMO emergency mobile hotline"
+          "scope": "Official LDRRMO email on municipal portal; mobile number withheld until confirmed as an institutional line rather than an officer's personal phone"
         }
       ]
     },
@@ -450,14 +450,14 @@
       "category": "emergency",
       "coverage": "Municipality of Manolo Fortich",
       "responsibilities": "Local law enforcement, public safety, and emergency police dispatch.",
-      "phone": "0917-147-3598",
-      "tel_href": "tel:+639171473598",
+      "phone": null,
+      "tel_href": null,
       "email": null,
       "website": "https://www.manolofortich.gov.ph",
       "location": "Tankulan, Manolo Fortich, Bukidnon 8703",
       "coordinates": { "lat": 8.3678, "lon": 124.8663 },
       "seal_path": "assets/images/seals/manolo-fortich.png",
-      "verification_status": "verified",
+      "verification_status": "pending_verification",
       "last_verified": "2026-11-15",
       "sources": [
         {
@@ -466,8 +466,8 @@
           "url": "https://www.manolofortich.gov.ph",
           "tier": 1,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Official municipal police station hotline"
+          "status": "pending_verification",
+          "scope": "Mobile number withheld until confirmed as an official station hotline rather than an officer's personal phone"
         }
       ]
     },

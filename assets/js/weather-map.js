@@ -428,10 +428,14 @@
           zoomSnap: 0.1,
           scrollWheelZoom: false,
           zoomControl: true,
-          attributionControl: false,
+          attributionControl: true,
           keyboard: true,
           keyboardPanDelta: 80,
         });
+
+        if (this.map.attributionControl) {
+          this.map.attributionControl.setPrefix(false);
+        }
 
         // Add tile layer with CSP-block detection — some servers (e.g. cPanel hosts that inject
         // their own CSP alongside .htaccess) block tile.openstreetmap.org images even when
@@ -439,6 +443,8 @@
         // succeeds, the host is blocking tiles; fall back to the always-reliable OSM iframe embed.
         const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 19,
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors',
           crossOrigin: false,
         });
 

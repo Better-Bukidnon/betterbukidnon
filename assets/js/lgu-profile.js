@@ -260,6 +260,14 @@
     // 2. Leadership
     var mayor = lgu.leadership.mayor;
     var vm = lgu.leadership.vice_mayor;
+    var mayorStatusNote =
+      mayor.status === 'verified'
+        ? 'Verified on official LGU portal'
+        : '2025 election results &middot; Pending official directory confirmation';
+    var vmStatusNote =
+      vm.status === 'verified'
+        ? 'Verified on official LGU portal'
+        : '2025 election results &middot; Pending official directory confirmation';
     var leadershipHtml =
       '<section class="section bb-profile-section bg-alt" id="leadership">' +
       '<div class="container">' +
@@ -278,6 +286,8 @@
       '</h3><p class="bb-card-subtitle">' +
       esc(mayor.title) +
       (mayor.party ? ' &middot; ' + esc(mayor.party) : '') +
+      '</p><p class="bb-card-subtitle" style="font-size:0.75rem;margin-top:4px;opacity:0.85">' +
+      mayorStatusNote +
       '</p></div>' +
       '</div>' +
       '</article>' +
@@ -289,6 +299,8 @@
       '</h3><p class="bb-card-subtitle">' +
       esc(vm.title) +
       (vm.party ? ' &middot; ' + esc(vm.party) : '') +
+      '</p><p class="bb-card-subtitle" style="font-size:0.75rem;margin-top:4px;opacity:0.85">' +
+      vmStatusNote +
       '</p></div>' +
       '</div>' +
       '</article>' +

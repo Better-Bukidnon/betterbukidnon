@@ -48,7 +48,7 @@
           "name": "Hon. Jay Warren R. Pabillaran",
           "title": "City Mayor",
           "party": "PFP",
-          "status": "verified",
+          "status": "pending_verification",
           "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
@@ -56,15 +56,16 @@
           "name": "Hon. Estelito \"Litoy\" R. Marabe",
           "title": "City Vice Mayor",
           "party": "Lakas-CMD",
-          "status": "verified",
-          "source_url": "https://www.gmanetwork.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -77,13 +78,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Malaybalay City, officially the City of Malaybalay, is a first-class component city and the provincial capital of Bukidnon. Known as the \"City in the Forest\" and home to the annual Kaamulan Festival, it serves as the seat of the Provincial Capitol and comprises 46 barangays in the 2nd Legislative District."
@@ -131,23 +132,24 @@
           "name": "Hon. Amie \"Junamie\" Galido Galario",
           "title": "City Mayor",
           "party": "Independent",
-          "status": "verified",
-          "source_url": "https://comelec.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Grezil \"Cecil\" Galario-Fernandez",
           "title": "City Vice Mayor",
           "party": "Independent",
-          "status": "verified",
-          "source_url": "https://comelec.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -160,13 +162,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Valencia City, officially the City of Valencia and known as the \"City of Golden Harvest,\" is the most populous locality and primary commercial center of Bukidnon. Situated along the central plateau and the Pulangi River basin in the 4th Legislative District, the city is subdivided into 31 barangays."
@@ -214,23 +216,24 @@
           "name": "Hon. Aira Villa",
           "title": "Municipal Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://metrocdodev.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Rogelio \"Dodo\" Bajuyo",
           "title": "Municipal Vice Mayor",
           "party": "BPP",
-          "status": "verified",
-          "source_url": "https://www.abs-cbn.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -243,13 +246,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Baungon is a second-class municipality in northwestern Bukidnon within the 1st Legislative District, bordering Cagayan de Oro City along the foothills of the Mount Kitanglad Range. It is an agricultural and eco-tourism gateway composed of 16 barangays."
@@ -297,23 +300,24 @@
           "name": "Hon. Bernie \"Loloy\" Castillanes",
           "title": "Municipal Mayor",
           "party": "PDR",
-          "status": "verified",
-          "source_url": "https://www.abs-cbn.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Lolita \"Lotlot\" Bullecer",
           "title": "Municipal Vice Mayor",
           "party": "BPP",
-          "status": "verified",
-          "source_url": "https://www.abs-cbn.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -326,13 +330,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Cabanglasan is a third-class municipality in eastern Bukidnon within the 2nd Legislative District, nestled along the Pantaron Range. Carved out of Malaybalay in 1979, it is known for its fertile valleys, forest watersheds, and 15 constituent barangays."
@@ -380,23 +384,24 @@
           "name": "Hon. Vanessa Ramiso Suasola",
           "title": "Municipal Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://metrocdodev.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Clinette Paco",
           "title": "Municipal Vice Mayor",
           "party": "BPP",
-          "status": "verified",
-          "source_url": "https://www.abs-cbn.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -409,13 +414,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Damulog is a fourth-class municipality at the southernmost gateway of Bukidnon in the 3rd Legislative District, bordering North Cotabato. It serves as an agricultural trading hub for upland and lowland farms across its 17 barangays."
@@ -463,23 +468,24 @@
           "name": "Hon. Santina Sophia \"Makoy\" Dandasan",
           "title": "Municipal Mayor",
           "party": "PFP",
-          "status": "verified",
-          "source_url": "https://metrocdodev.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Serville Cabunoc",
           "title": "Municipal Vice Mayor",
           "party": "BPP",
-          "status": "verified",
-          "source_url": "https://www.abs-cbn.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -492,13 +498,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Dangcagan is a third-class municipality in southern Bukidnon within the 3rd Legislative District, located along the Sayre Highway corridor between Maramag and Kibawe. Created in 1961, the municipality is composed of 14 agricultural barangays."
@@ -546,23 +552,24 @@
           "name": "Hon. Ma. Victoria O. Pizarro",
           "title": "Municipal Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://comelec.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Segundo \"Loloy\" Absuelo Jr.",
           "title": "Municipal Vice Mayor",
           "party": "Independent",
-          "status": "verified",
-          "source_url": "https://ph.rappler.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -575,13 +582,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Don Carlos is a first-class municipality in southern Bukidnon within the 3rd Legislative District, widely recognized as a major grain, corn, and sugarcane center as well as the home of Lake Pinamaloy. It comprises 29 thriving urban and rural barangays."
@@ -629,23 +636,24 @@
           "name": "Hon. Reggie Pad-ay",
           "title": "Municipal Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://metrocdodev.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Anthony A. Uy",
           "title": "Municipal Vice Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://www.dbm.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -658,13 +666,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Impasug-ong is a first-class municipality in northern Bukidnon within the 2nd Legislative District, renowned as the \"Home of the Cowboys\" and a premier cultural and highland tourism destination. Spanning vast mountain plateaus and river canyons, it is subdivided into 13 barangays."
@@ -712,23 +720,24 @@
           "name": "Hon. Jerry A. Canoy Jr.",
           "title": "Municipal Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://comelec.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Segundo R. Tadeo Jr.",
           "title": "Municipal Vice Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://www.abs-cbn.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -741,13 +750,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Kadingilan is a third-class municipality in southwestern Bukidnon within the 3rd Legislative District. Established as an independent municipality in 1971, it is an agricultural community of corn, rice, and rubber producers across 17 barangays."
@@ -795,8 +804,8 @@
           "name": "Hon. Raymon Charl O. Gamboa",
           "title": "Municipal Mayor",
           "party": "PFP",
-          "status": "verified",
-          "source_url": "https://comelec.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
@@ -811,7 +820,8 @@
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -824,13 +834,22 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
+          "agency": "Official LGU Portal (Kalilangan)",
+          "title": "Kalilangan Official Website",
+          "url": "https://kalilanganbukidnon.gov.ph",
           "tier": 1,
           "last_verified": "2026-11-15",
           "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "scope": "Confirmed 2025–2028 Vice Mayor on official .gov.ph portal"
+        },
+        {
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
+          "last_verified": "2026-11-15",
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Kalilangan is a second-class municipality in western Bukidnon within the 4th Legislative District, bordering Lanao del Sur at the foot of the Mount Kalatungan Range. Known for its diverse cultural heritage and productive farmlands, it consists of 14 barangays."
@@ -878,23 +897,24 @@
           "name": "Hon. Reynaldo S. Ang Rabanes",
           "title": "Municipal Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://www.dbm.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Raymundo A. \"Nonong\" Batao Jr.",
           "title": "Municipal Vice Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://www.abs-cbn.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -907,13 +927,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Kibawe is a second-class municipality in southern Bukidnon within the 3rd Legislative District, situated along the Sayre Highway and the Pulangi River. Historically a key parent town of southern Bukidnon municipalities, it is composed of 23 barangays."
@@ -961,23 +981,24 @@
           "name": "Hon. Edwin P. Abucayan",
           "title": "Municipal Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://comelec.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Mary Ann G. Angit",
           "title": "Municipal Vice Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://comelec.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -990,13 +1011,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Kitaotao is a first-class municipality in southeastern Bukidnon within the 3rd Legislative District, bordering Davao del Sur along the Bukidnon–Davao (BuDa) highland corridor. Known for its cool mountain climate and expansive agricultural lands, it comprises 35 barangays."
@@ -1044,23 +1065,24 @@
           "name": "Hon. Ricky James D. Balansag",
           "title": "Municipal Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://comelec.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Ernie R. Devibar",
           "title": "Municipal Vice Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://comelec.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -1073,13 +1095,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Lantapan is a first-class highland municipality in central Bukidnon within the 2nd Legislative District, nestled between the Mount Kitanglad and Mount Kalatungan ranges. Celebrated as Bukidnon's vegetable basket and high-value crop center, it is subdivided into 14 barangays."
@@ -1127,23 +1149,24 @@
           "name": "Hon. Aurelio \"Bobot\" B. Lopez",
           "title": "Municipal Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://comelec.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Leonardo Genesis T. Calingasan",
           "title": "Municipal Vice Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://www.dbm.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -1156,13 +1179,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Libona is a first-class municipality in northern Bukidnon within the 1st Legislative District, located on a scenic plateau near Cagayan de Oro. It is a major producer of pineapple, corn, and agro-industrial crops across its 14 barangays."
@@ -1210,23 +1233,24 @@
           "name": "Hon. Gary D. Casiño",
           "title": "Municipal Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://comelec.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Catherine D. Dela Rosa",
           "title": "Municipal Vice Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://comelec.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -1239,13 +1263,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Malitbog is a second-class municipality in northern Bukidnon within the 1st Legislative District, set in the Tagoloan River valley bordering Misamis Oriental. One of the oldest settlements in northern Bukidnon, it consists of 11 barangays."
@@ -1309,7 +1333,8 @@
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "verified"
       },
       "sources": [
         {
@@ -1322,13 +1347,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
+          "agency": "Official LGU Portal (Manolo Fortich)",
+          "title": "Manolo Fortich Official Website",
+          "url": "https://www.manolofortich.gov.ph",
           "tier": 1,
           "last_verified": "2026-11-15",
           "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "scope": "Confirmed 2025–2028 Mayor and Vice Mayor on official .gov.ph portal"
         }
       ],
       "introduction": "Manolo Fortich is a first-class municipality in northern Bukidnon within the 1st Legislative District, internationally known for its pineapple plantations, Del Monte highlands, and Dahilayan eco-tourism parks. Serving as the northern gateway to the province, it comprises 22 barangays."
@@ -1384,15 +1409,16 @@
           "name": "Hon. Maribeth Estrella-Lopez",
           "title": "Municipal Vice Mayor",
           "party": "BPP",
-          "status": "verified",
-          "source_url": "https://comelec.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -1405,13 +1431,22 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
+          "agency": "Official LGU Portal (Maramag)",
+          "title": "Maramag Official Website",
+          "url": "https://www.maramag.gov.ph",
           "tier": 1,
           "last_verified": "2026-11-15",
           "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "scope": "Confirmed 2025–2028 Mayor on official .gov.ph portal"
+        },
+        {
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
+          "last_verified": "2026-11-15",
+          "status": "pending_verification",
+          "scope": "2025–2028 Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Maramag is a first-class municipality in central-southern Bukidnon within the 3rd Legislative District, home to Central Mindanao University (CMU), the Pulangi IV Hydroelectric Plant, and the Maramag Pineapple trading hub. It is subdivided into 20 barangays."
@@ -1459,23 +1494,24 @@
           "name": "Hon. Manolito \"Manoy\" Garces",
           "title": "Municipal Mayor",
           "party": "PFP",
-          "status": "verified",
-          "source_url": "https://www.abs-cbn.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Edward Hernandez",
           "title": "Municipal Vice Mayor",
           "party": "BPP",
-          "status": "verified",
-          "source_url": "https://www.abs-cbn.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -1488,13 +1524,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Pangantucan is a first-class municipality in western Bukidnon within the 4th Legislative District, encompassing the southern slopes of the Mount Kalatungan Range Natural Park and Lake Napalit. It is an agricultural and watershed municipality of 19 barangays."
@@ -1542,23 +1578,24 @@
           "name": "Hon. Poling Lorenzo",
           "title": "Municipal Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://metrocdodev.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Joseph Durotan",
           "title": "Municipal Vice Mayor",
           "party": "BPP",
-          "status": "verified",
-          "source_url": "https://www.abs-cbn.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -1571,13 +1608,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Quezon is a first-class agro-industrial municipality in central-southern Bukidnon within the 3rd Legislative District, renowned as the sugar capital of Bukidnon and home to the Kiokong White Rock Wall and Blue Water Cave. It is composed of 31 barangays."
@@ -1625,23 +1662,24 @@
           "name": "Hon. Rogelio \"Bebot\" Yeke",
           "title": "Municipal Mayor",
           "party": "PFP",
-          "status": "verified",
-          "source_url": "https://www.abs-cbn.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Jeaser Mae Yeke",
           "title": "Municipal Vice Mayor",
           "party": "BPP",
-          "status": "verified",
-          "source_url": "https://www.abs-cbn.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -1654,13 +1692,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "San Fernando is a first-class municipality in eastern Bukidnon within the 2nd Legislative District, spanning the Tigua and Pulangi river valleys along the Pantaron Range. It is a rapidly growing agricultural municipality subdivided into 24 barangays."
@@ -1708,23 +1746,24 @@
           "name": "Hon. Venice \"Nice\" Villo",
           "title": "Municipal Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://metrocdodev.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. George Jeremy Baula",
           "title": "Municipal Vice Mayor",
           "party": null,
-          "status": "verified",
-          "source_url": "https://www.dbm.gov.ph/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -1737,13 +1776,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Sumilao is a fourth-class highland municipality in northern Bukidnon within the 1st Legislative District, situated along the Sayre Highway at the foot of Mount Palaopao. Rich in Higaonon cultural heritage and highland agriculture, it consists of 10 barangays."
@@ -1791,23 +1830,24 @@
           "name": "Hon. Renz Sulatan",
           "title": "Municipal Mayor",
           "party": "NPC",
-          "status": "verified",
-          "source_url": "https://www.abs-cbn.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "vice_mayor": {
           "name": "Hon. Vergito \"Ver\" Factura",
           "title": "Municipal Vice Mayor",
           "party": "BPP",
-          "status": "verified",
-          "source_url": "https://www.abs-cbn.com/",
+          "status": "pending_verification",
+          "source_url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
           "last_verified": "2026-11-15"
         },
         "councilors_status": "pending_verification",
         "councilors_note": "Sangguniang Panlungsod / Sangguniang Bayan member roster for 2025–2028 is pending verification against DILG Region X official records.",
         "councilors": [],
         "ex_officio_status": "pending_verification",
-        "department_heads_status": "pending_verification"
+        "department_heads_status": "pending_verification",
+        "status": "pending_verification"
       },
       "sources": [
         {
@@ -1820,13 +1860,13 @@
           "scope": "PSGC code, classification, barangay count, 2020 CPH population"
         },
         {
-          "agency": "COMELEC / DILG Region X",
-          "title": "2025 Local Election Results & Local Officials (2025–2028)",
-          "url": "https://region10.dilg.gov.ph/local-officials-for-the-term-2025-2028/",
-          "tier": 1,
+          "agency": "2025 Local Election Results Tracker",
+          "title": "2025 Bukidnon Local Election Results (Pending DILG / LGU Directory Confirmation)",
+          "url": "https://ph.rappler.com/elections/2025/local-race/bukidnon",
+          "tier": 3,
           "last_verified": "2026-11-15",
-          "status": "verified",
-          "scope": "Mayor and Vice Mayor for the 2025–2028 term"
+          "status": "pending_verification",
+          "scope": "2025–2028 Mayor and Vice Mayor compiled from election returns; pending direct confirmation on official LGU or DILG Region X directory"
         }
       ],
       "introduction": "Talakag is a first-class highland municipality in western Bukidnon within the 1st Legislative District, straddling the slopes of Both Mount Kitanglad and Mount Kalatungan. Created in 1917, it is a major highland agricultural center composed of 29 barangays."

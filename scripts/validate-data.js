@@ -27,6 +27,10 @@ const ALLOWED_IMAGE_EXTS = new Set(['.png', '.jpg', '.jpeg', '.svg', '.webp', '.
 const SKIP_DIRS = new Set([
   'node_modules',
   'dist',
+  '.next',
+  'out',
+  'public',
+  'src',
   'react-app',
   'docs',
   'admin',
@@ -39,6 +43,16 @@ const SKIP_DIRS = new Set([
   '.claude',
   '.wrangler',
 ]);
+const DATA_ONLY = process.argv.includes('--data-only');
+
+function resolveAssetPath(relAssetPath) {
+  const cleanRel = relAssetPath.replace(/^\/+/, '');
+  const rootCandidate = path.join(ROOT, cleanRel);
+  if (fs.existsSync(rootCandidate)) return rootCandidate;
+  const publicCandidate = path.join(ROOT, 'public', cleanRel);
+  if (fs.existsSync(publicCandidate)) return publicCandidate;
+  return rootCandidate;
+}
 
 const errors = [];
 const warnings = [];
@@ -146,13 +160,32 @@ function validateLgusAndBarangays() {
     }
 
     if (lgu.seal && lgu.seal.status === 'verified' && lgu.seal.path) {
-      const sealFull = path.join(ROOT, lgu.seal.path);
+      const sealFull = resolveAssetPath(lgu.seal.path);
       const ext = path.extname(lgu.seal.path).toLowerCase();
       if (!ALLOWED_IMAGE_EXTS.has(ext)) {
         err(`${ctx}: unsupported seal image format "${ext}" (${lgu.seal.path})`);
       }
       if (!fs.existsSync(sealFull)) {
         err(`${ctx}: missing seal image file "${lgu.seal.path}"`);
+      }
+    }
+
+    for (const role of ['mayor', 'vice_mayor']) {
+      const official = lgu.leadership && lgu.leadership[role];
+      if (!official || !official.name) {
+        err(`${ctx}: missing leadership.${role}.name`);
+        continue;
+      }
+      if (!VALID_STATUSES.has(official.status)) {
+        err(`${ctx}: invalid leadership.${role}.status "${official.status}"`);
+      }
+      if (official.status === 'verified') {
+        const srcUrl = official.source_url || '';
+        if (!srcUrl.includes('.gov.ph') || /^https?:\/\/(www\.)?comelec\.gov\.ph\/?$/i.test(srcUrl)) {
+          err(
+            `${ctx}: leadership.${role} ("${official.name}") is marked "verified" without a specific official .gov.ph source_url (${srcUrl})`
+          );
+        }
       }
     }
 
@@ -242,6 +275,13 @@ function validateContacts() {
     if (c.lgu_slug && !validSlugs.has(c.lgu_slug)) {
       err(`${ctx}: unknown lgu_slug "${c.lgu_slug}"`);
     }
+    if (c.phone && /(?:^|\D)(?:09\d{2}|\+?63\s*9\d{2})/.test(c.phone)) {
+      if (!c.is_official_agency_mobile || c.verification_status !== 'verified') {
+        err(
+          `${ctx}: mobile number "${c.phone}" is not permitted unless confirmed as an institutional agency line (is_official_agency_mobile: true, verification_status: "verified")`
+        );
+      }
+    }
     validateSources(c.sources, ctx);
   }
 }
@@ -309,7 +349,9 @@ function validateHtmlAssetsAndLinks() {
 validateAllJsonFiles();
 validateLgusAndBarangays();
 validateContacts();
-validateHtmlAssetsAndLinks();
+if (!DATA_ONLY && fs.existsSync(path.join(ROOT, 'index.html'))) {
+  validateHtmlAssetsAndLinks();
+}
 
 if (warnings.length > 0) {
   console.warn(`Warnings (${warnings.length}):`);

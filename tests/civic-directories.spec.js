@@ -26,6 +26,13 @@ test.describe('Civic Directories & Route Smoke Tests', () => {
     });
   }
 
+  test('Home page interactive map displays OpenStreetMap attribution', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    const attribution = page.locator('#map-container .leaflet-control-attribution');
+    await expect(attribution).toBeVisible();
+    await expect(attribution).toContainText('OpenStreetMap');
+  });
+
   test('Contact directory renders cards, filters, and supports copy', async ({ page }) => {
     await page.goto('/contact/', { waitUntil: 'domcontentloaded' });
     const cards = page.locator('#contacts-directory-grid .bb-card');
