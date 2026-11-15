@@ -1,0 +1,505 @@
+{
+  "_schema_version": "1.0",
+  "province": "Bukidnon",
+  "last_verified": "2026-11-15",
+  "contacts": [
+    {
+      "id": "nat-911",
+      "name": "National Emergency Hotline (911)",
+      "abbr": "911",
+      "level": "national",
+      "category": "emergency",
+      "coverage": "Nationwide / All 22 LGUs in Bukidnon (24/7)",
+      "responsibilities": "Immediate dispatch for life-threatening police, fire, medical, and disaster emergencies.",
+      "phone": "911",
+      "tel_href": "tel:911",
+      "email": null,
+      "website": "https://dilg.gov.ph/",
+      "location": "Nationwide 24/7 Emergency Dispatch",
+      "coordinates": null,
+      "seal_path": null,
+      "verification_status": "verified",
+      "last_verified": "2026-11-15",
+      "sources": [
+        {
+          "agency": "Department of the Interior and Local Government (DILG)",
+          "title": "National Emergency Hotline 911",
+          "url": "https://dilg.gov.ph/",
+          "tier": 1,
+          "last_verified": "2026-11-15",
+          "status": "verified",
+          "scope": "24/7 emergency hotline number and nationwide coverage"
+        }
+      ]
+    },
+    {
+      "id": "prov-capitol-main",
+      "name": "Provincial Capitol Main Line",
+      "abbr": "PGB",
+      "level": "provincial",
+      "category": "government",
+      "coverage": "Province of Bukidnon",
+      "responsibilities": "Central trunkline for the Provincial Government of Bukidnon at the Capitol Compound.",
+      "phone": "(088) 813-5741",
+      "tel_href": "tel:+63888135741",
+      "email": null,
+      "website": "https://bukidnon.gov.ph/",
+      "location": "Provincial Capitol Compound, Barangay 9, Malaybalay City, Bukidnon 8700",
+      "coordinates": { "lat": 8.1575, "lon": 125.1278 },
+      "seal_path": "assets/images/logo/better-bukidnon-logo.svg",
+      "verification_status": "pending_verification",
+      "last_verified": "2026-11-01",
+      "sources": [
+        {
+          "agency": "Provincial Government of Bukidnon",
+          "title": "bukidnon.gov.ph Directory (archived index)",
+          "url": "https://bukidnon.gov.ph/",
+          "tier": 1,
+          "last_verified": "2026-11-01",
+          "status": "pending_verification",
+          "scope": "Capitol landline requires direct confirmation with the Provincial Government"
+        }
+      ]
+    },
+    {
+      "id": "prov-pgo",
+      "name": "Provincial Governor's Office",
+      "abbr": "PGO",
+      "level": "provincial",
+      "category": "government",
+      "coverage": "Province of Bukidnon",
+      "responsibilities": "Office of the Provincial Governor; executive direction, provincial administration, and public assistance.",
+      "phone": "(088) 813-2457",
+      "tel_href": "tel:+63888132457",
+      "email": null,
+      "website": "https://bukidnon.gov.ph/",
+      "location": "Provincial Capitol Compound, Barangay 9, Malaybalay City, Bukidnon 8700",
+      "coordinates": { "lat": 8.1575, "lon": 125.1278 },
+      "seal_path": null,
+      "verification_status": "pending_verification",
+      "last_verified": "2026-11-01",
+      "sources": [
+        {
+          "agency": "Provincial Government of Bukidnon",
+          "title": "bukidnon.gov.ph Contact Directory",
+          "url": "https://bukidnon.gov.ph/",
+          "tier": 1,
+          "last_verified": "2026-11-01",
+          "status": "pending_verification",
+          "scope": "Telephone number from archived provincial directory"
+        }
+      ]
+    },
+    {
+      "id": "prov-pdrrmd",
+      "name": "Provincial Disaster Risk Reduction and Management Department",
+      "abbr": "PDRRMD",
+      "level": "provincial",
+      "category": "emergency",
+      "coverage": "Province-wide disaster coordination (22 LGUs)",
+      "responsibilities": "24/7 provincial disaster preparedness, rescue coordination, weather advisories, and emergency response.",
+      "phone": "(088) 813-1262",
+      "tel_href": "tel:+63888131262",
+      "email": null,
+      "website": "https://bukidnon.gov.ph/",
+      "location": "Provincial Capitol Compound, Malaybalay City, Bukidnon 8700",
+      "coordinates": { "lat": 8.1575, "lon": 125.1278 },
+      "seal_path": null,
+      "verification_status": "pending_verification",
+      "last_verified": "2026-11-01",
+      "sources": [
+        {
+          "agency": "Provincial Government of Bukidnon",
+          "title": "bukidnon.gov.ph Contact Directory",
+          "url": "https://bukidnon.gov.ph/",
+          "tier": 1,
+          "last_verified": "2026-11-01",
+          "status": "pending_verification",
+          "scope": "PDRRMD hotline from archived provincial directory"
+        }
+      ]
+    },
+    {
+      "id": "prov-pho",
+      "name": "Provincial Health Office",
+      "abbr": "PHO",
+      "level": "provincial",
+      "category": "healthcare",
+      "coverage": "Province of Bukidnon",
+      "responsibilities": "Public health programs, disease surveillance, immunization, and provincial hospital coordination.",
+      "phone": "(088) 813-5631",
+      "tel_href": "tel:+63888135631",
+      "email": null,
+      "website": "https://bukidnon.gov.ph/",
+      "location": "Provincial Capitol Compound, Malaybalay City, Bukidnon 8700",
+      "coordinates": { "lat": 8.1575, "lon": 125.1278 },
+      "seal_path": null,
+      "verification_status": "pending_verification",
+      "last_verified": "2026-11-01",
+      "sources": [
+        {
+          "agency": "Provincial Government of Bukidnon",
+          "title": "bukidnon.gov.ph Contact Directory",
+          "url": "https://bukidnon.gov.ph/",
+          "tier": 1,
+          "last_verified": "2026-11-01",
+          "status": "pending_verification",
+          "scope": "PHO landline from archived provincial directory"
+        }
+      ]
+    },
+    {
+      "id": "prov-pswdo",
+      "name": "Provincial Social Welfare and Development Office",
+      "abbr": "PSWDO",
+      "level": "provincial",
+      "category": "public_service",
+      "coverage": "Province of Bukidnon",
+      "responsibilities": "Crisis intervention (AICS), senior citizen/PWD support, child protection, and disaster relief.",
+      "phone": "(088) 813-5734",
+      "tel_href": "tel:+63888135734",
+      "email": null,
+      "website": "https://bukidnon.gov.ph/",
+      "location": "Provincial Capitol Compound, Malaybalay City, Bukidnon 8700",
+      "coordinates": { "lat": 8.1575, "lon": 125.1278 },
+      "seal_path": null,
+      "verification_status": "pending_verification",
+      "last_verified": "2026-11-01",
+      "sources": [
+        {
+          "agency": "Provincial Government of Bukidnon",
+          "title": "bukidnon.gov.ph Contact Directory",
+          "url": "https://bukidnon.gov.ph/",
+          "tier": 1,
+          "last_verified": "2026-11-01",
+          "status": "pending_verification",
+          "scope": "PSWDO landline from archived provincial directory"
+        }
+      ]
+    },
+    {
+      "id": "prov-pto",
+      "name": "Provincial Treasurer's Office",
+      "abbr": "PTO",
+      "level": "provincial",
+      "category": "public_service",
+      "coverage": "Province of Bukidnon",
+      "responsibilities": "Provincial tax collection, real property tax remittance, and revenue disbursement.",
+      "phone": "(088) 813-2474",
+      "tel_href": "tel:+63888132474",
+      "email": null,
+      "website": "https://bukidnon.gov.ph/",
+      "location": "Provincial Capitol Compound, Malaybalay City, Bukidnon 8700",
+      "coordinates": { "lat": 8.1575, "lon": 125.1278 },
+      "seal_path": null,
+      "verification_status": "pending_verification",
+      "last_verified": "2026-11-01",
+      "sources": [
+        {
+          "agency": "Provincial Government of Bukidnon",
+          "title": "bukidnon.gov.ph Contact Directory",
+          "url": "https://bukidnon.gov.ph/",
+          "tier": 1,
+          "last_verified": "2026-11-01",
+          "status": "pending_verification",
+          "scope": "PTO landline from archived provincial directory"
+        }
+      ]
+    },
+    {
+      "id": "prov-peo",
+      "name": "Provincial Engineer's Office",
+      "abbr": "PEO",
+      "level": "provincial",
+      "category": "public_service",
+      "coverage": "Province of Bukidnon",
+      "responsibilities": "Provincial road maintenance, public infrastructure engineering, and waterworks.",
+      "phone": "(088) 813-3656",
+      "tel_href": "tel:+63888133656",
+      "email": null,
+      "website": "https://bukidnon.gov.ph/",
+      "location": "Provincial Capitol Compound, Malaybalay City, Bukidnon 8700",
+      "coordinates": { "lat": 8.1575, "lon": 125.1278 },
+      "seal_path": null,
+      "verification_status": "pending_verification",
+      "last_verified": "2026-11-01",
+      "sources": [
+        {
+          "agency": "Provincial Government of Bukidnon",
+          "title": "bukidnon.gov.ph Contact Directory",
+          "url": "https://bukidnon.gov.ph/",
+          "tier": 1,
+          "last_verified": "2026-11-01",
+          "status": "pending_verification",
+          "scope": "PEO landline from archived provincial directory"
+        }
+      ]
+    },
+    {
+      "id": "prov-ppdo",
+      "name": "Provincial Planning and Development Office",
+      "abbr": "PPDO",
+      "level": "provincial",
+      "category": "public_service",
+      "coverage": "Province of Bukidnon",
+      "responsibilities": "Provincial development planning, socio-economic profiles, and zoning coordination.",
+      "phone": "(088) 813-2564",
+      "tel_href": "tel:+63888132564",
+      "email": null,
+      "website": "https://bukidnon.gov.ph/",
+      "location": "Provincial Capitol Compound, Malaybalay City, Bukidnon 8700",
+      "coordinates": { "lat": 8.1575, "lon": 125.1278 },
+      "seal_path": null,
+      "verification_status": "pending_verification",
+      "last_verified": "2026-11-01",
+      "sources": [
+        {
+          "agency": "Provincial Government of Bukidnon",
+          "title": "bukidnon.gov.ph Contact Directory",
+          "url": "https://bukidnon.gov.ph/",
+          "tier": 1,
+          "last_verified": "2026-11-01",
+          "status": "pending_verification",
+          "scope": "PPDO landline from archived provincial directory"
+        }
+      ]
+    },
+    {
+      "id": "prov-pictd",
+      "name": "Provincial ICT Division",
+      "abbr": "PICTD",
+      "level": "provincial",
+      "category": "government",
+      "coverage": "Province of Bukidnon",
+      "responsibilities": "Provincial government information systems, digital services, and communications infrastructure.",
+      "phone": "(088) 813-1603",
+      "tel_href": "tel:+63888131603",
+      "email": null,
+      "website": "https://bukidnon.gov.ph/",
+      "location": "Provincial Capitol Compound, Malaybalay City, Bukidnon 8700",
+      "coordinates": { "lat": 8.1575, "lon": 125.1278 },
+      "seal_path": null,
+      "verification_status": "pending_verification",
+      "last_verified": "2026-11-01",
+      "sources": [
+        {
+          "agency": "Provincial Government of Bukidnon",
+          "title": "bukidnon.gov.ph Contact Directory",
+          "url": "https://bukidnon.gov.ph/",
+          "tier": 1,
+          "last_verified": "2026-11-01",
+          "status": "pending_verification",
+          "scope": "PICTD landline from archived provincial directory"
+        }
+      ]
+    },
+    {
+      "id": "prov-dilg-bukidnon",
+      "name": "DILG Bukidnon Provincial Office",
+      "abbr": "DILG-Bukidnon",
+      "level": "provincial",
+      "category": "government",
+      "coverage": "Province of Bukidnon (22 LGUs)",
+      "responsibilities": "Local government supervision, LGU and barangay official directories, and governance compliance.",
+      "phone": "(088) 858-4181",
+      "tel_href": "tel:+63888584181",
+      "email": "dilg10.bukidnon@gmail.com",
+      "website": "https://region10.dilg.gov.ph/",
+      "location": "DILG Building, Capitol Grounds, Malaybalay City, Bukidnon 8700",
+      "coordinates": { "lat": 8.1575, "lon": 125.1278 },
+      "seal_path": null,
+      "verification_status": "verified",
+      "last_verified": "2026-11-15",
+      "sources": [
+        {
+          "agency": "DILG Region X",
+          "title": "DILG Region X Field Office Directory",
+          "url": "https://region10.dilg.gov.ph/",
+          "tier": 1,
+          "last_verified": "2026-11-15",
+          "status": "verified",
+          "scope": "Official provincial field office email, regional trunkline, and address"
+        }
+      ]
+    },
+    {
+      "id": "prov-ppo",
+      "name": "Bukidnon Police Provincial Office (PNP)",
+      "abbr": "Bukidnon PPO",
+      "level": "provincial",
+      "category": "emergency",
+      "coverage": "Province of Bukidnon",
+      "responsibilities": "Provincial law enforcement, crime response, and police station coordination.",
+      "phone": "(088) 813-4263",
+      "tel_href": "tel:+63888134263",
+      "email": null,
+      "website": null,
+      "location": "Camp Captain Julián C. Onahon, Malaybalay City, Bukidnon 8700",
+      "coordinates": { "lat": 8.1564, "lon": 125.1333 },
+      "seal_path": null,
+      "verification_status": "pending_verification",
+      "last_verified": "2026-11-01",
+      "sources": [
+        {
+          "agency": "BetterBukidnon Civic Directory",
+          "title": "Provincial Emergency Hotline Directory",
+          "url": "https://betterbukidnon.org/contact/",
+          "tier": 2,
+          "last_verified": "2026-11-01",
+          "status": "pending_verification",
+          "scope": "Landline from prior directory; confirm with Bukidnon PPO"
+        }
+      ]
+    },
+    {
+      "id": "city-malaybalay-bfp",
+      "name": "BFP Malaybalay City Fire Station",
+      "abbr": "BFP Malaybalay",
+      "level": "city",
+      "lgu_slug": "malaybalay-city",
+      "category": "emergency",
+      "coverage": "Malaybalay City",
+      "responsibilities": "Fire suppression, fire safety inspections, and emergency rescue in Malaybalay City.",
+      "phone": "(088) 813-5449",
+      "tel_href": "tel:+63888135449",
+      "email": null,
+      "website": "https://malaybalaycity.gov.ph",
+      "location": "Malaybalay City, Bukidnon 8700",
+      "coordinates": { "lat": 8.1564, "lon": 125.1333 },
+      "seal_path": "assets/images/seals/malaybalay-city.png",
+      "verification_status": "pending_verification",
+      "last_verified": "2026-11-01",
+      "sources": [
+        {
+          "agency": "BetterBukidnon Civic Directory",
+          "title": "Provincial Emergency Hotline Directory",
+          "url": "https://betterbukidnon.org/contact/",
+          "tier": 2,
+          "last_verified": "2026-11-01",
+          "status": "pending_verification",
+          "scope": "Fire station landline from prior directory"
+        }
+      ]
+    },
+    {
+      "id": "city-valencia-cdrrmo",
+      "name": "Valencia City CDRRMO",
+      "abbr": "CDRRMO Valencia",
+      "level": "city",
+      "lgu_slug": "valencia-city",
+      "category": "emergency",
+      "coverage": "Valencia City (31 barangays)",
+      "responsibilities": "City disaster risk reduction, emergency medical response, and rescue operations.",
+      "phone": "0917-703-9111",
+      "tel_href": "tel:+639177039111",
+      "email": null,
+      "website": "https://cityofvalencia.gov.ph",
+      "location": "Valencia City, Bukidnon 8709",
+      "coordinates": { "lat": 7.9042, "lon": 125.0928 },
+      "seal_path": "assets/images/seals/valencia-city.png",
+      "verification_status": "pending_verification",
+      "last_verified": "2026-11-15",
+      "sources": [
+        {
+          "agency": "Public Emergency Directory",
+          "title": "Valencia City Emergency Hotlines",
+          "url": "https://cityofvalencia.gov.ph",
+          "tier": 3,
+          "last_verified": "2026-11-15",
+          "status": "pending_verification",
+          "scope": "Mobile hotline requires direct confirmation with Valencia City Hall"
+        }
+      ]
+    },
+    {
+      "id": "muni-manolo-ldrrmo",
+      "name": "Manolo Fortich LDRRMO",
+      "abbr": "LDRRMO Manolo Fortich",
+      "level": "municipality",
+      "lgu_slug": "manolo-fortich",
+      "category": "emergency",
+      "coverage": "Municipality of Manolo Fortich (22 barangays)",
+      "responsibilities": "Municipal disaster response, emergency rescue, and weather monitoring.",
+      "phone": "0915-813-9494",
+      "tel_href": "tel:+639158139494",
+      "email": null,
+      "website": "https://www.manolofortich.gov.ph",
+      "location": "Tankulan, Manolo Fortich, Bukidnon 8703",
+      "coordinates": { "lat": 8.3678, "lon": 124.8663 },
+      "seal_path": "assets/images/seals/manolo-fortich.png",
+      "verification_status": "verified",
+      "last_verified": "2026-11-15",
+      "sources": [
+        {
+          "agency": "Municipality of Manolo Fortich",
+          "title": "Official Municipal Portal — Emergency Hotlines",
+          "url": "https://www.manolofortich.gov.ph",
+          "tier": 1,
+          "last_verified": "2026-11-15",
+          "status": "verified",
+          "scope": "Official LDRRMO emergency mobile hotline"
+        }
+      ]
+    },
+    {
+      "id": "muni-manolo-pnp",
+      "name": "Manolo Fortich Municipal Police Station",
+      "abbr": "MPS Manolo Fortich",
+      "level": "municipality",
+      "lgu_slug": "manolo-fortich",
+      "category": "emergency",
+      "coverage": "Municipality of Manolo Fortich",
+      "responsibilities": "Local law enforcement, public safety, and emergency police dispatch.",
+      "phone": "0917-147-3598",
+      "tel_href": "tel:+639171473598",
+      "email": null,
+      "website": "https://www.manolofortich.gov.ph",
+      "location": "Tankulan, Manolo Fortich, Bukidnon 8703",
+      "coordinates": { "lat": 8.3678, "lon": 124.8663 },
+      "seal_path": "assets/images/seals/manolo-fortich.png",
+      "verification_status": "verified",
+      "last_verified": "2026-11-15",
+      "sources": [
+        {
+          "agency": "Municipality of Manolo Fortich",
+          "title": "Official Municipal Portal — Police Hotline",
+          "url": "https://www.manolofortich.gov.ph",
+          "tier": 1,
+          "last_verified": "2026-11-15",
+          "status": "verified",
+          "scope": "Official municipal police station hotline"
+        }
+      ]
+    },
+    {
+      "id": "muni-maramag-hall",
+      "name": "Maramag Municipal Hall (Mayor's Office)",
+      "abbr": "LGU Maramag",
+      "level": "municipality",
+      "lgu_slug": "maramag",
+      "category": "government",
+      "coverage": "Municipality of Maramag (20 barangays)",
+      "responsibilities": "Municipal executive office, citizen inquiries, and local government services.",
+      "phone": "(088) 828-1870",
+      "tel_href": "tel:+63888281870",
+      "email": null,
+      "website": "https://www.maramag.gov.ph",
+      "location": "North Poblacion, Maramag, Bukidnon 8714",
+      "coordinates": { "lat": 7.7611, "lon": 125.0052 },
+      "seal_path": "assets/images/seals/maramag.png",
+      "verification_status": "verified",
+      "last_verified": "2026-11-15",
+      "sources": [
+        {
+          "agency": "Municipality of Maramag",
+          "title": "Official Municipal Website — Contact",
+          "url": "https://www.maramag.gov.ph",
+          "tier": 1,
+          "last_verified": "2026-11-15",
+          "status": "verified",
+          "scope": "Official municipal trunkline"
+        }
+      ]
+    }
+  ]
+}

@@ -3,7 +3,7 @@
  * Enterprise-grade PWA with versioned caching, runtime strategies, and offline resilience.
  */
 
-var CACHE_VERSION = 'v11';
+var CACHE_VERSION = 'v17';
 var STATIC_CACHE = 'betterbukidnon-static-' + CACHE_VERSION;
 var RUNTIME_CACHE = 'betterbukidnon-runtime-' + CACHE_VERSION;
 var OFFLINE_URL = '/offline.html';
@@ -130,6 +130,16 @@ self.addEventListener('fetch', function (event) {
   // Skip non-GET requests and chrome-extension/devtools
   if (event.request.method !== 'GET') return;
   if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
+
+  // Always use fresh network responses during local development
+  if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-store' }).catch(function () {
+        return caches.match(event.request);
+      })
+    );
+    return;
+  }
 
   // ── Navigation requests: Network-first with offline fallback ──
   if (event.request.mode === 'navigate') {

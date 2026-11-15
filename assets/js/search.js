@@ -37,6 +37,8 @@
     if (
       path.includes('/services/') ||
       path.includes('/government/') ||
+      path.includes('/lgus/') ||
+      path.includes('/barangays/') ||
       path.includes('/budget/') ||
       path.includes('/contact/') ||
       path.includes('/faq/') ||
@@ -52,6 +54,14 @@
       return '../';
     }
     return '';
+  }
+
+  function resolveServiceUrl(rawUrl) {
+    if (!rawUrl) return '';
+    if (rawUrl.startsWith('http') || rawUrl.startsWith('/')) return rawUrl;
+    const base = getBasePath();
+    const cleaned = rawUrl.replace(/^\.\.\//, '');
+    return base + cleaned;
   }
 
   // ==================== SEARCH INDEX ====================
@@ -611,14 +621,7 @@
     // Render results
     html += results
       .map((result, index) => {
-        let url = result.url;
-        if (!url.startsWith('http') && !url.startsWith('/')) {
-          if (window.location.pathname.includes('/services/')) {
-            // Already in services folder
-          } else if (!url.startsWith('../') && !url.startsWith('services/')) {
-            url = 'services/' + url;
-          }
-        }
+        const url = resolveServiceUrl(result.url);
 
         return `
                 <a href="${url}" class="search-result-item" role="option" data-index="${index}">
@@ -836,18 +839,7 @@
         const query = input.value.trim();
         if (query.length >= 2 && currentResults.length > 0) {
           addRecentSearch(query);
-          let url = currentResults[0].url;
-          if (
-            !url.startsWith('http') &&
-            !url.startsWith('/') &&
-            !url.startsWith('../') &&
-            !url.startsWith('services/')
-          ) {
-            if (!window.location.pathname.includes('/services/')) {
-              url = 'services/' + url;
-            }
-          }
-          window.location.href = url;
+          window.location.href = resolveServiceUrl(currentResults[0].url);
         }
       });
     }
