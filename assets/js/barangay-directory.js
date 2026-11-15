@@ -84,13 +84,68 @@
     var paginationEl = document.getElementById('brgy-pagination');
 
     var allBrgys = [];
+    var filteredBrgys = [];
     var lguMap = {};
     var currentPage = 1;
+    var prevBtn = null;
+    var nextBtn = null;
+    var pageLabelEl = null;
 
     var params = new URLSearchParams(window.location.search);
     var initialLgu = params.get('lgu') || 'all';
 
+    function ensurePaginationControls() {
+      if (!paginationEl || prevBtn) return;
+
+      prevBtn = document.createElement('button');
+      prevBtn.type = 'button';
+      prevBtn.className = 'btn btn-secondary btn-sm';
+      prevBtn.id = 'brgy-prev';
+      prevBtn.innerHTML = '<i class="bi bi-chevron-left" aria-hidden="true"></i> Previous';
+
+      pageLabelEl = document.createElement('span');
+      pageLabelEl.id = 'brgy-page-label';
+      pageLabelEl.setAttribute('aria-live', 'polite');
+      pageLabelEl.style.fontSize = '0.875rem';
+      pageLabelEl.style.padding = '0 8px';
+
+      nextBtn = document.createElement('button');
+      nextBtn.type = 'button';
+      nextBtn.className = 'btn btn-secondary btn-sm';
+      nextBtn.id = 'brgy-next';
+      nextBtn.innerHTML = 'Next <i class="bi bi-chevron-right" aria-hidden="true"></i>';
+
+      paginationEl.innerHTML = '';
+      paginationEl.appendChild(prevBtn);
+      paginationEl.appendChild(pageLabelEl);
+      paginationEl.appendChild(nextBtn);
+
+      prevBtn.addEventListener('click', function () {
+        if (currentPage > 1) {
+          currentPage--;
+          renderPage(filteredBrgys);
+          if (prevBtn.disabled && nextBtn && !nextBtn.disabled) {
+            nextBtn.focus();
+          }
+          grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+
+      nextBtn.addEventListener('click', function () {
+        var totalPages = Math.max(1, Math.ceil(filteredBrgys.length / PAGE_SIZE));
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderPage(filteredBrgys);
+          if (nextBtn.disabled && prevBtn && !prevBtn.disabled) {
+            prevBtn.focus();
+          }
+          grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
     function renderPage(filtered) {
+      filteredBrgys = filtered;
       var totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
       if (currentPage > totalPages) currentPage = totalPages;
       var start = (currentPage - 1) * PAGE_SIZE;
@@ -124,41 +179,21 @@
       }
 
       if (paginationEl) {
+        ensurePaginationControls();
         if (totalPages <= 1) {
-          paginationEl.innerHTML = '';
+          paginationEl.hidden = true;
+          paginationEl.style.display = 'none';
         } else {
-          paginationEl.innerHTML =
-            '<button type="button" class="btn btn-secondary btn-sm" id="brgy-prev" ' +
-            (currentPage <= 1 ? 'disabled' : '') +
-            '><i class="bi bi-chevron-left" aria-hidden="true"></i> Previous</button>' +
-            '<span style="font-size:0.875rem;padding:0 8px">Page ' +
-            currentPage +
-            ' of ' +
-            totalPages +
-            '</span>' +
-            '<button type="button" class="btn btn-secondary btn-sm" id="brgy-next" ' +
-            (currentPage >= totalPages ? 'disabled' : '') +
-            '>Next <i class="bi bi-chevron-right" aria-hidden="true"></i></button>';
-
-          var prevBtn = document.getElementById('brgy-prev');
-          var nextBtn = document.getElementById('brgy-next');
+          paginationEl.hidden = false;
+          paginationEl.style.display = '';
+          if (pageLabelEl) {
+            pageLabelEl.textContent = 'Page ' + currentPage + ' of ' + totalPages;
+          }
           if (prevBtn) {
-            prevBtn.addEventListener('click', function () {
-              if (currentPage > 1) {
-                currentPage--;
-                renderPage(filtered);
-                grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-            });
+            prevBtn.disabled = currentPage <= 1;
           }
           if (nextBtn) {
-            nextBtn.addEventListener('click', function () {
-              if (currentPage < totalPages) {
-                currentPage++;
-                renderPage(filtered);
-                grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-            });
+            nextBtn.disabled = currentPage >= totalPages;
           }
         }
       }
@@ -167,7 +202,10 @@
     function applyFilters(resetPage) {
       if (resetPage) currentPage = 1;
       var q = (searchInput ? searchInput.value : '').trim().toLowerCase();
-      var lgu = lguSelect ? lguSelect.value : 'all';
+      var lgu = lguSelect && lguSelect.value ? lguSelect.value : 'all';
+      if (lgu !== 'all' && !Object.prototype.hasOwnProperty.call(lguMap, lgu)) {
+        lgu = 'all';
+      }
       var sortBy = sortSelect ? sortSelect.value : 'name-asc';
 
       var filtered = allBrgys.filter(function (b) {
@@ -193,11 +231,13 @@
       renderPage(filtered);
     }
 
-    [searchInput, lguSelect, sortSelect].forEach(function (el) {
+    if (searchInput) {
+      searchInput.addEventListener('input', function () {
+        applyFilters(true);
+      });
+    }
+    [lguSelect, sortSelect].forEach(function (el) {
       if (el) {
-        el.addEventListener('input', function () {
-          applyFilters(true);
-        });
         el.addEventListener('change', function () {
           applyFilters(true);
         });
@@ -225,7 +265,11 @@
               opt.textContent = l.name + ' (' + l.barangay_count + ')';
               lguSelect.appendChild(opt);
             });
-          if (initialLgu !== 'all') lguSelect.value = initialLgu;
+          if (initialLgu !== 'all' && Object.prototype.hasOwnProperty.call(lguMap, initialLgu)) {
+            lguSelect.value = initialLgu;
+          } else {
+            lguSelect.value = 'all';
+          }
         }
 
         applyFilters(true);

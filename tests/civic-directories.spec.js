@@ -88,9 +88,20 @@ test.describe('Civic Directories & Route Smoke Tests', () => {
     await expect(page.locator('#lgu-brgy-grid .bb-card')).toHaveCount(46);
   });
 
-  test('Barangay directory loads 464 barangays and filters by LGU', async ({ page }) => {
-    await page.goto('/barangays/', { waitUntil: 'domcontentloaded' });
+  test('Barangay directory loads 464 barangays, filters by LGU, falls back to all on unknown ?lgu=, and preserves focus when paging', async ({
+    page,
+  }) => {
+    await page.goto('/barangays/?lgu=nonexistent-lgu', { waitUntil: 'domcontentloaded' });
     await expect(page.locator('#brgy-results-count')).toContainText('464');
+    await expect(page.locator('#brgy-lgu-filter')).toHaveValue('all');
+
+    const nextBtn = page.locator('#brgy-next');
+    await nextBtn.focus();
+    await nextBtn.click();
+    await expect(page.locator('#brgy-page-label')).toContainText('Page 2 of');
+    const activeId = await page.evaluate(() => document.activeElement && document.activeElement.id);
+    expect(activeId).toBe('brgy-next');
+
     await page.selectOption('#brgy-lgu-filter', 'sumilao');
     await expect(page.locator('#brgy-directory-grid .bb-card')).toHaveCount(10);
   });
