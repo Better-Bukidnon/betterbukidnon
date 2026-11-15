@@ -4,7 +4,7 @@
  * Added & Changed:
  * - Renders searchable, LGU-filterable, paginated directory of all 464 Bukidnon barangays.
  * - Displays barangay seal (or parent LGU seal fallback), barangay introduction, PSGC code,
- *   and verified Punong Barangay name.
+ *   and Punong Barangay (2023–2025 DILG directory).
  */
 (function () {
   'use strict';

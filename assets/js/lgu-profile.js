@@ -531,7 +531,7 @@
             (b.introduction ? '<p class="bb-card-intro">' + esc(b.introduction) + '</p>' : '') +
             '<div class="bb-card-meta">' +
             '<div class="bb-meta-item" style="grid-column: 1 / -1">' +
-            '<span class="bb-meta-label">Punong Barangay</span>' +
+            '<span class="bb-meta-label">Punong Barangay (2023&ndash;2025)</span>' +
             '<span class="bb-meta-value">' +
             pbName +
             '</span>' +
