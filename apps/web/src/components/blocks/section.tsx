@@ -21,18 +21,31 @@ export function Section({
   return (
     <section className={cn('py-10', alt && 'bg-surface-alt')}>
       <div className="container-site">
-        {title && (
-          <div className="mb-5 flex items-center justify-between max-md:flex-col max-md:gap-4 max-md:text-center">
-            <h2 className="mb-1 flex items-center gap-2 text-[1.125rem] text-ink">
-              {icon && <Icon name={icon} className="text-[1rem] text-primary" />}
-              <span>{title}</span>
-            </h2>
-            {intro && <p className="m-0 text-[0.8125rem] text-ink-light">{intro}</p>}
-          </div>
-        )}
+        {title && <SectionHeading icon={icon} title={title} intro={intro} />}
         {children}
       </div>
     </section>
+  )
+}
+
+/** The `.section-header` on its own, for a heading inside a section (certificate pages). */
+export function SectionHeading({
+  icon,
+  title,
+  intro,
+}: {
+  icon?: IconName
+  title: string
+  intro?: string
+}) {
+  return (
+    <div className="section-heading mb-5 flex items-center justify-between max-md:flex-col max-md:gap-4 max-md:text-center">
+      <h2 className="mb-1 flex items-center gap-2 text-[1.125rem] text-ink">
+        {icon && <Icon name={icon} className="text-[1rem] text-primary" />}
+        <span>{title}</span>
+      </h2>
+      {intro && <p className="m-0 text-[0.8125rem] text-ink-light">{intro}</p>}
+    </div>
   )
 }
 
