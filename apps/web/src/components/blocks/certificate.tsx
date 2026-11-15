@@ -2,7 +2,7 @@ import { Children, cloneElement, isValidElement } from 'react'
 import { Icon, type IconName } from '@/components/ui/icon'
 import { SiteLink } from '@/components/ui/site-link'
 import { cn } from '@/lib/utils'
-import { ListScope } from './box'
+import { cardBase, ListScope } from './box'
 
 /*
  * Blocks for the legacy certificate layout (birth, death and marriage certificates): a notice,
@@ -10,7 +10,7 @@ import { ListScope } from './box'
  * column of cards. Sections and quick facts reuse `Section` and `Stats`.
  */
 
-const card = 'rounded-site border border-black/6 bg-white p-3.5'
+const card = `${cardBase} p-3.5`
 const cardHeading = 'mb-2.5 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-ink'
 
 /** Legacy `.notice-box`: who handles the document, with a link to the right office. */
@@ -50,16 +50,19 @@ export function ListBox({
   title,
   children,
 }: {
-  icon: IconName
-  title: string
+  icon?: IconName
+  /** Omit for a box with only a list. */
+  title?: string
   children: React.ReactNode
 }) {
   return (
     <div className={cn('listbox', card)}>
-      <h4 className={cardHeading}>
-        <Icon name={icon} className="text-primary" />
-        <span>{title}</span>
-      </h4>
+      {title && (
+        <h4 className={cardHeading}>
+          {icon && <Icon name={icon} className="text-primary" />}
+          <span>{title}</span>
+        </h4>
+      )}
       <ListScope value={{ icon: 'check-circle-fill', variant: 'compact' }}>{children}</ListScope>
     </div>
   )
@@ -74,11 +77,15 @@ export function ListNote({ children }: { children: React.ReactNode }) {
   )
 }
 
+/** Legacy three-per-row grid (two up to 992px, one on phones), as `.process-grid` and `.staff-grid`. */
+export const threeUp =
+  'grid grid-cols-[repeat(3,1fr)] gap-2.5 max-[993px]:grid-cols-[repeat(2,1fr)] max-sm:grid-cols-1'
+
 /** Legacy `.process-grid`: numbered cards, three per row (two up to 992px, one on phones). */
 export function ProcessCards({ children }: { children: React.ReactNode }) {
   let number = 0
   return (
-    <div className="grid grid-cols-[repeat(3,1fr)] gap-2.5 max-[993px]:grid-cols-[repeat(2,1fr)] max-sm:grid-cols-1">
+    <div className={threeUp}>
       {Children.map(children, (child) =>
         isValidElement<{ number?: number }>(child)
           ? cloneElement(child, { number: ++number })
@@ -128,12 +135,8 @@ export function InfoGrid({ children }: { children: React.ReactNode }) {
 }
 
 export function InfoMain({ children }: { children: React.ReactNode }) {
-  // Legacy spaces the boxes 14px apart and a later heading 20px below them.
-  return (
-    <div className="[&>.listbox]:mb-3.5 [&>.section-heading:not(:first-child)]:mt-5">
-      {children}
-    </div>
-  )
+  // Legacy spaces the boxes 14px apart.
+  return <div className="[&>.listbox]:mb-3.5">{children}</div>
 }
 
 export function InfoSide({ children }: { children: React.ReactNode }) {

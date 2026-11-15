@@ -5,6 +5,18 @@
 
 /** Components a document may use; `components/blocks` implements each one. */
 export const blockNames = [
+  'CardGrid',
+  'ContactBox',
+  'FieldGroup',
+  'FieldGroups',
+  'IconItem',
+  'IconList',
+  'InfoCard',
+  'ProcessTable',
+  'RequirementCard',
+  'StepBadge',
+  'Tile',
+  'Tiles',
   'ContactButton',
   'Fineprint',
   'Lead',

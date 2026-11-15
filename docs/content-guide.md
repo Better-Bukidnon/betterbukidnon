@@ -10,23 +10,23 @@ pages listed below.
 
 ## Where things live
 
-| What                                                    | Where                                                                                                                                                                 |
-| ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Emergency hotline bar                                   | `scripts/chrome/hotline.html` (then `npm run chrome`), plus `react-app/src/components/layout/HotlineBar.tsx`                                                          |
-| Header, navigation and footer                           | `scripts/chrome/header.html`, `footer.html` (then `npm run chrome`), plus the React `Header.tsx` and `Footer.tsx`                                                     |
-| Homepage                                                | `apps/web/src/features/home/` and the `home_*` keys in `apps/web/messages/*.json`                                                                                     |
-| Governor, Vice Governor, Board Members, representatives | `data/officials.json` (rendered by `assets/js/officials.js`) and the cards in `government/index.html` and `index.html`                                                |
-| Cities, municipalities and districts                    | `government/index.html` (section `#lgus`) and `data/demographics.json`                                                                                                |
-| Population and area                                     | `data/demographics.json`, the homepage stat cards, `statistics/index.html`                                                                                            |
-| Service categories                                      | `data/service-categories.json` (each `/services/<id>` page, in EN, FIL and CEB); the directory cards in `apps/web/src/routes/services/index.tsx`                      |
-| Office pages and document guides                        | `content/services/<slug>/{en,fil,ceb}.mdx` (every service-details page except Business Permits and Property Declaration); the rest are still `service-details/*.html` |
-| Search results                                          | `data/services.json` (titles, keywords, offices) and the engine in `apps/web/src/features/services/search.ts`                                                         |
-| Capitol directory                                       | `contact/index.html`                                                                                                                                                  |
-| Ordinances and resolutions                              | `data/ordinances.json`, `data/resolutions.json`                                                                                                                       |
-| Budget, SRE and DPWH projects                           | `data/fiscal_transparency.json`, `data/dpwh-projects.json`                                                                                                            |
-| News                                                    | `data/news.json` (see [news-curation.md](news-curation.md))                                                                                                           |
-| Our Projects page and nav dropdown                      | `data/projects.json` (validated in `apps/web/src/features/projects/`), the "Our Projects" dropdown in `apps/web/src/config/navigation.ts`                             |
-| Sitemap                                                 | `sitemap.xml` and `sitemap/index.html`                                                                                                                                |
+| What                                                    | Where                                                                                                                                            |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Emergency hotline bar                                   | `scripts/chrome/hotline.html` (then `npm run chrome`), plus `react-app/src/components/layout/HotlineBar.tsx`                                     |
+| Header, navigation and footer                           | `scripts/chrome/header.html`, `footer.html` (then `npm run chrome`), plus the React `Header.tsx` and `Footer.tsx`                                |
+| Homepage                                                | `apps/web/src/features/home/` and the `home_*` keys in `apps/web/messages/*.json`                                                                |
+| Governor, Vice Governor, Board Members, representatives | `data/officials.json` (rendered by `assets/js/officials.js`) and the cards in `government/index.html` and `index.html`                           |
+| Cities, municipalities and districts                    | `government/index.html` (section `#lgus`) and `data/demographics.json`                                                                           |
+| Population and area                                     | `data/demographics.json`, the homepage stat cards, `statistics/index.html`                                                                       |
+| Service categories                                      | `data/service-categories.json` (each `/services/<id>` page, in EN, FIL and CEB); the directory cards in `apps/web/src/routes/services/index.tsx` |
+| Office pages and document guides                        | `content/services/<slug>/{en,fil,ceb}.mdx` (every service-details page); the rest are still `service-details/*.html`                             |
+| Search results                                          | `data/services.json` (titles, keywords, offices) and the engine in `apps/web/src/features/services/search.ts`                                    |
+| Capitol directory                                       | `contact/index.html`                                                                                                                             |
+| Ordinances and resolutions                              | `data/ordinances.json`, `data/resolutions.json`                                                                                                  |
+| Budget, SRE and DPWH projects                           | `data/fiscal_transparency.json`, `data/dpwh-projects.json`                                                                                       |
+| News                                                    | `data/news.json` (see [news-curation.md](news-curation.md))                                                                                      |
+| Our Projects page and nav dropdown                      | `data/projects.json` (validated in `apps/web/src/features/projects/`), the "Our Projects" dropdown in `apps/web/src/config/navigation.ts`        |
+| Sitemap                                                 | `sitemap.xml` and `sitemap/index.html`                                                                                                           |
 
 ## Common tasks
 
@@ -163,6 +163,19 @@ The birth, death and marriage certificate pages use the certificate layout (see
 | `<Faq question>`                                  | A question that opens to show its answer                                             |
 | `<SideCard icon title>`                           | A card in the narrow column; Markdown text, `**bold**` lines and link lists inside   |
 | `<Hours>`, `<SideLink href>`, `<ButtonLink href>` | A line with a clock; a link on its own; a full-width button                          |
+
+Business Permits and Property Declaration add a few blocks of their own:
+
+| Block                                                         | Use                                                                                                          |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `<ProcessTable widths="34,40,26">` with `<StepBadge>`         | A Markdown table of steps with a blue header; start each step cell with `<StepBadge>1</StepBadge> **Title**` |
+| `<ListBox>` without `icon` and `title`                        | A box with only a list                                                                                       |
+| `<CardGrid>` with `<InfoCard title href>`                     | Short titled cards, three per row (or two in a `<RouteGrid>`); `href` makes the title a link                 |
+| `<Section large>`, `<Stats large>`                            | The bigger headings and quick facts of Property Declaration                                                  |
+| `<Tiles>` with `<Tile label>`                                 | A label beside a short answer, three per row                                                                 |
+| `<FieldGroups>` with `<FieldGroup icon title>`                | Two cards per row, each with a checked Markdown list                                                         |
+| `<RequirementCard title>`                                     | A card with a plain bulleted list; put several in `<Tiles>`                                                  |
+| `<ContactBox icon title>` with `<IconList>`/`<IconItem icon>` | A contact or links card; each list item has its own icon (`<IconList muted>` for grey)                       |
 
 - Leave a blank line around Markdown inside a block, as above.
 - Links: app paths (`/government#lgus`) stay in the reader's language; `https://` links open

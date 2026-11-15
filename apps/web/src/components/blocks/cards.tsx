@@ -1,9 +1,20 @@
 import { Icon, type IconName } from '@/components/ui/icon'
+import { cn } from '@/lib/utils'
 
-/** Legacy `.quick-stats`: four facts in a row, two up to 768px, one below 576px. */
-export function Stats({ children }: { children: React.ReactNode }) {
+/**
+ * Legacy `.quick-stats`: four facts in a row, two up to 768px, one below 576px. `large` is the
+ * Property Declaration version: bigger text, and one per row only up to 480px.
+ */
+export function Stats({ large = false, children }: { large?: boolean; children: React.ReactNode }) {
   return (
-    <dl className="mb-5 grid grid-cols-4 gap-2.5 max-[769px]:grid-cols-2 max-sm:grid-cols-1">
+    <dl
+      className={cn(
+        'grid grid-cols-4 max-[769px]:grid-cols-2',
+        large
+          ? 'mb-6 gap-3 max-[481px]:grid-cols-1 [&_dd]:text-[0.875rem] [&_dt]:text-[0.6875rem] [&_i]:text-[1.125rem] [&>div]:p-3.5'
+          : 'mb-5 gap-2.5 max-sm:grid-cols-1',
+      )}
+    >
       {children}
     </dl>
   )

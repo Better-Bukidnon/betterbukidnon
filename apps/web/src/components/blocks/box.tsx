@@ -2,7 +2,10 @@ import { Children, cloneElement, createContext, isValidElement, useContext } fro
 import { Icon, type IconName } from '@/components/ui/icon'
 import { cn } from '@/lib/utils'
 
-const box = 'rounded-site border border-black/6 bg-white p-3.5'
+/** The white card with a faint border that most legacy service-page boxes use. */
+export const cardBase = 'rounded-site border border-black/6 bg-white'
+
+const box = `${cardBase} p-3.5`
 
 /** Legacy `.info-box.office-prose`: paragraphs of running text in a white box. */
 export function Prose({ children }: { children: React.ReactNode }) {
@@ -138,7 +141,7 @@ export function ListItem({
         {itemIcon && (
           <Icon name={itemIcon} className="mt-[3px] shrink-0 text-[0.625rem] text-primary" />
         )}
-        {isLink(children) ? children : <span>{children}</span>}
+        {flexItems(children)}
       </li>
     )
   }
@@ -153,7 +156,7 @@ export function ListItem({
         )}
       />
       {/* Legacy wraps item text in a span, but puts links in the list item directly. */}
-      {bare || isLink(children) ? children : <span>{children}</span>}
+      {bare ? children : flexItems(children)}
     </li>
   )
 }
@@ -198,4 +201,25 @@ export function Phone({ number, children }: { number: string; children?: React.R
 /** A list item that is only a link (an `<a>` or a Markdown link) is not wrapped in a span. */
 function isLink(children: React.ReactNode) {
   return isValidElement<{ href?: string }>(children) && Boolean(children.props.href)
+}
+
+/**
+ * The content of a list item as legacy lays it out: a link on its own, or text in a span with
+ * any links after it as separate items (so they sit apart, with the item's gap).
+ */
+function flexItems(children: React.ReactNode) {
+  if (isLink(children)) return children
+  const parts = Children.toArray(children)
+  const firstLink = parts.findIndex((part) => isLink(part))
+  if (firstLink <= 0) return <span>{children}</span>
+  const text = parts.slice(0, firstLink)
+  // Markdown keeps the space before the link in the text; legacy has the gap instead.
+  const last = text.at(-1)
+  if (typeof last === 'string') text[text.length - 1] = last.trimEnd()
+  return (
+    <>
+      <span>{text}</span>
+      {parts.slice(firstLink)}
+    </>
+  )
 }
