@@ -6,22 +6,13 @@ import { SiteLink } from '@/components/ui/site-link'
 import { cn } from '@/lib/utils'
 import { m } from '@/paraglide/messages'
 import { officials } from './data'
+import { englishDistrictLabel } from './districts'
 
 /*
  * The Elected Officials page, reproducing legacy government/officials.html with the markup
  * assets/js/officials.js rendered there from data/officials.json. It is prerendered here, so
  * the list shows without JavaScript.
  */
-
-// English-only on purpose: the legacy page showed these untranslated. The translated
-// gov_district_* labels are the Government page's.
-const districts = [
-  m.officials_district_1,
-  m.officials_district_2,
-  m.officials_district_3,
-  m.officials_district_4,
-]
-const districtLabel = (district: number) => districts[district - 1]?.() ?? ''
 
 const boardByDistrict = [...new Set(officials.board_members.map((member) => member.district))]
   .sort((a, b) => a - b)
@@ -83,7 +74,7 @@ export function OfficialsPage() {
           <Group title={m.officials_sangguniang_bayan_members()} intro={m.officials_sp_intro()}>
             {boardByDistrict.map(({ district, members }) => (
               <div key={district}>
-                <h3 className={districtHeading}>{districtLabel(district)}</h3>
+                <h3 className={districtHeading}>{englishDistrictLabel(district)}</h3>
                 <div className={grid4}>
                   {members.map((member) => (
                     <MemberCard key={member.name} name={member.name}>
@@ -110,7 +101,7 @@ export function OfficialsPage() {
             <div className={grid4}>
               {representatives.map((rep) => (
                 <MemberCard key={rep.name} name={rep.name}>
-                  {districtLabel(rep.district)} · {m.officials_representative()}
+                  {englishDistrictLabel(rep.district)} · {m.officials_representative()}
                 </MemberCard>
               ))}
             </div>
