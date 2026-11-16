@@ -1,6 +1,6 @@
 import { Children, cloneElement, createContext, isValidElement, useContext } from 'react'
 import { Icon, type IconName } from '@/components/ui/icon'
-import { cn } from '@/lib/utils'
+import { cn, telHref } from '@/lib/utils'
 
 /** The white card with a faint border that most legacy service-page boxes use. */
 export const cardBase = 'rounded-site border border-black/6 bg-white'
@@ -160,8 +160,6 @@ export function ListItem({
     </li>
   )
 }
-
-const telHref = (number: string) => `tel:+63${number.replace(/\D/g, '').replace(/^0/, '')}`
 
 /**
  * The address, hours and phone numbers of an office, as a `.req-list`. One number goes in

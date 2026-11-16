@@ -1,3 +1,4 @@
+import { outlineButtonSmall } from '@/components/layout/legacy'
 import { Icon, type IconName } from '@/components/ui/icon'
 import { SiteLink } from '@/components/ui/site-link'
 
@@ -27,10 +28,7 @@ export function LinkButton({
   return (
     // A div, not the legacy p: formatted MDX wraps the label in its own paragraph.
     <div className="mt-4 [&_p]:m-0 [&_p]:inline">
-      <SiteLink
-        href={href}
-        className="inline-block rounded-site border-2 border-primary bg-white px-4 py-2 text-center text-[0.875rem] font-semibold text-primary no-underline transition-all duration-200 hover:bg-surface-alt hover:no-underline max-md:px-3 max-md:py-1.5 max-md:text-[0.8125rem]"
-      >
+      <SiteLink href={href} className={outlineButtonSmall}>
         {icon && <Icon name={icon} />} <span>{children}</span>
       </SiteLink>
     </div>
