@@ -11,13 +11,18 @@ const namedOfficialSchema = z.object({
   district: z.number().int().min(1).max(4).optional(),
 })
 
+// Board members and representatives are elected by district, so the district is required.
+const districtOfficialSchema = namedOfficialSchema.extend({
+  district: z.number().int().min(1).max(4),
+})
+
 export const officialsDataSchema = z.object({
   term: z.string().min(1),
   last_verified: z.iso.date(),
   sources: z.array(sourceSchema).min(1),
   governor: namedOfficialSchema,
   vice_governor: namedOfficialSchema,
-  board_members: z.array(namedOfficialSchema),
+  board_members: z.array(districtOfficialSchema),
   ex_officio: z.array(
     z.object({
       id: z.string().min(1),
@@ -26,7 +31,7 @@ export const officialsDataSchema = z.object({
       status: z.enum(['verified', 'verify']),
     }),
   ),
-  representatives: z.array(namedOfficialSchema),
+  representatives: z.array(districtOfficialSchema),
 })
 export type OfficialsData = z.infer<typeof officialsDataSchema>
 
