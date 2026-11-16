@@ -27,3 +27,17 @@ export const primaryButton = `${legacyButton} border-transparent bg-primary px-6
 
 /** Legacy `.btn.btn-secondary.btn-sm`: a small outlined button. */
 export const outlineButtonSmall = `${legacyButton} border-primary bg-white px-4 py-2 text-[0.875rem] text-primary hover:bg-surface-alt max-md:px-3 max-md:py-1.5 max-md:text-[0.8125rem]`
+
+/** Legacy `.data-table` (wrap it in `overflow-x-auto`), its cells and its white-on-blue headers. */
+export const dataTable =
+  'w-full border-collapse overflow-hidden rounded-site bg-white max-md:text-[0.875rem] [&_tbody_tr:hover]:bg-surface-alt'
+export const dataTableCell = 'border-b border-surface-alt p-4 text-left max-md:p-2'
+export const dataTableHead = `${dataTableCell} bg-primary font-semibold text-white`
+
+/** Legacy `.info-card-icon`: the gradient icon column of an `.info-card`. */
+export const infoCardIcon =
+  'flex w-15 shrink-0 items-center justify-center bg-linear-135 from-primary to-secondary text-[1.5rem] text-white'
+
+/** The small centred grey note under a legislative section (legacy `.leg-note`). */
+export const legacyNote =
+  'mx-auto mb-0 mt-5 max-w-190 text-center text-[0.8125rem] leading-[1.6] text-ink-light'

@@ -1,6 +1,10 @@
 import { Link } from '@tanstack/react-router'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import {
+  dataTable,
+  dataTableCell,
+  dataTableHead,
+  infoCardIcon,
   legacyCard as card,
   legacyGrid as grid,
   outlineButtonSmall,
@@ -13,16 +17,13 @@ import type { Message } from '@/lib/i18n'
 import { cn, telHref } from '@/lib/utils'
 import { m } from '@/paraglide/messages'
 import { demographics, officials } from './data'
+import { districtLabel, districts } from './districts'
 
 /*
  * The Provincial Government page, reproducing legacy government/index.html and the global
  * legacy CSS it uses (.section, .grid-*, .card, .executive-card, .board-member-card,
  * .dept-card, .data-table).
  */
-
-// The labels of the four districts, in order (district n is districts[n - 1]).
-const districts = [m.gov_district_1, m.gov_district_2, m.gov_district_3, m.gov_district_4]
-const districtLabel = (district: number) => districts[district - 1]?.() ?? ''
 
 const number = (value: number) => value.toLocaleString('en-US')
 
@@ -35,20 +36,6 @@ const lgus = [...demographics.lgus].sort(
 )
 const totalPopulation = lgus.reduce((total, lgu) => total + lgu.population_2020, 0)
 const totalBarangays = lgus.reduce((total, lgu) => total + lgu.barangays, 0)
-
-const districtSummaries = districts.map((label, i) => {
-  const members = lgus.filter((lgu) => lgu.district === i + 1)
-  return {
-    label,
-    boardMembers: officials.board_members.filter((member) => member.district === i + 1),
-    representative: officials.representatives.find((rep) => rep.district === i + 1)?.name,
-    lguNames: members
-      .map((lgu) => lgu.name)
-      .sort((a, b) => a.localeCompare(b))
-      .join(', '),
-    population: members.reduce((total, lgu) => total + lgu.population_2020, 0),
-  }
-})
 
 type Office = {
   icon: IconName
@@ -334,7 +321,7 @@ function ProvincialBoard() {
         </SectionIntro>
         <h3 className="mb-6 text-center text-[1.25rem]">{m.gov_board_members_by_district()}</h3>
         <div className={cn(grid[4], 'gap-6')}>
-          {districtSummaries.map((district) => (
+          {districts.map((district) => (
             <div key={district.label()} className={memberCard}>
               <span className={cn(memberBadge, 'mb-1.5')}>{district.label()}</span>
               <ul className="m-0 list-none p-0">
@@ -420,7 +407,7 @@ function Offices() {
 function OfficeCard({ office }: { office: Office }) {
   const body = (
     <>
-      <div className="flex min-h-full w-15 shrink-0 items-center justify-center bg-linear-135 from-primary to-secondary text-[1.5rem] text-white">
+      <div className={cn(infoCardIcon, 'min-h-full')}>
         <Icon name={office.icon} />
       </div>
       <div className="flex flex-1 flex-col gap-2 p-6">
@@ -493,7 +480,7 @@ function Districts() {
           <p className={introNarrow}>{m.gov_districts_subtitle()}</p>
         </SectionIntro>
         <div className={cn(grid[2], 'gap-6')}>
-          {districtSummaries.map((district) => (
+          {districts.map((district) => (
             <div key={district.label()} className={card}>
               <h3 className="mb-2 text-[1.125rem] text-primary">{district.label()}</h3>
               <p className="mb-2">
@@ -521,8 +508,6 @@ function Districts() {
 
 function Lgus() {
   // Legacy .data-table: every th, including row headers, is white on blue.
-  const cell = 'border-b border-surface-alt p-4 text-left max-md:p-2'
-  const head = cn(cell, 'bg-primary font-semibold text-white')
   return (
     <section id="lgus" className="section-y bg-surface-alt">
       <div className="container-site">
@@ -535,37 +520,37 @@ function Lgus() {
           <p className={introNarrow}>{m.gov_lgus_subtitle()}</p>
         </SectionIntro>
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse overflow-hidden rounded-site bg-white max-md:text-[0.875rem] [&_tbody_tr:hover]:bg-surface-alt">
+          <table className={dataTable}>
             <caption className="sr-only">{m.gov_lgus_caption()}</caption>
             <thead>
               <tr>
-                <th className={head}>{m.gov_th_lgu()}</th>
-                <th className={head}>{m.gov_th_type()}</th>
-                <th className={head}>{m.gov_th_district()}</th>
-                <th className={cn(head, 'text-right')}>{m.gov_th_population_2020()}</th>
-                <th className={cn(head, 'text-right')}>{m.gov_th_barangays()}</th>
+                <th className={dataTableHead}>{m.gov_th_lgu()}</th>
+                <th className={dataTableHead}>{m.gov_th_type()}</th>
+                <th className={dataTableHead}>{m.gov_th_district()}</th>
+                <th className={cn(dataTableHead, 'text-right')}>{m.gov_th_population_2020()}</th>
+                <th className={cn(dataTableHead, 'text-right')}>{m.gov_th_barangays()}</th>
               </tr>
             </thead>
             <tbody>
               {lgus.map((lgu) => (
                 <tr key={lgu.name}>
-                  <th scope="row" className={head}>
+                  <th scope="row" className={dataTableHead}>
                     {lgu.name}
                   </th>
-                  <td className={cell}>{lguTypes[lguKind(lgu)]?.()}</td>
-                  <td className={cell}>{districtLabel(lgu.district)}</td>
-                  <td className={cn(cell, 'text-right')}>{number(lgu.population_2020)}</td>
-                  <td className={cn(cell, 'text-right')}>{lgu.barangays}</td>
+                  <td className={dataTableCell}>{lguTypes[lguKind(lgu)]?.()}</td>
+                  <td className={dataTableCell}>{districtLabel(lgu.district)}</td>
+                  <td className={cn(dataTableCell, 'text-right')}>{number(lgu.population_2020)}</td>
+                  <td className={cn(dataTableCell, 'text-right')}>{lgu.barangays}</td>
                 </tr>
               ))}
             </tbody>
             <tfoot>
               <tr className="font-semibold">
-                <th colSpan={3} scope="row" className={head}>
+                <th colSpan={3} scope="row" className={dataTableHead}>
                   {m.gov_total_province()}
                 </th>
-                <td className={cn(cell, 'text-right')}>{number(totalPopulation)}</td>
-                <td className={cn(cell, 'text-right')}>{totalBarangays}</td>
+                <td className={cn(dataTableCell, 'text-right')}>{number(totalPopulation)}</td>
+                <td className={cn(dataTableCell, 'text-right')}>{totalBarangays}</td>
               </tr>
             </tfoot>
           </table>
