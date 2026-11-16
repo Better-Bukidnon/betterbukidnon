@@ -22,3 +22,17 @@ export const districts = [
 })
 
 export const districtLabel = (district: number) => districts[district - 1]?.label() ?? ''
+
+// English-only on purpose: the legacy Officials and Statistics pages showed these untranslated.
+const englishLabels = [
+  m.officials_district_1,
+  m.officials_district_2,
+  m.officials_district_3,
+  m.officials_district_4,
+]
+export const englishDistrictLabel = (district: number) => englishLabels[district - 1]?.() ?? ''
+
+export const provincePopulation = districts.reduce(
+  (total, district) => total + district.population,
+  0,
+)

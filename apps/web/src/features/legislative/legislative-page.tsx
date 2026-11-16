@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { legacyNote as note } from '@/components/layout/legacy'
+import { PatternHero } from '@/components/layout/pattern-hero'
 import { Icon, type IconName } from '@/components/ui/icon'
 import { SiteLink } from '@/components/ui/site-link'
 import { contactDirectory } from '@/config/contact'
@@ -117,7 +118,13 @@ export function LegislativePage() {
       <Breadcrumbs
         items={[{ label: m.leg_home(), link: { to: '/' } }, { label: m.nav_legislative() }]}
       />
-      <Hero />
+      <PatternHero
+        tabletStep
+        icon="bank2"
+        badge={m.leg_sangguniang_bayan()}
+        title={m.leg_legislative_documents()}
+        subtitle={m.leg_ordinances_and_resolutions_of_the_sangguniang()}
+      />
       <Frameworks />
       <Members />
       <Process />
@@ -160,27 +167,6 @@ export function LegislativePage() {
         </div>
       </section>
     </>
-  )
-}
-
-function Hero() {
-  return (
-    <section className="legacy-hero-pattern bg-linear-135 from-primary to-secondary pb-14 pt-12 text-center max-[769px]:pb-12 max-[769px]:pt-10 max-sm:pb-11 max-sm:pt-9">
-      <div className="container-site">
-        <div className="relative z-1">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/15 px-5 py-2 text-[0.875rem] font-medium text-white backdrop-blur-[4px]">
-            <Icon name="bank2" />
-            <span>{m.leg_sangguniang_bayan()}</span>
-          </span>
-          <h1 className="mb-2 text-[2rem] font-bold text-white max-[769px]:text-[1.75rem] max-sm:text-[1.5rem]">
-            {m.leg_legislative_documents()}
-          </h1>
-          <p className="m-0 text-[1rem] text-white/85 max-sm:text-[0.9375rem]">
-            {m.leg_ordinances_and_resolutions_of_the_sangguniang()}
-          </p>
-        </div>
-      </div>
-    </section>
   )
 }
 

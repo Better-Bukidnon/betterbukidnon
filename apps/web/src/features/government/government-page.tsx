@@ -14,18 +14,16 @@ import { PageHeader } from '@/components/layout/page-header'
 import { Icon, type IconName } from '@/components/ui/icon'
 import { SiteLink } from '@/components/ui/site-link'
 import type { Message } from '@/lib/i18n'
-import { cn, telHref } from '@/lib/utils'
+import { cn, formatNumber, telHref } from '@/lib/utils'
 import { m } from '@/paraglide/messages'
 import { demographics, officials } from './data'
-import { districtLabel, districts } from './districts'
+import { districtLabel, districts, provincePopulation } from './districts'
 
 /*
  * The Provincial Government page, reproducing legacy government/index.html and the global
  * legacy CSS it uses (.section, .grid-*, .card, .executive-card, .board-member-card,
  * .dept-card, .data-table).
  */
-
-const number = (value: number) => value.toLocaleString('en-US')
 
 type Lgu = (typeof demographics.lgus)[number]
 // Legacy order: the capital, then the other city, then the municipalities alphabetically.
@@ -34,7 +32,6 @@ const lguTypes = [m.gov_type_capital_city, m.gov_type_component_city, m.gov_type
 const lgus = [...demographics.lgus].sort(
   (a, b) => lguKind(a) - lguKind(b) || a.name.localeCompare(b.name),
 )
-const totalPopulation = lgus.reduce((total, lgu) => total + lgu.population_2020, 0)
 const totalBarangays = lgus.reduce((total, lgu) => total + lgu.barangays, 0)
 
 type Office = {
@@ -490,7 +487,7 @@ function Districts() {
                 <strong>{m.gov_member_lgus()}</strong>: {district.lguNames}
               </p>
               <p className="m-0 text-ink-light">
-                <strong>{m.gov_population_2020()}</strong>: {number(district.population)}
+                <strong>{m.gov_population_2020()}</strong>: {formatNumber(district.population)}
               </p>
             </div>
           ))}
@@ -539,7 +536,9 @@ function Lgus() {
                   </th>
                   <td className={dataTableCell}>{lguTypes[lguKind(lgu)]?.()}</td>
                   <td className={dataTableCell}>{districtLabel(lgu.district)}</td>
-                  <td className={cn(dataTableCell, 'text-right')}>{number(lgu.population_2020)}</td>
+                  <td className={cn(dataTableCell, 'text-right')}>
+                    {formatNumber(lgu.population_2020)}
+                  </td>
                   <td className={cn(dataTableCell, 'text-right')}>{lgu.barangays}</td>
                 </tr>
               ))}
@@ -549,7 +548,9 @@ function Lgus() {
                 <th colSpan={3} scope="row" className={dataTableHead}>
                   {m.gov_total_province()}
                 </th>
-                <td className={cn(dataTableCell, 'text-right')}>{number(totalPopulation)}</td>
+                <td className={cn(dataTableCell, 'text-right')}>
+                  {formatNumber(provincePopulation)}
+                </td>
                 <td className={cn(dataTableCell, 'text-right')}>{totalBarangays}</td>
               </tr>
             </tfoot>
