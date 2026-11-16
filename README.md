@@ -1,4 +1,5 @@
 # BetterBukidnon.org
+[![Join Discord](https://img.shields.io/badge/Discord-Join%20Our%20Community-5865F2?logo=discord&logoColor=white)](https://discord.gg/gKFYnEAcH)
 
 A volunteer-run civic portal for the **Province of Bukidnon**, Philippines: provincial
 services, officials, emergency hotlines, statistics and public records in one easy-to-read
@@ -75,6 +76,16 @@ researchers are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md), then open an i
 pull request into `develop`. Province facts must come from official sources; see the
 [fact sheet](docs/bukidnon-facts.md).
 
+
+## Community
+
+Join our [Discord community](https://discord.gg/gKFYnEAcH) to connect with fellow contributors, discuss ideas, ask questions, and collaborate on BetterBukidnon.org.
+
+Whether you're a developer, designer, writer, or community volunteer, everyone is welcome!
+
+[**Join our Discord Server**](https://discord.gg/gKFYnEAcH)
+
+
 ## Data sources
 
 | Source                                                        | Used for                            |
@@ -110,3 +121,4 @@ See [LICENSE](LICENSE).
 
 - Email: volunteer@betterbukidnon.org
 - GitHub: [Better-Bukidnon/betterbukidnon](https://github.com/Better-Bukidnon/betterbukidnon)
+- Discord: [Join our community](https://discord.gg/gKFYnEAcH)
