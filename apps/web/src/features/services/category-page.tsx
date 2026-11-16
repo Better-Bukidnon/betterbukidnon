@@ -1,3 +1,4 @@
+import { legacyGrid } from '@/components/layout/legacy'
 import { PageHeader } from '@/components/layout/page-header'
 import { CharterNote } from './charter-note'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
@@ -59,7 +60,7 @@ export function ServiceCategoryPage({ page }: { page: CategoryData }) {
             {section.intro && (
               <p className="mb-6 mt-0 max-w-190 text-ink-light">{l(section.intro)}</p>
             )}
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 max-xl:grid-cols-2 max-md:grid-cols-1 min-[1200px]:grid-cols-3">
+            <div className={`${legacyGrid[3]} gap-6`}>
               {section.cards.map((card) => (
                 <div
                   key={card.title.en}

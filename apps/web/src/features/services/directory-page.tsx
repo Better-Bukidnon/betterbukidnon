@@ -1,3 +1,4 @@
+import { legacyGrid } from '@/components/layout/legacy'
 import { Link } from '@tanstack/react-router'
 import { PageHeader } from '@/components/layout/page-header'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
@@ -82,7 +83,7 @@ export function ServicesDirectoryPage({ initialQuery }: { initialQuery?: string 
 
       <section className="section-y">
         <div className="container-site">
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 max-xl:grid-cols-2 max-md:grid-cols-1 min-[1200px]:grid-cols-3">
+          <div className={`${legacyGrid[3]} gap-6`}>
             {categories.map((category) => (
               <Link
                 key={category.id}

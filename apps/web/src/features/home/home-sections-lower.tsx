@@ -5,6 +5,7 @@ import { contactDirectory } from '@/config/contact'
 import { repositoryUrl } from '@/config/navigation'
 import { text, type Message } from '@/lib/i18n'
 import { GlanceHeader, SectionHeader, SectionLink } from './home-ui'
+import { telHref } from '@/lib/utils'
 import { m } from '@/paraglide/messages'
 
 const timeline: ReadonlyArray<{
@@ -233,8 +234,7 @@ export function ContactInfo() {
       title: m.contact_phone,
       value: contactDirectory.phone,
       note: m.contact_hours(),
-      // (088) 813-5741 -> tel:+63888135741 (drop the trunk 0 after the country code)
-      href: `tel:+63${contactDirectory.phone.replace(/\D/g, '').slice(1)}`,
+      href: telHref(contactDirectory.phone),
     },
     {
       icon: 'globe2',
