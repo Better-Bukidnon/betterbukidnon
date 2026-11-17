@@ -793,5 +793,17 @@
   "dir_profile_leadership_pending": "Leadership record pending verification",
   "dir_profile_no_barangays": "No matching barangays.",
   "dir_profile_references_description": "Authoritative government publications and datasets backing this profile",
-  "dir_profile_verified": "Last verified {date}"
+  "dir_profile_verified": "Last verified {date}",
+  "dir_barangay_badge": "{count} Official Barangays",
+  "dir_barangay_title": "Bukidnon Barangay Directory",
+  "dir_barangay_description": "Complete PSA PSGC directory of all {count} barangays organized under Bukidnon's {lgus} cities and municipalities.",
+  "dir_search_barangay": "Search Barangay Name or PSGC Code",
+  "dir_search_barangay_placeholder": "e.g. Poblacion, Casisang, 1001312001...",
+  "dir_lgu_filter": "City / Municipality",
+  "dir_all_lgus_barangays": "All {lgus} LGUs ({count} Barangays)",
+  "dir_barangay_name_asc": "Barangay Name (A–Z)",
+  "dir_barangay_name_desc": "Barangay Name (Z–A)",
+  "dir_barangay_lgu_asc": "City / Municipality (A–Z)",
+  "dir_barangay_showing": "Showing {from}–{to} of {total} barangays",
+  "dir_barangay_pagination": "Barangay directory pages"
 }

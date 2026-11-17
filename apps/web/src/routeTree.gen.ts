@@ -23,6 +23,7 @@ import { Route as SitemapRouteImport } from './routes/sitemap'
 import { Route as StatisticsRouteImport } from './routes/statistics'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AdminNewsEditorRouteImport } from './routes/admin.news-editor'
+import { Route as BarangaysIndexRouteImport } from './routes/barangays/index'
 import { Route as GovernmentIndexRouteImport } from './routes/government/index'
 import { Route as GovernmentOfficialsRouteImport } from './routes/government/officials'
 import { Route as LegislativeIndexRouteImport } from './routes/legislative/index'
@@ -104,6 +105,11 @@ const AdminNewsEditorRoute = AdminNewsEditorRouteImport.update({
   path: '/admin/news-editor',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BarangaysIndexRoute = BarangaysIndexRouteImport.update({
+  id: '/barangays/',
+  path: '/barangays/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GovernmentIndexRoute = GovernmentIndexRouteImport.update({
   id: '/government/',
   path: '/government/',
@@ -178,6 +184,7 @@ export interface FileRoutesByFullPath {
   '/lgus/$slug': typeof LgusSlugRoute
   '/service-details/$slug': typeof ServiceDetailsSlugRoute
   '/services/$category': typeof ServicesCategoryRoute
+  '/barangays/': typeof BarangaysIndexRoute
   '/government/': typeof GovernmentIndexRoute
   '/legislative/': typeof LegislativeIndexRoute
   '/lgus/': typeof LgusIndexRoute
@@ -204,6 +211,7 @@ export interface FileRoutesByTo {
   '/lgus/$slug': typeof LgusSlugRoute
   '/service-details/$slug': typeof ServiceDetailsSlugRoute
   '/services/$category': typeof ServicesCategoryRoute
+  '/barangays': typeof BarangaysIndexRoute
   '/government': typeof GovernmentIndexRoute
   '/legislative': typeof LegislativeIndexRoute
   '/lgus': typeof LgusIndexRoute
@@ -231,6 +239,7 @@ export interface FileRoutesById {
   '/lgus/$slug': typeof LgusSlugRoute
   '/service-details/$slug': typeof ServiceDetailsSlugRoute
   '/services/$category': typeof ServicesCategoryRoute
+  '/barangays/': typeof BarangaysIndexRoute
   '/government/': typeof GovernmentIndexRoute
   '/legislative/': typeof LegislativeIndexRoute
   '/lgus/': typeof LgusIndexRoute
@@ -259,6 +268,7 @@ export interface FileRouteTypes {
     | '/lgus/$slug'
     | '/service-details/$slug'
     | '/services/$category'
+    | '/barangays/'
     | '/government/'
     | '/legislative/'
     | '/lgus/'
@@ -285,6 +295,7 @@ export interface FileRouteTypes {
     | '/lgus/$slug'
     | '/service-details/$slug'
     | '/services/$category'
+    | '/barangays'
     | '/government'
     | '/legislative'
     | '/lgus'
@@ -311,6 +322,7 @@ export interface FileRouteTypes {
     | '/lgus/$slug'
     | '/service-details/$slug'
     | '/services/$category'
+    | '/barangays/'
     | '/government/'
     | '/legislative/'
     | '/lgus/'
@@ -338,6 +350,7 @@ export interface RootRouteChildren {
   LgusSlugRoute: typeof LgusSlugRoute
   ServiceDetailsSlugRoute: typeof ServiceDetailsSlugRoute
   ServicesCategoryRoute: typeof ServicesCategoryRoute
+  BarangaysIndexRoute: typeof BarangaysIndexRoute
   GovernmentIndexRoute: typeof GovernmentIndexRoute
   LegislativeIndexRoute: typeof LegislativeIndexRoute
   LgusIndexRoute: typeof LgusIndexRoute
@@ -444,6 +457,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminNewsEditorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/barangays/': {
+      id: '/barangays/'
+      path: '/barangays'
+      fullPath: '/barangays/'
+      preLoaderRoute: typeof BarangaysIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/government/': {
       id: '/government/'
       path: '/government'
@@ -538,6 +558,7 @@ const rootRouteChildren: RootRouteChildren = {
   LgusSlugRoute: LgusSlugRoute,
   ServiceDetailsSlugRoute: ServiceDetailsSlugRoute,
   ServicesCategoryRoute: ServicesCategoryRoute,
+  BarangaysIndexRoute: BarangaysIndexRoute,
   GovernmentIndexRoute: GovernmentIndexRoute,
   LegislativeIndexRoute: LegislativeIndexRoute,
   LgusIndexRoute: LgusIndexRoute,

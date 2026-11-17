@@ -76,6 +76,7 @@ const groups = [
       ['Government Structure', '/government'],
       ['Elected Officials', '/government/officials'],
       ['Cities and Municipalities', '/lgus'],
+      ['Barangay Directory', '/barangays'],
       ['Legislative Documents', '/legislative'],
       ['Ordinance Framework', '/legislative/ordinance-framework'],
       ['Resolution Framework', '/legislative/resolution-framework'],

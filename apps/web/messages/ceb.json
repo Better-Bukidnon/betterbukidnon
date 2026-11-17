@@ -628,5 +628,17 @@
   "dir_profile_leadership_pending": "Ang rekord sa pangulo naghulat pa sa pagpamatuod",
   "dir_profile_no_barangays": "Walay motakdo nga barangay.",
   "dir_profile_references_description": "Awtoritatibong publikasyon ug dataset sa gobyerno nga nagsuporta niining profile",
-  "dir_profile_verified": "Katapusang gipamatud-an {date}"
+  "dir_profile_verified": "Katapusang gipamatud-an {date}",
+  "dir_barangay_badge": "{count} Opisyal nga Barangay",
+  "dir_barangay_title": "Direktoryo sa Barangay sa Bukidnon",
+  "dir_barangay_description": "Kompletong PSA PSGC direktoryo sa tanang {count} ka barangay ubos sa {lgus} ka siyudad ug munisipalidad sa Bukidnon.",
+  "dir_search_barangay": "Pangitaa ang Ngalan o PSGC Code sa Barangay",
+  "dir_search_barangay_placeholder": "pananglitan Poblacion, Casisang, 1001312001...",
+  "dir_lgu_filter": "Siyudad / Munisipalidad",
+  "dir_all_lgus_barangays": "Tanan nga {lgus} LGU ({count} Barangay)",
+  "dir_barangay_name_asc": "Ngalan sa Barangay (A–Z)",
+  "dir_barangay_name_desc": "Ngalan sa Barangay (Z–A)",
+  "dir_barangay_lgu_asc": "Siyudad / Munisipalidad (A–Z)",
+  "dir_barangay_showing": "Gipakita ang {from}–{to} sa {total} ka barangay",
+  "dir_barangay_pagination": "Mga panid sa direktoryo sa barangay"
 }
