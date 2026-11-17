@@ -26,10 +26,32 @@ test.describe('Civic Directories & Route Smoke Tests', () => {
     });
   }
 
-  test('Home page interactive map displays OpenStreetMap attribution', async ({ page }) => {
+  test('Home page interactive map displays OpenStreetMap attribution without waiting for weather', async ({
+    page,
+  }) => {
+    await page.route('**/api.open-meteo.com/**', async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 11_000));
+      await route.fulfill({
+        contentType: 'application/json',
+        body: JSON.stringify({
+          current: {
+            temperature_2m: 29,
+            relative_humidity_2m: 65,
+            weather_code: 1,
+            wind_speed_10m: 12,
+          },
+          hourly: {
+            time: ['2026-11-17T00:00'],
+            temperature_2m: [29],
+            weather_code: [1],
+          },
+        }),
+      });
+    });
+
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     const attribution = page.locator('#map-container .leaflet-control-attribution');
-    await expect(attribution).toBeVisible();
+    await expect(attribution).toBeVisible({ timeout: 5_000 });
     await expect(attribution).toContainText('OpenStreetMap');
   });
 
