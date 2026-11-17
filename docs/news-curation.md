@@ -4,8 +4,7 @@ How the **Latest Updates** (homepage) and **News** page are kept up to date.
 
 ## How it works
 
-Both sections are rendered by [`assets/js/news.js`](../assets/js/news.js) from a single
-file: [`data/news.json`](../data/news.json). The homepage shows the 3 most recent items;
+Both sections use the shared data file [`data/news.json`](../data/news.json). The homepage shows the 3 most recent items;
 the News page shows all of them, newest first. No backend is involved — it is a static
 JSON file served by the Cloudflare Workers deployment (previously cPanel).
 
@@ -19,8 +18,7 @@ To avoid hand-editing JSON, use the curation tool:
 admin/news-editor.html
 ```
 
-This is an **internal tool**. It is excluded from the production build
-([`build.sh`](../build.sh)), so it is never deployed publicly. You run it locally.
+This is an **internal tool**. It is not included in the `apps/web` production build.
 
 ## Adding or editing an update
 
@@ -41,7 +39,7 @@ This is an **internal tool**. It is excluded from the production build
 4. Click **Save update**.
 5. Click **Download news.json**.
 6. Replace [`data/news.json`](../data/news.json) with the downloaded file, commit, and
-   deploy (`npm run build` → upload `dist/`).
+   deploy (`pnpm build` → Cloudflare Workers).
 
 `Copy JSON` and `Import file…` are available if you prefer pasting, or want to resume
 editing a file you saved earlier.

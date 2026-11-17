@@ -16,9 +16,8 @@ Migration work is reviewed in incremental pull requests against the `develop` br
 the merged code on `develop` as the source of truth; an open pull request is not part of the
 deployed application until merged and deployed.
 
-Not yet migrated: several routes are shorter than the legacy pages they replace (FAQ, legal
-pages, and most translations). Routes that match the legacy design so far: the page chrome, `/` (home), `/projects`,
-`/services`, and the ten `/services/<category>` pages. See [Legacy static pages](#legacy-static-pages).
+The user-facing routes have been migrated. The legacy pages remain the visual and content
+reference for parity review. See [Legacy static pages](#legacy-static-pages).
 
 Current migration goals:
 
@@ -71,14 +70,14 @@ apps/
     tsconfig.json
 content/                     MDX documents: content/<collection>/<slug>/<locale>.mdx
 data/                        JSON content sources, validated at the app boundary
-scripts/                     TypeScript maintenance and build helpers, plus legacy shell scripts
-tests/                       Playwright browser tests for remaining legacy pages
+scripts/                     TypeScript build, SEO, service worker and content maintenance tools
+tests/                       Playwright browser tests
 docs/                         Architecture, content, deployment, and contributor guidance
 wrangler.jsonc                Cloudflare static asset directory and environment routes
 ```
 
 The root still holds the legacy static site (page folders such as `services/` and `faq/`,
-`index.html`, `assets/`, `build.sh`). It is not deployed; see
+`index.html`, `assets/`). It is not deployed; see
 [Legacy static pages](#legacy-static-pages).
 
 ## App structure
@@ -239,22 +238,16 @@ before changing those settings. Building does not publish or deploy the site.
 | `pnpm web:messages`                | Regenerate the typed Paraglide messages                        |
 | `pnpm exec playwright test --list` | Check browser-test discovery                                   |
 
-Browser tests under `tests/` still target legacy static pages during the transition. Migrate
-their fixtures to the new app or replace them with route-focused tests before deleting the old
-static source and its test coverage.
+Browser tests under `tests/` cover the app and legacy reference behavior. Keep the legacy source
+available until route parity review and corresponding browser coverage are complete.
 
 ## Legacy static pages
 
 The HTML pages at the repository root are the site this project forked from. Cloudflare no
-longer serves them, but they remain as the reference for content that has not reached parity,
-and the Playwright tests and `pnpm screenshots:mobile` still run against them. They are
-removed once their routes reach parity.
+longer serves them; they remain as the visual and content reference and for targeted comparison.
 
-While they exist, their shared skip link, hotline bar, header, and footer are generated from
-templates in `scripts/chrome/`. Edit a template, then run `pnpm chrome` to rewrite every page;
-`pnpm chrome:check` fails if a page differs from the templates. Do not edit between the
-`<!-- chrome:name -->` markers by hand. `pnpm version:patch` (and `minor`/`major`) updates
-`version.json`, `package.json`, and the version in every legacy page footer.
+Their shared chrome was generated from the retired `scripts/chrome/` templates. Do not use those
+scripts to change the deployed application.
 
 ## Architecture decisions
 

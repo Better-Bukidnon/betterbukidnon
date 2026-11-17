@@ -83,8 +83,7 @@ verified Bukidnon data:
   Bukidnon visitors would have been reported into another project's analytics.
 - Office emails on `@solano.gov.ph` were removed. No `@bukidnon.gov.ph` addresses could be
   verified, so none were added.
-- Deployment is Cloudflare Workers (see [deployment.md](deployment.md)); the cPanel files remain
-  as a legacy option.
+- Deployment is Cloudflare Workers (see [deployment.md](deployment.md)).
 
 ### Repository
 
