@@ -75,7 +75,7 @@ const groups = [
     links: [
       ['Government Structure', '/government'],
       ['Elected Officials', '/government/officials'],
-      ['Cities and Municipalities', '/government#lgus'],
+      ['Cities and Municipalities', '/lgus'],
       ['Legislative Documents', '/legislative'],
       ['Ordinance Framework', '/legislative/ordinance-framework'],
       ['Resolution Framework', '/legislative/resolution-framework'],

@@ -19,7 +19,14 @@ const result = await generateSW({
   // Lottie animations are large and only decorative, so they are fetched on demand.
   // Filipino and Cebuano pages are cached as they are visited (below) instead of on install,
   // so a first visit does not download every page three times.
-  globIgnores: ['sw.js', 'workbox-*.js', 'animations/**', 'fil/**', 'ceb/**'],
+  globIgnores: [
+    'sw.js',
+    'workbox-*.js',
+    'animations/**',
+    'images/seals/**',
+    'fil/**',
+    'ceb/**',
+  ],
   swDest: `${clientDirectory}sw.js`,
   // Pages are served without a trailing slash and may carry a query (/services?q=birth), so
   // precache each page under its URL (/services, not /services/index.html) and match it
@@ -37,6 +44,15 @@ const result = await generateSW({
   ],
   ignoreURLParametersMatching: [/./],
   runtimeCaching: [
+    {
+      // Directory seals are useful once visited but too large for every first offline install.
+      urlPattern: ({ url }) => url.pathname.startsWith('/images/seals/'),
+      handler: 'CacheFirst',
+      options: {
+        cacheName: 'directory-seals',
+        expiration: { maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 30 },
+      },
+    },
     {
       urlPattern: ({ request, url }) =>
         request.mode === 'navigate' && /^\/(fil|ceb)(\/|$)/.test(url.pathname),
