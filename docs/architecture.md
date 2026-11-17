@@ -120,8 +120,8 @@ loaders with their Zod schemas, and tests. Routes stay thin: a route file declar
 loader and `head` (`seo()`), and renders the feature's page, passing loader data and search
 params as props. A feature imports shared code from `components/`, `config/` and `lib/`, and
 another feature's public modules only when it needs them (the home hero uses the services
-search box). Pages not yet migrated from legacy are still placeholder routes; each gets its
-feature folder when it is migrated.
+search box). All user-facing routes have an app implementation. The legacy files remain
+available for visual and behavior parity review until the retirement audit is complete.
 
 Service search (`features/services/service-search-box.tsx`, used by the home hero and the
 Services page) runs the engine in `features/services/search.ts`, a port of the legacy
@@ -246,13 +246,13 @@ available until route parity review and corresponding browser coverage are compl
 The HTML pages at the repository root are the site this project forked from. Cloudflare no
 longer serves them; they remain as the visual and content reference and for targeted comparison.
 
-Their shared chrome was generated from the retired `scripts/chrome/` templates. Do not use those
-scripts to change the deployed application.
+Their shared chrome can be regenerated from `scripts/chrome/` with `pnpm chrome`; that command
+only updates legacy reference pages and does not change the deployed application.
 
 ## Architecture decisions
 
 - **One app instead of a separate health app:** `/services/health` used to be a standalone
-  Next.js app (`react-app/`). It is now a route in the same portal, with the shared shell,
+  Next.js app. It is now a route in the same portal, with the shared shell,
   search, localization, and deployment. A separate app would add a second build and ownership
   boundary without representing a separate product.
 - **Static prerendering:** public service and government pages need stable direct links and

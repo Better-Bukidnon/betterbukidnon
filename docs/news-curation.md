@@ -12,37 +12,22 @@ JSON file served by the Cloudflare Workers deployment (previously cPanel).
 homepage feed show: "No updates yet. Follow the Provincial Government of Bukidnon on Facebook",
 linking to <https://www.facebook.com/lgubukidnon>.
 
-To avoid hand-editing JSON, use the curation tool:
-
-```
-admin/news-editor.html
-```
-
-This is an **internal tool**. It is not included in the `apps/web` production build.
+To avoid hand-editing JSON, use the maintainer tool at `/admin/news-editor` in the app.
+It validates the JSON in the browser and downloads a file for review; changes still need to be
+committed to the repository.
 
 ## Adding or editing an update
 
 1. Start the local server from the project root:
    ```bash
-   npm run dev          # serves on http://localhost:8000
+   pnpm web:dev
    ```
-2. Open **http://localhost:8000/admin/news-editor.html**. It loads the current
+2. Open the local Vite URL followed by `/admin/news-editor`. It loads the current
    `data/news.json` automatically.
-3. Click **Add new update** (or **Edit** on an existing entry) and fill in:
-   - **Title** (≤120 chars) and **Summary** (≤300 chars)
-   - **Date**, **Category label**, and **Badge color** (`info` blue / `success` green
-     / `warning` amber — common categories auto-pick a color)
-   - **Link URL** (optional) — e.g. the original Facebook post; adds a "Read more" link
-     on the News page card and makes the homepage title link out
-   - **ID** auto-fills from the title and must be unique
-     The live preview shows the resulting News-page card. Validation blocks bad entries.
-4. Click **Save update**.
-5. Click **Download news.json**.
-6. Replace [`data/news.json`](../data/news.json) with the downloaded file, commit, and
-   deploy (`pnpm build` → Cloudflare Workers).
-
-`Copy JSON` and `Import file…` are available if you prefer pasting, or want to resume
-editing a file you saved earlier.
+3. Edit the JSON in the text area using the schema below. Keep each `id` unique.
+4. Click **Validate and download**. The tool reports invalid data in the page.
+5. Replace [`data/news.json`](../data/news.json) with the downloaded file, run `pnpm web:test`,
+   then commit and deploy (`pnpm build` → Cloudflare Workers).
 
 ## Schema
 
