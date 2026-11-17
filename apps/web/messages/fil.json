@@ -643,5 +643,14 @@
   "news_news": "Balita",
   "news_news_updates": "Balita at mga Update",
   "news_stay_informed_about_the_latest_happenings_in": "Manatiling may kaalaman tungkol sa mga pinakabagong pangyayari sa Bukidnon",
-  "news_fetching_news_and_updates_from_bukidnon": "Kinukuha ang mga balita at update mula sa Bukidnon."
+  "news_fetching_news_and_updates_from_bukidnon": "Kinukuha ang mga balita at update mula sa Bukidnon.",
+  "dir_lgus": "Mga Lungsod at Munisipalidad",
+  "dir_barangays": "Mga Barangay",
+  "dir_bukidnon": "Bukidnon",
+  "dir_find_your_lgu": "Hanapin ang iyong lungsod o munisipalidad",
+  "dir_find_your_barangay": "Hanapin ang iyong barangay",
+  "seo_lgus_title": "Mga Lungsod at Munisipalidad ng Bukidnon",
+  "seo_lgus_description": "Direktoryo ng mga lungsod at munisipalidad ng Bukidnon, na may napatunayang pampublikong impormasyon at mga source.",
+  "seo_barangays_title": "Mga Barangay ng Bukidnon",
+  "seo_barangays_description": "Direktoryo ng mga barangay ng Bukidnon, nakaayos ayon sa lungsod at munisipalidad na may pampublikong source ng impormasyon."
 }

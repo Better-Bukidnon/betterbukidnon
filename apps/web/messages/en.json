@@ -731,5 +731,14 @@
   "news_news": "News",
   "news_news_updates": "News & Updates",
   "news_stay_informed_about_the_latest_happenings_in": "Stay informed about the latest happenings in Bukidnon",
-  "news_fetching_news_and_updates_from_bukidnon": "Fetching news and updates from Bukidnon."
+  "news_fetching_news_and_updates_from_bukidnon": "Fetching news and updates from Bukidnon.",
+  "dir_lgus": "Cities and Municipalities",
+  "dir_barangays": "Barangays",
+  "dir_bukidnon": "Bukidnon",
+  "dir_find_your_lgu": "Find your city or municipality",
+  "dir_find_your_barangay": "Find your barangay",
+  "seo_lgus_title": "Cities and Municipalities of Bukidnon",
+  "seo_lgus_description": "Directory of Bukidnon's cities and municipalities, with verified public information and sources.",
+  "seo_barangays_title": "Barangays of Bukidnon",
+  "seo_barangays_description": "Directory of Bukidnon's barangays, organized by city and municipality with public source information."
 }

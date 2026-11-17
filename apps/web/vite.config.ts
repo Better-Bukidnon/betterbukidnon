@@ -23,7 +23,10 @@ export default defineConfig({
   },
   publicDir: 'public',
   resolve: {
-    alias: { '@': new URL('./src', import.meta.url).pathname },
+    alias: {
+      '@': new URL('./src', import.meta.url).pathname,
+      '@data': new URL('../../data', import.meta.url).pathname,
+    },
     tsconfigPaths: true,
   },
   plugins: [
