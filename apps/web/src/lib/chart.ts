@@ -10,7 +10,7 @@ import {
   Tooltip,
 } from 'chart.js'
 
-// Only the pieces the two statistics charts use, so the lazy chunk stays small.
+// Only the pieces the site's doughnut and bar charts use, so the lazy chunk stays small.
 Chart.register(
   ArcElement,
   BarController,

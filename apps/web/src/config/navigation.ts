@@ -1,6 +1,6 @@
 import { linkOptions, type LinkOptions } from '@tanstack/react-router'
 import type { IconName } from '@/components/ui/icon'
-import { contactDirectory } from './contact'
+import { blgfUrl, contactDirectory } from './contact'
 import { m } from '@/paraglide/messages'
 import type { Message } from '@/lib/i18n'
 
@@ -89,7 +89,7 @@ export const footerResources: readonly ExternalNavLink[] = [
   { label: m.footer_official_lgu_bukidnon_portal, href: 'https://bukidnon.gov.ph/' },
   { label: m.footer_sangguniang_bayan, href: 'https://bukidnon.gov.ph/' },
   { label: m.footer_lgu_bukidnon_facebook, href: 'https://www.facebook.com/lgubukidnon' },
-  { label: m.footer_blgf_portal, href: 'https://blgf.gov.ph/' },
+  { label: m.footer_blgf_portal, href: blgfUrl },
   { label: m.footer_cmci_dti_portal, href: 'https://cmci.dti.gov.ph/' },
 ]
 
