@@ -60,7 +60,7 @@ apps/
       routes/                TanStack file routes: loader, head (seo) and one feature page each
       features/<domain>/     Pages, components, data loaders, schemas and tests for one domain:
                              home, services, projects, government, legislative, transparency,
-                             news, engagement, pwa
+                             news, engagement, pwa, directories
       components/            Shared UI: layout (shell, header, footer, page header, breadcrumbs,
                              language menu, not-found), ui (icon, links), blocks (MDX blocks)
       config/                Site metadata, navigation and the contact/hotline directory

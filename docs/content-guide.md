@@ -14,20 +14,21 @@ pages listed below.
 | What                                                    | Where                                                                                                                                            |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Emergency hotline bar                                   | `apps/web/src/config/contact.ts`                                                                                                                 |
-| Header, navigation and footer                           | `apps/web/src/components/layout/` and `apps/web/src/config/navigation.ts`; text in `apps/web/messages/`                                           |
+| Header, navigation and footer                           | `apps/web/src/components/layout/` and `apps/web/src/config/navigation.ts`; text in `apps/web/messages/`                                          |
 | Homepage                                                | `apps/web/src/features/home/` and the `home_*` keys in `apps/web/messages/*.json`                                                                |
 | Governor, Vice Governor, Board Members, representatives | `data/officials.json`, rendered by the government feature and homepage                                                                           |
-| Cities, municipalities and districts                    | `data/demographics.json` and the government feature                                                                                             |
-| Population and area                                     | `data/demographics.json` and the home and statistics features                                                                                   |
+| Cities, municipalities and districts                    | `data/demographics.json` and the government feature                                                                                              |
+| LGU and barangay directories                            | `data/lgus.json`, `data/barangays.json`, `data/bukidnon-boundary.geojson`; validated in `apps/web/src/features/directories/`                     |
+| Population and area                                     | `data/demographics.json` and the home and statistics features                                                                                    |
 | Service categories                                      | `data/service-categories.json` (each `/services/<id>` page, in EN, FIL and CEB); the directory cards in `apps/web/src/routes/services/index.tsx` |
-| Office pages and document guides                        | `content/services/<slug>/{en,fil,ceb}.mdx`                                                                                                      |
+| Office pages and document guides                        | `content/services/<slug>/{en,fil,ceb}.mdx`                                                                                                       |
 | Search results                                          | `data/services.json` (titles, keywords, offices) and the engine in `apps/web/src/features/services/search.ts`                                    |
 | Capitol directory                                       | `apps/web/src/features/engagement/` and `apps/web/src/config/contact.ts`                                                                         |
 | Ordinances and resolutions                              | `data/ordinances.json`, `data/resolutions.json`                                                                                                  |
 | Budget, SRE and DPWH projects                           | `data/fiscal_transparency.json`, `data/dpwh-projects.json`                                                                                       |
 | News                                                    | `data/news.json` (see [news-curation.md](news-curation.md))                                                                                      |
 | Our Projects page and nav dropdown                      | `data/projects.json` (validated in `apps/web/src/features/projects/`), the "Our Projects" dropdown in `apps/web/src/config/navigation.ts`        |
-| Sitemap                                                 | Generated from routes by `scripts/generate-seo-files.ts`; the sitemap page is in `apps/web/src/routes/sitemap.tsx`                                |
+| Sitemap                                                 | Generated from routes by `scripts/generate-seo-files.ts`; the sitemap page is in `apps/web/src/routes/sitemap.tsx`                               |
 
 ## Common tasks
 

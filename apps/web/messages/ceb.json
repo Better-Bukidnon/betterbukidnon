@@ -566,5 +566,14 @@
   "news_news": "Balita",
   "news_news_updates": "Balita ug Update",
   "news_stay_informed_about_the_latest_happenings_in": "Pabilin nga kaubanan sa pinakabag-o nga mga panghitabo sa Bukidnon",
-  "news_fetching_news_and_updates_from_bukidnon": "Gikuha ang balita ug mga update gikan sa Bukidnon."
+  "news_fetching_news_and_updates_from_bukidnon": "Gikuha ang balita ug mga update gikan sa Bukidnon.",
+  "dir_lgus": "Mga Siyudad ug Munisipalidad",
+  "dir_barangays": "Mga Barangay",
+  "dir_bukidnon": "Bukidnon",
+  "dir_find_your_lgu": "Pangitaa ang imong siyudad o munisipalidad",
+  "dir_find_your_barangay": "Pangitaa ang imong barangay",
+  "seo_lgus_title": "Mga Siyudad ug Munisipalidad sa Bukidnon",
+  "seo_lgus_description": "Direktoryo sa mga siyudad ug munisipalidad sa Bukidnon, nga adunay napamatud-ang pampublikong impormasyon ug mga tinubdan.",
+  "seo_barangays_title": "Mga Barangay sa Bukidnon",
+  "seo_barangays_description": "Direktoryo sa mga barangay sa Bukidnon, gisunod sa siyudad ug munisipalidad uban sa pampublikong impormasyon sa tinubdan."
 }
