@@ -65,16 +65,8 @@ npx wrangler deploy --env production    # production  → betterbukidnon.org
       the Worker without code changes; update `privacy/index.html` if you do.
 - [ ] Run Lighthouse on the dev site and keep accessibility at 90 or more.
 
-## Legacy: cPanel
+## Legacy reference
 
-The template originally deployed to cPanel/Apache. These files remain for anyone hosting on
-Apache:
-
-- `.htaccess`: clean URLs, security headers, Content-Security-Policy, caching
-- `scripts/package-cpanel.sh` (`npm run package`): packs `dist/` into an archive to extract
-  in `public_html/`
-- `serve.py`: local server that mimics the `.htaccess` clean URLs
-
-Cloudflare does not read `.htaccess`. If you need security headers on Cloudflare, add a
-`_headers` file to `dist/` (supported by Workers static assets) or configure them in the
-dashboard.
+The original HTML, CSS, and JavaScript remain in the repository as the visual and behavior
+reference while migrated routes are reviewed. They are not part of the Cloudflare deployment.
+The former cPanel packaging and Apache build scripts have been retired.

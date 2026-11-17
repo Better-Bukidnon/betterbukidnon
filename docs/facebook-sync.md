@@ -43,25 +43,9 @@ In **GitHub → Settings → Secrets and variables → Actions**:
 | `FB_PAGE_ID`      | **Variable** | The page's numeric ID (public, safe as a variable) |
 | `FB_ACCESS_TOKEN` | **Secret**   | The Page / System User access token                |
 
-> **Hosting note.** The site now deploys on Cloudflare Workers (`wrangler.jsonc`,
-> `npm run build`). The cPanel FTP deploy step in the workflow is **legacy**: it is
-> kept, but only runs when `FTP_SERVER` is set. On Cloudflare, commit the updated
-> `data/news.json` (download the `news-json` artifact the job uploads) and let the
-> normal build deploy it.
-
-Legacy only: to auto-deploy the updated file to an old cPanel host, also add:
-
-| Name              | Type         | Value                                               |
-| ----------------- | ------------ | --------------------------------------------------- |
-| `FTP_SERVER`      | Secret       | cPanel FTP host (e.g. `ftp.betterbukidnon.org`)     |
-| `FTP_USERNAME`    | Secret       | FTP account username                                |
-| `FTP_PASSWORD`    | Secret       | FTP account password                                |
-| `FTP_REMOTE_PATH` | **Variable** | Path to the file, e.g. `public_html/data/news.json` |
-
-The deploy step uses **FTPS** (`curl --ssl-reqd`). If your host only allows
-**SFTP**, swap the deploy step for an SFTP/key-based action — the sync engine is
-unchanged either way. If no FTP secrets are set, the workflow instead uploads the
-updated `news.json` as a downloadable build artifact, so nothing is ever lost.
+> **Hosting note.** The site deploys to Cloudflare Workers (`wrangler.jsonc`,
+> `pnpm build`). The workflow uploads changed `data/news.json` as an artifact. Review
+> and commit the artifact so the regular Cloudflare build publishes it.
 
 ## How it behaves (reliability guarantees)
 
