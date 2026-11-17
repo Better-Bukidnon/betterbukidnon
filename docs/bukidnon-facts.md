@@ -203,6 +203,21 @@ tribes to give thanks to _Magbabaya_ for the harvest, and runs in Malaybalay aro
 - Central Mindanao University (Musuan, Maramag) and Bukidnon State University
   (Malaybalay).
 
+### City and Municipal Mayors & Vice Mayors (2025–2028 Term, `data/lgus.json`)
+
+- **Verified against official `.gov.ph` LGU portals (`status: "verified"`):**
+  - **Manolo Fortich:** Mayor Rogelio "Titing" N. Quiño and Vice Mayor Reynaldo L. Bagayas Jr. (`manolofortich.gov.ph`)
+  - **Maramag:** Mayor Jose Joel P. Doromal (`maramag.gov.ph`)
+  - **Kalilangan:** Vice Mayor Charlie James Paul M. Lacdo-o (`kalilanganbukidnon.gov.ph`)
+- **Pending direct LGU / DILG confirmation (`status: "pending_verification"`):**
+  - All other 2025–2028 Mayors and Vice Mayors in `data/lgus.json` are compiled from 2025 local election results trackers (`ph.rappler.com/elections/2025/local-race/bukidnon`) and remain marked `pending_verification` (Tier 3) until confirmed against an official `.gov.ph` LGU portal or the published DILG Region X 2025–2028 directory.
+
+### Punong Barangay Directory (`data/barangays.json`)
+
+- **Historical 2023–2025 directory (`status: "historical"`, `term: "2023 - 2025"`):**
+  - All 464 barangay PSGC codes, names, and parent LGU mappings are **Verified** against the PSA PSGC publication (`psa.gov.ph/classification/psgc`).
+  - Punong Barangay names are sourced from the DILG Region X Punong Barangay Directory for the **2023–2025** term (`region10.dilg.gov.ph/punong-barangay-directories/`) and are marked `status: "historical"` pending current-term verification.
+
 ## 7. Things this site does not have yet
 
 These were Solano-specific in the upstream template and have **no verified Bukidnon

@@ -64,6 +64,8 @@ const SECTION_NAV = {
   services: 'services',
   'service-details': 'services',
   government: 'government',
+  lgus: 'government',
+  barangays: 'government',
   statistics: 'statistics',
   legislative: 'legislative',
   budget: 'transparency',
@@ -118,7 +120,10 @@ function render(template, ctx, options, rel, name) {
 function reactHeaderDrift(templates) {
   const normalize = (href) => {
     if (/^https?:/.test(href)) return href;
-    const clean = href.replace(/^\{\{(?:root|home)\}\}/, '/').replace(/^\/+/, '/');
+    const clean = href
+      .replace(/^\{\{(?:root|home)\}\}/, '/')
+      .replace(/^\/+/, '/')
+      .replace(/\.html$/, '');
     return clean.length > 1 ? clean.replace(/\/$/, '') : clean;
   };
   const collect = (text, pattern) =>

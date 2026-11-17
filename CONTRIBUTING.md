@@ -164,6 +164,23 @@ Maintainers make final decisions on whether a pull request is accepted, requires
 
 Technical correctness alone does not guarantee acceptance, particularly when a contribution introduces significant architectural changes that have not been discussed or approved.
 
+## Local Verification & Testing Checklist
+
+Before opening a Pull Request against `develop`, run the automated checks locally:
+
+```bash
+npm run chrome:check   # Verify shared header, footer, and hotline bar across all pages
+npm run validate       # Validate JSON schemas, PSGC uniqueness, LGU-barangay links, and local assets
+npm run test:chrome    # Run Playwright route smoke tests, directory filters, and responsive checks
+```
+
+Manual checks for content, accessibility, and translations:
+
+- **Source Verification:** Confirm new officials, contacts, and statistics follow [docs/source-verification.md](docs/source-verification.md) and never present historical or unconfirmed records as current.
+- **Accessibility:** Verify keyboard navigation, focus states, semantic landmarks, and `alt` attributes (see `tests/volunteer-modal.a11y.spec.js` and `accessibility/`).
+- **Translations:** Ensure any new `data-i18n` keys exist in `en`, `fil`, and `ceb` in `assets/js/translations.js` (see [docs/translations.md](docs/translations.md)).
+
+
 ## Community
 
 - **GitHub:** [issues and discussions](https://github.com/Better-Bukidnon/betterbukidnon/issues)

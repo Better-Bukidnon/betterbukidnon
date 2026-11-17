@@ -63,6 +63,38 @@ function showInstallBanner() {
 // ─── Register Service Worker with seamless updates ──────────────────────────
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function () {
+    var disableSwFlag = false;
+    try {
+      disableSwFlag = new URLSearchParams(window.location.search).get('no-sw') === '1';
+    } catch (e) {
+      disableSwFlag = false;
+    }
+
+    if (disableSwFlag) {
+      var hadSw = !!navigator.serviceWorker.controller;
+      navigator.serviceWorker.getRegistrations().then(function (regs) {
+        return Promise.all(
+          regs.map(function (r) {
+            return r.unregister();
+          })
+        );
+      });
+      if (window.caches && window.caches.keys) {
+        window.caches.keys().then(function (keys) {
+          return Promise.all(
+            keys.map(function (k) {
+              return window.caches.delete(k);
+            })
+          );
+        });
+      }
+      if (hadSw && !sessionStorage.getItem('bb_sw_dev_purged')) {
+        sessionStorage.setItem('bb_sw_dev_purged', '1');
+        window.location.reload();
+      }
+      return;
+    }
+
     navigator.serviceWorker
       .register('/sw.js')
       .then(function (reg) {

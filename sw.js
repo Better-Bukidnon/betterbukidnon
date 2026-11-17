@@ -3,7 +3,7 @@
  * Enterprise-grade PWA with versioned caching, runtime strategies, and offline resilience.
  */
 
-var CACHE_VERSION = 'v11';
+var CACHE_VERSION = 'v18';
 var STATIC_CACHE = 'betterbukidnon-static-' + CACHE_VERSION;
 var RUNTIME_CACHE = 'betterbukidnon-runtime-' + CACHE_VERSION;
 var OFFLINE_URL = '/offline.html';
@@ -12,6 +12,12 @@ var OFFLINE_URL = '/offline.html';
 var PRECACHE_URLS = [
   '/',
   '/offline.html',
+  '/lgus/',
+  '/barangays/',
+  '/contact/',
+  '/data/lgus.json',
+  '/data/barangays.json',
+  '/data/contacts.json',
   '/projects/',
   '/data/projects.json',
   '/assets/css/projects.css',
@@ -20,9 +26,14 @@ var PRECACHE_URLS = [
   '/assets/css/responsive.css',
   '/assets/css/footer.css',
   '/assets/css/accessibility.css',
+  '/assets/css/civic-directory.css',
   '/assets/js/main.js',
   '/assets/js/translations.js',
   '/assets/js/info-bar.js',
+  '/assets/js/source-verification.js',
+  '/assets/js/lgu-directory.js',
+  '/assets/js/barangay-directory.js',
+  '/assets/js/contacts-directory.js',
   '/assets/images/logo/better-bukidnon-logo.svg',
   '/assets/images/logo/better-bukidnon-logo-white.svg',
   '/assets/images/logo/favicon.svg',
@@ -130,6 +141,16 @@ self.addEventListener('fetch', function (event) {
   // Skip non-GET requests and chrome-extension/devtools
   if (event.request.method !== 'GET') return;
   if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
+
+  // Optional ?no-sw=1 bypass for local debugging without service worker caching
+  if (url.searchParams.get('no-sw') === '1') {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-store' }).catch(function () {
+        return caches.match(event.request);
+      })
+    );
+    return;
+  }
 
   // ── Navigation requests: Network-first with offline fallback ──
   if (event.request.mode === 'navigate') {

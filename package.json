@@ -15,6 +15,7 @@
     "version:check": "node scripts/bump-version.js",
     "chrome": "node scripts/sync-chrome.js",
     "chrome:check": "node scripts/sync-chrome.js --check",
+    "validate": "node scripts/validate-data.js",
     "test": "playwright test",
     "test:chrome": "playwright test --project=chrome",
     "test:report": "playwright show-report",
