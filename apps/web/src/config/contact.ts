@@ -12,3 +12,6 @@ export const contactDirectory = {
     { label: 'Provincial Social Welfare', display: '(088) 813-5734', href: 'tel:+63888135734' },
   ],
 } as const
+
+// Bureau of Local Government Finance: the official source for LGU income and spending.
+export const blgfUrl = 'https://blgf.gov.ph/'

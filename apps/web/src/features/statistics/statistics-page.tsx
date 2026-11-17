@@ -1,18 +1,19 @@
-import type { ChartConfiguration } from 'chart.js'
+import type { ChartConfiguration, ChartType } from 'chart.js'
 import { useRef, useState } from 'react'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { PatternHero } from '@/components/layout/pattern-hero'
 import { dataTable, dataTableCell, dataTableHead, primaryButton } from '@/components/layout/legacy'
 import { Icon, type IconName } from '@/components/ui/icon'
+import { LazyChart } from '@/components/ui/lazy-chart'
 import { SiteLink } from '@/components/ui/site-link'
-import { contactDirectory } from '@/config/contact'
+import { blgfUrl, contactDirectory } from '@/config/contact'
 import { demographics } from '@/features/government/data'
 import {
   districts,
   englishDistrictLabel as districtName,
   provincePopulation,
 } from '@/features/government/districts'
-import { useOnceVisible, useReveal } from '@/lib/use-reveal'
+import { useReveal } from '@/lib/use-reveal'
 import { cn, formatNumber as format } from '@/lib/utils'
 import { m } from '@/paraglide/messages'
 import { competitiveIndex } from './data'
@@ -547,7 +548,7 @@ function Pending() {
   const cards = [
     {
       title: m.stats_pending_finance(),
-      href: 'https://blgf.gov.ph/',
+      href: blgfUrl,
       link: m.stats_bureau_of_local_government_finance_blgf(),
     },
     {
@@ -581,33 +582,17 @@ function Pending() {
   )
 }
 
-/** A chart card: Chart.js loads and draws once it scrolls into view, as on the legacy page. */
-function ChartBox({
+/** Legacy `.chart-wrapper` / `.distribution-chart`: the card around a chart, or a note if it can't load. */
+function ChartBox<T extends ChartType>({
   className,
   label,
   config,
 }: {
   className: string
   label: string
-  config: () => ChartConfiguration
+  config: () => ChartConfiguration<T>
 }) {
   const [failed, setFailed] = useState(false)
-  const ref = useOnceVisible<HTMLCanvasElement>({
-    threshold: 0.1,
-    onVisible: (canvas) => {
-      let chart: { destroy: () => void } | undefined
-      let cancelled = false
-      import('./chart')
-        .then(({ Chart }) => {
-          if (!cancelled) chart = new Chart(canvas, config())
-        })
-        .catch(() => setFailed(true))
-      return () => {
-        cancelled = true
-        chart?.destroy()
-      }
-    },
-  })
   return (
     <div
       className={cn(
@@ -621,7 +606,7 @@ function ChartBox({
           {m.stats_chart_unavailable()}
         </p>
       ) : (
-        <canvas ref={ref} role="img" aria-label={label} />
+        <LazyChart label={label} config={config} onError={() => setFailed(true)} />
       )}
     </div>
   )

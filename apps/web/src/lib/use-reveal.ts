@@ -9,10 +9,12 @@ type OnVisible<T> = (element: T) => (() => void) | void
 export function useOnceVisible<T extends HTMLElement>({
   delay = 0,
   threshold = 0.2,
+  rootMargin,
   onVisible,
 }: {
   delay?: number
   threshold?: number
+  rootMargin?: string
   onVisible: OnVisible<T>
 }) {
   const ref = useRef<T>(null)
@@ -32,7 +34,7 @@ export function useOnceVisible<T extends HTMLElement>({
           cleanup = callback.current(element)
         }, delay)
       },
-      { threshold },
+      { threshold, rootMargin },
     )
     observer.observe(element)
     return () => {
@@ -40,18 +42,23 @@ export function useOnceVisible<T extends HTMLElement>({
       window.clearTimeout(timer)
       cleanup?.()
     }
-  }, [delay, threshold])
+  }, [delay, threshold, rootMargin])
 
   return ref
 }
 
 /** Marks a `legacy-reveal` element `data-visible` once it scrolls into view, so it animates in. */
 export function useReveal<T extends HTMLElement>({
-  delay,
   onReveal,
-}: { delay?: number; onReveal?: OnVisible<T> } = {}) {
+  ...options
+}: {
+  delay?: number
+  threshold?: number
+  rootMargin?: string
+  onReveal?: OnVisible<T>
+} = {}) {
   return useOnceVisible<T>({
-    delay,
+    ...options,
     onVisible: (element) => {
       element.dataset.visible = ''
       return onReveal?.(element)

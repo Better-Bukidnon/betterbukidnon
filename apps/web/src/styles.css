@@ -227,14 +227,15 @@
 
 /*
  * Legacy .animate-on-scroll: hidden and lowered until useReveal marks it data-visible, then it
- * fades and slides up. Without JavaScript it just shows.
+ * fades and slides up. Without JavaScript it just shows. --reveal-offset (default 40px) and
+ * --reveal-duration (default 0.8s) set the slide and its length.
  */
 @utility legacy-reveal {
-  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all var(--reveal-duration, 0.8s) cubic-bezier(0.16, 1, 0.3, 1);
   @media (scripting: enabled) {
     &:not([data-visible]) {
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateY(var(--reveal-offset, 40px));
     }
   }
 }
