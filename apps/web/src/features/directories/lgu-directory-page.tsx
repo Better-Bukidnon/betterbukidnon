@@ -6,6 +6,7 @@ import { SiteLink } from '@/components/ui/site-link'
 import { cn, formatNumber } from '@/lib/utils'
 import { m } from '@/paraglide/messages'
 import { lgus, type Lgu } from './data'
+import { directoryPaths } from './paths'
 import {
   filterLgus,
   initialLguFilters,
@@ -201,16 +202,22 @@ function LguCard({ lgu }: { lgu: Lgu }) {
           wide
         />
       </dl>
-      {lgu.website && (
-        <div className="mt-auto pt-1.5">
+      <div className="mt-auto pt-1.5">
+        <SiteLink
+          href={directoryPaths.lgu(lgu.slug)}
+          className="mr-2 inline-flex items-center gap-1.5 rounded-site bg-primary px-3 py-1.5 text-[0.8125rem] font-semibold text-white no-underline hover:bg-primary-dark hover:no-underline"
+        >
+          {m.dir_view_profile()} <Icon name="arrow-right" />
+        </SiteLink>
+        {lgu.website && (
           <SiteLink
             href={lgu.website}
             className="inline-flex items-center gap-1.5 rounded-site border-2 border-primary px-3 py-1.5 text-[0.8125rem] font-semibold text-primary no-underline transition-colors hover:bg-surface-alt hover:no-underline"
           >
             <Icon name="globe2" /> {m.dir_official_website()}
           </SiteLink>
-        </div>
-      )}
+        )}
+      </div>
     </article>
   )
 }

@@ -29,6 +29,7 @@ import { Route as LegislativeIndexRouteImport } from './routes/legislative/index
 import { Route as LegislativeOrdinanceFrameworkRouteImport } from './routes/legislative/ordinance-framework'
 import { Route as LegislativeResolutionFrameworkRouteImport } from './routes/legislative/resolution-framework'
 import { Route as LgusIndexRouteImport } from './routes/lgus/index'
+import { Route as LgusSlugRouteImport } from './routes/lgus/$slug'
 import { Route as ServiceDetailsSlugRouteImport } from './routes/service-details.$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
 import { Route as ServicesCategoryRouteImport } from './routes/services/$category'
@@ -135,6 +136,11 @@ const LgusIndexRoute = LgusIndexRouteImport.update({
   path: '/lgus/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LgusSlugRoute = LgusSlugRouteImport.update({
+  id: '/lgus/$slug',
+  path: '/lgus/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServiceDetailsSlugRoute = ServiceDetailsSlugRouteImport.update({
   id: '/service-details/$slug',
   path: '/service-details/$slug',
@@ -169,6 +175,7 @@ export interface FileRoutesByFullPath {
   '/government/officials': typeof GovernmentOfficialsRoute
   '/legislative/ordinance-framework': typeof LegislativeOrdinanceFrameworkRoute
   '/legislative/resolution-framework': typeof LegislativeResolutionFrameworkRoute
+  '/lgus/$slug': typeof LgusSlugRoute
   '/service-details/$slug': typeof ServiceDetailsSlugRoute
   '/services/$category': typeof ServicesCategoryRoute
   '/government/': typeof GovernmentIndexRoute
@@ -194,6 +201,7 @@ export interface FileRoutesByTo {
   '/government/officials': typeof GovernmentOfficialsRoute
   '/legislative/ordinance-framework': typeof LegislativeOrdinanceFrameworkRoute
   '/legislative/resolution-framework': typeof LegislativeResolutionFrameworkRoute
+  '/lgus/$slug': typeof LgusSlugRoute
   '/service-details/$slug': typeof ServiceDetailsSlugRoute
   '/services/$category': typeof ServicesCategoryRoute
   '/government': typeof GovernmentIndexRoute
@@ -220,6 +228,7 @@ export interface FileRoutesById {
   '/government/officials': typeof GovernmentOfficialsRoute
   '/legislative/ordinance-framework': typeof LegislativeOrdinanceFrameworkRoute
   '/legislative/resolution-framework': typeof LegislativeResolutionFrameworkRoute
+  '/lgus/$slug': typeof LgusSlugRoute
   '/service-details/$slug': typeof ServiceDetailsSlugRoute
   '/services/$category': typeof ServicesCategoryRoute
   '/government/': typeof GovernmentIndexRoute
@@ -247,6 +256,7 @@ export interface FileRouteTypes {
     | '/government/officials'
     | '/legislative/ordinance-framework'
     | '/legislative/resolution-framework'
+    | '/lgus/$slug'
     | '/service-details/$slug'
     | '/services/$category'
     | '/government/'
@@ -272,6 +282,7 @@ export interface FileRouteTypes {
     | '/government/officials'
     | '/legislative/ordinance-framework'
     | '/legislative/resolution-framework'
+    | '/lgus/$slug'
     | '/service-details/$slug'
     | '/services/$category'
     | '/government'
@@ -297,6 +308,7 @@ export interface FileRouteTypes {
     | '/government/officials'
     | '/legislative/ordinance-framework'
     | '/legislative/resolution-framework'
+    | '/lgus/$slug'
     | '/service-details/$slug'
     | '/services/$category'
     | '/government/'
@@ -323,6 +335,7 @@ export interface RootRouteChildren {
   GovernmentOfficialsRoute: typeof GovernmentOfficialsRoute
   LegislativeOrdinanceFrameworkRoute: typeof LegislativeOrdinanceFrameworkRoute
   LegislativeResolutionFrameworkRoute: typeof LegislativeResolutionFrameworkRoute
+  LgusSlugRoute: typeof LgusSlugRoute
   ServiceDetailsSlugRoute: typeof ServiceDetailsSlugRoute
   ServicesCategoryRoute: typeof ServicesCategoryRoute
   GovernmentIndexRoute: typeof GovernmentIndexRoute
@@ -473,6 +486,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LgusIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lgus/$slug': {
+      id: '/lgus/$slug'
+      path: '/lgus/$slug'
+      fullPath: '/lgus/$slug'
+      preLoaderRoute: typeof LgusSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/service-details/$slug': {
       id: '/service-details/$slug'
       path: '/service-details/$slug'
@@ -515,6 +535,7 @@ const rootRouteChildren: RootRouteChildren = {
   GovernmentOfficialsRoute: GovernmentOfficialsRoute,
   LegislativeOrdinanceFrameworkRoute: LegislativeOrdinanceFrameworkRoute,
   LegislativeResolutionFrameworkRoute: LegislativeResolutionFrameworkRoute,
+  LgusSlugRoute: LgusSlugRoute,
   ServiceDetailsSlugRoute: ServiceDetailsSlugRoute,
   ServicesCategoryRoute: ServicesCategoryRoute,
   GovernmentIndexRoute: GovernmentIndexRoute,
