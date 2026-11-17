@@ -6,7 +6,7 @@ are available alongside your own. Claude picks one automatically when a task mat
 description, or you can ask for one by name:
 
 ```
-> Use the accessibility-tester agent to audit service-details/pswdo.html
+> Use the accessibility-tester agent to audit the PSWDO service guide in apps/web
 > Have the seo-specialist review the meta tags on the homepage
 ```
 
@@ -18,8 +18,8 @@ The agent files are copied unmodified from
 
 | Area                          | Agents                                                                                                   | Typical use here                                                  |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| Front end                     | `frontend-developer`, `ui-designer`, `javascript-pro`                                                    | Page layout, CSS, the vanilla JS in `assets/js/`                  |
-| React app                     | `react-specialist`, `nextjs-developer`, `typescript-pro`                                                 | `react-app/` (the `/services/health` page)                        |
+| Front end                     | `frontend-developer`, `ui-designer`, `javascript-pro`                                                    | Page layout and CSS for `apps/web`; legacy files are reference    |
+| React app                     | `react-specialist`, `typescript-pro`                                                                     | Routes and features under `apps/web/src/`                         |
 | Scripts                       | `python-pro`                                                                                             | Maintenance scripts in `scripts/`                                 |
 | Quality                       | `code-reviewer`, `debugger`, `qa-expert`, `test-automator`, `ui-ux-tester`                               | Reviews, bug hunts, Playwright tests in `tests/`                  |
 | Accessibility and performance | `accessibility-tester`, `performance-engineer`                                                           | WCAG 2.1 AA checks, Lighthouse scores, page weight                |

@@ -1,8 +1,9 @@
 # Content Guide
 
-How to change what the site says. Read [translations.md](translations.md) first: most visible
-text exists twice, once in the HTML and once in `assets/js/translations.js`, and the dictionary
-wins.
+How to change what the app says. Use the files under `apps/web`, `data/`, and `content/` as the
+active sources. The root HTML/CSS/JavaScript is retained as a visual and behavior reference;
+update it only when a parity check or redirect requires it. Read [translations.md](translations.md)
+before changing localized text.
 
 Before changing a fact (a name, a number, a date), update
 [bukidnon-facts.md](bukidnon-facts.md) with the new value and its source. Then update the
@@ -12,21 +13,21 @@ pages listed below.
 
 | What                                                    | Where                                                                                                                                            |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Emergency hotline bar                                   | `scripts/chrome/hotline.html` (then `npm run chrome`), plus `react-app/src/components/layout/HotlineBar.tsx`                                     |
-| Header, navigation and footer                           | `scripts/chrome/header.html`, `footer.html` (then `npm run chrome`), plus the React `Header.tsx` and `Footer.tsx`                                |
+| Emergency hotline bar                                   | `apps/web/src/config/contact.ts`                                                                                                                 |
+| Header, navigation and footer                           | `apps/web/src/components/layout/` and `apps/web/src/config/navigation.ts`; text in `apps/web/messages/`                                           |
 | Homepage                                                | `apps/web/src/features/home/` and the `home_*` keys in `apps/web/messages/*.json`                                                                |
-| Governor, Vice Governor, Board Members, representatives | `data/officials.json` (rendered by `assets/js/officials.js`) and the cards in `government/index.html` and `index.html`                           |
-| Cities, municipalities and districts                    | `government/index.html` (section `#lgus`) and `data/demographics.json`                                                                           |
-| Population and area                                     | `data/demographics.json`, the homepage stat cards, `statistics/index.html`                                                                       |
+| Governor, Vice Governor, Board Members, representatives | `data/officials.json`, rendered by the government feature and homepage                                                                           |
+| Cities, municipalities and districts                    | `data/demographics.json` and the government feature                                                                                             |
+| Population and area                                     | `data/demographics.json` and the home and statistics features                                                                                   |
 | Service categories                                      | `data/service-categories.json` (each `/services/<id>` page, in EN, FIL and CEB); the directory cards in `apps/web/src/routes/services/index.tsx` |
-| Office pages and document guides                        | `content/services/<slug>/{en,fil,ceb}.mdx` (every service-details page); the rest are still `service-details/*.html`                             |
+| Office pages and document guides                        | `content/services/<slug>/{en,fil,ceb}.mdx`                                                                                                      |
 | Search results                                          | `data/services.json` (titles, keywords, offices) and the engine in `apps/web/src/features/services/search.ts`                                    |
-| Capitol directory                                       | `contact/index.html`                                                                                                                             |
+| Capitol directory                                       | `apps/web/src/features/engagement/` and `apps/web/src/config/contact.ts`                                                                         |
 | Ordinances and resolutions                              | `data/ordinances.json`, `data/resolutions.json`                                                                                                  |
 | Budget, SRE and DPWH projects                           | `data/fiscal_transparency.json`, `data/dpwh-projects.json`                                                                                       |
 | News                                                    | `data/news.json` (see [news-curation.md](news-curation.md))                                                                                      |
 | Our Projects page and nav dropdown                      | `data/projects.json` (validated in `apps/web/src/features/projects/`), the "Our Projects" dropdown in `apps/web/src/config/navigation.ts`        |
-| Sitemap                                                 | `sitemap.xml` and `sitemap/index.html`                                                                                                           |
+| Sitemap                                                 | Generated from routes by `scripts/generate-seo-files.ts`; the sitemap page is in `apps/web/src/routes/sitemap.tsx`                                |
 
 ## Common tasks
 
@@ -34,23 +35,20 @@ pages listed below.
 
 1. Update section 3 of [bukidnon-facts.md](bukidnon-facts.md) with the source.
 2. Edit `data/officials.json`.
-3. Update the Governor and Vice Governor cards on the homepage (`index.html`, section
-   "Provincial Leadership") and on `government/index.html`.
-4. Search for the old names across the repo, `react-app/` included:
-   `grep -rn "Old Name" --include=*.html --include=*.js --include=*.json .`
+3. Run `pnpm web:check` and `pnpm web:test` to catch invalid data and presentation issues.
+4. Search for the old name in active app and content sources with `rg "Old Name" apps/web data content`.
 
 ### A hotline number changes
 
-The hotline bar is generated from one template. Edit the number in
-`scripts/chrome/hotline.html`, then copy it into every page and check the diff:
+The app hotline directory is defined in `apps/web/src/config/contact.ts`. Update it there and
+check the related contact page and navigation labels:
 
 ```bash
-npm run chrome
-git diff --stat
+pnpm web:check
+pnpm web:test
 ```
 
-Also update `react-app/src/components/layout/HotlineBar.tsx`, `contact/index.html` and
-[bukidnon-facts.md](bukidnon-facts.md).
+Update [bukidnon-facts.md](bukidnon-facts.md) when the number is a verified provincial fact.
 
 ### Change a service category page
 
@@ -185,7 +183,8 @@ Business Permits and Property Declaration add a few blocks of their own:
 - Keep the same blocks, in the same order, in every language. Text that is not translated yet
   can stay in English in `fil.mdx` or `ceb.mdx`.
 
-Office pages not yet converted are still the legacy `service-details/*.html` files; new guides
+Service guides are maintained as localized MDX documents; legacy `service-details/*.html` files
+remain available for visual and behavior parity review. New guides
 go in `content/services/`.
 
 ### Add or change a project on the Our Projects page
@@ -201,8 +200,8 @@ go in `content/services/`.
    description in a language, or if its icon is not in Bootstrap Icons.
 3. If the project is `active`, also add it to the "Our Projects" dropdown in
    `apps/web/src/config/navigation.ts`, with a `nav_projects_<id>` message.
-4. While the legacy `projects/` page still exists, make the same change in
-   `assets/js/translations.js` and `scripts/chrome/header.html` (then `pnpm chrome`).
+4. Keep the legacy `projects/` page as a parity reference; update it only when required for a
+   direct comparison or URL compatibility check.
 
 ### Fill an empty data file
 

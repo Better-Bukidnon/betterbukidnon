@@ -2,11 +2,11 @@
 
 The site is available in three languages:
 
-| Code  | Language           | URL                    | Coverage                                                                                   |
-| ----- | ------------------ | ---------------------- | ------------------------------------------------------------------------------------------ |
-| `en`  | English            | `/services/health`     | Complete; the fallback for everything                                                      |
-| `fil` | Filipino           | `/fil/services/health` | Near complete                                                                              |
-| `ceb` | Cebuano (Binisaya) | `/ceb/services/health` | Navigation, buttons, headings, footer and shared page text; the rest falls back to English |
+| Code  | Language           | URL prefix | Coverage                                                                                       |
+| ----- | ------------------ | ---------- | ---------------------------------------------------------------------------------------------- |
+| `en`  | English            | `/`        | Complete; default language and fallback                                                        |
+| `fil` | Filipino           | `/fil`     | Localized routes; untranslated messages, records, and documents fall back to English           |
+| `ceb` | Cebuano (Binisaya) | `/ceb`     | Localized routes; untranslated messages, records, and documents fall back to English           |
 
 Cebuano replaced the upstream template's Ilocano because it is the language most widely
 spoken in Bukidnon. Binukid, Higaonon and other indigenous languages would be welcome

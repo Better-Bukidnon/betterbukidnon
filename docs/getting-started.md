@@ -51,9 +51,9 @@ routes.
 
 ## Migration and contribution workflow
 
-The application is migrating in reviewed stages from the fork's static HTML and JavaScript to
-TypeScript React modules. The legacy pages stay in the repository until their routes reach
-parity; see [architecture.md](architecture.md#legacy-static-pages).
+The user-facing application routes live in `apps/web`. Legacy HTML, CSS, and JavaScript stay
+in the repository as visual and behavior references during parity review; see
+[architecture.md](architecture.md#legacy-static-pages).
 
 For a new feature, prefer this sequence:
 
