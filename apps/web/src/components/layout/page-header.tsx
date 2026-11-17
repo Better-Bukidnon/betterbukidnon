@@ -17,7 +17,7 @@ export function PageHeader({
   return (
     <section className="bg-linear-135 from-primary to-secondary py-12 text-white">
       <div className="container-site">
-        <div className="mx-auto max-w-150 text-center">
+        <div className="mx-auto max-w-[600px] text-center">
           <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-4 py-1.5 text-[0.8125rem] font-medium text-white">
             <Icon name={icon} />
             {badge}

@@ -13,5 +13,29 @@ export const contactDirectory = {
   ],
 } as const
 
+/** Capitol directory reproduced from the contact page's published source. */
+export const capitolDirectory = [
+  { office: 'main', abbreviation: '–', phone: '(088) 813-5741' },
+  { office: 'pgo', abbreviation: 'PGO', phone: '(088) 813-2457' },
+  { office: 'pho', abbreviation: 'PHO', phone: '(088) 813-5631', href: '/services/health' },
+  { office: 'peo', abbreviation: 'PEO', phone: '(088) 813-3656', href: '/services/infrastructure' },
+  { office: 'peo_waterworks', abbreviation: '–', phone: '(088) 813-3688' },
+  {
+    office: 'pswdo',
+    abbreviation: 'PSWDO',
+    phone: '(088) 813-5734',
+    href: '/services/social-services',
+  },
+  { office: 'pto', abbreviation: 'PTO', phone: '(088) 813-2474', href: '/services/tax-payments' },
+  { office: 'ppdo', abbreviation: 'PPDO', phone: '(088) 813-2564' },
+  {
+    office: 'pdrrmd',
+    abbreviation: 'PDRRMD',
+    phone: '(088) 813-1262',
+    href: '/services/public-safety',
+  },
+  { office: 'pictd', abbreviation: 'PICTD', phone: '(088) 813-1603' },
+] as const
+
 // Bureau of Local Government Finance: the official source for LGU income and spending.
 export const blgfUrl = 'https://blgf.gov.ph/'
