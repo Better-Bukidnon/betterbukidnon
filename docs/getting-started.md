@@ -48,6 +48,22 @@ routes.
 | `pnpm lighthouse`                   | Run Lighthouse CI against a running `pnpm serve:dist`          |
 | `pnpm screenshots:mobile`           | Phone-size screenshots of the legacy pages                     |
 | `pnpm chrome` / `pnpm chrome:check` | Regenerate or check the legacy pages' shared header and footer |
+| `pnpm visual:parity`                | Capture a side-by-side app and legacy comparison               |
+
+### Visual parity review
+
+Build first, then compare a focused set of routes in the supported locales and widths:
+
+```bash
+pnpm build
+pnpm visual:parity -- --routes=/,/projects,/services --locales=en,fil,ceb --widths=1366,1024,768,375
+```
+
+The script serves the legacy root and built app locally, stops both servers when finished, and
+writes screenshots plus an opacity-overlay review page to `screenshots/parity/index.html`.
+Choose routes explicitly so comparisons stay focused; app clean URLs are matched to their
+legacy `.html` sources through `apps/web/public/_redirects`.
+Pass `--browser=firefox` or `--browser=webkit` to use another installed Playwright browser.
 
 ## Migration and contribution workflow
 
