@@ -64,10 +64,9 @@ Everything else is in [docs/](docs/README.md):
 
 ## Migration note
 
-The site is being migrated from the static HTML/JavaScript it was forked from to one typed
-React application in `apps/web`, which is what gets deployed. The legacy pages at the
-repository root stay until their routes reach parity; see the
-[architecture guide](docs/architecture.md#migration-status).
+The user-facing migration to the typed React application in `apps/web` is complete. The app is
+what gets deployed; the legacy pages at the repository root remain as visual and content
+references during parity review. See the [architecture guide](docs/architecture.md#migration-status).
 
 ## Contributing
 

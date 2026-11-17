@@ -9,8 +9,9 @@
  */
 import fs from 'node:fs'
 import path from 'node:path'
+import { site } from '../apps/web/src/config/site'
 
-const SITE_URL = 'https://betterbukidnon.org'
+const SITE_URL = site.url
 const LOCALES = ['en', 'fil', 'ceb'] as const
 const clientDir = new URL('../apps/web/dist/client/', import.meta.url).pathname
 const production = process.env.SITE_ENV === 'production' || process.env.WORKERS_CI_BRANCH === 'main'
