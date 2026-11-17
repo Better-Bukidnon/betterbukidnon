@@ -25,6 +25,7 @@
     "test:chrome": "playwright test --project=chrome",
     "test:report": "playwright show-report",
     "screenshots:mobile": "node scripts/mobile-screenshots.mjs",
+    "visual:parity": "node scripts/visual-parity.mjs",
     "lighthouse": "lhci autorun",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
