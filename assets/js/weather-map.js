@@ -125,37 +125,51 @@
       return null;
     },
 
-    async fetchWeather() {
-      // If running via file: protocol (no CORS), use mock data immediately
+    async fetchWeather(lat, lon, options) {
+      const targetLat = typeof lat === 'number' ? lat : this.COORDINATES.lat;
+      const targetLon = typeof lon === 'number' ? lon : this.COORDINATES.lon;
+      const isDefault =
+        Math.abs(targetLat - this.COORDINATES.lat) < 0.0001 &&
+        Math.abs(targetLon - this.COORDINATES.lon) < 0.0001;
+      const externalSignal = options && options.signal ? options.signal : null;
+
+      // If running via file: protocol (no CORS), use mock data only for default Malaybalay location
       if (isFileProtocol()) {
-        console.log('Weather: File protocol detected, using mock data');
-        return getMockWeather();
+        console.log('Weather: File protocol detected');
+        return isDefault
+          ? getMockWeather()
+          : { unavailable: true, isFallback: true, timestamp: Date.now() };
       }
 
-      // Try cache first
-      try {
-        const cached = this.getCachedWeather();
-        if (cached) {
-          console.log(
-            'Weather: Using cached data (expires in ' +
-              Math.round((cached.timestamp + this.CACHE_TTL - Date.now()) / 1000) +
-              's)'
-          );
-          return cached;
+      // Try cache first for default location
+      if (isDefault) {
+        try {
+          const cached = this.getCachedWeather();
+          if (cached) {
+            return cached;
+          }
+        } catch (e) {
+          console.warn('Weather: Cache check failed', e);
         }
-      } catch (e) {
-        console.warn('Weather: Cache check failed', e);
       }
 
-      // Try API fetch with timeout
-      console.log('Weather: Fetching live data from Open-Meteo API...');
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+      // Try API fetch with timeout and optional caller AbortSignal
+      const controller = new AbortController();
+      const onExternalAbort = () => controller.abort();
+      if (externalSignal) {
+        if (externalSignal.aborted) {
+          const abortErr = new Error('Weather request aborted');
+          abortErr.name = 'AbortError';
+          throw abortErr;
+        }
+        externalSignal.addEventListener('abort', onExternalAbort, { once: true });
+      }
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
 
+      try {
         const params = new URLSearchParams({
-          latitude: this.COORDINATES.lat,
-          longitude: this.COORDINATES.lon,
+          latitude: targetLat,
+          longitude: targetLon,
           current: 'temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m',
           hourly: 'temperature_2m,weather_code',
           timezone: 'Asia/Manila',
@@ -163,12 +177,7 @@
         });
 
         const apiUrl = `${this.API_URL}?${params}`;
-        console.log('Weather: API URL:', apiUrl);
-
-        const response = await fetch(apiUrl, {
-          signal: controller.signal,
-        });
-
+        const response = await fetch(apiUrl, { signal: controller.signal });
         clearTimeout(timeoutId);
 
         if (!response.ok) {
@@ -176,21 +185,29 @@
         }
 
         const apiData = await response.json();
-        console.log('Weather: API response received:', apiData);
-        const weatherData = this.transformApiResponse(apiData);
-        this.cacheWeather(weatherData);
-        console.log(
-          'Weather: ✓ Live data fetched successfully - Temp:',
-          weatherData.temperature + '°C'
-        );
+        const weatherData = this.transformApiResponse(apiData, isDefault);
+        if (isDefault && !weatherData.unavailable) this.cacheWeather(weatherData);
         return weatherData;
       } catch (error) {
-        console.warn('Weather: ✗ API fetch failed, using mock data -', error.message);
-        return getMockWeather();
+        clearTimeout(timeoutId);
+        if (externalSignal && externalSignal.aborted) {
+          const abortErr = new Error('Weather request aborted');
+          abortErr.name = 'AbortError';
+          throw abortErr;
+        }
+        console.warn('Weather: API fetch failed -', error.message);
+        if (isDefault) {
+          return getMockWeather();
+        }
+        return { unavailable: true, isFallback: true, timestamp: Date.now() };
+      } finally {
+        if (externalSignal) {
+          externalSignal.removeEventListener('abort', onExternalAbort);
+        }
       }
     },
 
-    transformApiResponse(apiData) {
+    transformApiResponse(apiData, isDefault = true) {
       try {
         const current = apiData.current;
         const hourly = apiData.hourly;
@@ -220,8 +237,10 @@
           timestamp: Date.now(),
         };
       } catch (e) {
-        console.warn('Weather: Transform failed, using mock', e);
-        return getMockWeather();
+        console.warn('Weather: Transform failed', e);
+        return isDefault
+          ? getMockWeather()
+          : { unavailable: true, isFallback: true, timestamp: Date.now() };
       }
     },
   };
@@ -230,8 +249,23 @@
   // Weather UI - Renders weather data into the DOM
   // ============================================================================
   const WeatherUI = {
-    render(container, data) {
+    escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    },
+
+    render(container, data, locationLabel, coords) {
       if (!container) return;
+      const locText = locationLabel || 'Malaybalay City, Bukidnon';
+      const safeLoc = this.escapeHtml(locText);
+
+      if (data && data.unavailable) {
+        this.renderUnavailable(container, locText, coords);
+        return;
+      }
 
       try {
         // Limit to 4 hours for minimal design
@@ -253,7 +287,7 @@
           : '<span style="font-size:0.65rem;color:#06a77d;margin-left:4px;" title="Live data from Open-Meteo API">●</span>';
 
         container.innerHTML = `
-                <div class="weather-widget" role="region" aria-label="Current weather in Malaybalay City, Bukidnon">
+                <div class="weather-widget" role="region" aria-label="Current weather in ${safeLoc}">
                     <div class="weather-current">
                         <div class="weather-current-icon" aria-hidden="true">
                             <i class="bi ${data.icon}"></i>
@@ -262,7 +296,7 @@
                             <div class="weather-current-temp" aria-label="Temperature ${data.temperature} degrees Celsius">${data.temperature}°C</div>
                             <div class="weather-current-condition" aria-label="Condition: ${data.condition}">${data.condition}${dataSourceBadge}</div>
                             <div class="weather-current-location">
-                                <i class="bi bi-geo-alt" aria-hidden="true"></i> Malaybalay City, Bukidnon
+                                <i class="bi bi-geo-alt" aria-hidden="true"></i> ${safeLoc}
                             </div>
                         </div>
                     </div>
@@ -279,14 +313,71 @@
                     <div class="weather-hourly" role="list" aria-label="Hourly forecast">
                         ${forecastHTML}
                     </div>
+                    <div class="weather-lgu-switcher">
+                        <label for="weather-lgu-select">City / Municipality Weather</label>
+                        <select id="weather-lgu-select" aria-label="Select city or municipality for live weather">
+                            <option value="malaybalay-city">Malaybalay City (Capital)</option>
+                        </select>
+                    </div>
                 </div>
             `;
+
+        if (typeof window.populateWeatherLguSelect === 'function') {
+          window.populateWeatherLguSelect(locText);
+        }
 
         container.setAttribute('data-weather-loaded', 'true');
       } catch (e) {
         console.error('Weather: Render failed', e);
         this.renderError(container);
       }
+    },
+
+    renderUnavailable(container, locationLabel, coords) {
+      if (!container) return;
+      const locText = locationLabel || 'Selected locality';
+      const safeLoc = this.escapeHtml(locText);
+      container.innerHTML = `
+            <div class="weather-widget weather-widget--unavailable" role="status" aria-live="polite" aria-label="Live weather unavailable for ${safeLoc}">
+                <div class="weather-current">
+                    <div class="weather-current-icon" aria-hidden="true">
+                        <i class="bi bi-cloud-slash"></i>
+                    </div>
+                    <div class="weather-current-info">
+                        <div class="weather-current-condition" style="font-weight:600;">Live weather unavailable</div>
+                        <div class="weather-current-location">
+                            <i class="bi bi-geo-alt" aria-hidden="true"></i> ${safeLoc}
+                        </div>
+                    </div>
+                </div>
+                <p style="font-size:0.8125rem;opacity:0.85;margin:0.5rem 0;">Real-time weather data could not be reached for this locality. Please try again shortly.</p>
+                <div style="margin-bottom:0.75rem;">
+                    <button type="button" class="btn btn-sm btn-primary weather-retry-btn" id="weather-locality-retry-btn">
+                        <i class="bi bi-arrow-clockwise" aria-hidden="true"></i> Retry
+                    </button>
+                </div>
+                <div class="weather-lgu-switcher">
+                    <label for="weather-lgu-select">City / Municipality Weather</label>
+                    <select id="weather-lgu-select" aria-label="Select city or municipality for live weather">
+                        <option value="malaybalay-city">Malaybalay City (Capital)</option>
+                    </select>
+                </div>
+            </div>
+        `;
+      if (typeof window.populateWeatherLguSelect === 'function') {
+        window.populateWeatherLguSelect(locText);
+      }
+      const retryBtn = container.querySelector('#weather-locality-retry-btn');
+      if (retryBtn) {
+        retryBtn.addEventListener('click', () => {
+          if (coords && typeof coords.lat === 'number' && typeof coords.lon === 'number' && typeof window.updateBukidnonWeather === 'function') {
+            window.updateBukidnonWeather(coords.lat, coords.lon, locText);
+          } else if (window.WeatherMapInit) {
+            window.WeatherMapInit();
+          }
+        });
+      }
+      container.setAttribute('data-weather-loaded', 'unavailable');
     },
 
     renderLoading(container) {
@@ -423,20 +514,26 @@
         this.map = L.map(container, {
           center: this.BUKIDNON_CENTER,
           zoom: this.DEFAULT_ZOOM,
+          zoomSnap: 0.1,
           scrollWheelZoom: false,
           zoomControl: true,
+          attributionControl: true,
           keyboard: true,
           keyboardPanDelta: 80,
         });
+
+        if (this.map.attributionControl) {
+          this.map.attributionControl.setPrefix(false);
+        }
 
         // Add tile layer with CSP-block detection — some servers (e.g. cPanel hosts that inject
         // their own CSP alongside .htaccess) block tile.openstreetmap.org images even when
         // unpkg.com images (marker icons) load fine. If 3 tile errors fire before any tile
         // succeeds, the host is blocking tiles; fall back to the always-reliable OSM iframe embed.
         const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
           maxZoom: 19,
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors',
           crossOrigin: false,
         });
 
@@ -464,9 +561,9 @@
 
         tileLayer.addTo(this.map);
 
-        // Add marker
-        const marker = L.marker(this.BUKIDNON_CENTER).addTo(this.map);
-        marker.bindPopup('<strong>Bukidnon Provincial Capitol</strong><br>Malaybalay City 8700');
+        // Add provincial overview & all 22 LGU markers
+        this.map.setView([7.95, 125.02], 9);
+        this.loadLguLayer();
 
         container.setAttribute('data-map-loaded', 'leaflet');
 
@@ -493,6 +590,299 @@
         return null;
       }
     },
+
+    loadLguLayer() {
+      const infoPanel = document.getElementById('map-info-panel');
+      const textAltList = document.getElementById('map-text-alt-list');
+      const searchInput = document.getElementById('map-lgu-search');
+      const filterSelect = document.getElementById('map-lgu-filter');
+      const brgySelect = document.getElementById('map-brgy-select');
+      const resetBtn = document.getElementById('map-reset-btn');
+
+      let allLgus = [];
+      let allBarangays = null;
+      let bukidnonBounds = null;
+      const markersBySlug = new Map();
+      const layerGroup = L.layerGroup().addTo(this.map);
+
+      if (this.map && this.map.createPane) {
+        const maskPane = this.map.createPane('bukidnonMask');
+        maskPane.style.zIndex = '350';
+        maskPane.style.pointerEvents = 'none';
+      }
+
+      fetch('data/bukidnon-boundary.geojson')
+        .then((r) => r.json())
+        .then((geojson) => {
+          const coords = geojson && geojson.geometry && geojson.geometry.coordinates && geojson.geometry.coordinates[0];
+          if (!coords || !coords.length || !this.map) return;
+          const ring = coords.map((c) => [c[1], c[0]]);
+          const worldRing = [
+            [-90, -180],
+            [-90, 180],
+            [90, 180],
+            [90, -180],
+          ];
+          L.polygon([worldRing, ring], {
+            pane: 'bukidnonMask',
+            className: 'bb-map-outside-mask',
+            fillColor: '#e2e8f0',
+            fillOpacity: 0.68,
+            stroke: false,
+            interactive: false,
+          }).addTo(this.map);
+
+          const boundary = L.polygon(ring, {
+            color: '#0032a0',
+            weight: 2.5,
+            opacity: 0.9,
+            fill: false,
+            interactive: false,
+          }).addTo(this.map);
+
+          bukidnonBounds = boundary.getBounds();
+          this.map.fitBounds(bukidnonBounds, { padding: [12, 12] });
+        })
+        .catch((err) => {
+          console.warn('Map: Could not load Bukidnon boundary GeoJSON', err);
+        });
+
+      function esc(s) {
+        return String(s || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function renderInfoPanel(lgu) {
+        if (!infoPanel || !lgu) return;
+        infoPanel.style.display = 'block';
+        const sealHtml =
+          lgu.seal && lgu.seal.path
+            ? `<div class="bb-seal-frame bb-seal-frame--sm"><img src="${esc(lgu.seal.path)}" alt="${esc(lgu.name)} seal" loading="lazy" /></div>`
+            : `<div class="bb-seal-frame bb-seal-frame--sm bb-seal-frame--fallback" aria-hidden="true"><i class="bi bi-shield-fill"></i></div>`;
+
+        infoPanel.innerHTML = `
+          <div class="bb-card-top">
+            ${sealHtml}
+            <div class="bb-card-heading">
+              <h3 class="bb-card-title" style="margin-bottom:2px">${esc(lgu.name)}</h3>
+              <p class="bb-card-subtitle">${esc(lgu.classification)} &middot; District ${esc(lgu.district)} &middot; ${lgu.barangay_count} Barangays &middot; Pop. (${esc(lgu.population.latest_year)}): ${Number(lgu.population.latest || 0).toLocaleString('en-US')}</p>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a href="lgus/${encodeURIComponent(lgu.slug)}/" class="btn btn-primary btn-sm">View Profile</a>
+              <a href="barangays/?lgu=${encodeURIComponent(lgu.slug)}" class="btn btn-secondary btn-sm">Barangays</a>
+            </div>
+          </div>
+        `;
+      }
+
+      function populateBarangaysForLgu(lgu) {
+        if (!brgySelect) return;
+        brgySelect.disabled = true;
+        brgySelect.innerHTML = '<option value="">Loading barangays...</option>';
+
+        const loadPromise = allBarangays
+          ? Promise.resolve(allBarangays)
+          : fetch('data/barangays.json')
+              .then((r) => r.json())
+              .then((d) => {
+                allBarangays = d.barangays || [];
+                return allBarangays;
+              });
+
+        loadPromise
+          .then((brgys) => {
+            const list = brgys.filter((b) => b.lgu_slug === lgu.slug);
+            brgySelect.innerHTML = `<option value="">Select barangay (${list.length})</option>`;
+            list.forEach((b) => {
+              const opt = document.createElement('option');
+              opt.value = b.psgc_code;
+              opt.textContent = b.name;
+              brgySelect.appendChild(opt);
+            });
+            brgySelect.disabled = false;
+          })
+          .catch(() => {
+            brgySelect.innerHTML = '<option value="">Unavailable</option>';
+          });
+      }
+
+      let searchWeatherTimer = null;
+
+      const selectLgu = (lgu) => {
+        if (!lgu) return;
+        if (searchWeatherTimer) {
+          clearTimeout(searchWeatherTimer);
+          searchWeatherTimer = null;
+        }
+        renderInfoPanel(lgu);
+        populateBarangaysForLgu(lgu);
+        if (this.map && lgu.coordinates && lgu.coordinates.lat && lgu.coordinates.lon) {
+          this.map.setView([lgu.coordinates.lat, lgu.coordinates.lon], 12);
+          const m = markersBySlug.get(lgu.slug);
+          if (m) m.openPopup();
+          if (typeof window.updateBukidnonWeather === 'function') {
+            window.updateBukidnonWeather(lgu.coordinates.lat, lgu.coordinates.lon, `${lgu.name}, Bukidnon`);
+          }
+        }
+      };
+
+      const renderMarkers = () => {
+        layerGroup.clearLayers();
+        markersBySlug.clear();
+        if (searchWeatherTimer) {
+          clearTimeout(searchWeatherTimer);
+          searchWeatherTimer = null;
+        }
+        const q = (searchInput ? searchInput.value : '').trim().toLowerCase();
+        const flt = filterSelect ? filterSelect.value : 'all';
+
+        const visible = allLgus.filter((lgu) => {
+          if (flt === 'Component City' && lgu.classification !== 'Component City') return false;
+          if (/^[1-4]$/.test(flt) && String(lgu.district) !== flt) return false;
+          if (q && lgu.name.toLowerCase().indexOf(q) === -1) return false;
+          return true;
+        });
+
+        visible.forEach((lgu) => {
+          if (!lgu.coordinates || !lgu.coordinates.lat || !lgu.coordinates.lon) return;
+          const isCity = lgu.classification === 'Component City';
+          const isCapital = !!lgu.is_capital;
+          const pinSize = isCapital ? 20 : isCity ? 18 : 14;
+          const pinClass = isCapital
+            ? 'bb-map-pin bb-map-pin--capital'
+            : isCity
+              ? 'bb-map-pin bb-map-pin--city'
+              : 'bb-map-pin bb-map-pin--muni';
+          const pinIcon = L.divIcon({
+            className: 'bb-map-pin-wrapper',
+            html: `<span class="${pinClass}" aria-hidden="true"></span>`,
+            iconSize: [pinSize, pinSize],
+            iconAnchor: [pinSize / 2, pinSize / 2],
+            popupAnchor: [0, -pinSize / 2],
+          });
+
+          const marker = L.marker([lgu.coordinates.lat, lgu.coordinates.lon], {
+            icon: pinIcon,
+            title: lgu.name,
+            alt: lgu.name,
+            zIndexOffset: isCapital ? 200 : isCity ? 100 : 0,
+          }).addTo(layerGroup);
+
+          marker.bindTooltip(esc(lgu.name), {
+            direction: 'top',
+            offset: [0, -8],
+            className: 'bb-map-tooltip',
+          });
+
+          marker.bindPopup(
+            `<strong>${esc(lgu.name)}</strong><br>${esc(lgu.classification)} &middot; District ${esc(lgu.district)}<br>Barangays: ${lgu.barangay_count}<br><a href="lgus/${encodeURIComponent(lgu.slug)}/">View LGU Profile</a>`
+          );
+          marker.on('click', () => selectLgu(lgu));
+          markersBySlug.set(lgu.slug, marker);
+        });
+
+        if (visible.length === 1 && q) {
+          const single = visible[0];
+          if (
+            single.coordinates &&
+            single.coordinates.lat &&
+            single.coordinates.lon &&
+            typeof window.updateBukidnonWeather === 'function'
+          ) {
+            searchWeatherTimer = setTimeout(() => {
+              searchWeatherTimer = null;
+              window.updateBukidnonWeather(
+                single.coordinates.lat,
+                single.coordinates.lon,
+                `${single.name}, Bukidnon`
+              );
+            }, 350);
+          }
+        }
+      };
+
+      window.populateWeatherLguSelect = (activeLocationText) => {
+        const wSelect = document.getElementById('weather-lgu-select');
+        if (!wSelect || !allLgus.length) return;
+        wSelect.innerHTML = allLgus
+          .map((l) => {
+            const isSelected = activeLocationText && activeLocationText.indexOf(l.name) === 0;
+            return `<option value="${esc(l.slug)}"${isSelected ? ' selected' : ''}>${esc(l.name)}${l.is_capital ? ' (Capital)' : ''}</option>`;
+          })
+          .join('');
+        wSelect.onchange = () => {
+          const chosen = allLgus.find((l) => l.slug === wSelect.value);
+          if (chosen) selectLgu(chosen);
+        };
+      };
+
+      fetch('data/lgus.json')
+        .then((r) => r.json())
+        .then((data) => {
+          allLgus = data.lgus || [];
+          renderMarkers();
+          window.populateWeatherLguSelect('Malaybalay City, Bukidnon');
+
+          if (textAltList) {
+            textAltList.innerHTML =
+              '<ul style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px 12px">' +
+              allLgus
+                .map(
+                  (l) =>
+                    `<li><a href="lgus/${encodeURIComponent(l.slug)}/"><strong>${esc(l.name)}</strong></a> (${esc(l.classification)}, ${l.barangay_count} brgys)</li>`
+                )
+                .join('') +
+              '</ul>';
+          }
+
+          if (searchInput) {
+            searchInput.addEventListener('input', renderMarkers);
+          }
+          if (filterSelect) {
+            filterSelect.addEventListener('change', renderMarkers);
+          }
+          if (brgySelect) {
+            brgySelect.addEventListener('change', () => {
+              if (brgySelect.value) {
+                window.location.href = 'barangays/profile/?code=' + encodeURIComponent(brgySelect.value);
+              }
+            });
+          }
+          if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+              if (searchInput) searchInput.value = '';
+              if (filterSelect) filterSelect.value = 'all';
+              if (brgySelect) {
+                brgySelect.innerHTML = '<option value="">Select LGU first</option>';
+                brgySelect.disabled = true;
+              }
+              if (infoPanel) {
+                infoPanel.innerHTML = '';
+                infoPanel.style.display = 'none';
+              }
+              renderMarkers();
+              if (this.map) {
+                if (bukidnonBounds) {
+                  this.map.fitBounds(bukidnonBounds, { padding: [12, 12] });
+                } else {
+                  this.map.setView([7.95, 125.02], 9);
+                }
+              }
+              if (typeof window.updateBukidnonWeather === 'function') {
+                window.updateBukidnonWeather(8.1575, 125.1278, 'Malaybalay City, Bukidnon');
+              }
+            });
+          }
+        })
+        .catch((err) => {
+          console.warn('Map: Could not load data/lgus.json, showing Capitol marker', err);
+          const marker = L.marker(this.BUKIDNON_CENTER).addTo(this.map);
+          marker.bindPopup('<strong>Bukidnon Provincial Capitol</strong><br>Malaybalay City 8700');
+        });
+    },
   };
 
   // ============================================================================
@@ -504,18 +894,49 @@
     const weatherContainer = document.getElementById('weather-container');
     const mapContainer = document.getElementById('map-container');
 
-    // WEATHER: Show loading, then fetch
+    // WEATHER: Show loading, then fetch with AbortController & stale-response counter
+    let activeWeatherRequestId = 0;
+    let activeWeatherAbortController = null;
+
+    window.updateBukidnonWeather = async function (lat, lon, locationLabel) {
+      if (!weatherContainer) return;
+      if (activeWeatherAbortController) {
+        activeWeatherAbortController.abort();
+      }
+      const controller = new AbortController();
+      activeWeatherAbortController = controller;
+      const requestId = ++activeWeatherRequestId;
+      const coords =
+        typeof lat === 'number' && typeof lon === 'number' ? { lat, lon } : undefined;
+
+      try {
+        const data = await WeatherService.fetchWeather(lat, lon, {
+          signal: controller.signal,
+        });
+        if (requestId !== activeWeatherRequestId) return;
+        WeatherUI.render(weatherContainer, data, locationLabel, coords);
+      } catch (error) {
+        if (error && error.name === 'AbortError') return;
+        if (requestId !== activeWeatherRequestId) return;
+        console.error('Weather: Update failed', error);
+        WeatherUI.renderUnavailable(weatherContainer, locationLabel, coords);
+      }
+    };
+
     if (weatherContainer) {
       try {
         // Show loading state first
         WeatherUI.renderLoading(weatherContainer);
 
-        // Fetch weather (will use mock if needed)
-        const data = await WeatherService.fetchWeather();
-        WeatherUI.render(weatherContainer, data);
+        // Fetch initial default weather via the same request-guarded path
+        await window.updateBukidnonWeather(
+          WeatherService.COORDINATES.lat,
+          WeatherService.COORDINATES.lon,
+          'Malaybalay City, Bukidnon'
+        );
       } catch (error) {
         console.error('Weather: Init failed', error);
-        // Render mock data as last resort
+        // Render mock data as last resort for default Malaybalay view
         WeatherUI.render(weatherContainer, getMockWeather());
       }
     }

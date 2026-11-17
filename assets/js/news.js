@@ -90,7 +90,11 @@
       var a = items[i];
       var badge = safeBadge(a.badge);
       var href = safeUrl(a.url) || 'news/';
-      var external = href !== 'news/';
+      if (href.charAt(0) === '/') {
+        href = href.slice(1);
+      }
+      var external = /^https?:\/\//i.test(href);
+      var sourceLabel = esc(a.source) || 'Read Update';
       html += '<article class="home-news-card">';
       html += '<div class="home-news-meta">';
       html +=
@@ -99,7 +103,10 @@
         '">' +
         esc(a.category) +
         '</span>';
-      html += '<span class="home-news-date">' + formatDate(a.date) + '</span>';
+      html +=
+        '<span class="home-news-date"><i class="bi bi-calendar3" aria-hidden="true"></i> ' +
+        formatDate(a.date) +
+        '</span>';
       html += '</div>';
       html +=
         '<h3><a href="' +
@@ -110,6 +117,16 @@
         esc(a.title) +
         '</a></h3>';
       html += '<p>' + esc(a.summary) + '</p>';
+      html += '<div class="home-news-footer">';
+      html +=
+        '<a href="' +
+        href +
+        '" class="home-news-cta"' +
+        (external ? ' target="_blank" rel="noopener noreferrer"' : '') +
+        '>' +
+        sourceLabel +
+        ' <i class="bi bi-arrow-right" aria-hidden="true"></i></a>';
+      html += '</div>';
       html += '</article>';
     }
     grid.innerHTML = html;
@@ -148,6 +165,10 @@
       var a = items[i];
       var badge = safeBadge(a.badge);
       var url = safeUrl(a.url);
+      if (url && url.charAt(0) === '/') {
+        url = '..' + url;
+      }
+      var externalUrl = /^https?:\/\//i.test(url);
       var title = esc(a.title);
       html += '<article class="news-card" aria-label="' + title + '">';
       html += '<div class="news-card-header">';
@@ -157,7 +178,13 @@
       html += '<div class="news-card-body">';
       html += '<h3 class="news-card-title">';
       html += url
-        ? '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + title + '</a>'
+        ? '<a href="' +
+          url +
+          '"' +
+          (externalUrl ? ' target="_blank" rel="noopener noreferrer"' : '') +
+          '>' +
+          title +
+          '</a>'
         : title;
       html += '</h3>';
       html += '<p class="news-card-desc">' + esc(a.summary) + '</p>';
@@ -168,7 +195,9 @@
         html +=
           '<a class="news-card-source" href="' +
           url +
-          '" target="_blank" rel="noopener noreferrer">' +
+          '"' +
+          (externalUrl ? ' target="_blank" rel="noopener noreferrer"' : '') +
+          '>' +
           label +
           ' <i class="bi bi-arrow-right" aria-hidden="true"></i></a>';
         html += '</div>';

@@ -45,6 +45,10 @@ for checks, builds, and the legacy-site parity workflow.
 
 ### Submitting Code
 
+Before starting a substantial contribution, check existing issues and pull requests to ensure the work is not already planned or in progress.
+
+For major features, architectural changes, or migrations, coordinate with the maintainers before implementation. Small fixes, documentation improvements, and other straightforward contributions do not generally require prior approval.
+
 1. **Fork** the repository
 2. **Create** a feature branch from `develop`
    ```bash
@@ -118,12 +122,16 @@ Types:
 
 ## Pull Request Process
 
-1. Ensure your code follows the style guidelines
-2. Update documentation if needed
-3. Test thoroughly before submitting
-4. Fill out the PR template completely
-5. Link related issues
-6. Wait for review and address feedback
+1. Ensure your code follows the existing project structure and coding guidelines.
+2. Keep changes focused and avoid unrelated modifications.
+3. Update documentation if needed.
+4. Test thoroughly before submitting.
+5. Fill out the PR template completely, including a clear description of the changes and their purpose.
+6. Link related issues or discussions, where applicable.
+7. For significant architectural changes, reference the previously approved proposal or discussion.
+8. Wait for maintainer review and address feedback as necessary.
+
+**Note:** Submitting a pull request does not guarantee acceptance. Maintainers may request changes or decline contributions that conflict with the project's existing architecture, ongoing work, or agreed development direction.
 
 ## Review Criteria
 
@@ -135,6 +143,30 @@ Pull requests are reviewed for:
 - Mobile responsiveness
 - Data accuracy (for content changes)
 - Security considerations
+- Alignment with the project's architecture and roadmap
+- Compatibility with ongoing development
+- Scope and maintainability of the proposed changes
+
+Maintainers make final decisions on whether a pull request is accepted, requires revisions, or is closed without merging.
+
+Technical correctness alone does not guarantee acceptance, particularly when a contribution introduces significant architectural changes that have not been discussed or approved.
+
+## Local Verification & Testing Checklist
+
+Before opening a Pull Request against `develop`, run the automated checks locally:
+
+```bash
+npm run chrome:check   # Verify shared header, footer, and hotline bar across all pages
+npm run validate       # Validate JSON schemas, PSGC uniqueness, LGU-barangay links, and local assets
+npm run test:chrome    # Run Playwright route smoke tests, directory filters, and responsive checks
+```
+
+Manual checks for content, accessibility, and translations:
+
+- **Source Verification:** Confirm new officials, contacts, and statistics follow [docs/source-verification.md](docs/source-verification.md) and never present historical or unconfirmed records as current.
+- **Accessibility:** Verify keyboard navigation, focus states, semantic landmarks, and `alt` attributes (see `tests/volunteer-modal.a11y.spec.js` and `accessibility/`).
+- **Translations:** Ensure any new `data-i18n` keys exist in `en`, `fil`, and `ceb` in `assets/js/translations.js` (see [docs/translations.md](docs/translations.md)).
+
 
 ## Community
 
