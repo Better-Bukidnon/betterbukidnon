@@ -392,7 +392,7 @@ function Offices() {
               </SiteLink>
             </li>
             <li>
-              <a href="#lgus">{m.gov_link_find_your_lgu()}</a>
+              <SiteLink href="/lgus">{m.gov_link_find_your_lgu()}</SiteLink>
             </li>
           </ul>
         </div>
