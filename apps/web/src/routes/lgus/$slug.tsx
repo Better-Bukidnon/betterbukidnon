@@ -13,7 +13,7 @@ export const Route = createFileRoute('/lgus/$slug')({
   head: ({ loaderData, params }) =>
     loaderData
       ? seo({
-          title: loaderData.lgu.name,
+          title: `${loaderData.lgu.name}, Bukidnon`,
           description: loaderData.lgu.introduction,
           path: directoryPaths.lgu(params.slug),
         })
