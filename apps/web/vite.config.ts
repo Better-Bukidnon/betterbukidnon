@@ -9,6 +9,8 @@ import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import viteReact from '@vitejs/plugin-react'
 import { defineConfig } from 'vite-plus'
 import servicesData from '../../data/services.json' with { type: 'json' }
+import barangaysData from '../../data/barangays.json' with { type: 'json' }
+import lgusData from '../../data/lgus.json' with { type: 'json' }
 
 const serviceDetailPages = servicesData.services
   .filter((service) => service.url.includes('service-details'))
@@ -16,6 +18,11 @@ const serviceDetailPages = servicesData.services
     path: `/service-details/${service.id}`,
     prerender: { enabled: true },
   }))
+
+const directoryPages = [
+  ...lgusData.lgus.map((lgu) => `/lgus/${lgu.slug}`),
+  ...barangaysData.barangays.map((barangay) => `/barangays/${barangay.slug}`),
+]
 
 export default defineConfig({
   test: {
@@ -45,6 +52,7 @@ export default defineConfig({
       // The locale home pages seed the crawl of each language's pages.
       pages: [
         ...serviceDetailPages,
+        ...directoryPages.map((path) => ({ path, prerender: { enabled: true } })),
         // Cloudflare serves the nearest 404.html for unknown URLs (not_found_handling).
         ...['', '/fil', '/ceb'].map((prefix) => ({
           path: `${prefix}/404`,
@@ -53,6 +61,10 @@ export default defineConfig({
         ...['fil', 'ceb'].flatMap((locale) => [
           { path: `/${locale}`, prerender: { enabled: true } },
           ...serviceDetailPages.map((page) => ({ ...page, path: `/${locale}${page.path}` })),
+          ...directoryPages.map((path) => ({
+            path: `/${locale}${path}`,
+            prerender: { enabled: true },
+          })),
         ]),
       ],
     }),

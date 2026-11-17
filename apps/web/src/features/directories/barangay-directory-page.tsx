@@ -2,8 +2,10 @@ import { useMemo, useState } from 'react'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { PageHeader } from '@/components/layout/page-header'
 import { Icon } from '@/components/ui/icon'
+import { SiteLink } from '@/components/ui/site-link'
 import { m } from '@/paraglide/messages'
 import { barangays, lgus, lguBySlug, type Barangay } from './data'
+import { barangayPath } from './paths'
 import {
   filterBarangays,
   initialBarangayFilters,
@@ -152,6 +154,12 @@ function BarangayCard({ barangay }: { barangay: Barangay }) {
           {barangay.leadership.punong_barangay?.name ?? m.dir_profile_leadership_pending()}
         </dd>
       </dl>
+      <SiteLink
+        href={barangayPath(barangay)}
+        className="mt-auto inline-flex w-fit items-center gap-1.5 rounded-site bg-primary px-3 py-1.5 text-[0.8125rem] font-semibold text-white no-underline hover:bg-primary-dark hover:no-underline"
+      >
+        {m.dir_view_profile()} <Icon name="arrow-right" />
+      </SiteLink>
     </article>
   )
 }
