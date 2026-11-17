@@ -1,5 +1,5 @@
 import { useRouter } from '@tanstack/react-router'
-import { Fragment, useEffect, useId, useRef, useState } from 'react'
+import { Fragment, useEffect, useEffectEvent, useId, useRef, useState } from 'react'
 import { Icon, type IconName } from '@/components/ui/icon'
 import type { Service } from './schemas'
 import {
@@ -101,16 +101,16 @@ export function ServiceSearchBox({
     setOpen(true)
     trackSearch(value, found.length)
   }
+  const searchFromEffect = useEffectEvent((value: string) => performSearch(value))
 
   // Pages are prerendered without a query, so ?q= is applied after hydration.
   useEffect(() => {
     const value = initialQuery?.trim() ?? ''
     if (value.length < 2) return
     setQuery(value)
-    performSearch(value)
+    searchFromEffect(value)
     input.current?.focus()
-    // Runs once for the query the page was opened with.
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
+    // Runs when the URL query changes, using the current category and search handlers.
   }, [initialQuery])
 
   // Debounced like legacy: suggestions update at once, results 150ms after typing stops.
@@ -118,10 +118,8 @@ export function ServiceSearchBox({
     if (!open) return
     const value = query.trim()
     if (value.length < 2) return
-    const timer = setTimeout(() => performSearch(value), 150)
+    const timer = setTimeout(() => searchFromEffect(value), 150)
     return () => clearTimeout(timer)
-    // performSearch reads the latest category itself; re-run only when the query changes.
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [query])
 
   useEffect(() => {

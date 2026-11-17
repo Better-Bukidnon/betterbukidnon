@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test'
 import { SEL, gotoFresh, waitForOpen } from './helpers/volunteer-modal.js'
 
+type LayoutShiftEntry = PerformanceEntry & { hadRecentInput: boolean; value: number }
+
 test.describe('Volunteer modal — animation integrity', () => {
   test('entry opacity rises monotonically — no appear/disappear flash', async ({ page }) => {
     await gotoFresh(page)
@@ -86,8 +88,8 @@ test.describe('Volunteer modal — cost to the page', () => {
       window.__cls = 0
       new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          // @ts-ignore — layout-shift entries are not in the base typings
-          if (!entry.hadRecentInput) window.__cls += entry.value
+          const shift = entry as LayoutShiftEntry
+          if (!shift.hadRecentInput) window.__cls += shift.value
         }
       }).observe({ type: 'layout-shift', buffered: true })
     })

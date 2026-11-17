@@ -181,14 +181,16 @@ export function serviceHref(service: Pick<Service, 'url'>) {
     .replace(/\/$/, '')}`
 }
 
-function readList<T>(key: string): T[] {
+function readList<T>(key: string, isItem: (value: unknown) => value is T): T[] {
   try {
     const value: unknown = JSON.parse(localStorage.getItem(key) ?? '[]')
-    return Array.isArray(value) ? (value as T[]) : []
+    return Array.isArray(value) ? value.filter(isItem) : []
   } catch {
     return []
   }
 }
+
+const isString = (value: unknown): value is string => typeof value === 'string'
 
 function writeList(key: string, value: unknown[]) {
   try {
@@ -198,7 +200,7 @@ function writeList(key: string, value: unknown[]) {
   }
 }
 
-export const getRecentSearches = () => readList<string>(RECENT_SEARCHES_KEY)
+export const getRecentSearches = () => readList(RECENT_SEARCHES_KEY, isString)
 
 export function addRecentSearch(query: string) {
   if (!query || query.length < 2) return
@@ -216,8 +218,22 @@ export function clearRecentSearches() {
 
 type AnalyticsEntry = { query: string; count: number; resultsCount: number; lastSearched: number }
 
+function isAnalyticsEntry(value: unknown): value is AnalyticsEntry {
+  if (typeof value !== 'object' || value === null) return false
+  const entry = value as Partial<AnalyticsEntry>
+  return (
+    typeof entry.query === 'string' &&
+    typeof entry.count === 'number' &&
+    Number.isFinite(entry.count) &&
+    typeof entry.resultsCount === 'number' &&
+    Number.isFinite(entry.resultsCount) &&
+    typeof entry.lastSearched === 'number' &&
+    Number.isFinite(entry.lastSearched)
+  )
+}
+
 export function trackSearch(query: string, resultsCount: number) {
-  const analytics = readList<AnalyticsEntry>(ANALYTICS_KEY)
+  const analytics = readList(ANALYTICS_KEY, isAnalyticsEntry)
   const existing = analytics.find((entry) => entry.query.toLowerCase() === query.toLowerCase())
   if (existing) {
     existing.count++
@@ -230,7 +246,7 @@ export function trackSearch(query: string, resultsCount: number) {
 }
 
 export function getPopularSearches(limit = 5) {
-  const popular = readList<AnalyticsEntry>(ANALYTICS_KEY)
+  const popular = readList(ANALYTICS_KEY, isAnalyticsEntry)
     .filter((entry) => entry.count >= 2)
     .slice(0, limit)
     .map((entry) => entry.query)

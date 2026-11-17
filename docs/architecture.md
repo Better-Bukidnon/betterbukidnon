@@ -238,8 +238,9 @@ before changing those settings. Building does not publish or deploy the site.
 | `pnpm web:messages`                | Regenerate the typed Paraglide messages                        |
 | `pnpm exec playwright test --list` | Check browser-test discovery                                   |
 
-Browser tests under `tests/` cover the app and legacy reference behavior. Keep the legacy source
-available until route parity review and corresponding browser coverage are complete.
+The Playwright tests under `tests/` currently cover legacy reference behavior. They are not part
+of the pull request CI workflow. Keep the legacy source available until route parity review and
+app-route browser coverage are complete.
 
 ## Legacy static pages
 

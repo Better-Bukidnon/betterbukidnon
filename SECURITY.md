@@ -4,8 +4,8 @@
 
 | Version | Supported |
 | ------- | --------- |
-| 1.1.x   | Yes       |
-| < 1.1   | No        |
+| 2.x     | Yes       |
+| < 2.0   | No        |
 
 ## Reporting a Vulnerability
 
@@ -37,36 +37,36 @@ Include in your report:
 
 ### Current Implementations
 
-**Server Security:**
+**Hosting:**
 
-- HTTPS enforced via .htaccess
-- HTTP Strict Transport Security (HSTS)
-- Content Security Policy (CSP) headers
-- X-Frame-Options to prevent clickjacking
-- X-Content-Type-Options to prevent MIME sniffing
-- Referrer-Policy for privacy
+- Cloudflare Workers serves the prerendered files in `apps/web/dist/client`; there is no
+  application server. See [deployment.md](docs/deployment.md) and `wrangler.jsonc`.
+- HTTPS and response security headers are managed at the hosting layer. This repository does
+  not configure production CSP, HSTS, framing, MIME-sniffing, or referrer headers. Verify the
+  active Cloudflare configuration before relying on any of them.
 
 **Application Security:**
 
-- No user authentication or data collection
-- No database or server-side processing
-- Static site with client-side rendering only
-- External API calls limited to weather and exchange rates
-- No cookies or local storage for sensitive data
+- No user authentication, database, or application-server processing
+- Routes are prerendered to HTML; browser code provides interactive features
+- Search history and the volunteer-dialog dismissal flag are stored in browser local storage
+- External requests include Open-Meteo weather data, OpenStreetMap maps, and the Facebook page
+  embed; check the active app sources when this list changes
 
 **Data Security:**
 
-- All data sourced from public government portals
-- No personal identifiable information (PII) stored
-- No user input forms that store data
+- Civic data is sourced from public government portals and documented in `docs/bukidnon-facts.md`
+- The app does not send search history or volunteer-dialog state to a project backend
 
 ### Third-Party Services
 
-| Service          | Purpose        | Data Shared         |
-| ---------------- | -------------- | ------------------- |
-| Open-Meteo API   | Weather data   | Location (Bukidnon) |
-| ExchangeRate API | Currency rates | None                |
-| OpenStreetMap    | Map tiles      | None                |
+| Service                     | Purpose                      | Data Shared                 |
+| --------------------------- | ---------------------------- | --------------------------- |
+| Open-Meteo API              | Weather data                 | Bukidnon coordinates        |
+| Open ER API                 | PHP exchange rate            | Browser request metadata    |
+| OpenStreetMap               | Map embed and tiles          | Browser request metadata    |
+| Facebook                    | Embedded page feed           | Browser request metadata    |
+| Facebook Graph API (CI job) | Scheduled public news import | Page ID and access token     |
 
 ## Best Practices for Contributors
 
@@ -76,7 +76,8 @@ When contributing code:
 2. **Validate inputs** - Sanitize any user-facing inputs
 3. **Use HTTPS** - All external resources must use HTTPS
 4. **Review dependencies** - Check for known vulnerabilities
-5. **Follow CSP** - Ensure new scripts comply with Content Security Policy
+5. **Check hosting headers** - Verify the active deployment configuration before adding scripts,
+   embeds, or other third-party origins.
 
 ## Scope
 
@@ -88,7 +89,7 @@ This security policy covers:
 
 Out of scope:
 
-- Third-party services and APIs (Open-Meteo, exchange rates, OpenStreetMap, Facebook embed)
+- Third-party services and APIs (Open-Meteo, Open ER API, OpenStreetMap, Facebook)
 - User's local environment
 - Social media accounts
 

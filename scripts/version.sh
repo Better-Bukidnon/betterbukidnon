@@ -1,10 +1,6 @@
 #!/bin/bash
 
-# Version Management Script for BetterBukidnon
-# Delegates to the cross-platform Node.js script which handles:
-#   - version.json (master source of truth)
-#   - package.json sync
-#   - all HTML files (Ver. X.X.X pattern)
+# Compatibility wrapper for scripts/bump-version.ts.
 #
 # Usage: ./scripts/version.sh [major|minor|patch]
 

@@ -1,5 +1,31 @@
-import { describe, expect, it } from 'vite-plus/test'
-import { getSuggestions, searchCategories, searchServices, serviceHref } from './search'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vite-plus/test'
+import {
+  getRecentSearches,
+  getSuggestions,
+  searchCategories,
+  searchServices,
+  serviceHref,
+  trackSearch,
+} from './search'
+
+const localStorageData = new Map<string, string>()
+const localStorageMock: Storage = {
+  get length() {
+    return localStorageData.size
+  },
+  clear: () => localStorageData.clear(),
+  getItem: (key) => localStorageData.get(key) ?? null,
+  key: (index) => [...localStorageData.keys()][index] ?? null,
+  removeItem: (key) => localStorageData.delete(key),
+  setItem: (key, value) => localStorageData.set(key, value),
+}
+
+beforeEach(() => {
+  localStorageData.clear()
+  vi.stubGlobal('localStorage', localStorageMock)
+})
+
+afterEach(() => vi.unstubAllGlobals())
 
 // Recorded by running the legacy assets/js/search.js over the same data/services.json.
 const legacy = {
@@ -127,5 +153,19 @@ describe('service search matches the legacy engine', () => {
     expect(serviceHref({ url: '../services/health.html' })).toBe('/services/health')
     expect(serviceHref({ url: '../government/' })).toBe('/government')
     expect(serviceHref({ url: '../government/officials.html' })).toBe('/government/officials')
+  })
+
+  it('ignores malformed values in persisted search lists', () => {
+    localStorageData.set(
+      'betterbukidnon_recent_searches',
+      JSON.stringify(['birth certificate', 42, null, { query: 'invalid' }]),
+    )
+    localStorageData.set('betterbukidnon_search_analytics', JSON.stringify([{ query: 42 }]))
+
+    expect(getRecentSearches()).toEqual(['birth certificate'])
+    expect(() => trackSearch('business permit', 2)).not.toThrow()
+    expect(JSON.parse(localStorageData.get('betterbukidnon_search_analytics') ?? '[]')).toEqual([
+      expect.objectContaining({ query: 'business permit', count: 1, resultsCount: 2 }),
+    ])
   })
 })

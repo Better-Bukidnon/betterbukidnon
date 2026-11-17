@@ -2,16 +2,16 @@
 // for before/after images in pull requests. Also reports pages that scroll
 // sideways.
 //
-//   npm run screenshots:mobile
-//   npm run screenshots:mobile -- --pages=home,services --widths=320,412
-//   npm run screenshots:mobile -- --browser=firefox --out=screenshots/before
+//   pnpm screenshots:mobile
+//   pnpm screenshots:mobile -- --pages=home,services --widths=320,412
+//   pnpm screenshots:mobile -- --browser=firefox --out=screenshots/before
 //
 // Options:
 //   --pages=a,b     Page folders to capture; "home" is the homepage (default: all)
 //   --widths=a,b    Viewport widths in CSS pixels (default: 320,375,412)
 //   --out=dir       Output folder (default: screenshots)
 //   --browser=name  chrome (installed Google Chrome, the default), chromium or
-//                   firefox (both from `npx playwright install`)
+//                   firefox (both from `pnpm exec playwright install`)
 
 import { chromium, firefox } from 'playwright';
 import { spawn } from 'node:child_process';
@@ -36,7 +36,7 @@ const allPages = [
   ...readdirSync(ROOT, { withFileTypes: true })
     .filter((d) => d.isDirectory() && existsSync(join(ROOT, d.name, 'index.html')))
     .map((d) => d.name)
-    .filter((name) => !['admin', 'docs', 'node_modules', 'dist', 'react-app'].includes(name))
+    .filter((name) => !['admin', 'docs', 'node_modules', 'dist'].includes(name))
     .sort(),
 ];
 const pages = args.pages ? args.pages.split(',') : allPages;
@@ -56,7 +56,7 @@ function launch() {
   return chromium.launch({ channel: 'chrome' }).catch((err) => {
     console.error(
       'Could not start Google Chrome. Install it, or use --browser=chromium after\n' +
-        '`npx playwright install chromium`.\n'
+        '`pnpm exec playwright install chromium`.\n'
     );
     throw err;
   });

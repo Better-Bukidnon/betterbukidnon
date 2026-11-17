@@ -89,6 +89,7 @@ export function DpwhProjects({ projects }: { projects: DpwhProject[] }) {
   const [shown, setShown] = useState(firstRows)
   const [loading, setLoading] = useState(false)
   const loadMoreRef = useRef<HTMLDivElement>(null)
+  const pendingLoad = useRef<number | null>(null)
 
   const { rows, summary, tabs } = useMemo(() => summarize(projects), [projects])
   const filtered = filter === 'all' ? rows : rows.filter((row) => row.category.id === filter)
@@ -98,12 +99,19 @@ export function DpwhProjects({ projects }: { projects: DpwhProject[] }) {
   const loadMore = () => {
     if (loading || remaining <= 0) return
     setLoading(true)
-    window.setTimeout(() => {
+    pendingLoad.current = window.setTimeout(() => {
+      pendingLoad.current = null
       setShown((rows) => rows + moreRows)
       setLoading(false)
     }, 150)
   }
   const onLoadMoreVisible = useEffectEvent(loadMore)
+
+  useEffect(() => {
+    return () => {
+      if (pendingLoad.current !== null) window.clearTimeout(pendingLoad.current)
+    }
+  }, [])
 
   useEffect(() => {
     const element = loadMoreRef.current
@@ -119,6 +127,11 @@ export function DpwhProjects({ projects }: { projects: DpwhProject[] }) {
   }, [])
 
   const selectFilter = (id: 'all' | CategoryId) => {
+    if (pendingLoad.current !== null) {
+      window.clearTimeout(pendingLoad.current)
+      pendingLoad.current = null
+      setLoading(false)
+    }
     setFilter(id)
     setShown(firstRows)
   }

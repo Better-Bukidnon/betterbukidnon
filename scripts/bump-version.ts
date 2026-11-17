@@ -19,7 +19,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const VERSION_FILE = path.join(__dirname, '..', 'version.json')
 const PACKAGE_FILE = path.join(__dirname, '..', 'package.json')
 
-// Read current version
 let versionData
 try {
   versionData = JSON.parse(fs.readFileSync(VERSION_FILE, 'utf8'))
@@ -65,7 +64,6 @@ const today = new Date().toISOString().split('T')[0]
 
 console.log('Bumping: ' + oldVersion + ' -> ' + newVersion)
 
-// Update version.json
 versionData.version = newVersion
 versionData.major = major
 versionData.minor = minor
@@ -73,7 +71,6 @@ versionData.patch = patch
 versionData.lastUpdated = today
 fs.writeFileSync(VERSION_FILE, JSON.stringify(versionData, null, 2) + '\n')
 
-// Update package.json
 try {
   const pkg = JSON.parse(fs.readFileSync(PACKAGE_FILE, 'utf8'))
   pkg.version = newVersion
