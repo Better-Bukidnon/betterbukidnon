@@ -1,3 +1,4 @@
+import { ScrollRegion } from '@/components/ui/scroll-region'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import {
   dataTable,
@@ -260,7 +261,7 @@ function Directory() {
           title={m.contact_directory_title()}
           description={m.contact_directory_desc()}
         />
-        <div className="overflow-x-auto">
+        <ScrollRegion label={m.contact_directory_title()}>
           <table className={dataTable}>
             <caption className="sr-only">{m.contact_directory_title()}</caption>
             <thead>
@@ -288,7 +289,7 @@ function Directory() {
               ))}
             </tbody>
           </table>
-        </div>
+        </ScrollRegion>
         <p className={'mt-4 ' + legacyNote}>
           <Icon name="exclamation-circle" /> {m.contact_directory_verify()}
         </p>

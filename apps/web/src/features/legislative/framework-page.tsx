@@ -1,3 +1,4 @@
+import { ScrollRegion } from '@/components/ui/scroll-region'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import {
   dataTable,
@@ -300,7 +301,7 @@ function FrameworkPage({ framework: f }: { framework: Framework }) {
 /** Legacy `.data-table`: the published records, once the data files have any. */
 function RecordsTable({ framework: f }: { framework: Framework }) {
   return (
-    <div className="overflow-x-auto">
+    <ScrollRegion label={f.tableCaption()}>
       <table className={cn(dataTable, 'shadow-sm')}>
         <caption className="sr-only">{f.tableCaption()}</caption>
         <thead>
@@ -326,6 +327,6 @@ function RecordsTable({ framework: f }: { framework: Framework }) {
           ))}
         </tbody>
       </table>
-    </div>
+    </ScrollRegion>
   )
 }

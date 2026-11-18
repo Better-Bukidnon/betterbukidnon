@@ -1,3 +1,4 @@
+import { ScrollRegionLabel } from '@/components/ui/scroll-region'
 import { Children, isValidElement } from 'react'
 import { Icon, type IconName } from '@/components/ui/icon'
 import { SiteLink } from '@/components/ui/site-link'
@@ -178,7 +179,9 @@ export function Topic({
               '[&_a]:font-semibold [&_a]:text-primary [&_p]:mb-2.5 [&_p]:text-[0.8125rem] [&_p]:leading-[1.6] [&_p]:text-ink [&_p:last-child]:mb-0',
           )}
         >
-          <TableScope value="light">{body}</TableScope>
+          <ScrollRegionLabel value={title}>
+            <TableScope value="light">{body}</TableScope>
+          </ScrollRegionLabel>
         </div>
       </div>
     </div>

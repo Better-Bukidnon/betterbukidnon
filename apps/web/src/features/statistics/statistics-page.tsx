@@ -1,3 +1,4 @@
+import { ScrollRegion } from '@/components/ui/scroll-region'
 import type { ChartConfiguration, ChartType } from 'chart.js'
 import { useRef, useState } from 'react'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
@@ -318,7 +319,7 @@ const statsTable = cn(
   dataTable,
   'min-w-140 text-[0.9375rem] max-md:text-[0.9375rem] max-sm:text-[0.8125rem]',
 )
-const tableWrap = 'overflow-x-auto rounded-xl border border-black/6 bg-white'
+const tableWrap = 'rounded-xl border border-black/6 bg-white'
 const num = 'text-right tabular-nums whitespace-nowrap'
 const rowHead = cn(dataTableCell, 'font-semibold text-ink')
 const footCell = 'border-t-2 border-t-primary'
@@ -341,7 +342,7 @@ function LguTable() {
       title={m.stats_lgus_title()}
       description={m.stats_lgus_desc()}
     >
-      <div className={tableWrap}>
+      <ScrollRegion label={m.stats_lgus_caption()} className={tableWrap}>
         <table className={statsTable}>
           <caption className="sr-only">{m.stats_lgus_caption()}</caption>
           <thead>
@@ -397,7 +398,7 @@ function LguTable() {
             </tr>
           </tfoot>
         </table>
-      </div>
+      </ScrollRegion>
       <Source />
     </Section>
   )
@@ -438,7 +439,7 @@ function CompetitiveIndex() {
       description={m.stats_cities_and_municipalities_competitiveness_index()}
     >
       {hasScores ? (
-        <div className={tableWrap}>
+        <ScrollRegion label={m.stats_bukidnon_competitive_index()} className={tableWrap}>
           <table className={statsTable}>
             <thead>
               <tr>
@@ -470,7 +471,7 @@ function CompetitiveIndex() {
               ))}
             </tbody>
           </table>
-        </div>
+        </ScrollRegion>
       ) : (
         <div className="mx-auto max-w-180 rounded-xl border border-dashed border-[rgba(0,50,160,0.3)] bg-white px-6 py-8 text-center max-sm:px-4 max-sm:py-5">
           <Icon
