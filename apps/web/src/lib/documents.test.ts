@@ -69,7 +69,7 @@ describe('document files', () => {
 
   for (const file of documentFiles) {
     const name = path.relative(contentDir, file)
-    const parsed = parseDocumentPath(file)
+    const parsed = parseDocumentPath(file.split(path.sep).join('/'))
 
     it(`${name} is named <collection>/<slug>/<language>.mdx and has an English version`, () => {
       expect(parsed).toBeDefined()

@@ -12,7 +12,11 @@ function writeStaticDocument(source: string, destination: string) {
     fs
       .readFileSync(source, 'utf8')
       .replace(/<script\b[\s\S]*?<\/script>/g, '')
-      .replace(/<link rel="modulepreload"[^>]*>/g, ''),
+      .replace(/<link rel="modulepreload"[^>]*>/g, '')
+      .replace(
+        '</head>',
+        '<style>@media(max-width:1024px){header #main-nav{visibility:visible!important;position:static!important;inset:auto!important;order:4!important;flex:0 0 100%!important;height:auto!important;transform:none!important;overflow:visible!important;border:0!important;opacity:1!important}header #main-nav>ul{gap:0!important}header #main-nav>ul>li{width:100%}header #main-nav a{display:flex!important;width:100%;padding:10px 16px!important}}header #main-nav ul ul{visibility:visible!important;position:static!important;min-width:0!important;max-height:none!important;transform:none!important;overflow:visible!important;padding:0 0 0 16px!important;opacity:1!important;box-shadow:none!important}header #main-nav ul ul a{display:flex!important;padding:8px 12px!important}header #main-nav li>button{display:none!important}header button[aria-label="Toggle Navigation"],header button[aria-controls]:not([aria-label]){display:none!important}</style></head>',
+      ),
   )
 }
 
@@ -34,6 +38,7 @@ const result = await generateSW({
     'sw.js',
     'workbox-*.js',
     'animations/**',
+    'data/**',
     'images/seals/**',
     'lgus/*/index.html',
     'barangays/*/*/index.html',

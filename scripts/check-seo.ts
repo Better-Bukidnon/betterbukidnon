@@ -33,7 +33,8 @@ const absolute = (urlPath: string) => (urlPath === '/' ? SITE_URL : `${SITE_URL}
 
 const built = new Map<string, string>()
 for (const file of pages(clientDir)) {
-  const urlPath = `/${path.relative(clientDir, path.dirname(file))}`.replace(/\/$/, '') || '/'
+  const relative = path.relative(clientDir, path.dirname(file)).split(path.sep).join('/')
+  const urlPath = `/${relative}`.replace(/\/$/, '') || '/'
   built.set(urlPath, fs.readFileSync(file, 'utf8'))
 }
 const builtUrls = new Set([...built.keys()].map(absolute))

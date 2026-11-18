@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { Icon, type IconName } from '@/components/ui/icon'
 import { formatNumber } from '@/lib/utils'
@@ -13,6 +13,20 @@ const profileLinks: { href: string; icon: IconName; label: () => string }[] = [
 ]
 
 export function LguProfilePage({ lgu, barangays }: { lgu: Lgu; barangays: Barangay[] }) {
+  useEffect(() => {
+    const header = document.querySelector('header')
+    if (!header) return
+    const updateHeight = () => {
+      document.documentElement.style.setProperty(
+        '--site-header-height',
+        `${header.getBoundingClientRect().height}px`,
+      )
+    }
+    updateHeight()
+    const observer = new ResizeObserver(updateHeight)
+    observer.observe(header)
+    return () => observer.disconnect()
+  }, [])
   const [query, setQuery] = useState('')
   const shownBarangays = useMemo(() => {
     const value = query.trim().toLocaleLowerCase()
@@ -67,7 +81,7 @@ export function LguProfilePage({ lgu, barangays }: { lgu: Lgu; barangays: Barang
           </div>
         </div>
       </section>
-      <div className="sticky top-0 z-30 border-b border-black/8 bg-white/96 shadow-[0_2px_8px_rgba(15,23,42,0.03)] backdrop-blur-sm">
+      <div className="sticky top-[var(--site-header-height,0px)] z-30 border-b border-black/8 bg-white/96 shadow-[0_2px_8px_rgba(15,23,42,0.03)] backdrop-blur-sm">
         <nav
           aria-label={m.dir_profile_sections()}
           className="container-site flex gap-1.5 overflow-x-auto py-2.5"
@@ -113,7 +127,10 @@ function SectionHeader({
   action?: React.ReactNode
 }) {
   return (
-    <div id={id} className="mb-[18px] flex scroll-mt-24 flex-wrap items-end justify-between gap-3">
+    <div
+      id={id}
+      className="mb-[18px] flex scroll-mt-[calc(var(--site-header-height,0px)+4rem)] flex-wrap items-end justify-between gap-3"
+    >
       <div>
         <h2 className="mb-0.75 flex items-center gap-2 text-[1.3rem] text-ink">
           <Icon name={icon} className="text-[1.15rem] text-primary" /> {title}

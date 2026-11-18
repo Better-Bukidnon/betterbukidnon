@@ -58,11 +58,13 @@ npx wrangler deploy                     # development → dev.betterbukidnon.org
 
 # Production Worker
 SITE_ENV=production pnpm build
+pnpm seo:check
 npx wrangler deploy --env production    # production  → betterbukidnon.org
 ```
 
-In PowerShell, run `$env:SITE_ENV = 'production'; pnpm build` for the production build. The
-variable only needs to be set during the build; Wrangler deploys the files already in `dist`.
+In PowerShell, run `$env:SITE_ENV = 'production'; pnpm build; pnpm seo:check` for the production
+build and sitemap validation. The variable only needs to be set during the build; Wrangler deploys
+the files already in `dist`.
 
 ## Before the first production launch
 

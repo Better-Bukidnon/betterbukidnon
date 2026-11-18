@@ -5,6 +5,9 @@ import markerShadowUrl from 'leaflet/dist/images/marker-shadow.png?url'
 import { Icon, type IconName } from '@/components/ui/icon'
 import { GlanceHeader } from './home-ui'
 import { m } from '@/paraglide/messages'
+import { localizePath } from '@/lib/i18n'
+import type { Barangay, Lgu } from '@/features/directories/data'
+import { getLocale } from '@/paraglide/runtime'
 
 // Provincial Capitol, Malaybalay City (same point as the legacy weather-map.js).
 const CAPITOL: [number, number] = [8.1575, 125.1278]
@@ -255,7 +258,15 @@ function WeatherCard() {
 
 function CapitolMap() {
   const container = useRef<HTMLDivElement>(null)
+  const mapRef = useRef<import('leaflet').Map | null>(null)
+  const bounds = useRef<import('leaflet').LatLngBounds | null>(null)
+  const markers = useRef(new Map<string, import('leaflet').Marker>())
+  const [directory, setDirectory] = useState<{ lgus: Lgu[]; barangays: Barangay[] }>()
   const [interactive, setInteractive] = useState(false)
+  const [query, setQuery] = useState('')
+  const [district, setDistrict] = useState('all')
+  const [selected, setSelected] = useState<Lgu>()
+  const [barangayCode, setBarangayCode] = useState('')
 
   useEffect(() => {
     const element = container.current
@@ -263,8 +274,13 @@ function CapitolMap() {
     let map: import('leaflet').Map | undefined
     let cancelled = false
 
-    void Promise.all([import('leaflet'), import('leaflet/dist/leaflet.css')]).then(([L]) => {
+    void Promise.all([
+      import('leaflet'),
+      import('leaflet/dist/leaflet.css'),
+      import('@/features/directories/data'),
+    ]).then(([L, , data]) => {
       if (cancelled) return
+      setDirectory({ lgus: data.lgus, barangays: data.barangays })
       setInteractive(true)
       map = L.map(element, {
         center: CAPITOL,
@@ -288,10 +304,12 @@ function CapitolMap() {
           if (loaded || ++errors < 3) return
           map?.remove()
           map = undefined
+          mapRef.current = null
           setInteractive(false)
         })
         .addTo(map)
-      L.marker(CAPITOL, {
+      mapRef.current = map
+      const marker = L.marker(CAPITOL, {
         icon: L.icon({
           iconUrl: markerIconUrl,
           iconRetinaUrl: markerIcon2xUrl,
@@ -304,16 +322,168 @@ function CapitolMap() {
       })
         .addTo(map)
         .bindPopup('<strong>Bukidnon Provincial Capitol</strong><br>Malaybalay City 8700')
+      for (const lgu of data.lgus) {
+        const isCapital = lgu.is_capital
+        const isCity = lgu.classification === 'Component City'
+        const size = isCapital ? 20 : isCity ? 18 : 14
+        const pin = L.divIcon({
+          className: 'bb-map-pin-wrapper',
+          html: `<span class="bb-map-pin ${isCapital ? 'bb-map-pin--capital' : isCity ? 'bb-map-pin--city' : 'bb-map-pin--muni'}" aria-hidden="true"></span>`,
+          iconSize: [size, size],
+          iconAnchor: [size / 2, size / 2],
+          popupAnchor: [0, -size / 2],
+        })
+        const lguMarker = L.marker([lgu.coordinates.lat, lgu.coordinates.lon], {
+          icon: pin,
+          title: lgu.name,
+          alt: lgu.name,
+          zIndexOffset: isCapital ? 200 : isCity ? 100 : 0,
+        })
+          .bindTooltip(lgu.name, { direction: 'top', offset: [0, -8], className: 'bb-map-tooltip' })
+          .bindPopup(
+            `<strong>${lgu.name}</strong><br>${lgu.classification} · District ${lgu.district}`,
+          )
+          .on('click', () => setSelected(lgu))
+          .addTo(map)
+        markers.current.set(lgu.slug, lguMarker)
+      }
+      const points = data.lgus.map(
+        (lgu) => [lgu.coordinates.lat, lgu.coordinates.lon] as [number, number],
+      )
+      if (points.length) map.fitBounds(L.latLngBounds(points).pad(0.12))
+      const boundary = L.geoJSON(data.bukidnonBoundary, {
+        style: { color: '#0032a0', weight: 2.5, opacity: 0.9, fill: false },
+        interactive: false,
+      }).addTo(map)
+      bounds.current = boundary.getBounds()
+      if (bounds.current.isValid()) map.fitBounds(bounds.current, { padding: [12, 12] })
+      marker.on('click', () => setSelected(data.lgus.find((lgu) => lgu.is_capital)))
     })
 
     return () => {
       cancelled = true
       map?.remove()
+      mapRef.current = null
+      markers.current.clear()
+      bounds.current = null
     }
   }, [])
 
+  useEffect(() => {
+    if (!directory) return
+    const normalized = query.trim().toLocaleLowerCase()
+    for (const lgu of directory.lgus) {
+      const marker = markers.current.get(lgu.slug)
+      if (!marker) continue
+      const matchesQuery = !normalized || lgu.name.toLocaleLowerCase().includes(normalized)
+      const matchesDistrict =
+        district === 'all' || String(lgu.district) === district || lgu.classification === district
+      if (matchesQuery && matchesDistrict && mapRef.current) marker.addTo(mapRef.current)
+      else marker.remove()
+    }
+  }, [directory, district, query])
+
+  const selectedBarangays =
+    directory?.barangays.filter((barangay) => barangay.lgu_slug === selected?.slug) ?? []
+  const chooseLgu = (slug: string) => {
+    const lgu = directory?.lgus.find((entry) => entry.slug === slug)
+    if (!lgu) return
+    setSelected(lgu)
+    setBarangayCode('')
+    mapRef.current?.setView([lgu.coordinates.lat, lgu.coordinates.lon], 11)
+    markers.current.get(slug)?.openPopup()
+  }
+  const reset = () => {
+    setQuery('')
+    setDistrict('all')
+    setSelected(undefined)
+    setBarangayCode('')
+    if (directory?.lgus.length && bounds.current?.isValid()) {
+      mapRef.current?.fitBounds(bounds.current, { padding: [12, 12] })
+    }
+  }
+
   return (
     <div className={`overflow-hidden ${card}`}>
+      <div className="grid grid-cols-[1.4fr_1fr_1.2fr_auto] items-end gap-2.5 border-b border-black/6 bg-white px-4 py-3.5 max-[993px]:grid-cols-2 max-[640px]:grid-cols-1">
+        <label className="grid min-w-0 gap-1 text-xs font-semibold text-ink-light">
+          Find City / Municipality
+          <input
+            type="search"
+            value={query}
+            list="home-map-lgus"
+            onChange={(event) => {
+              const value = event.target.value
+              setQuery(value)
+              const match = directory?.lgus.find(
+                (lgu) => lgu.name.toLocaleLowerCase() === value.trim().toLocaleLowerCase(),
+              )
+              if (match) chooseLgu(match.slug)
+            }}
+            placeholder="Search 22 LGUs..."
+            className="min-h-10 rounded-site border border-black/15 px-3 text-sm font-normal"
+          />
+          <datalist id="home-map-lgus">
+            {directory?.lgus.map((lgu) => (
+              <option key={lgu.slug} value={lgu.name} />
+            ))}
+          </datalist>
+        </label>
+        <label className="grid min-w-0 gap-1 text-xs font-semibold text-ink-light">
+          Filter
+          <select
+            value={district}
+            onChange={(event) => setDistrict(event.target.value)}
+            className="min-h-10 rounded-site border border-black/15 bg-white px-3 text-sm font-normal"
+          >
+            <option value="all">All 22 LGUs</option>
+            <option value="Component City">Cities (2)</option>
+            {[1, 2, 3, 4].map((number) => (
+              <option key={number} value={String(number)}>
+                {number}
+                {number === 1 ? 'st' : number === 2 ? 'nd' : number === 3 ? 'rd' : 'th'} District
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="grid min-w-0 gap-1 text-xs font-semibold text-ink-light">
+          Barangay (by LGU)
+          <select
+            disabled={!selected}
+            value={barangayCode}
+            onChange={(event) => {
+              const barangay = selectedBarangays.find(
+                (entry) => entry.psgc_code === event.target.value,
+              )
+              if (barangay && selected)
+                window.location.assign(
+                  localizePath(
+                    `/barangays/${selected.slug}/${barangay.slug.split('/').at(-1)}`,
+                    getLocale(),
+                  ),
+                )
+              setBarangayCode(event.target.value)
+            }}
+            className="min-h-10 rounded-site border border-black/15 bg-white px-3 text-sm font-normal disabled:bg-surface-alt"
+          >
+            <option value="">
+              {selected ? `Select barangay (${selectedBarangays.length})` : 'Select LGU first'}
+            </option>
+            {selectedBarangays.map((barangay) => (
+              <option key={barangay.psgc_code} value={barangay.psgc_code}>
+                {barangay.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <button
+          type="button"
+          onClick={reset}
+          className="inline-flex h-[38px] items-center justify-self-start whitespace-nowrap rounded-site border border-black/15 px-3.5 text-sm font-semibold text-ink hover:bg-surface-alt"
+        >
+          Reset map view
+        </button>
+      </div>
       <div
         role="application"
         aria-label="Interactive map of Bukidnon"
@@ -333,6 +503,37 @@ function CapitolMap() {
           />
         )}
       </div>
+      {selected && (
+        <div
+          aria-live="polite"
+          className="mx-4 mt-3.5 rounded-[10px] border border-primary/15 bg-slate-50 px-4 py-3"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h3 className="mb-1 text-base font-semibold text-ink">{selected.name}</h3>
+              <p className="m-0 text-sm text-ink-light">
+                {selected.classification} · District {selected.district} · {selected.barangay_count}{' '}
+                Barangays · Pop. ({selected.population.latest_year}):{' '}
+                {selected.population.latest.toLocaleString('en-US')}
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <a
+                className="rounded-site bg-primary px-3 py-2 text-sm font-semibold text-white no-underline"
+                href={localizePath(`/lgus/${selected.slug}`, getLocale())}
+              >
+                View Profile
+              </a>
+              <a
+                className="rounded-site border border-primary px-3 py-2 text-sm font-semibold text-primary no-underline"
+                href={localizePath(`/barangays?lgu=${selected.slug}`, getLocale())}
+              >
+                Barangays
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
       <p className="m-0 flex items-center gap-1.5 border-t border-black/5 bg-white px-6 py-3 text-[0.75rem] text-ink-light">
         <Icon name="geo-alt" className="text-[0.8125rem] text-primary" />
         <span>{m.home_capitol_address()}</span>

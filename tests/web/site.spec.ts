@@ -44,6 +44,24 @@ test('the legacy barangay profile URL redirects by PSGC code', async ({ page }) 
   await expect(page.locator('h1')).toContainText('Aglayan')
 })
 
+test('the home map searches LGUs and opens the selected barangay profile', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('bb-vol-popup-v1', '1'))
+  await page.goto('/')
+  const search = page.getByRole('combobox', { name: 'Find City / Municipality' })
+  await search.fill('Malaybalay City')
+  await expect(page.getByRole('heading', { name: 'Malaybalay City' }).last()).toBeVisible()
+  await page.getByLabel('Barangay (by LGU)').selectOption({ label: 'Aglayan' })
+  await expect(page).toHaveURL(/\/barangays\/malaybalay-city\/aglayan$/)
+})
+
+test('legacy public data URLs remain available after cutover', async ({ request }) => {
+  for (const pathname of ['/data/lgus.json', '/data/barangays.json', '/data/contacts.json']) {
+    const response = await request.get(pathname)
+    expect(response.status(), pathname).toBe(200)
+    expect(response.headers()['content-type'], pathname).toContain('application/json')
+  }
+})
+
 test('unknown paths show the prerendered 404 without a hydration error', async ({ page }) => {
   for (const pathname of [
     '/services/nonexistent',
@@ -56,6 +74,12 @@ test('unknown paths show the prerendered 404 without a hydration error', async (
     const response = await page.goto(pathname)
     expect(response?.status(), pathname).toBe(404)
     await expect(page.getByText('404', { exact: true })).toBeVisible()
+    await expect(page.locator('header button[aria-label="Toggle Navigation"]')).toBeHidden()
+    await expect(page.locator('header nav#main-nav')).toBeVisible()
+    await expect(page.locator('html')).toHaveAttribute(
+      'lang',
+      pathname.startsWith('/fil/') ? 'fil' : pathname.startsWith('/ceb/') ? 'ceb' : 'en',
+    )
     expect(errors, pathname).toEqual([])
     page.removeAllListeners('pageerror')
   }

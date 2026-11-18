@@ -16,6 +16,9 @@ export function PwaUpdateNotice() {
     navigator.serviceWorker.addEventListener('controllerchange', onControllerChange)
     void navigator.serviceWorker.register('/sw.js').then((nextRegistration) => {
       setRegistration(nextRegistration)
+      if (nextRegistration.waiting && navigator.serviceWorker.controller) {
+        setUpdateAvailable(true)
+      }
 
       nextRegistration.addEventListener('updatefound', () => {
         const worker = nextRegistration.installing

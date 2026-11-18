@@ -250,6 +250,52 @@
 }
 
 /* Legacy .section vertical padding: 64px, 32px at 1024px and below, 24px at 767px and below. */
+/* Legacy civic map markers and tooltips from assets/css/civic-directory.css. */
+.bb-map-pin-wrapper {
+  border: 0;
+  background: transparent;
+}
+.bb-map-pin {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: 2.5px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgb(0 24 80 / 38%);
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease;
+}
+.bb-map-pin--muni {
+  background: #0032a0;
+}
+.bb-map-pin--city {
+  background: #f59e0b;
+  box-shadow:
+    0 0 0 3px rgb(245 158 11 / 28%),
+    0 2px 8px rgb(0 0 0 / 35%);
+}
+.bb-map-pin--capital {
+  border-width: 3px;
+  background: #d97706;
+  box-shadow:
+    0 0 0 4px rgb(217 119 6 / 32%),
+    0 3px 10px rgb(0 0 0 / 40%);
+}
+.bb-map-pin-wrapper:hover .bb-map-pin {
+  transform: scale(1.28);
+}
+.bb-map-tooltip {
+  padding: 3px 8px;
+  border: 1px solid rgb(0 50 160 / 18%);
+  border-radius: 6px;
+  font-family: var(--font-main);
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 12%);
+}
+
 @utility section-y {
   padding-block: 64px;
   @media (max-width: 1024px) {

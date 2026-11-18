@@ -40,7 +40,8 @@ const absolute = (urlPath: string) => (urlPath === '/' ? SITE_URL : `${SITE_URL}
 
 const indexable = new Map<string, Set<string>>()
 for (const file of pages(clientDir)) {
-  const urlPath = `/${path.relative(clientDir, path.dirname(file))}`.replace(/\/$/, '') || '/'
+  const relative = path.relative(clientDir, path.dirname(file)).split(path.sep).join('/')
+  const urlPath = `/${relative}`.replace(/\/$/, '') || '/'
   const html = fs.readFileSync(file, 'utf8')
   if (/<meta name="robots" content="noindex/.test(html)) continue
   // An untranslated page shows English and names the English page as canonical; leave it out.

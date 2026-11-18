@@ -32,7 +32,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "web:dev": "cd apps/web && vp dev",
-    "web:build": "cd apps/web && vp build && cd ../.. && tsx scripts/generate-seo-files.ts && tsx scripts/generate-web-sw.ts",
+    "web:build": "cd apps/web && vp build && cd ../.. && tsx scripts/copy-public-data.ts && tsx scripts/generate-seo-files.ts && tsx scripts/generate-web-sw.ts",
     "web:preview": "cd apps/web && vp preview",
     "web:typecheck": "pnpm web:messages && vp check --no-fmt --no-lint apps/web",
     "web:check": "pnpm web:messages && vp check apps/web",

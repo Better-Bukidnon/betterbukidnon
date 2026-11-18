@@ -28,7 +28,6 @@ const services: { icon: IconName; title: () => string; text: () => string }[] = 
 ]
 
 export function BarangayProfilePage({ barangay, lgu }: { barangay: Barangay; lgu: Lgu }) {
-  if (!lgu) return null
   const seal = (barangay.seal.path || lgu.seal.path).split('/').at(-1)
   const leader = barangay.leadership.punong_barangay
   const population = barangay.population.value

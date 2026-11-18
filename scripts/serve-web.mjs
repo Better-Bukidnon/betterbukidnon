@@ -33,6 +33,22 @@ async function resolveFile(urlPath) {
   }
 }
 
+async function resolveNotFound(urlPath) {
+  let directory = path.resolve(root, `.${decodeURIComponent(urlPath)}`)
+  while (directory === root || directory.startsWith(`${root}${path.sep}`)) {
+    const candidate = path.join(directory, '404.html')
+    try {
+      await stat(candidate)
+      return candidate
+    } catch {
+      const parent = path.dirname(directory)
+      if (parent === directory) break
+      directory = parent
+    }
+  }
+  return path.join(root, '404.html')
+}
+
 createServer(async (request, response) => {
   const url = new URL(request.url ?? '/', 'http://localhost')
   if (url.pathname !== '/' && url.pathname.endsWith('/')) {
@@ -43,7 +59,7 @@ createServer(async (request, response) => {
 
   const file = await resolveFile(url.pathname)
   const notFound = !file
-  const target = file ?? path.join(root, '404.html')
+  const target = file ?? (await resolveNotFound(url.pathname))
   try {
     const body = await readFile(target)
     response.writeHead(notFound ? 404 : 200, {
