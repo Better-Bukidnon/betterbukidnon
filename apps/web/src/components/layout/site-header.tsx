@@ -213,7 +213,7 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-[1000] bg-white py-3 shadow-sm max-xl:py-2.5 max-md:py-2 max-xs:py-1.5">
+    <header className="site-header sticky top-0 z-[1000] bg-white py-3 shadow-sm max-xl:py-2.5 max-md:py-2 max-xs:py-1.5">
       <div className="container-site flex min-h-12 items-center justify-between max-xl:min-h-11 max-xl:flex-wrap max-md:min-h-9 max-md:gap-1.5 max-xs:min-h-8">
         <div className="flex items-center gap-4 py-1 max-xl:order-1 max-xl:shrink-0 max-xl:py-0.5">
           <Link to="/" className="max-xl:flex max-xl:min-h-11 max-xl:items-center">

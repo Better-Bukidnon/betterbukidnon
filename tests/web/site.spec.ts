@@ -60,6 +60,94 @@ test('the home map searches LGUs and opens the selected barangay profile', async
   await expect(page).toHaveURL(/\/barangays\/malaybalay-city\/aglayan$/)
 })
 
+test('a unique home-map search selects the LGU and syncs its weather', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('bb-vol-popup-v1', '1'))
+  await page.route(/api\.open-meteo\.com\/v1\/forecast/, (route) =>
+    route.fulfill({
+      json: {
+        current: {
+          temperature_2m: 26,
+          relative_humidity_2m: 80,
+          weather_code: 1,
+          wind_speed_10m: 4,
+        },
+        hourly: {
+          time: ['2026-11-18T23:00'],
+          temperature_2m: [25],
+          weather_code: [1],
+        },
+      },
+    }),
+  )
+  await page.goto('/')
+  await page.getByRole('combobox', { name: 'Find City / Municipality' }).fill('Valencia')
+
+  const barangays = page.getByLabel('Barangay (by LGU)')
+  await expect(barangays).toBeEnabled()
+  await expect(barangays.locator('option')).toHaveCount(32)
+  await expect(page.getByRole('region', { name: 'Current weather in Valencia City, Bukidnon' })).toBeVisible()
+  await barangays.selectOption({ index: 1 })
+  await expect(page).toHaveURL(/\/barangays\/valencia-city\//)
+})
+
+test.describe('home-map barangay request recovery', () => {
+  test.use({ serviceWorkers: 'block' })
+
+  test('retries a failed request when the same LGU is selected again', async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem('bb-vol-popup-v1', '1'))
+    let requests = 0
+    await page.route('**/data/barangays.json', async (route) => {
+      requests += 1
+      if (requests === 1) await route.abort('failed')
+      else await route.continue()
+    })
+    await page.goto('/')
+    await page.getByRole('combobox', { name: 'Find City / Municipality' }).fill('Valencia')
+
+    const barangays = page.getByLabel('Barangay (by LGU)')
+    await expect(barangays).toBeDisabled()
+    await expect(barangays.locator('option').first()).toHaveText('Unavailable')
+    await page.getByRole('button', { name: 'Valencia City' }).click()
+    await expect(barangays).toBeEnabled()
+    await expect(barangays.locator('option').first()).toHaveText('Select barangay (31)')
+    expect(requests).toBe(2)
+  })
+})
+
+test('LGU profile anchors clear the measured sticky header at responsive widths', async ({ page }) => {
+  for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 1100, height: 900 },
+    { width: 768, height: 1024 },
+    { width: 390, height: 844 },
+  ]) {
+    await page.setViewportSize(viewport)
+    await page.goto('/lgus/cabanglasan')
+    await page.locator('a[href="#leadership"]').click()
+    const getLayout = () => page.evaluate(() => {
+      const header = document.querySelector('.site-header')
+      const nav = document.querySelector('[aria-label="Profile sections"]')
+      const heading = document.querySelector('#leadership')
+      if (!header || !nav || !heading) return null
+      return {
+        headerBottom: header.getBoundingClientRect().bottom,
+        navTop: nav.getBoundingClientRect().top,
+        navBottom: nav.getBoundingClientRect().bottom,
+        headingTop: heading.getBoundingClientRect().top,
+      }
+    })
+    await expect
+      .poll(async () => {
+        const layout = await getLayout()
+        return layout && Math.abs(layout.navTop - layout.headerBottom)
+      })
+      .toBeLessThanOrEqual(1)
+    const layout = await getLayout()
+    expect(layout).not.toBeNull()
+    expect(layout.headingTop).toBeGreaterThanOrEqual(layout.navBottom - 1)
+  }
+})
+
 test('legacy public data URLs remain available after cutover', async ({ request }) => {
   for (const pathname of ['/data/lgus.json', '/data/barangays.json', '/data/contacts.json']) {
     const response = await request.get(pathname)

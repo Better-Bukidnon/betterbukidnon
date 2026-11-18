@@ -12,7 +12,12 @@ import { getLocale } from '@/paraglide/runtime'
 // Provincial Capitol, Malaybalay City (same point as the legacy weather-map.js).
 const CAPITOL: [number, number] = [8.1575, 125.1278]
 const WEATHER_TTL = 15 * 60 * 1000
-const WEATHER_CACHE_KEY = 'home_weather'
+type WeatherLocation = { lat: number; lon: number; label: string }
+const CAPITOL_LOCATION: WeatherLocation = {
+  lat: CAPITOL[0],
+  lon: CAPITOL[1],
+  label: 'Malaybalay City, Bukidnon',
+}
 const OSM_EMBED =
   'https://www.openstreetmap.org/export/embed.html?bbox=124.55%2C7.35%2C125.65%2C8.65&layer=mapnik&marker=8.1575%2C125.1278'
 
@@ -54,9 +59,10 @@ type ForecastResponse = {
   hourly: { time: string[]; temperature_2m: number[]; weather_code: number[] }
 }
 
-async function fetchWeather(): Promise<Weather> {
+async function fetchWeather(location: WeatherLocation): Promise<Weather> {
+  const cacheKey = `home_weather_${location.lat.toFixed(4)}_${location.lon.toFixed(4)}`
   try {
-    const cached = JSON.parse(localStorage.getItem(WEATHER_CACHE_KEY) ?? 'null') as {
+    const cached = JSON.parse(localStorage.getItem(cacheKey) ?? 'null') as {
       at: number
       data: Weather
     } | null
@@ -65,8 +71,8 @@ async function fetchWeather(): Promise<Weather> {
     // Ignore unreadable cache entries and fetch fresh data.
   }
   const params = new URLSearchParams({
-    latitude: String(CAPITOL[0]),
-    longitude: String(CAPITOL[1]),
+    latitude: String(location.lat),
+    longitude: String(location.lon),
     current: 'temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m',
     hourly: 'temperature_2m,weather_code',
     timezone: 'Asia/Manila',
@@ -104,7 +110,7 @@ async function fetchWeather(): Promise<Weather> {
       }),
   }
   try {
-    localStorage.setItem(WEATHER_CACHE_KEY, JSON.stringify({ at: Date.now(), data: weather }))
+    localStorage.setItem(cacheKey, JSON.stringify({ at: Date.now(), data: weather }))
   } catch {
     // Shown either way; it is only fetched again on the next visit.
   }
@@ -117,16 +123,21 @@ const card =
 const shimmer =
   'animate-[skeleton-shimmer_1.5s_ease-in-out_infinite] bg-[linear-gradient(90deg,#f0f0f0_25%,#fafafa_50%,#f0f0f0_75%)] bg-size-[200%_100%]'
 
-function WeatherCard() {
+function WeatherCard({ location }: { location: WeatherLocation }) {
   const [state, setState] = useState<'loading' | 'error' | Weather>('loading')
+  const [retry, setRetry] = useState(0)
 
-  const load = () => {
+  const load = () => setRetry((attempt) => attempt + 1)
+  useEffect(() => {
+    let current = true
     setState('loading')
-    fetchWeather()
-      .then(setState)
-      .catch(() => setState('error'))
-  }
-  useEffect(load, [])
+    fetchWeather(location)
+      .then((weather) => current && setState(weather))
+      .catch(() => current && setState('error'))
+    return () => {
+      current = false
+    }
+  }, [location, retry])
 
   if (state === 'loading') {
     return (
@@ -182,7 +193,7 @@ function WeatherCard() {
   return (
     <div
       role="region"
-      aria-label="Current weather in Malaybalay City, Bukidnon"
+      aria-label={`Current weather in ${location.label}`}
       className={`group p-8 max-sm:p-6 ${card}`}
     >
       <div className="flex items-start gap-6 pb-6">
@@ -206,8 +217,7 @@ function WeatherCard() {
             </span>
           </div>
           <div className="flex items-center gap-1 text-[0.75rem] text-ink-light">
-            <Icon name="geo-alt" className="text-[0.6875rem] text-primary" /> Malaybalay City,
-            Bukidnon
+            <Icon name="geo-alt" className="text-[0.6875rem] text-primary" /> {location.label}
           </div>
         </div>
       </div>
@@ -256,17 +266,99 @@ function WeatherCard() {
   )
 }
 
-function CapitolMap() {
+function CapitolMap({
+  onLocationChange,
+}: {
+  onLocationChange: (location: WeatherLocation) => void
+}) {
   const container = useRef<HTMLDivElement>(null)
   const mapRef = useRef<import('leaflet').Map | null>(null)
   const bounds = useRef<import('leaflet').LatLngBounds | null>(null)
   const markers = useRef(new Map<string, import('leaflet').Marker>())
-  const [directory, setDirectory] = useState<{ lgus: Lgu[]; barangays: Barangay[] }>()
+  const barangaysPromise = useRef<Promise<Barangay[]> | null>(null)
+  const barangaysRequestId = useRef(0)
+  const barangaysLoadFailed = useRef(false)
+  const selectedLguSlug = useRef<string | null>(null)
+  const chooseLguRef = useRef<(lgu: Lgu, options?: { focusMap?: boolean }) => void>(() => {})
+  const [lgus, setLgus] = useState<Lgu[]>([])
   const [interactive, setInteractive] = useState(false)
   const [query, setQuery] = useState('')
   const [district, setDistrict] = useState('all')
   const [selected, setSelected] = useState<Lgu>()
+  const [selectedBarangays, setSelectedBarangays] = useState<Barangay[]>([])
+  const [barangaysStatus, setBarangaysStatus] = useState<
+    'idle' | 'loading' | 'ready' | 'unavailable'
+  >('idle')
   const [barangayCode, setBarangayCode] = useState('')
+
+  const loadBarangays = (lgu: Lgu) => {
+    const requestId = ++barangaysRequestId.current
+    barangaysLoadFailed.current = false
+    setBarangaysStatus('loading')
+    setSelectedBarangays([])
+
+    if (!barangaysPromise.current) {
+      barangaysPromise.current = fetch('/data/barangays.json')
+        .then((response) => {
+          if (!response.ok) throw new Error(`Barangays: HTTP ${response.status}`)
+          return response.json() as Promise<{ barangays: Barangay[] }>
+        })
+        .then((data) => data.barangays)
+        .catch((error: unknown) => {
+          barangaysPromise.current = null
+          throw error
+        })
+    }
+
+    void barangaysPromise.current
+      .then((barangays) => {
+        if (requestId !== barangaysRequestId.current) return
+        setSelectedBarangays(barangays.filter((barangay) => barangay.lgu_slug === lgu.slug))
+        setBarangaysStatus('ready')
+      })
+      .catch(() => {
+        if (requestId !== barangaysRequestId.current) return
+        barangaysLoadFailed.current = true
+        setBarangaysStatus('unavailable')
+      })
+  }
+
+  const chooseLgu = (lgu: Lgu, options: { focusMap?: boolean } = {}) => {
+    const selectionChanged = selectedLguSlug.current !== lgu.slug
+    selectedLguSlug.current = lgu.slug
+    if (selectionChanged || barangaysLoadFailed.current) {
+      setSelected(lgu)
+      setBarangayCode('')
+      loadBarangays(lgu)
+    }
+
+    if (selectionChanged || options.focusMap) {
+      mapRef.current?.setView([lgu.coordinates.lat, lgu.coordinates.lon], 12)
+      markers.current.get(lgu.slug)?.openPopup()
+      if (selectionChanged) {
+        onLocationChange({
+          lat: lgu.coordinates.lat,
+          lon: lgu.coordinates.lon,
+          label: `${lgu.name}, Bukidnon`,
+        })
+      }
+    }
+  }
+  chooseLguRef.current = chooseLgu
+
+  const reset = () => {
+    barangaysRequestId.current += 1
+    barangaysLoadFailed.current = false
+    selectedLguSlug.current = null
+    setQuery('')
+    setDistrict('all')
+    setSelected(undefined)
+    setSelectedBarangays([])
+    setBarangaysStatus('idle')
+    setBarangayCode('')
+    onLocationChange(CAPITOL_LOCATION)
+    if (bounds.current?.isValid()) mapRef.current?.fitBounds(bounds.current, { padding: [12, 12] })
+  }
 
   useEffect(() => {
     const element = container.current
@@ -277,88 +369,101 @@ function CapitolMap() {
     void Promise.all([
       import('leaflet'),
       import('leaflet/dist/leaflet.css'),
-      import('@/features/directories/data'),
-    ]).then(([L, , data]) => {
-      if (cancelled) return
-      setDirectory({ lgus: data.lgus, barangays: data.barangays })
-      setInteractive(true)
-      map = L.map(element, {
-        center: CAPITOL,
-        zoom: 14,
-        scrollWheelZoom: false,
-        keyboard: true,
-        keyboardPanDelta: 80,
-      })
-      // Like legacy: if the first three tiles fail (blocked or offline), fall back to the iframe.
-      let loaded = false
-      let errors = 0
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 19,
-      })
-        .on('tileload', () => {
-          loaded = true
+      fetch('/data/lgus.json'),
+      fetch('/data/bukidnon-boundary.geojson'),
+    ])
+      .then(async ([L, , lguResponse, boundaryResponse]) => {
+        if (!lguResponse.ok || !boundaryResponse.ok) throw new Error('Could not load map data')
+        const lguData = (await lguResponse.json()) as { lgus: Lgu[] }
+        const boundaryData = (await boundaryResponse.json()) as GeoJSON.GeoJsonObject
+        if (cancelled) return
+        setLgus(lguData.lgus)
+        setInteractive(true)
+        map = L.map(element, {
+          center: CAPITOL,
+          zoom: 14,
+          scrollWheelZoom: false,
+          keyboard: true,
+          keyboardPanDelta: 80,
         })
-        .on('tileerror', () => {
-          if (loaded || ++errors < 3) return
-          map?.remove()
-          map = undefined
-          mapRef.current = null
-          setInteractive(false)
+        let loaded = false
+        let errors = 0
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          maxZoom: 19,
         })
-        .addTo(map)
-      mapRef.current = map
-      const marker = L.marker(CAPITOL, {
-        icon: L.icon({
-          iconUrl: markerIconUrl,
-          iconRetinaUrl: markerIcon2xUrl,
-          shadowUrl: markerShadowUrl,
-          iconSize: [25, 41],
-          iconAnchor: [12, 41],
-          popupAnchor: [1, -34],
-          shadowSize: [41, 41],
-        }),
-      })
-        .addTo(map)
-        .bindPopup('<strong>Bukidnon Provincial Capitol</strong><br>Malaybalay City 8700')
-      for (const lgu of data.lgus) {
-        const isCapital = lgu.is_capital
-        const isCity = lgu.classification === 'Component City'
-        const size = isCapital ? 20 : isCity ? 18 : 14
-        const pin = L.divIcon({
-          className: 'bb-map-pin-wrapper',
-          html: `<span class="bb-map-pin ${isCapital ? 'bb-map-pin--capital' : isCity ? 'bb-map-pin--city' : 'bb-map-pin--muni'}" aria-hidden="true"></span>`,
-          iconSize: [size, size],
-          iconAnchor: [size / 2, size / 2],
-          popupAnchor: [0, -size / 2],
-        })
-        const lguMarker = L.marker([lgu.coordinates.lat, lgu.coordinates.lon], {
-          icon: pin,
-          title: lgu.name,
-          alt: lgu.name,
-          zIndexOffset: isCapital ? 200 : isCity ? 100 : 0,
-        })
-          .bindTooltip(lgu.name, { direction: 'top', offset: [0, -8], className: 'bb-map-tooltip' })
-          .bindPopup(
-            `<strong>${lgu.name}</strong><br>${lgu.classification} · District ${lgu.district}`,
-          )
-          .on('click', () => setSelected(lgu))
+          .on('tileload', () => {
+            loaded = true
+          })
+          .on('tileerror', () => {
+            if (loaded || ++errors < 3) return
+            map?.remove()
+            map = undefined
+            mapRef.current = null
+            setInteractive(false)
+          })
           .addTo(map)
-        markers.current.set(lgu.slug, lguMarker)
-      }
-      const points = data.lgus.map(
-        (lgu) => [lgu.coordinates.lat, lgu.coordinates.lon] as [number, number],
-      )
-      if (points.length) map.fitBounds(L.latLngBounds(points).pad(0.12))
-      const boundary = L.geoJSON(data.bukidnonBoundary, {
-        style: { color: '#0032a0', weight: 2.5, opacity: 0.9, fill: false },
-        interactive: false,
-      }).addTo(map)
-      bounds.current = boundary.getBounds()
-      if (bounds.current.isValid()) map.fitBounds(bounds.current, { padding: [12, 12] })
-      marker.on('click', () => setSelected(data.lgus.find((lgu) => lgu.is_capital)))
-    })
+        mapRef.current = map
+        const capitolMarker = L.marker(CAPITOL, {
+          icon: L.icon({
+            iconUrl: markerIconUrl,
+            iconRetinaUrl: markerIcon2xUrl,
+            shadowUrl: markerShadowUrl,
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41],
+          }),
+        })
+          .addTo(map)
+          .bindPopup('<strong>Bukidnon Provincial Capitol</strong><br>Malaybalay City 8700')
+        for (const lgu of lguData.lgus) {
+          const isCapital = lgu.is_capital
+          const isCity = lgu.classification === 'Component City'
+          const size = isCapital ? 20 : isCity ? 18 : 14
+          const pin = L.divIcon({
+            className: 'bb-map-pin-wrapper',
+            html: `<span class="bb-map-pin ${isCapital ? 'bb-map-pin--capital' : isCity ? 'bb-map-pin--city' : 'bb-map-pin--muni'}" aria-hidden="true"></span>`,
+            iconSize: [size, size],
+            iconAnchor: [size / 2, size / 2],
+            popupAnchor: [0, -size / 2],
+          })
+          const lguMarker = L.marker([lgu.coordinates.lat, lgu.coordinates.lon], {
+            icon: pin,
+            title: lgu.name,
+            alt: lgu.name,
+            zIndexOffset: isCapital ? 200 : isCity ? 100 : 0,
+          })
+            .bindTooltip(lgu.name, {
+              direction: 'top',
+              offset: [0, -8],
+              className: 'bb-map-tooltip',
+            })
+            .bindPopup(
+              `<strong>${lgu.name}</strong><br>${lgu.classification} · District ${lgu.district}`,
+            )
+            .on('click', () => chooseLguRef.current(lgu, { focusMap: true }))
+            .addTo(map)
+          markers.current.set(lgu.slug, lguMarker)
+        }
+        const boundary = L.geoJSON(boundaryData, {
+          style: { color: '#0032a0', weight: 2.5, opacity: 0.9, fill: false },
+          interactive: false,
+        }).addTo(map)
+        bounds.current = boundary.getBounds()
+        if (bounds.current.isValid()) map.fitBounds(bounds.current, { padding: [12, 12] })
+        capitolMarker.on('click', () => {
+          const capital = lguData.lgus.find((lgu) => lgu.is_capital)
+          if (capital) chooseLguRef.current(capital, { focusMap: true })
+        })
+      })
+      .catch((error: unknown) => {
+        if (!cancelled) console.error('Could not initialize the Bukidnon map', error)
+        map?.remove()
+        map = undefined
+        setInteractive(false)
+      })
 
     return () => {
       cancelled = true
@@ -370,38 +475,20 @@ function CapitolMap() {
   }, [])
 
   useEffect(() => {
-    if (!directory) return
     const normalized = query.trim().toLocaleLowerCase()
-    for (const lgu of directory.lgus) {
+    const visible: Lgu[] = []
+    for (const lgu of lgus) {
       const marker = markers.current.get(lgu.slug)
-      if (!marker) continue
       const matchesQuery = !normalized || lgu.name.toLocaleLowerCase().includes(normalized)
       const matchesDistrict =
         district === 'all' || String(lgu.district) === district || lgu.classification === district
-      if (matchesQuery && matchesDistrict && mapRef.current) marker.addTo(mapRef.current)
-      else marker.remove()
+      if (matchesQuery && matchesDistrict) {
+        visible.push(lgu)
+        if (marker && mapRef.current) marker.addTo(mapRef.current)
+      } else marker?.remove()
     }
-  }, [directory, district, query])
-
-  const selectedBarangays =
-    directory?.barangays.filter((barangay) => barangay.lgu_slug === selected?.slug) ?? []
-  const chooseLgu = (slug: string) => {
-    const lgu = directory?.lgus.find((entry) => entry.slug === slug)
-    if (!lgu) return
-    setSelected(lgu)
-    setBarangayCode('')
-    mapRef.current?.setView([lgu.coordinates.lat, lgu.coordinates.lon], 11)
-    markers.current.get(slug)?.openPopup()
-  }
-  const reset = () => {
-    setQuery('')
-    setDistrict('all')
-    setSelected(undefined)
-    setBarangayCode('')
-    if (directory?.lgus.length && bounds.current?.isValid()) {
-      mapRef.current?.fitBounds(bounds.current, { padding: [12, 12] })
-    }
-  }
+    if (normalized && visible.length === 1) chooseLguRef.current(visible[0]!)
+  }, [district, lgus, query])
 
   return (
     <div className={`overflow-hidden ${card}`}>
@@ -412,19 +499,12 @@ function CapitolMap() {
             type="search"
             value={query}
             list="home-map-lgus"
-            onChange={(event) => {
-              const value = event.target.value
-              setQuery(value)
-              const match = directory?.lgus.find(
-                (lgu) => lgu.name.toLocaleLowerCase() === value.trim().toLocaleLowerCase(),
-              )
-              if (match) chooseLgu(match.slug)
-            }}
+            onChange={(event) => setQuery(event.target.value)}
             placeholder="Search 22 LGUs..."
             className="min-h-10 rounded-site border border-black/15 px-3 text-sm font-normal"
           />
           <datalist id="home-map-lgus">
-            {directory?.lgus.map((lgu) => (
+            {lgus.map((lgu) => (
               <option key={lgu.slug} value={lgu.name} />
             ))}
           </datalist>
@@ -449,7 +529,7 @@ function CapitolMap() {
         <label className="grid min-w-0 gap-1 text-xs font-semibold text-ink-light">
           Barangay (by LGU)
           <select
-            disabled={!selected}
+            disabled={!selected || barangaysStatus !== 'ready'}
             value={barangayCode}
             onChange={(event) => {
               const barangay = selectedBarangays.find(
@@ -467,7 +547,13 @@ function CapitolMap() {
             className="min-h-10 rounded-site border border-black/15 bg-white px-3 text-sm font-normal disabled:bg-surface-alt"
           >
             <option value="">
-              {selected ? `Select barangay (${selectedBarangays.length})` : 'Select LGU first'}
+              {barangaysStatus === 'loading'
+                ? 'Loading barangays...'
+                : barangaysStatus === 'unavailable'
+                  ? 'Unavailable'
+                  : selected
+                    ? `Select barangay (${selectedBarangays.length})`
+                    : 'Select LGU first'}
             </option>
             {selectedBarangays.map((barangay) => (
               <option key={barangay.psgc_code} value={barangay.psgc_code}>
@@ -544,16 +630,18 @@ function CapitolMap() {
 }
 
 export function WeatherMap() {
+  const [weatherLocation, setWeatherLocation] = useState(CAPITOL_LOCATION)
+
   return (
     <section className="bg-surface-alt py-12 max-xl:py-8 max-md:py-6">
       <div className="container-site">
         <GlanceHeader title={m.home_weather_and_map_of_bukidnon()} />
         <div className="grid grid-cols-[340px_minmax(0,1fr)] items-stretch gap-8 max-lg:grid-cols-[minmax(0,1fr)] max-lg:gap-6">
           <div className="flex flex-col" aria-live="polite">
-            <WeatherCard />
+            <WeatherCard location={weatherLocation} />
           </div>
           <div className="flex flex-col">
-            <CapitolMap />
+            <CapitolMap onLocationChange={setWeatherLocation} />
           </div>
         </div>
       </div>

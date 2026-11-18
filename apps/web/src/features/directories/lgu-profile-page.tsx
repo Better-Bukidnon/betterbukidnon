@@ -14,7 +14,7 @@ const profileLinks: { href: string; icon: IconName; label: () => string }[] = [
 
 export function LguProfilePage({ lgu, barangays }: { lgu: Lgu; barangays: Barangay[] }) {
   useEffect(() => {
-    const header = document.querySelector('header')
+    const header = document.querySelector('.site-header')
     if (!header) return
     const updateHeight = () => {
       document.documentElement.style.setProperty(
@@ -23,6 +23,7 @@ export function LguProfilePage({ lgu, barangays }: { lgu: Lgu; barangays: Barang
       )
     }
     updateHeight()
+    if (typeof ResizeObserver === 'undefined') return
     const observer = new ResizeObserver(updateHeight)
     observer.observe(header)
     return () => observer.disconnect()
@@ -127,10 +128,7 @@ function SectionHeader({
   action?: React.ReactNode
 }) {
   return (
-    <div
-      id={id}
-      className="mb-[18px] flex scroll-mt-[calc(var(--site-header-height,0px)+4rem)] flex-wrap items-end justify-between gap-3"
-    >
+    <div id={id} className="mb-[18px] flex flex-wrap items-end justify-between gap-3">
       <div>
         <h2 className="mb-0.75 flex items-center gap-2 text-[1.3rem] text-ink">
           <Icon name={icon} className="text-[1.15rem] text-primary" /> {title}
@@ -171,7 +169,10 @@ function Overview({ lgu }: { lgu: Lgu }) {
     },
   ]
   return (
-    <section className="section-y" id="overview">
+    <section
+      className="section-y scroll-mt-[calc(var(--site-header-height,0px)+4rem)]"
+      id="overview"
+    >
       <div className="container-site">
         <SectionHeader
           id="overview-heading"
@@ -264,7 +265,10 @@ function Leadership({ lgu }: { lgu: Lgu }) {
     },
   ]
   return (
-    <section className="section-y bg-surface-alt" id="leadership">
+    <section
+      className="section-y scroll-mt-[calc(var(--site-header-height,0px)+4rem)] bg-surface-alt"
+      id="leadership"
+    >
       <div className="container-site">
         <SectionHeader
           id="leadership-heading"
@@ -311,7 +315,10 @@ function Barangays({
   setQuery: (value: string) => void
 }) {
   return (
-    <section className="section-y" id="barangays">
+    <section
+      className="section-y scroll-mt-[calc(var(--site-header-height,0px)+4rem)]"
+      id="barangays"
+    >
       <div className="container-site">
         <SectionHeader
           id="barangays-heading"
@@ -359,7 +366,10 @@ function Barangays({
 
 function References({ lgu }: { lgu: Lgu }) {
   return (
-    <section className="section-y bg-surface-alt" id="references">
+    <section
+      className="section-y scroll-mt-[calc(var(--site-header-height,0px)+4rem)] bg-surface-alt"
+      id="references"
+    >
       <div className="container-site">
         <SectionHeader
           id="references-heading"
