@@ -6,11 +6,16 @@ on:
   pull_request:
     branches: [develop, main]
 
+permissions:
+  contents: read
+
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Enable pnpm
         run: corepack enable

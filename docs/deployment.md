@@ -44,13 +44,25 @@ the build script. Run `pnpm build` before deploying; it does not mutate the pack
 
 ## Manual deploy
 
+Build production assets with `SITE_ENV=production` before deploying to the production Worker.
+Otherwise the generated `robots.txt` and `_headers` intentionally block indexing. In
+PowerShell, set the variable with `$env:SITE_ENV = 'production'` before running the build.
+
 ```bash
 pnpm install --frozen-lockfile
-pnpm build
 npx wrangler login                      # once
+
+# Development Worker
+pnpm build
 npx wrangler deploy                     # development → dev.betterbukidnon.org
+
+# Production Worker
+SITE_ENV=production pnpm build
 npx wrangler deploy --env production    # production  → betterbukidnon.org
 ```
+
+In PowerShell, run `$env:SITE_ENV = 'production'; pnpm build` for the production build. The
+variable only needs to be set during the build; Wrangler deploys the files already in `dist`.
 
 ## Before the first production launch
 

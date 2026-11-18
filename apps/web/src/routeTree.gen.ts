@@ -35,6 +35,7 @@ import { Route as ServiceDetailsSlugRouteImport } from './routes/service-details
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
 import { Route as ServicesCategoryRouteImport } from './routes/services/$category'
 import { Route as BarangaysLguSlugBarangaySlugRouteImport } from './routes/barangays/$lguSlug/$barangaySlug'
+import { Route as BarangaysProfileIndexRouteImport } from './routes/barangays/profile/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -169,6 +170,11 @@ const BarangaysLguSlugBarangaySlugRoute =
     path: '/barangays/$lguSlug/$barangaySlug',
     getParentRoute: () => rootRouteImport,
   } as any)
+const BarangaysProfileIndexRoute = BarangaysProfileIndexRouteImport.update({
+  id: '/barangays/profile/',
+  path: '/barangays/profile/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -197,6 +203,7 @@ export interface FileRoutesByFullPath {
   '/lgus/': typeof LgusIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/barangays/$lguSlug/$barangaySlug': typeof BarangaysLguSlugBarangaySlugRoute
+  '/barangays/profile/': typeof BarangaysProfileIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -225,6 +232,7 @@ export interface FileRoutesByTo {
   '/lgus': typeof LgusIndexRoute
   '/services': typeof ServicesIndexRoute
   '/barangays/$lguSlug/$barangaySlug': typeof BarangaysLguSlugBarangaySlugRoute
+  '/barangays/profile': typeof BarangaysProfileIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -254,6 +262,7 @@ export interface FileRoutesById {
   '/lgus/': typeof LgusIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/barangays/$lguSlug/$barangaySlug': typeof BarangaysLguSlugBarangaySlugRoute
+  '/barangays/profile/': typeof BarangaysProfileIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -284,6 +293,7 @@ export interface FileRouteTypes {
     | '/lgus/'
     | '/services/'
     | '/barangays/$lguSlug/$barangaySlug'
+    | '/barangays/profile/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -312,6 +322,7 @@ export interface FileRouteTypes {
     | '/lgus'
     | '/services'
     | '/barangays/$lguSlug/$barangaySlug'
+    | '/barangays/profile'
   id:
     | '__root__'
     | '/'
@@ -340,6 +351,7 @@ export interface FileRouteTypes {
     | '/lgus/'
     | '/services/'
     | '/barangays/$lguSlug/$barangaySlug'
+    | '/barangays/profile/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -369,6 +381,7 @@ export interface RootRouteChildren {
   LgusIndexRoute: typeof LgusIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
   BarangaysLguSlugBarangaySlugRoute: typeof BarangaysLguSlugBarangaySlugRoute
+  BarangaysProfileIndexRoute: typeof BarangaysProfileIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -555,6 +568,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BarangaysLguSlugBarangaySlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/barangays/profile/': {
+      id: '/barangays/profile/'
+      path: '/barangays/profile'
+      fullPath: '/barangays/profile/'
+      preLoaderRoute: typeof BarangaysProfileIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -585,6 +605,7 @@ const rootRouteChildren: RootRouteChildren = {
   LgusIndexRoute: LgusIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
   BarangaysLguSlugBarangaySlugRoute: BarangaysLguSlugBarangaySlugRoute,
+  BarangaysProfileIndexRoute: BarangaysProfileIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

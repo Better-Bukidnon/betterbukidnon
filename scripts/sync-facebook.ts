@@ -4,7 +4,7 @@
  *
  * Fetches the latest posts from the Provincial Government of Bukidnon Facebook Page
  * (https://www.facebook.com/lgubukidnon, marked "Verify" in docs/bukidnon-facts.md) via the
- * Graph API, derives a title/summary, categorizes each post, validates it, and
+ * Graph API, derives a title/excerpt, categorizes each post, validates it, and
  * merges the result into data/news.json alongside any manually-curated entries.
  * The static front-end (assets/js/news.js) renders the merged file unchanged.
  *
@@ -225,10 +225,10 @@ function transformPost(post) {
     date: toDate(post.created_time),
     category,
     badge,
-    summary: message
+    excerpt: message
       ? truncate(message, SUMMARY_MAX)
       : 'See the full post on the official Facebook page.',
-    url: post.permalink_url || null,
+    ...(post.permalink_url ? { url: post.permalink_url } : {}),
     source: 'View on Facebook',
   }
 }
@@ -243,7 +243,7 @@ function isValidItem(item) {
   if (!item.date || isNaN(new Date(item.date + 'T00:00:00').getTime())) return false
   if (!BADGES[item.badge]) return false
   if (!item.category) return false
-  if (!item.summary || item.summary.length > SUMMARY_MAX) return false
+  if (!item.excerpt || item.excerpt.length > SUMMARY_MAX) return false
   if (item.url && !/^https?:\/\//i.test(item.url)) return false
   return true
 }

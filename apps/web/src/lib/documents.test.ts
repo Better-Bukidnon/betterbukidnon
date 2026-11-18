@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import bootstrapIcons from 'bootstrap-icons/font/bootstrap-icons.json' with { type: 'json' }
 import { parse as parseYaml } from 'yaml'
 import { describe, expect, it } from 'vite-plus/test'
@@ -8,7 +9,7 @@ import { blockNames, parseDocumentPath, resolveDocument } from './documents'
 import { serviceCategories } from '@/features/services/categories'
 import { serviceBySlug } from '@/features/services/services'
 
-const contentDir = new URL('../../../../content/', import.meta.url).pathname
+const contentDir = fileURLToPath(new URL('../../../../content/', import.meta.url))
 const LOCALES = ['en', 'fil', 'ceb']
 
 const documentFiles = fs
@@ -18,7 +19,7 @@ const documentFiles = fs
 
 function readDocument(file: string) {
   const source = fs.readFileSync(file, 'utf8')
-  const match = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(source)
+  const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/.exec(source)
   return { frontmatter: match ? parseYaml(match[1] ?? '') : undefined, body: match?.[2] ?? '' }
 }
 

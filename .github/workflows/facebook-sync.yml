@@ -25,17 +25,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Enable pnpm
-        run: corepack enable
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+          node-version: 22.19.0
 
       - name: Sync Facebook posts into data/news.json
         id: sync
@@ -46,7 +41,7 @@ jobs:
           # FB_API_VERSION: v21.0
           # FB_LIMIT: '25'
           # MAX_FB_ITEMS: '30'
-        run: pnpm exec tsx scripts/sync-facebook.ts
+        run: node --experimental-strip-types scripts/sync-facebook.ts
 
       - name: Upload news.json artifact for review
         if: steps.sync.outputs.changed == 'true'

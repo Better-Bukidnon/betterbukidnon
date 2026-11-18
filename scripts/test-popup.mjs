@@ -12,6 +12,7 @@
 
 import { chromium } from 'playwright';
 import { spawn } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { setTimeout as sleep } from 'node:timers/promises';
 
 const PORT = 8911;
@@ -25,7 +26,7 @@ const VIEWPORTS = [
 
 function startServer() {
   const srv = spawn('python3', ['-m', 'http.server', String(PORT)], {
-    cwd: new URL('..', import.meta.url).pathname,
+    cwd: fileURLToPath(new URL('..', import.meta.url)),
     stdio: 'ignore',
   });
   return srv;

@@ -3,7 +3,7 @@ import { Icon, type IconName } from '@/components/ui/icon'
 import { SiteLink } from '@/components/ui/site-link'
 import { formatNumber } from '@/lib/utils'
 import { m } from '@/paraglide/messages'
-import { findLgu, type Barangay } from './data'
+import type { Barangay, Lgu } from './data'
 import { directoryPaths } from './paths'
 
 const services: { icon: IconName; title: () => string; text: () => string }[] = [
@@ -27,8 +27,7 @@ const services: { icon: IconName; title: () => string; text: () => string }[] = 
   { icon: 'stars', title: m.dir_service_youth, text: m.dir_service_youth_text },
 ]
 
-export function BarangayProfilePage({ barangay }: { barangay: Barangay }) {
-  const lgu = findLgu(barangay.lgu_slug)
+export function BarangayProfilePage({ barangay, lgu }: { barangay: Barangay; lgu: Lgu }) {
   if (!lgu) return null
   const seal = (barangay.seal.path || lgu.seal.path).split('/').at(-1)
   const leader = barangay.leadership.punong_barangay

@@ -1,14 +1,14 @@
 import { createFileRoute, notFound } from '@tanstack/react-router'
-import { findLgu } from '@/features/directories/data'
 import { LguProfilePage } from '@/features/directories/lgu-profile-page'
 import { directoryPaths } from '@/features/directories/paths'
 import { seo } from '@/lib/seo'
 
 export const Route = createFileRoute('/lgus/$slug')({
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
+    const { findLgu, findBarangaysForLgu } = await import('@/features/directories/data')
     const lgu = findLgu(params.slug)
     if (!lgu) throw notFound()
-    return { lgu }
+    return { lgu, barangays: findBarangaysForLgu(lgu.slug) }
   },
   head: ({ loaderData, params }) =>
     loaderData
@@ -18,5 +18,5 @@ export const Route = createFileRoute('/lgus/$slug')({
           path: directoryPaths.lgu(params.slug),
         })
       : {},
-  component: () => <LguProfilePage lgu={Route.useLoaderData().lgu} />,
+  component: () => <LguProfilePage {...Route.useLoaderData()} />,
 })

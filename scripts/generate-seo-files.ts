@@ -9,11 +9,12 @@
  */
 import fs from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { site } from '../apps/web/src/config/site'
 
 const SITE_URL = site.url
 const LOCALES = ['en', 'fil', 'ceb'] as const
-const clientDir = new URL('../apps/web/dist/client/', import.meta.url).pathname
+const clientDir = fileURLToPath(new URL('../apps/web/dist/client/', import.meta.url))
 const production = process.env.SITE_ENV === 'production' || process.env.WORKERS_CI_BRANCH === 'main'
 
 function pages(dir: string, out: string[] = []): string[] {
@@ -80,8 +81,24 @@ fs.writeFileSync(
 )
 
 const headersFile = path.join(clientDir, '_headers')
-if (production) fs.rmSync(headersFile, { force: true })
-else fs.writeFileSync(headersFile, '/*\n  X-Robots-Tag: noindex\n')
+if (production) {
+  if (fs.existsSync(headersFile)) {
+    const headers = fs
+      .readFileSync(headersFile, 'utf8')
+      .replace(/^\s*X-Robots-Tag:\s*noindex\s*\n?/gim, '')
+      .trim()
+    if (headers) fs.writeFileSync(headersFile, `${headers}\n`)
+    else fs.rmSync(headersFile)
+  }
+} else {
+  const existingHeaders = fs.existsSync(headersFile)
+    ? fs.readFileSync(headersFile, 'utf8').trimEnd()
+    : ''
+  fs.writeFileSync(
+    headersFile,
+    `${existingHeaders ? `${existingHeaders}\n` : ''}/*\n  X-Robots-Tag: noindex\n`,
+  )
+}
 
 console.log(
   `SEO files: ${entries.length} sitemap URLs (${indexable.size} pages), ${production ? 'production' : 'non-production (noindex)'} robots.txt`,

@@ -1,19 +1,30 @@
 import fs from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import { generateSW } from 'workbox-build'
 
-const clientDirectory = new URL('../apps/web/dist/client/', import.meta.url).pathname
+const clientDirectory = fileURLToPath(new URL('../apps/web/dist/client/', import.meta.url))
 
-// The offline page is shown at whatever URL failed to load, where the app would expect that
-// URL's page and fail to hydrate. Serve a copy without scripts: styled, with plain links.
-const offlinePage = fs.readFileSync(`${clientDirectory}offline/index.html`, 'utf8')
-fs.writeFileSync(
-  `${clientDirectory}offline.html`,
-  offlinePage
-    .replace(/<script\b[\s\S]*?<\/script>/g, '')
-    .replace(/<link rel="modulepreload"[^>]*>/g, ''),
-)
+// Error documents can be served at a URL that does not match the prerendered route. Keep them
+// styled and linkable, but omit app scripts so React does not hydrate against a different path.
+function writeStaticDocument(source: string, destination: string) {
+  fs.writeFileSync(
+    destination,
+    fs
+      .readFileSync(source, 'utf8')
+      .replace(/<script\b[\s\S]*?<\/script>/g, '')
+      .replace(/<link rel="modulepreload"[^>]*>/g, ''),
+  )
+}
+
+writeStaticDocument(`${clientDirectory}offline/index.html`, `${clientDirectory}offline.html`)
+writeStaticDocument(`${clientDirectory}404.html`, `${clientDirectory}404.html`)
+for (const locale of ['fil', 'ceb']) {
+  const localized404 = `${clientDirectory}${locale}/404.html`
+  if (fs.existsSync(localized404)) writeStaticDocument(localized404, localized404)
+}
 
 const result = await generateSW({
+  importScripts: ['/cleanup-legacy-caches.js'],
   globDirectory: clientDirectory,
   globPatterns: ['**/*.{css,html,ico,js,json,png,svg,webmanifest}'],
   // Lottie animations are large and only decorative, so they are fetched on demand.
@@ -24,6 +35,8 @@ const result = await generateSW({
     'workbox-*.js',
     'animations/**',
     'images/seals/**',
+    'lgus/*/index.html',
+    'barangays/*/*/index.html',
     'fil/**',
     'ceb/**',
   ],
@@ -44,6 +57,18 @@ const result = await generateSW({
   ],
   ignoreURLParametersMatching: [/./],
   runtimeCaching: [
+    {
+      // Individual directory profiles stay available offline after they have been visited.
+      urlPattern: ({ request, url }) =>
+        request.mode === 'navigate' &&
+        /^\/(?:lgus\/[^/]+|barangays\/[^/]+\/[^/]+)\/?$/.test(url.pathname),
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'directory-pages',
+        expiration: { maxEntries: 100, maxAgeSeconds: 60 * 60 * 24 * 30 },
+        precacheFallback: { fallbackURL: '/offline.html' },
+      },
+    },
     {
       // Directory seals are useful once visited but too large for every first offline install.
       urlPattern: ({ url }) => url.pathname.startsWith('/images/seals/'),

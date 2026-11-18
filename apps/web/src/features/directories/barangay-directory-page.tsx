@@ -4,7 +4,7 @@ import { PageHeader } from '@/components/layout/page-header'
 import { Icon } from '@/components/ui/icon'
 import { SiteLink } from '@/components/ui/site-link'
 import { m } from '@/paraglide/messages'
-import { barangays, lgus, lguBySlug, type Barangay } from './data'
+import type { Barangay, Lgu } from './data'
 import { barangayPath } from './paths'
 import {
   filterBarangays,
@@ -20,8 +20,21 @@ const fieldLabel = 'mb-1 block text-[0.75rem] font-semibold text-ink-light'
 const fieldControl =
   'w-full rounded-site border border-black/16 bg-white px-2.5 py-2 text-[0.875rem] text-ink outline-none transition-[border-color,box-shadow] focus:border-primary focus:shadow-[0_0_0_3px_rgba(0,50,160,0.15)]'
 
-export function BarangayDirectoryPage() {
-  const [filters, setFilters] = useState<BarangayFilters>(initialBarangayFilters)
+export function BarangayDirectoryPage({
+  barangays,
+  lgus,
+  lguBySlug,
+  initialLgu,
+}: {
+  barangays: Barangay[]
+  lgus: Lgu[]
+  lguBySlug: Map<string, Lgu>
+  initialLgu?: string
+}) {
+  const [filters, setFilters] = useState<BarangayFilters>(() => ({
+    ...initialBarangayFilters,
+    lgu: initialLgu && lguBySlug.has(initialLgu) ? initialLgu : 'all',
+  }))
   const shown = useMemo(() => filterBarangays(barangays, filters), [filters])
   const pages = pageCount(shown.length)
   const page = Math.min(filters.page, pages)
@@ -100,7 +113,7 @@ export function BarangayDirectoryPage() {
           {items.length ? (
             <div className="grid grid-cols-3 gap-4 max-lg:grid-cols-2 max-[640px]:grid-cols-1">
               {items.map((barangay) => (
-                <BarangayCard key={barangay.psgc_code} barangay={barangay} />
+                <BarangayCard key={barangay.psgc_code} barangay={barangay} lguBySlug={lguBySlug} />
               ))}
             </div>
           ) : (
@@ -123,7 +136,13 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
     </div>
   )
 }
-function BarangayCard({ barangay }: { barangay: Barangay }) {
+function BarangayCard({
+  barangay,
+  lguBySlug,
+}: {
+  barangay: Barangay
+  lguBySlug: Map<string, Lgu>
+}) {
   const seal = lguBySlug.get(barangay.lgu_slug)?.seal.path.split('/').at(-1)
   return (
     <article className="flex min-w-0 flex-col gap-2.5 rounded-xl border border-black/8 border-t-[3px] border-t-primary/75 bg-white px-[18px] py-4 shadow-[0_1px_4px_rgba(15,23,42,0.04)]">

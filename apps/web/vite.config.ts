@@ -1,4 +1,5 @@
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
+import { fileURLToPath } from 'node:url'
 import mdx from '@mdx-js/rollup'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
@@ -31,8 +32,8 @@ export default defineConfig({
   publicDir: 'public',
   resolve: {
     alias: {
-      '@': new URL('./src', import.meta.url).pathname,
-      '@data': new URL('../../data', import.meta.url).pathname,
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@data': fileURLToPath(new URL('../../data', import.meta.url)),
     },
     tsconfigPaths: true,
   },

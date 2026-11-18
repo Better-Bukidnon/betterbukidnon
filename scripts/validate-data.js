@@ -9,11 +9,11 @@
  *  - Contact directory dataset (unique IDs, valid categories/levels, verification metadata)
  *  - Internal HTML links and local asset references (images, CSS, JS)
  */
-'use strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const fs = require('fs');
-const path = require('path');
-
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
 const DATA_DIR = path.join(ROOT, 'data');
 const VALID_STATUSES = new Set([

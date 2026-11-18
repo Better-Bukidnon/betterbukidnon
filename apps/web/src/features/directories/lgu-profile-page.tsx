@@ -3,7 +3,7 @@ import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { Icon, type IconName } from '@/components/ui/icon'
 import { formatNumber } from '@/lib/utils'
 import { m } from '@/paraglide/messages'
-import { findBarangaysForLgu, type Lgu } from './data'
+import type { Barangay, Lgu } from './data'
 
 const profileLinks: { href: string; icon: IconName; label: () => string }[] = [
   { href: '#overview', icon: 'grid-1x2-fill', label: m.dir_profile_overview },
@@ -12,9 +12,8 @@ const profileLinks: { href: string; icon: IconName; label: () => string }[] = [
   { href: '#references', icon: 'journal-check', label: m.dir_profile_references },
 ]
 
-export function LguProfilePage({ lgu }: { lgu: Lgu }) {
+export function LguProfilePage({ lgu, barangays }: { lgu: Lgu; barangays: Barangay[] }) {
   const [query, setQuery] = useState('')
-  const barangays = findBarangaysForLgu(lgu.slug)
   const shownBarangays = useMemo(() => {
     const value = query.trim().toLocaleLowerCase()
     return value
@@ -290,7 +289,7 @@ function Barangays({
   setQuery,
 }: {
   lgu: Lgu
-  shown: ReturnType<typeof findBarangaysForLgu>
+  shown: Barangay[]
   query: string
   setQuery: (value: string) => void
 }) {

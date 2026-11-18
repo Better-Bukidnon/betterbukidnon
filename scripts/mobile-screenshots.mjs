@@ -18,8 +18,9 @@ import { spawn } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = new URL('..', import.meta.url).pathname;
+const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const PORT = 8912;
 const BASE = `http://localhost:${PORT}`;
 const HEIGHT = 800;

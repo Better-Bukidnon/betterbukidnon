@@ -5,7 +5,7 @@ import { Icon } from '@/components/ui/icon'
 import { SiteLink } from '@/components/ui/site-link'
 import { cn, formatNumber } from '@/lib/utils'
 import { m } from '@/paraglide/messages'
-import { lgus, type Lgu } from './data'
+import type { Lgu } from './data'
 import { directoryPaths } from './paths'
 import {
   filterLgus,
@@ -16,14 +16,14 @@ import {
 } from './lgu-directory'
 
 const districts = [1, 2, 3, 4] as const
-const cityCount = lgus.filter((lgu) => lgu.classification === 'Component City').length
-const municipalityCount = lgus.length - cityCount
 
 const fieldLabel = 'mb-1 block text-[0.75rem] font-semibold text-ink-light'
 const fieldControl =
   'w-full rounded-site border border-black/16 bg-white px-2.5 py-2 text-[0.875rem] text-ink outline-none transition-[border-color,box-shadow] focus:border-primary focus:shadow-[0_0_0_3px_rgba(0,50,160,0.15)]'
 
-export function LguDirectoryPage() {
+export function LguDirectoryPage({ lgus }: { lgus: Lgu[] }) {
+  const cityCount = lgus.filter((lgu) => lgu.classification === 'Component City').length
+  const municipalityCount = lgus.length - cityCount
   const [filters, setFilters] = useState<LguFilters>(initialLguFilters)
   const shown = useMemo(() => filterLgus(lgus, filters), [filters])
   const update = (values: Partial<LguFilters>) =>

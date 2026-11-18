@@ -11,11 +11,12 @@
  */
 import fs from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { site } from '../apps/web/src/config/site'
 
 const SITE_URL = site.url
 const LOCALES = ['en', 'fil', 'ceb']
-const clientDir = new URL('../apps/web/dist/client/', import.meta.url).pathname
+const clientDir = fileURLToPath(new URL('../apps/web/dist/client/', import.meta.url))
 const problems: string[] = []
 
 function pages(dir: string, out: string[] = []): string[] {

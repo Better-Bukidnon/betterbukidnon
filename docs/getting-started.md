@@ -41,10 +41,11 @@ routes.
 | `pnpm web:dev`                      | Start the app development server                               |
 | `pnpm web:check`                    | Run app formatting, lint, and TypeScript checks                |
 | `pnpm web:test`                     | Run the app's unit and content tests                           |
+| `pnpm web:e2e`                      | Run browser checks against the built app                       |
 | `pnpm web:build`                    | Build, prerender, and generate the service worker              |
 | `pnpm build`                        | Production build entry point                                   |
 | `pnpm version:check`                | Print current project version without changing it              |
-| `pnpm test`                         | Run the Playwright browser tests (legacy pages)                |
+| `pnpm test`                         | Run the legacy Playwright browser tests                        |
 | `pnpm lighthouse`                   | Run Lighthouse CI against a running `pnpm serve:dist`          |
 | `pnpm screenshots:mobile`           | Phone-size screenshots of the legacy pages                     |
 | `pnpm chrome` / `pnpm chrome:check` | Regenerate or check the legacy pages' shared header and footer |
@@ -90,7 +91,12 @@ The Playwright tests need browsers the first time:
 ```bash
 pnpm exec playwright install
 pnpm test
+pnpm build
+pnpm web:e2e
 ```
+
+`pnpm test` covers the retained legacy pages. `pnpm web:e2e` serves `apps/web/dist/client`
+through a local static server that applies the app's trailing-slash and 404 behavior.
 
 GitHub Actions runs Lighthouse CI on pushes and pull requests to `main`
 (`.github/workflows/lighthouse.yml`). Accessibility must score 90 or more.

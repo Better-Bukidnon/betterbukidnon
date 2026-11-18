@@ -156,9 +156,9 @@ Technical correctness alone does not guarantee acceptance, particularly when a c
 Before opening a Pull Request against `develop`, run the automated checks locally:
 
 ```bash
-npm run chrome:check   # Verify shared header, footer, and hotline bar across all pages
-npm run validate       # Validate JSON schemas, PSGC uniqueness, LGU-barangay links, and local assets
-npm run test:chrome    # Run Playwright route smoke tests, directory filters, and responsive checks
+pnpm chrome:check   # Verify shared header, footer, and hotline bar across all pages
+pnpm validate       # Validate JSON schemas, PSGC uniqueness, LGU-barangay links, and local assets
+pnpm test:chrome    # Run Playwright route smoke tests, directory filters, and responsive checks
 ```
 
 Manual checks for content, accessibility, and translations:

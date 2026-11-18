@@ -13,13 +13,7 @@ export const Route = createFileRoute('/offline')({
     }),
 
   component: () => (
-    <main
-      id="main-content"
-      className="mx-auto flex min-h-screen w-full max-w-[600px] flex-col items-center px-4 py-8 text-center"
-    >
-      <a href="#main-content" className="sr-only focus:not-sr-only">
-        Skip to main content
-      </a>
+    <section className="mx-auto flex min-h-screen w-full max-w-[600px] flex-col items-center px-4 py-8 text-center">
       <div className="mb-6 flex h-[60px] w-[200px] items-center justify-center rounded-lg bg-primary text-[1.125rem] font-bold text-white">
         BetterBukidnon
       </div>
@@ -49,13 +43,12 @@ export const Route = createFileRoute('/offline')({
           ))}
         </ul>
       </section>
-      <button
-        type="button"
-        onClick={() => window.location.reload()}
+      <a
+        href=""
         className="rounded-md bg-primary px-8 py-3 text-base font-semibold text-white hover:bg-primary-dark"
       >
         Try Again
-      </button>
-    </main>
+      </a>
+    </section>
   ),
 })

@@ -40,8 +40,8 @@ committed to the repository.
       "date": "YYYY-MM-DD", // required
       "category": "Announcement", // required label shown on the badge
       "badge": "info", // required: info | success | warning
-      "summary": "string", // required, ≤300 chars
-      "url": "https://...", // optional outbound link (or null)
+      "excerpt": "string", // required, ≤300 chars
+      "url": "https://...", // optional outbound link; omit when unavailable
       "source": "View on Facebook", // optional link label (defaults to "Read more")
     },
   ],

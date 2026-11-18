@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Enable pnpm
         run: corepack enable
@@ -42,3 +44,12 @@ jobs:
 
       - name: Check titles, canonical and hreflang links, JSON-LD and the sitemap
         run: pnpm seo:check
+
+      - name: Validate legacy datasets
+        run: pnpm validate
+
+      - name: Install Chromium for migrated app checks
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Browser checks against the built app
+        run: pnpm web:e2e
