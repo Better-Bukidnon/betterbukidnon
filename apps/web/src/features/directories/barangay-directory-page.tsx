@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useId, useMemo, useState } from 'react'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { PageHeader } from '@/components/layout/page-header'
 import { Icon } from '@/components/ui/icon'
@@ -66,41 +66,49 @@ export function BarangayDirectoryPage({
             className="mb-4 grid grid-cols-[2fr_1fr_1fr] items-end gap-2.5 rounded-site border border-black/8 bg-white px-3.5 py-3 shadow-sm max-lg:grid-cols-2 max-[640px]:grid-cols-1"
           >
             <Field label={m.dir_search_barangay()}>
-              <input
-                id="barangay-search"
-                type="search"
-                value={filters.query}
-                onChange={(event) => updateFilter({ query: event.target.value })}
-                placeholder={m.dir_search_barangay_placeholder()}
-                className={fieldControl}
-              />
+              {(id) => (
+                <input
+                  id={id}
+                  type="search"
+                  value={filters.query}
+                  onChange={(event) => updateFilter({ query: event.target.value })}
+                  placeholder={m.dir_search_barangay_placeholder()}
+                  className={fieldControl}
+                />
+              )}
             </Field>
             <Field label={m.dir_lgu_filter()}>
-              <select
-                value={filters.lgu}
-                onChange={(event) => updateFilter({ lgu: event.target.value })}
-                className={fieldControl}
-              >
-                <option value="all">
-                  {m.dir_all_lgus_barangays({ lgus: lgus.length, count: barangays.length })}
-                </option>
-                {lgus.map((lgu) => (
-                  <option key={lgu.slug} value={lgu.slug}>
-                    {lgu.name}
+              {(id) => (
+                <select
+                  id={id}
+                  value={filters.lgu}
+                  onChange={(event) => updateFilter({ lgu: event.target.value })}
+                  className={fieldControl}
+                >
+                  <option value="all">
+                    {m.dir_all_lgus_barangays({ lgus: lgus.length, count: barangays.length })}
                   </option>
-                ))}
-              </select>
+                  {lgus.map((lgu) => (
+                    <option key={lgu.slug} value={lgu.slug}>
+                      {lgu.name}
+                    </option>
+                  ))}
+                </select>
+              )}
             </Field>
             <Field label={m.dir_sort_by()}>
-              <select
-                value={filters.sort}
-                onChange={(event) => updateFilter({ sort: event.target.value as BarangaySort })}
-                className={fieldControl}
-              >
-                <option value="name-asc">{m.dir_barangay_name_asc()}</option>
-                <option value="name-desc">{m.dir_barangay_name_desc()}</option>
-                <option value="lgu-asc">{m.dir_barangay_lgu_asc()}</option>
-              </select>
+              {(id) => (
+                <select
+                  id={id}
+                  value={filters.sort}
+                  onChange={(event) => updateFilter({ sort: event.target.value as BarangaySort })}
+                  className={fieldControl}
+                >
+                  <option value="name-asc">{m.dir_barangay_name_asc()}</option>
+                  <option value="name-desc">{m.dir_barangay_name_desc()}</option>
+                  <option value="lgu-asc">{m.dir_barangay_lgu_asc()}</option>
+                </select>
+              )}
             </Field>
           </div>
           <p className="mb-4 text-[0.8125rem] text-ink-light" aria-live="polite">
@@ -128,11 +136,14 @@ export function BarangayDirectoryPage({
   )
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({ label, children }: { label: string; children: (id: string) => React.ReactNode }) {
+  const id = useId()
   return (
     <div className="min-w-0">
-      <label className={fieldLabel}>{label}</label>
-      {children}
+      <label htmlFor={id} className={fieldLabel}>
+        {label}
+      </label>
+      {children(id)}
     </div>
   )
 }
