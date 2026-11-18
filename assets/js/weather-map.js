@@ -600,7 +600,10 @@
       const resetBtn = document.getElementById('map-reset-btn');
 
       let allLgus = [];
-      let allBarangays = null;
+      let barangaysPromise = null;
+      let selectedLguSlug = null;
+      let barangayLoadRequestId = 0;
+      let barangayLoadFailed = false;
       let bukidnonBounds = null;
       const markersBySlug = new Map();
       const layerGroup = L.layerGroup().addTo(this.map);
@@ -680,20 +683,25 @@
 
       function populateBarangaysForLgu(lgu) {
         if (!brgySelect) return;
+        const requestId = ++barangayLoadRequestId;
+        barangayLoadFailed = false;
         brgySelect.disabled = true;
         brgySelect.innerHTML = '<option value="">Loading barangays...</option>';
 
-        const loadPromise = allBarangays
-          ? Promise.resolve(allBarangays)
-          : fetch('data/barangays.json')
-              .then((r) => r.json())
-              .then((d) => {
-                allBarangays = d.barangays || [];
-                return allBarangays;
-              });
+        if (!barangaysPromise) {
+          barangaysPromise = fetch('data/barangays.json')
+            .then((r) => r.json())
+            .then((d) => d.barangays || [])
+            .catch((error) => {
+              // Allow a later LGU selection to retry after a transient failure.
+              barangaysPromise = null;
+              throw error;
+            });
+        }
 
-        loadPromise
+        barangaysPromise
           .then((brgys) => {
+            if (requestId !== barangayLoadRequestId) return;
             const list = brgys.filter((b) => b.lgu_slug === lgu.slug);
             brgySelect.innerHTML = `<option value="">Select barangay (${list.length})</option>`;
             list.forEach((b) => {
@@ -705,26 +713,38 @@
             brgySelect.disabled = false;
           })
           .catch(() => {
+            if (requestId !== barangayLoadRequestId) return;
+            barangayLoadFailed = true;
             brgySelect.innerHTML = '<option value="">Unavailable</option>';
           });
       }
 
-      let searchWeatherTimer = null;
-
-      const selectLgu = (lgu) => {
+      const selectLgu = (lgu, options = {}) => {
         if (!lgu) return;
-        if (searchWeatherTimer) {
-          clearTimeout(searchWeatherTimer);
-          searchWeatherTimer = null;
+        const selectionChanged = selectedLguSlug !== lgu.slug;
+        selectedLguSlug = lgu.slug;
+
+        if (selectionChanged || barangayLoadFailed) {
+          renderInfoPanel(lgu);
+          populateBarangaysForLgu(lgu);
         }
-        renderInfoPanel(lgu);
-        populateBarangaysForLgu(lgu);
-        if (this.map && lgu.coordinates && lgu.coordinates.lat && lgu.coordinates.lon) {
+
+        if (
+          this.map &&
+          lgu.coordinates &&
+          lgu.coordinates.lat &&
+          lgu.coordinates.lon &&
+          (selectionChanged || options.focusMap)
+        ) {
           this.map.setView([lgu.coordinates.lat, lgu.coordinates.lon], 12);
           const m = markersBySlug.get(lgu.slug);
           if (m) m.openPopup();
-          if (typeof window.updateBukidnonWeather === 'function') {
-            window.updateBukidnonWeather(lgu.coordinates.lat, lgu.coordinates.lon, `${lgu.name}, Bukidnon`);
+          if (selectionChanged && typeof window.updateBukidnonWeather === 'function') {
+            window.updateBukidnonWeather(
+              lgu.coordinates.lat,
+              lgu.coordinates.lon,
+              `${lgu.name}, Bukidnon`
+            );
           }
         }
       };
@@ -732,10 +752,6 @@
       const renderMarkers = () => {
         layerGroup.clearLayers();
         markersBySlug.clear();
-        if (searchWeatherTimer) {
-          clearTimeout(searchWeatherTimer);
-          searchWeatherTimer = null;
-        }
         const q = (searchInput ? searchInput.value : '').trim().toLowerCase();
         const flt = filterSelect ? filterSelect.value : 'all';
 
@@ -780,27 +796,12 @@
           marker.bindPopup(
             `<strong>${esc(lgu.name)}</strong><br>${esc(lgu.classification)} &middot; District ${esc(lgu.district)}<br>Barangays: ${lgu.barangay_count}<br><a href="lgus/${encodeURIComponent(lgu.slug)}/">View LGU Profile</a>`
           );
-          marker.on('click', () => selectLgu(lgu));
+          marker.on('click', () => selectLgu(lgu, { focusMap: true }));
           markersBySlug.set(lgu.slug, marker);
         });
 
         if (visible.length === 1 && q) {
-          const single = visible[0];
-          if (
-            single.coordinates &&
-            single.coordinates.lat &&
-            single.coordinates.lon &&
-            typeof window.updateBukidnonWeather === 'function'
-          ) {
-            searchWeatherTimer = setTimeout(() => {
-              searchWeatherTimer = null;
-              window.updateBukidnonWeather(
-                single.coordinates.lat,
-                single.coordinates.lon,
-                `${single.name}, Bukidnon`
-              );
-            }, 350);
-          }
+          selectLgu(visible[0]);
         }
       };
 
@@ -815,7 +816,7 @@
           .join('');
         wSelect.onchange = () => {
           const chosen = allLgus.find((l) => l.slug === wSelect.value);
-          if (chosen) selectLgu(chosen);
+          if (chosen) selectLgu(chosen, { focusMap: true });
         };
       };
 
@@ -856,9 +857,12 @@
               if (searchInput) searchInput.value = '';
               if (filterSelect) filterSelect.value = 'all';
               if (brgySelect) {
+                barangayLoadRequestId += 1;
                 brgySelect.innerHTML = '<option value="">Select LGU first</option>';
                 brgySelect.disabled = true;
               }
+              selectedLguSlug = null;
+              barangayLoadFailed = false;
               if (infoPanel) {
                 infoPanel.innerHTML = '';
                 infoPanel.style.display = 'none';

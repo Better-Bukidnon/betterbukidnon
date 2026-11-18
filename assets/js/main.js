@@ -190,6 +190,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // Prevent double-click text selection on entire header
   const siteHeader = document.querySelector('.site-header');
   if (siteHeader) {
+    // Keep sticky page navigation aligned with the actual header as navigation
+    // labels wrap, fonts load, or translated content changes its height.
+    const syncHeaderHeight = () => {
+      document.documentElement.style.setProperty('--header-height', `${siteHeader.getBoundingClientRect().height}px`);
+    };
+    syncHeaderHeight();
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(syncHeaderHeight).observe(siteHeader);
+    }
+
     siteHeader.addEventListener('mousedown', (e) => {
       if (e.detail > 1) {
         e.preventDefault();
