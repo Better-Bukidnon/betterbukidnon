@@ -894,6 +894,16 @@
     const weatherContainer = document.getElementById('weather-container');
     const mapContainer = document.getElementById('map-container');
 
+    // MAP: Initialize independently so a slow weather request never delays map access.
+    if (mapContainer) {
+      try {
+        MapComponent.init('map-container');
+      } catch (error) {
+        console.error('Map: Init failed', error);
+        MapComponent.renderTextFallback(mapContainer);
+      }
+    }
+
     // WEATHER: Show loading, then fetch with AbortController & stale-response counter
     let activeWeatherRequestId = 0;
     let activeWeatherAbortController = null;
@@ -938,16 +948,6 @@
         console.error('Weather: Init failed', error);
         // Render mock data as last resort for default Malaybalay view
         WeatherUI.render(weatherContainer, getMockWeather());
-      }
-    }
-
-    // MAP: Initialize
-    if (mapContainer) {
-      try {
-        MapComponent.init('map-container');
-      } catch (error) {
-        console.error('Map: Init failed', error);
-        MapComponent.renderTextFallback(mapContainer);
       }
     }
   }
