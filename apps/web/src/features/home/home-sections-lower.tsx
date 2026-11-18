@@ -131,7 +131,7 @@ export function LatestUpdates() {
               href={FACEBOOK_PAGE}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-site bg-[#1877f2] px-5.5 py-3 text-[0.9375rem] font-semibold text-white transition-[background-color,transform] hover:-translate-y-px hover:bg-[#0b5ed7] hover:text-white hover:no-underline focus:bg-[#0b5ed7] focus:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1877f2]"
+              className="inline-flex items-center gap-2 rounded-site bg-[#0b5ed7] px-5.5 py-3 text-[0.9375rem] font-semibold text-white transition-[background-color,transform] hover:-translate-y-px hover:bg-[#0a58ca] hover:text-white hover:no-underline focus:bg-[#0a58ca] focus:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1877f2]"
             >
               <Icon name="facebook" /> Visit the Facebook Page
             </a>

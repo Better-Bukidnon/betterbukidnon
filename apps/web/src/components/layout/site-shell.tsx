@@ -10,7 +10,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     <>
       <a
         href="#main-content"
-        className="absolute -top-10 left-0 z-[1001] bg-hotline p-2 text-white transition-[top] duration-200 focus:top-0"
+        className="absolute -top-10 left-0 z-[1001] bg-hotline-dark p-2 text-white transition-[top] duration-200 focus:top-0"
       >
         {m.nav_skip_to_main_content()}
       </a>
