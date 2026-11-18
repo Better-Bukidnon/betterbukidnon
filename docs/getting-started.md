@@ -62,7 +62,8 @@ Saves the first screen and the full page of every page at 320, 375 and 412 px wi
 `screenshots/` (ignored by git and left out of the build), and lists any page that scrolls
 sideways. It uses your installed Google Chrome; pass `--browser=chromium` or
 `--browser=firefox` to use a browser from `npx playwright install` instead. Narrow it down with
-`--pages=home,services` and `--widths=375`.
+`--pages=home,services,service-details/civil-registrar` and `--widths=375`: a folder name is
+that folder's index page, and `folder/name` is another page in it.
 
 For before/after images in a pull request, run it on `develop` and on your branch with
 different output folders:

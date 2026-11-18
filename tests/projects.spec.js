@@ -5,6 +5,7 @@ const EXTERNAL = [
   { name: 'Budget Tracker', href: 'https://budget.betterbukidnon.org' },
   { name: 'SALN Tracker', href: 'https://saln.betterbukidnon.org' },
   { name: 'Infrastructure Tracker', href: 'https://infra.betterbukidnon.org' },
+  { name: 'Bukidnon Officials', href: 'https://officials.betterbukidnon.org' },
 ];
 
 /** The "Our Projects" nav item (the dropdown trigger link). */
@@ -93,12 +94,13 @@ test.describe('Our Projects page', () => {
     page.locator('.projects-tab-count').evaluateAll((els) => els.map((e) => e.textContent));
   const titles = (page) => page.locator('#projects-grid .project-card-title').allTextContents();
 
-  test('shows all projects under Active with tab counts', async ({ page }) => {
+  test('shows active projects under Active with tab counts', async ({ page }) => {
     await page.goto('/projects/');
-    await expect(page.locator('#projects-grid .project-card')).toHaveCount(3);
-    expect(await counts(page)).toEqual(['3', '0', '0']);
+    await expect(page.locator('#projects-grid .project-card')).toHaveCount(4);
+    expect(await counts(page)).toEqual(['4', '0', '0']);
     expect((await titles(page)).sort()).toEqual([
       'Budget Tracker',
+      'Bukidnon Officials',
       'Infrastructure Tracker',
       'SALN Tracker',
     ]);

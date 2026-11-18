@@ -76,6 +76,7 @@
     <link rel="stylesheet" href="../assets/css/responsive.css" />
     <link rel="stylesheet" href="../assets/css/accessibility.css" />
     <link rel="stylesheet" href="../assets/css/footer.css" />
+    <link rel="stylesheet" href="../assets/css/civic-directory.css" />
   </head>
 
   <body>
@@ -147,34 +148,40 @@
               >
               <ul class="dropdown-menu">
                 <li>
-                  <a href="../services/certificates" data-i18n="nav-certificates">Certificates</a>
+                  <a href="../services/certificates.html" data-i18n="nav-certificates"
+                    >Certificates</a
+                  >
                 </li>
-                <li><a href="../services/business" data-i18n="nav-business">Business</a></li>
+                <li><a href="../services/business.html" data-i18n="nav-business">Business</a></li>
                 <li>
-                  <a href="../services/tax-payments" data-i18n="nav-tax-payments">Tax Payments</a>
+                  <a href="../services/tax-payments.html" data-i18n="nav-tax-payments"
+                    >Tax Payments</a
+                  >
                 </li>
                 <li>
-                  <a href="../services/social-services" data-i18n="nav-social-services"
+                  <a href="../services/social-services.html" data-i18n="nav-social-services"
                     >Social Services</a
                   >
                 </li>
-                <li><a href="../services/health" data-i18n="nav-health">Health</a></li>
+                <li><a href="../services/health.html" data-i18n="nav-health">Health</a></li>
                 <li>
-                  <a href="../services/agriculture" data-i18n="nav-agriculture">Agriculture</a>
+                  <a href="../services/agriculture.html" data-i18n="nav-agriculture">Agriculture</a>
                 </li>
                 <li>
-                  <a href="../services/infrastructure" data-i18n="nav-infrastructure"
+                  <a href="../services/infrastructure.html" data-i18n="nav-infrastructure"
                     >Infrastructure</a
                   >
                 </li>
-                <li><a href="../services/education" data-i18n="nav-education">Education</a></li>
                 <li>
-                  <a href="../services/public-safety" data-i18n="nav-public-safety"
+                  <a href="../services/education.html" data-i18n="nav-education">Education</a>
+                </li>
+                <li>
+                  <a href="../services/public-safety.html" data-i18n="nav-public-safety"
                     >Public Safety</a
                   >
                 </li>
                 <li>
-                  <a href="../services/environment" data-i18n="nav-environment">Environment</a>
+                  <a href="../services/environment.html" data-i18n="nav-environment">Environment</a>
                 </li>
               </ul>
             </li>
@@ -190,12 +197,16 @@
               >
               <ul class="dropdown-menu">
                 <li>
-                  <a href="../legislative/ordinance-framework" data-i18n="nav-ordinance-framework"
+                  <a
+                    href="../legislative/ordinance-framework.html"
+                    data-i18n="nav-ordinance-framework"
                     >Ordinance Framework</a
                   >
                 </li>
                 <li>
-                  <a href="../legislative/resolution-framework" data-i18n="nav-resolution-framework"
+                  <a
+                    href="../legislative/resolution-framework.html"
+                    data-i18n="nav-resolution-framework"
                     >Resolution Framework</a
                   >
                 </li>
@@ -239,6 +250,17 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     ><span data-i18n="nav-projects-infra">Infrastructure</span>
+                    <span class="sr-only" data-i18n="nav-opens-new-tab"
+                      >(opens in a new tab)</span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://officials.betterbukidnon.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    ><span data-i18n="nav-projects-dynasties">Bukidnon Officials</span>
                     <span class="sr-only" data-i18n="nav-opens-new-tab"
                       >(opens in a new tab)</span
                     ></a
@@ -337,47 +359,20 @@
         </div>
       </section>
 
-      <!-- Volunteer-project notice -->
-      <section class="section" style="padding-bottom: 0">
+      <!-- Capitol & Emergency Quick Reference -->
+      <section class="section bb-section-compact">
         <div class="container">
-          <div class="info-card" role="note">
-            <div class="info-card-icon">
-              <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
-            </div>
-            <div class="info-card-content">
-              <h2
-                style="font-size: 1.125rem; margin-bottom: var(--spacing-sm)"
-                data-i18n="contact-notice-title"
-              >
-                BetterBukidnon is a volunteer project
-              </h2>
-              <p data-i18n="contact-notice-text">
-                BetterBukidnon.org is run by volunteers. It is not the Provincial Government of
-                Bukidnon and cannot process documents, payments, permits or complaints. For official
-                requests, contact the Provincial Capitol using the numbers on this page or visit
-                bukidnon.gov.ph.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Contact Information -->
-      <section class="section">
-        <div class="container">
-          <div class="grid grid-3" style="gap: var(--spacing-md)">
+          <div class="grid grid-3" style="gap: var(--spacing-sm); margin-bottom: var(--spacing-md)">
             <div class="contact-card">
               <div class="contact-card-icon">
                 <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
               </div>
               <div class="contact-card-content">
-                <h3 data-i18n="contact-address">Address</h3>
+                <h3>Capitol Address</h3>
                 <p class="contact-card-value">
                   Provincial Capitol Compound, Barangay 9, Malaybalay City, Bukidnon 8700
                 </p>
-                <span class="contact-card-note" data-i18n="contact-provincial-government"
-                  >Provincial Government of Bukidnon</span
-                >
+                <span class="contact-card-note">Provincial Government of Bukidnon</span>
               </div>
             </div>
             <a href="tel:+63888135741" class="contact-card">
@@ -385,10 +380,10 @@
                 <i class="bi bi-telephone-fill" aria-hidden="true"></i>
               </div>
               <div class="contact-card-content">
-                <h3 data-i18n="contact-main-line">Capitol main line</h3>
+                <h3>Capitol Trunkline</h3>
                 <p class="contact-card-value">(088) 813-5741</p>
-                <span class="contact-card-note" data-i18n="contact-hours"
-                  >Mon-Fri: 8:00 AM - 5:00 PM</span
+                <span class="contact-card-note"
+                  >Mon&ndash;Fri: 8:00 AM &ndash; 5:00 PM &middot; Emergencies: 911 (24/7)</span
                 >
               </div>
             </a>
@@ -400,83 +395,21 @@
             >
               <div class="contact-card-icon"><i class="bi bi-globe2" aria-hidden="true"></i></div>
               <div class="contact-card-content">
-                <h3 data-i18n="contact-official-website">Official website</h3>
+                <h3>Official Portal</h3>
                 <p class="contact-card-value">bukidnon.gov.ph</p>
-                <span class="contact-card-note" data-i18n="contact-provincial-government"
-                  >Provincial Government of Bukidnon</span
-                >
+                <span class="contact-card-note">Provincial Government of Bukidnon</span>
               </div>
             </a>
           </div>
-        </div>
-      </section>
 
-      <!-- Office Hours -->
-      <section class="office-hours-section">
-        <div class="container">
-          <div class="office-hours-inner">
-            <div class="office-hours-header">
-              <i class="bi bi-clock-fill" aria-hidden="true"></i>
-              <h2 data-i18n="contact-office-hours">Office Hours</h2>
-            </div>
-            <div class="office-hours-schedule">
-              <div class="office-hours-item office-hours-item--open">
-                <span class="office-hours-day" data-i18n="contact-monday-friday"
-                  >Monday - Friday</span
-                >
-                <span class="office-hours-time">8:00 AM - 5:00 PM</span>
-                <span class="office-hours-status"
-                  ><i class="bi bi-check-circle-fill" aria-hidden="true"></i>
-                  <span data-i18n="contact-open">Open</span></span
-                >
-              </div>
-              <div class="office-hours-item office-hours-item--closed">
-                <span class="office-hours-day" data-i18n="contact-saturday-sunday"
-                  >Saturday & Sunday</span
-                >
-                <span class="office-hours-time" data-i18n="contact-closed">Closed</span>
-                <span class="office-hours-status"
-                  ><i class="bi bi-x-circle-fill" aria-hidden="true"></i>
-                  <span data-i18n="contact-closed">Closed</span></span
-                >
-              </div>
-              <div class="office-hours-item office-hours-item--closed">
-                <span class="office-hours-day" data-i18n="contact-national-local-holidays"
-                  >National & Local Holidays</span
-                >
-                <span class="office-hours-time" data-i18n="contact-closed">Closed</span>
-                <span class="office-hours-status"
-                  ><i class="bi bi-x-circle-fill" aria-hidden="true"></i>
-                  <span data-i18n="contact-closed">Closed</span></span
-                >
-              </div>
-              <div class="office-hours-item office-hours-item--open">
-                <span class="office-hours-day" data-i18n="contact-emergencies">Emergencies</span>
-                <span class="office-hours-time" data-i18n="contact-call-911">Call 911</span>
-                <span class="office-hours-status"
-                  ><i class="bi bi-telephone-fill" aria-hidden="true"></i> <span>24/7</span></span
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Emergency Hotlines -->
-      <section class="section">
-        <div class="container">
-          <div class="hotlines-header">
+          <div class="hotlines-header" style="margin-bottom: var(--spacing-xs)">
             <div class="hotlines-title">
               <span class="hotlines-badge"
                 ><i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
-                <span data-i18n="contact-emergency">Emergency</span></span
+                <span>24/7 Emergency</span></span
               >
-              <h2 data-i18n="contact-hotlines">Emergency Hotlines</h2>
+              <h2 style="font-size: 1.25rem">Emergency Hotlines</h2>
             </div>
-            <p data-i18n="contact-hotlines-desc">
-              For life-threatening emergencies anywhere in Bukidnon, call 911. The provincial
-              numbers below are Malaybalay landlines.
-            </p>
           </div>
           <div class="hotlines-grid">
             <a href="tel:911" class="hotline-card"
@@ -520,225 +453,119 @@
               <span class="hotline-card-number">(088) 813-5734</span></a
             >
           </div>
-          <p class="text-muted" style="margin-top: var(--spacing-md); font-size: 0.875rem">
-            <i class="bi bi-info-circle" aria-hidden="true"></i>
-            <span data-i18n="contact-hotlines-note"
-              >Police is the Bukidnon Police Provincial Office at Camp Onahon, Malaybalay City. Fire
-              is the BFP Malaybalay City Fire Station. Outside Malaybalay, your city or municipal
-              police station, fire station or disaster office may respond faster. Except for 911,
-              these numbers come from older directories, so please confirm them with the
-              office.</span
-            >
-          </p>
         </div>
       </section>
 
-      <!-- Capitol Directory -->
-      <section class="section bg-alt">
+      <!-- Interactive Searchable Contact Directory -->
+      <section class="section bg-alt bb-section-compact" id="directory">
         <div class="container">
-          <div class="hotlines-header">
+          <div class="hotlines-header" style="margin-bottom: var(--spacing-sm)">
             <div class="hotlines-title">
-              <span class="hotlines-badge hotlines-badge--medical"
-                ><i class="bi bi-building-fill" aria-hidden="true"></i>
-                <span data-i18n="contact-directory-badge">Directory</span></span
-              >
-              <h2 data-i18n="contact-directory-title">Provincial Capitol Directory</h2>
+              <h2>Office &amp; Emergency Contact Directory</h2>
             </div>
-            <p data-i18n="contact-directory-desc">
-              Telephone numbers of provincial offices at the Capitol in Malaybalay City. Dial (088)
-              first when calling from a mobile phone or from outside the area.
+            <p>
+              Search and filter provincial, city, and municipal offices, emergency responders, and
+              public service departments across Bukidnon.
             </p>
           </div>
-          <div style="overflow-x: auto">
-            <table class="data-table">
-              <caption class="sr-only" data-i18n="contact-directory-title">
-                Provincial Capitol Directory
-              </caption>
-              <thead>
-                <tr>
-                  <th scope="col" data-i18n="contact-dir-office">Office</th>
-                  <th scope="col" data-i18n="contact-dir-abbr">Abbreviation</th>
-                  <th scope="col" data-i18n="contact-dir-telephone">Telephone</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td data-i18n="contact-dir-main-line">Capitol main line</td>
-                  <td>&ndash;</td>
-                  <td><a href="tel:+63888135741">(088) 813-5741</a></td>
-                </tr>
-                <tr>
-                  <td data-i18n="contact-dir-pgo">Provincial Governor's Office</td>
-                  <td>PGO</td>
-                  <td><a href="tel:+63888132457">(088) 813-2457</a></td>
-                </tr>
-                <tr>
-                  <td>
-                    <a
-                      href="../service-details/provincial-health-office"
-                      data-i18n="contact-dir-pho"
-                      >Provincial Health Office</a
-                    >
-                  </td>
-                  <td>PHO</td>
-                  <td><a href="tel:+63888135631">(088) 813-5631</a></td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="../service-details/provincial-engineering" data-i18n="contact-dir-peo"
-                      >Provincial Engineer's Office</a
-                    >
-                  </td>
-                  <td>PEO</td>
-                  <td><a href="tel:+63888133656">(088) 813-3656</a></td>
-                </tr>
-                <tr>
-                  <td data-i18n="contact-dir-peo-waterworks">PEO Waterworks</td>
-                  <td>&ndash;</td>
-                  <td><a href="tel:+63888133688">(088) 813-3688</a></td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="../service-details/pswdo" data-i18n="contact-dir-pswdo"
-                      >Provincial Social Welfare and Development Office</a
-                    >
-                  </td>
-                  <td>PSWDO</td>
-                  <td><a href="tel:+63888135734">(088) 813-5734</a></td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="../service-details/provincial-treasurer" data-i18n="contact-dir-pto"
-                      >Provincial Treasurer's Office</a
-                    >
-                  </td>
-                  <td>PTO</td>
-                  <td><a href="tel:+63888132474">(088) 813-2474</a></td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="../service-details/provincial-planning" data-i18n="contact-dir-ppdo"
-                      >Provincial Planning and Development Office</a
-                    >
-                  </td>
-                  <td>PPDO</td>
-                  <td><a href="tel:+63888132564">(088) 813-2564</a></td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="../service-details/pdrrmd" data-i18n="contact-dir-pdrrmd"
-                      >Provincial Disaster Risk Reduction and Management Department</a
-                    >
-                  </td>
-                  <td>PDRRMD</td>
-                  <td><a href="tel:+63888131262">(088) 813-1262</a></td>
-                </tr>
-                <tr>
-                  <td data-i18n="contact-dir-pictd">Provincial ICT Division</td>
-                  <td>PICTD</td>
-                  <td><a href="tel:+63888131603">(088) 813-1603</a></td>
-                </tr>
-              </tbody>
-            </table>
+
+          <div class="bb-toolbar bb-toolbar--3" role="search" aria-label="Filter contact directory">
+            <div class="bb-field">
+              <label for="contacts-search">Search offices, hotlines, or locations</label>
+              <input
+                type="search"
+                id="contacts-search"
+                class="bb-input"
+                placeholder="e.g. PDRRMD, Manolo Fortich, 911, Health..."
+              />
+            </div>
+            <div class="bb-field">
+              <label for="contacts-level-filter">Government Level</label>
+              <select id="contacts-level-filter" class="bb-select">
+                <option value="all">All Levels</option>
+                <option value="national">National / Nationwide</option>
+                <option value="provincial">Provincial</option>
+                <option value="city">City</option>
+                <option value="municipality">Municipality</option>
+              </select>
+            </div>
+            <div class="bb-field">
+              <label for="contacts-category-filter">Category</label>
+              <select id="contacts-category-filter" class="bb-select">
+                <option value="all">All Categories</option>
+                <option value="emergency">Emergency Responders</option>
+                <option value="government">Government Offices</option>
+                <option value="healthcare">Healthcare Facilities</option>
+                <option value="public_service">Public Service Departments</option>
+              </select>
+            </div>
           </div>
-          <p class="text-muted" style="margin-top: var(--spacing-md); font-size: 0.875rem">
-            <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
-            <span data-i18n="contact-directory-verify"
-              >These numbers come from the Capitol directory on bukidnon.gov.ph and could not be
-              re-checked by our volunteers. Please confirm them with the Capitol. No official email
-              addresses are listed because none could be confirmed.</span
-            >
-          </p>
+
+          <div class="bb-results-bar">
+            <span id="contacts-results-count">Loading contact directory...</span>
+          </div>
+
+          <div id="contacts-directory-grid" class="bb-card-grid">
+            <div class="bb-empty-state" style="grid-column: 1 / -1">
+              <i class="bi bi-hourglass-split" aria-hidden="true"></i>
+              <p>Loading contact directory...</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Map -->
-      <section class="section">
+      <!-- Capitol Location & Volunteer Contact -->
+      <section class="section bb-section-compact">
         <div class="container">
-          <div class="hotlines-header">
-            <div class="hotlines-title">
-              <span class="hotlines-badge hotlines-badge--medical"
-                ><i class="bi bi-map-fill" aria-hidden="true"></i>
-                <span data-i18n="contact-map-badge">Map</span></span
-              >
-              <h2 data-i18n="contact-map-title">Find the Provincial Capitol</h2>
+          <div class="grid grid-2" style="gap: var(--spacing-md); align-items: start">
+            <div class="map-card">
+              <iframe
+                class="map-iframe"
+                style="height: 240px"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=125.1000%2C8.1350%2C125.1550%2C8.1800&amp;layer=mapnik&amp;marker=8.1575%2C125.1278"
+                title="Map of Malaybalay City showing the Bukidnon Provincial Capitol"
+                data-i18n-title="contact-map-iframe-title"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+              <p class="map-attribution">
+                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+                <span>Provincial Capitol Compound, Barangay 9, Malaybalay City</span>
+                <a
+                  href="https://www.openstreetmap.org/?mlat=8.1575&amp;mlon=125.1278#map=15/8.1575/125.1278"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Open Map</a
+                >
+              </p>
             </div>
-            <p data-i18n="contact-map-desc">
-              The Capitol is in Malaybalay City, the capital of Bukidnon.
-            </p>
-          </div>
-          <div class="map-card">
-            <iframe
-              class="map-iframe"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=125.1000%2C8.1350%2C125.1550%2C8.1800&amp;layer=mapnik&amp;marker=8.1575%2C125.1278"
-              title="Map of Malaybalay City showing the Bukidnon Provincial Capitol"
-              data-i18n-title="contact-map-iframe-title"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
-            <p class="map-attribution">
-              <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
-              <span data-i18n="contact-map-caption"
-                >Provincial Capitol Compound, Barangay 9, Malaybalay City. The marker position is
-                approximate.</span
-              >
+            <div style="display: flex; flex-direction: column; gap: var(--spacing-sm)">
+              <a href="mailto:volunteer@betterbukidnon.org" class="contact-card">
+                <div class="contact-card-icon">
+                  <i class="bi bi-envelope-fill" aria-hidden="true"></i>
+                </div>
+                <div class="contact-card-content">
+                  <h3>Civic Portal Team</h3>
+                  <p class="contact-card-value">volunteer@betterbukidnon.org</p>
+                  <span class="contact-card-note"
+                    >Submit directory updates or report corrections</span
+                  >
+                </div>
+              </a>
               <a
-                href="https://www.openstreetmap.org/?mlat=8.1575&amp;mlon=125.1278#map=15/8.1575/125.1278"
+                href="https://github.com/Better-Bukidnon/betterbukidnon"
+                class="contact-card"
                 target="_blank"
                 rel="noopener noreferrer"
-                data-i18n="contact-map-larger"
-                >View larger map</a
               >
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- About this website -->
-      <section class="section bg-alt">
-        <div class="container">
-          <div class="hotlines-header">
-            <div class="hotlines-title">
-              <span class="hotlines-badge hotlines-badge--medical"
-                ><i class="bi bi-people-fill" aria-hidden="true"></i>
-                <span data-i18n="contact-volunteers-badge">Volunteers</span></span
-              >
-              <h2 data-i18n="contact-site-title">Questions about this website</h2>
+                <div class="contact-card-icon"><i class="bi bi-github" aria-hidden="true"></i></div>
+                <div class="contact-card-content">
+                  <h3>Open-Source Repository</h3>
+                  <p class="contact-card-value">github.com/Better-Bukidnon/betterbukidnon</p>
+                  <span class="contact-card-note">Contribute code, data, or issue reports</span>
+                </div>
+              </a>
             </div>
-            <p data-i18n="contact-site-desc">
-              Email the BetterBukidnon volunteers to report a mistake, suggest a correction or join
-              the project. We are not government employees and cannot act on requests meant for the
-              Provincial Government.
-            </p>
-          </div>
-          <div class="grid grid-2" style="gap: var(--spacing-md)">
-            <a href="mailto:volunteer@betterbukidnon.org" class="contact-card">
-              <div class="contact-card-icon">
-                <i class="bi bi-envelope-fill" aria-hidden="true"></i>
-              </div>
-              <div class="contact-card-content">
-                <h3 data-i18n="contact-volunteer-team">Volunteer team</h3>
-                <p class="contact-card-value">volunteer@betterbukidnon.org</p>
-                <span class="contact-card-note" data-i18n="contact-volunteer-reply"
-                  >Replies may take a few days</span
-                >
-              </div>
-            </a>
-            <a
-              href="https://github.com/Better-Bukidnon/betterbukidnon"
-              class="contact-card"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div class="contact-card-icon"><i class="bi bi-github" aria-hidden="true"></i></div>
-              <div class="contact-card-content">
-                <h3 data-i18n="contact-source-code">Source code</h3>
-                <p class="contact-card-value">github.com/Better-Bukidnon/betterbukidnon</p>
-                <span class="contact-card-note" data-i18n="contact-github-note"
-                  >Open an issue or pull request</span
-                >
-              </div>
-            </a>
           </div>
         </div>
       </section>
@@ -921,5 +748,7 @@
     <script defer src="../assets/js/info-bar.js"></script>
     <script defer src="../assets/js/main.js"></script>
     <script defer src="../assets/js/version.js"></script>
+    <script defer src="../assets/js/source-verification.js"></script>
+    <script defer src="../assets/js/contacts-directory.js"></script>
   </body>
 </html>

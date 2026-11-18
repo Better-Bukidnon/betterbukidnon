@@ -149,34 +149,40 @@
               >
               <ul class="dropdown-menu">
                 <li>
-                  <a href="../services/certificates" data-i18n="nav-certificates">Certificates</a>
+                  <a href="../services/certificates.html" data-i18n="nav-certificates"
+                    >Certificates</a
+                  >
                 </li>
-                <li><a href="../services/business" data-i18n="nav-business">Business</a></li>
+                <li><a href="../services/business.html" data-i18n="nav-business">Business</a></li>
                 <li>
-                  <a href="../services/tax-payments" data-i18n="nav-tax-payments">Tax Payments</a>
+                  <a href="../services/tax-payments.html" data-i18n="nav-tax-payments"
+                    >Tax Payments</a
+                  >
                 </li>
                 <li>
-                  <a href="../services/social-services" data-i18n="nav-social-services"
+                  <a href="../services/social-services.html" data-i18n="nav-social-services"
                     >Social Services</a
                   >
                 </li>
-                <li><a href="../services/health" data-i18n="nav-health">Health</a></li>
+                <li><a href="../services/health.html" data-i18n="nav-health">Health</a></li>
                 <li>
-                  <a href="../services/agriculture" data-i18n="nav-agriculture">Agriculture</a>
+                  <a href="../services/agriculture.html" data-i18n="nav-agriculture">Agriculture</a>
                 </li>
                 <li>
-                  <a href="../services/infrastructure" data-i18n="nav-infrastructure"
+                  <a href="../services/infrastructure.html" data-i18n="nav-infrastructure"
                     >Infrastructure</a
                   >
                 </li>
-                <li><a href="../services/education" data-i18n="nav-education">Education</a></li>
                 <li>
-                  <a href="../services/public-safety" data-i18n="nav-public-safety"
+                  <a href="../services/education.html" data-i18n="nav-education">Education</a>
+                </li>
+                <li>
+                  <a href="../services/public-safety.html" data-i18n="nav-public-safety"
                     >Public Safety</a
                   >
                 </li>
                 <li>
-                  <a href="../services/environment" data-i18n="nav-environment">Environment</a>
+                  <a href="../services/environment.html" data-i18n="nav-environment">Environment</a>
                 </li>
               </ul>
             </li>
@@ -192,12 +198,16 @@
               >
               <ul class="dropdown-menu">
                 <li>
-                  <a href="../legislative/ordinance-framework" data-i18n="nav-ordinance-framework"
+                  <a
+                    href="../legislative/ordinance-framework.html"
+                    data-i18n="nav-ordinance-framework"
                     >Ordinance Framework</a
                   >
                 </li>
                 <li>
-                  <a href="../legislative/resolution-framework" data-i18n="nav-resolution-framework"
+                  <a
+                    href="../legislative/resolution-framework.html"
+                    data-i18n="nav-resolution-framework"
                     >Resolution Framework</a
                   >
                 </li>
@@ -241,6 +251,17 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     ><span data-i18n="nav-projects-infra">Infrastructure</span>
+                    <span class="sr-only" data-i18n="nav-opens-new-tab"
+                      >(opens in a new tab)</span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://officials.betterbukidnon.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    ><span data-i18n="nav-projects-dynasties">Bukidnon Officials</span>
                     <span class="sr-only" data-i18n="nav-opens-new-tab"
                       >(opens in a new tab)</span
                     ></a
@@ -370,36 +391,22 @@
       -->
       <section class="section fb-feed-section" aria-label="Facebook updates">
         <div class="container">
-          <div class="fb-feed-head">
-            <h2>From our Facebook Page</h2>
-            <p>
-              The latest posts published by the Provincial Government of Bukidnon Facebook Page.
-            </p>
-          </div>
-          <div class="fb-feed-embed">
-            <iframe
-              title="Latest posts from the Provincial Government of Bukidnon Facebook Page"
-              src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Flgubukidnon&tabs=timeline&width=500&height=720&small_header=false&adapt_container_width=true&hide_cover=false&show_facecount=true"
-              width="500"
-              height="720"
-              scrolling="no"
-              frameborder="0"
-              allowfullscreen="true"
-              loading="lazy"
-              allow="encrypted-media; clipboard-write; web-share"
-            ></iframe>
-          </div>
-          <p class="fb-feed-fallback">
-            Can't see the feed?
+          <div class="bb-card" style="display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px">
+            <div>
+              <h2 style="font-size:1.125rem;margin:0 0 4px">Official Provincial Government Facebook Page</h2>
+              <p style="font-size:0.875rem;color:var(--color-text-light);margin:0">
+                Follow the Provincial Government of Bukidnon on Facebook for real-time public advisories, executive orders, and community announcements.
+              </p>
+            </div>
             <a
               href="https://www.facebook.com/lgubukidnon"
               target="_blank"
               rel="noopener noreferrer"
+              class="btn btn-primary btn-sm"
             >
-              Visit the Provincial Government of Bukidnon Facebook Page
-              <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+              <i class="bi bi-facebook" aria-hidden="true"></i> Visit Official Facebook Page
             </a>
-          </p>
+          </div>
         </div>
       </section>
     </main>

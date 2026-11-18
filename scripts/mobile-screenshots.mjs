@@ -7,7 +7,9 @@
 //   npm run screenshots:mobile -- --browser=firefox --out=screenshots/before
 //
 // Options:
-//   --pages=a,b     Page folders to capture; "home" is the homepage (default: all)
+//   --pages=a,b     Pages to capture (default: all). "home" is the homepage, a folder
+//                   name is that folder's index page, and folder/name is another page
+//                   in it, for example service-details/civil-registrar
 //   --widths=a,b    Viewport widths in CSS pixels (default: 320,375,412)
 //   --out=dir       Output folder (default: screenshots)
 //   --browser=name  chrome (installed Google Chrome, the default), chromium or
@@ -31,13 +33,22 @@ const args = Object.fromEntries(
   })
 );
 
+// Every folder that holds pages: its index page (listed by the folder name) and any
+// other page in it (listed as folder/name)
 const allPages = [
   'home',
   ...readdirSync(ROOT, { withFileTypes: true })
     .filter((d) => d.isDirectory() && existsSync(join(ROOT, d.name, 'index.html')))
     .map((d) => d.name)
     .filter((name) => !['admin', 'docs', 'node_modules', 'dist', 'react-app'].includes(name))
-    .sort(),
+    .sort()
+    .flatMap((folder) => [
+      folder,
+      ...readdirSync(join(ROOT, folder))
+        .filter((file) => file.endsWith('.html') && file !== 'index.html')
+        .map((file) => `${folder}/${file.slice(0, -'.html'.length)}`)
+        .sort(),
+    ]),
 ];
 const pages = args.pages ? args.pages.split(',') : allPages;
 const widths = (args.widths || '320,375,412').split(',').map(Number);
@@ -88,11 +99,13 @@ try {
     const page = await context.newPage();
 
     for (const name of pages) {
-      const path = name === 'home' ? 'index.html' : `${name}/index.html`;
+      const path =
+        name === 'home' ? 'index.html' : name.includes('/') ? `${name}.html` : `${name}/index.html`;
+      const file = name.replace('/', '-');
       await page.goto(`${BASE}/${path}`, { waitUntil: 'load' });
       await page.waitForLoadState('networkidle', { timeout: 5000 }).catch(() => {});
 
-      await page.screenshot({ path: join(outDir, `${name}-${width}.png`) });
+      await page.screenshot({ path: join(outDir, `${file}-${width}.png`) });
 
       // Scroll through the page so scroll-triggered reveals and lazy content
       // render before the full-page capture
@@ -103,7 +116,7 @@ try {
       }
       await page.evaluate(() => window.scrollTo(0, 0));
       await sleep(500);
-      await page.screenshot({ path: join(outDir, `${name}-${width}-full.png`), fullPage: true });
+      await page.screenshot({ path: join(outDir, `${file}-${width}-full.png`), fullPage: true });
 
       const overflow = await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth
