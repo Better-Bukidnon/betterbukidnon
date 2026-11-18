@@ -24,6 +24,10 @@
 
 /* Desktop */
 @media (max-width: 1199px) and (min-width: 1025px) {
+  :root {
+    --header-height: 101px;
+  }
+
   .container {
     max-width: 960px;
   }

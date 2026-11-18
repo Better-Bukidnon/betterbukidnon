@@ -86,6 +86,34 @@ test.describe('Civic Directories & Route Smoke Tests', () => {
     await expect(page).toHaveURL(/\/barangays\/profile\/\?code=1001321001$/);
   });
 
+  test.describe('Map Barangay data request recovery', () => {
+    test.use({ serviceWorkers: 'block' });
+
+    test('retries a failed load for the selected LGU', async ({ page }) => {
+      let barangayRequests = 0;
+      await page.route('**/data/barangays.json', async (route) => {
+        barangayRequests += 1;
+        if (barangayRequests === 1) {
+          await route.abort('failed');
+          return;
+        }
+        await route.continue();
+      });
+
+      await page.goto('/', { waitUntil: 'domcontentloaded' });
+      await page.fill('#map-lgu-search', 'Valencia');
+
+      const barangaySelect = page.locator('#map-brgy-select');
+      await expect(barangaySelect).toBeDisabled();
+      await expect(barangaySelect.locator('option').first()).toHaveText('Unavailable');
+
+      await page.locator('#map-container .leaflet-marker-icon').dispatchEvent('click');
+      await expect(barangaySelect).toBeEnabled();
+      await expect(barangaySelect.locator('option').first()).toHaveText('Select barangay (31)');
+      expect(barangayRequests).toBe(2);
+    });
+  });
+
   test('Contact directory renders cards, filters, and supports copy', async ({ page }) => {
     await page.goto('/contact/', { waitUntil: 'domcontentloaded' });
     const cards = page.locator('#contacts-directory-grid .bb-card');
@@ -130,6 +158,7 @@ test.describe('Civic Directories & Route Smoke Tests', () => {
   }) => {
     for (const viewport of [
       { width: 1440, height: 900 },
+      { width: 1100, height: 900 },
       { width: 768, height: 1024 },
       { width: 390, height: 844 },
     ]) {
@@ -154,7 +183,7 @@ test.describe('Civic Directories & Route Smoke Tests', () => {
       });
 
       expect(layout).not.toBeNull();
-      expect(layout.navTop).toBeGreaterThanOrEqual(layout.headerBottom - 1);
+      expect(Math.abs(layout.navTop - layout.headerBottom)).toBeLessThanOrEqual(1);
       expect(layout.leadershipTop).toBeGreaterThanOrEqual(layout.navBottom - 1);
     }
   });

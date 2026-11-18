@@ -603,6 +603,7 @@
       let barangaysPromise = null;
       let selectedLguSlug = null;
       let barangayLoadRequestId = 0;
+      let barangayLoadFailed = false;
       let bukidnonBounds = null;
       const markersBySlug = new Map();
       const layerGroup = L.layerGroup().addTo(this.map);
@@ -683,15 +684,14 @@
       function populateBarangaysForLgu(lgu) {
         if (!brgySelect) return;
         const requestId = ++barangayLoadRequestId;
+        barangayLoadFailed = false;
         brgySelect.disabled = true;
         brgySelect.innerHTML = '<option value="">Loading barangays...</option>';
 
         if (!barangaysPromise) {
           barangaysPromise = fetch('data/barangays.json')
             .then((r) => r.json())
-            .then((d) => {
-              return d.barangays || [];
-            })
+            .then((d) => d.barangays || [])
             .catch((error) => {
               // Allow a later LGU selection to retry after a transient failure.
               barangaysPromise = null;
@@ -714,6 +714,7 @@
           })
           .catch(() => {
             if (requestId !== barangayLoadRequestId) return;
+            barangayLoadFailed = true;
             brgySelect.innerHTML = '<option value="">Unavailable</option>';
           });
       }
@@ -723,7 +724,7 @@
         const selectionChanged = selectedLguSlug !== lgu.slug;
         selectedLguSlug = lgu.slug;
 
-        if (selectionChanged) {
+        if (selectionChanged || barangayLoadFailed) {
           renderInfoPanel(lgu);
           populateBarangaysForLgu(lgu);
         }
@@ -861,6 +862,7 @@
                 brgySelect.disabled = true;
               }
               selectedLguSlug = null;
+              barangayLoadFailed = false;
               if (infoPanel) {
                 infoPanel.innerHTML = '';
                 infoPanel.style.display = 'none';
