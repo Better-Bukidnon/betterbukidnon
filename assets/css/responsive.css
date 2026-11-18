@@ -37,7 +37,7 @@
 /* Tablet */
 @media (max-width: 1024px) {
   :root {
-    --header-height: 56px;
+    --header-height: 68px;
   }
 
   .site-header {
@@ -319,6 +319,10 @@
 
 /* Mobile */
 @media (max-width: 767px) {
+  :root {
+    --header-height: 64px;
+  }
+
   .container {
     padding: 0 var(--spacing-sm);
   }
@@ -524,6 +528,10 @@
 
 /* Small Mobile */
 @media (max-width: 480px) {
+  :root {
+    --header-height: 60px;
+  }
+
   .container {
     padding: 0 var(--spacing-xs);
   }

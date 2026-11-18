@@ -357,7 +357,7 @@
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(15, 23, 42, 0.08);
   position: sticky;
-  top: 64px;
+  top: var(--header-height);
   z-index: 40;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
 }
@@ -416,6 +416,7 @@
 /* Compact Profile Sections & Stat Cards */
 .bb-profile-section {
   padding: 32px 0;
+  scroll-margin-top: calc(var(--header-height) + 64px);
 }
 
 .bb-profile-section-head {

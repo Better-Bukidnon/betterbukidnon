@@ -71,6 +71,21 @@ test.describe('Civic Directories & Route Smoke Tests', () => {
     await expect(widget).toContainText('Valencia City, Bukidnon');
   });
 
+  test('Map search selects a unique LGU and enables its barangay selector', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+
+    const barangaySelect = page.locator('#map-brgy-select');
+    await expect(barangaySelect).toBeDisabled();
+
+    await page.fill('#map-lgu-search', 'Valencia');
+    await expect(barangaySelect).toBeEnabled();
+    await expect(barangaySelect.locator('option').first()).toHaveText('Select barangay (31)');
+    await expect(barangaySelect.locator('option')).toHaveCount(32);
+
+    await barangaySelect.selectOption('1001321001');
+    await expect(page).toHaveURL(/\/barangays\/profile\/\?code=1001321001$/);
+  });
+
   test('Contact directory renders cards, filters, and supports copy', async ({ page }) => {
     await page.goto('/contact/', { waitUntil: 'domcontentloaded' });
     const cards = page.locator('#contacts-directory-grid .bb-card');
@@ -108,6 +123,40 @@ test.describe('Civic Directories & Route Smoke Tests', () => {
     await expect(page.locator('#infrastructure')).toBeVisible();
     await expect(page.locator('#references')).toBeVisible();
     await expect(page.locator('#lgu-brgy-grid .bb-card')).toHaveCount(46);
+  });
+
+  test('LGU profile sticky navigation clears the site header and anchor target', async ({
+    page,
+  }) => {
+    for (const viewport of [
+      { width: 1440, height: 900 },
+      { width: 768, height: 1024 },
+      { width: 390, height: 844 },
+    ]) {
+      await page.setViewportSize(viewport);
+      await page.goto('/lgus/cabanglasan/', { waitUntil: 'domcontentloaded' });
+      await expect(page.locator('.bb-profile-nav-bar')).toBeVisible();
+
+      await page.locator('.bb-profile-nav-link[href="#leadership"]').click();
+      await expect(page.locator('#leadership')).toBeInViewport();
+
+      const layout = await page.evaluate(() => {
+        const header = document.querySelector('.site-header');
+        const nav = document.querySelector('.bb-profile-nav-bar');
+        const leadership = document.querySelector('#leadership');
+        if (!header || !nav || !leadership) return null;
+        return {
+          headerBottom: header.getBoundingClientRect().bottom,
+          navTop: nav.getBoundingClientRect().top,
+          navBottom: nav.getBoundingClientRect().bottom,
+          leadershipTop: leadership.getBoundingClientRect().top,
+        };
+      });
+
+      expect(layout).not.toBeNull();
+      expect(layout.navTop).toBeGreaterThanOrEqual(layout.headerBottom - 1);
+      expect(layout.leadershipTop).toBeGreaterThanOrEqual(layout.navBottom - 1);
+    }
   });
 
   test('Barangay directory loads 464 barangays, filters by LGU, falls back to all on unknown ?lgu=, and preserves focus when paging', async ({
