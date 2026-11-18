@@ -38,6 +38,7 @@ const projectText: Record<string, { name: Message; description: Message }> = {
   budget: { name: m.proj_budget_name, description: m.proj_budget_desc },
   saln: { name: m.proj_saln_name, description: m.proj_saln_desc },
   infra: { name: m.proj_infra_name, description: m.proj_infra_desc },
+  dynasties: { name: m.proj_dynasties_name, description: m.proj_dynasties_desc },
 }
 const categoryLabel: Record<string, Message> = { transparency: m.proj_cat_transparency }
 
