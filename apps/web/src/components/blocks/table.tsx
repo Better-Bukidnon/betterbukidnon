@@ -1,3 +1,4 @@
+import { ScrollRegion } from '@/components/ui/scroll-region'
 import { cn } from '@/lib/utils'
 import { createContext, useContext } from 'react'
 
@@ -41,12 +42,12 @@ const styles: Record<TableStyle, { table: string; th: string; td: string }> = {
  * legacy let it overflow below 768px, which made the whole page scroll.
  */
 const scrollWrap =
-  'relative w-full overflow-x-auto [&_td]:min-w-25 [&_td:nth-child(2)]:min-w-75 [&_th]:min-w-25 [&_th:nth-child(2)]:min-w-75'
+  'relative w-full [&_td]:min-w-25 [&_td:nth-child(2)]:min-w-75 [&_th]:min-w-25 [&_th:nth-child(2)]:min-w-75'
 
 export function Table({ children }: { children?: React.ReactNode }) {
   const style = useContext(TableContext)
   const table = <table className={styles[style].table}>{children}</table>
-  return style === 'light' ? <div className={scrollWrap}>{table}</div> : table
+  return style === 'light' ? <ScrollRegion className={scrollWrap}>{table}</ScrollRegion> : table
 }
 
 export function TableHeading({ children }: { children?: React.ReactNode }) {
@@ -74,7 +75,7 @@ export function TableNote({ children }: { children: React.ReactNode }) {
 export function ProcessTable({ widths, children }: { widths?: string; children: React.ReactNode }) {
   const columns = widths?.split(',').map((width) => `${width.trim()}%`) ?? []
   return (
-    <div
+    <ScrollRegion
       className={cn(
         scrollWrap,
         '[&_th:nth-child(1)]:w-(--w1) [&_th:nth-child(2)]:w-(--w2) [&_th:nth-child(3)]:w-(--w3) [&_th:nth-child(4)]:w-(--w4)',
@@ -82,7 +83,7 @@ export function ProcessTable({ widths, children }: { widths?: string; children: 
       style={Object.fromEntries(columns.map((width, i) => [`--w${i + 1}`, width]))}
     >
       <TableScope value="process">{children}</TableScope>
-    </div>
+    </ScrollRegion>
   )
 }
 

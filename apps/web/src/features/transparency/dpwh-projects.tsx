@@ -1,3 +1,4 @@
+import { ScrollRegion } from '@/components/ui/scroll-region'
 import { useEffect, useEffectEvent, useMemo, useRef, useState } from 'react'
 import { Icon } from '@/components/ui/icon'
 import { cn, formatNumber } from '@/lib/utils'
@@ -175,7 +176,10 @@ export function DpwhProjects({ projects }: { projects: DpwhProject[] }) {
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-[10px] border border-black/6 bg-white max-lg:overflow-x-auto">
+      <ScrollRegion
+        label={m.budget_dpwh_infrastructure_projects_in_bukidnon()}
+        className="overflow-hidden rounded-[10px] border border-black/6 bg-white max-lg:overflow-x-auto"
+      >
         <table className="w-full table-fixed border-collapse text-[0.8125rem] max-lg:min-w-175 max-sm:min-w-150 max-sm:text-[0.75rem]">
           <thead className="sticky top-0 z-10 bg-[#0032a0]">
             <tr>
@@ -296,7 +300,7 @@ export function DpwhProjects({ projects }: { projects: DpwhProject[] }) {
             </span>
           )}
         </div>
-      </div>
+      </ScrollRegion>
     </div>
   )
 }

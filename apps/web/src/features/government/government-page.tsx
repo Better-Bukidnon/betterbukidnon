@@ -1,3 +1,4 @@
+import { ScrollRegion } from '@/components/ui/scroll-region'
 import { Link } from '@tanstack/react-router'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import {
@@ -516,7 +517,7 @@ function Lgus() {
         >
           <p className={introNarrow}>{m.gov_lgus_subtitle()}</p>
         </SectionIntro>
-        <div className="overflow-x-auto">
+        <ScrollRegion label={m.gov_lgus_caption()}>
           <table className={dataTable}>
             <caption className="sr-only">{m.gov_lgus_caption()}</caption>
             <thead>
@@ -555,7 +556,7 @@ function Lgus() {
               </tr>
             </tfoot>
           </table>
-        </div>
+        </ScrollRegion>
         <p className="mt-6 text-center text-[0.875rem] text-ink-light">
           <span>{m.gov_lgus_source()}</span>{' '}
           <SiteLink href="/statistics">{m.gov_lgus_more_stats()}</SiteLink>

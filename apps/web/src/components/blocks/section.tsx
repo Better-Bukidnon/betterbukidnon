@@ -1,3 +1,4 @@
+import { ScrollRegionLabel } from '@/components/ui/scroll-region'
 import { Icon, type IconName } from '@/components/ui/icon'
 import { cn } from '@/lib/utils'
 
@@ -25,7 +26,7 @@ export function Section({
     <section className={cn('py-10', alt && 'bg-surface-alt')}>
       <div className="container-site">
         {title && <SectionHeading icon={icon} title={title} intro={intro} large={large} />}
-        {children}
+        <ScrollRegionLabel value={title}>{children}</ScrollRegionLabel>
       </div>
     </section>
   )
