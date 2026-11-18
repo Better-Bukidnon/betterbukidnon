@@ -1,9 +1,12 @@
 // @ts-check
 // Page content must fit a phone screen: nothing inside <main> may be wider than the
 // viewport, because that makes the whole page scroll sideways (issue #31).
-const { test, expect } = require('@playwright/test');
-const fs = require('fs');
-const path = require('path');
+import { test, expect } from '@playwright/test';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Every page in sitemap.xml, as a path on the local server
 const PAGES = [

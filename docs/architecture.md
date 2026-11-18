@@ -1,196 +1,267 @@
-# Architecture
+# Architecture and migration
 
-BetterBukidnon is a **static website**: hand-written HTML pages, one shared stylesheet set,
-vanilla JavaScript, and JSON data files fetched in the browser. There is no server-side code
-and no database. One page (`/services/health`) is built with Next.js and merged in at build
-time. Cloudflare Workers serves the built files as static assets.
+BetterBukidnon is a static, multi-language civic information portal for Bukidnon. The active
+application is a React 19 and TypeScript 7 app built with Vite+ and TanStack Start. TanStack
+Start prerenders routes to HTML; Cloudflare Workers serves the output as static assets. The app
+has no application server, database, or user-account system.
 
-## Directory layout
+## Migration status
 
-```
-/
-├── index.html                 Homepage
-├── services/                  Service category pages (agriculture, business, certificates, …)
-├── service-details/           One page per office or document (provincial-treasurer, pswdo, …)
-├── government/                Provincial Government overview (index) and officials list
-├── statistics/                Population, land area, LGU table, charts
-├── legislative/               Sangguniang Panlalawigan + ordinance/resolution process pages
-├── budget/                    Transparency: budget, SRE, DPWH projects
-├── news/                      Curated updates (data/news.json)
-├── projects/                  Our Projects page (cards from data/projects.json)
-├── contact/ faq/ terms/ privacy/ accessibility/ sitemap/
-├── 403.html 404.html 500.html offline.html
-├── assets/
-│   ├── css/                   style.css (main), responsive, accessibility, footer, page-specific
-│   ├── js/                    One script per feature (see below)
-│   ├── images/logo/           better-bukidnon-logo(-white).svg, favicon.svg/.ico, partner logos
-│   ├── images/banners/        opengraph.png (social preview, 1200×630)
-│   └── animation/             Lottie JSON used by homepage call-to-action sections
-├── data/                      JSON content loaded by the page scripts
-├── react-app/                 Next.js app; only /services/health ships to production
-├── admin/news-editor.html     Local-only tool for editing data/news.json (not deployed)
-├── scripts/                   Build, version and maintenance scripts (not deployed)
-├── tests/                     Playwright specs
-├── docs/                      This documentation (not deployed)
-├── .claude/agents/            Claude Code subagents for contributors (see claude-code.md)
-├── build.sh                   Production build → dist/
-├── wrangler.jsonc             Cloudflare Workers config (development + production)
-├── sw.js, manifest.webmanifest  Progressive Web App support
-└── .htaccess, serve.py        Legacy Apache/cPanel config and a local clean-URL server
-```
+The repository began as a fork of a static HTML site with duplicated page chrome, browser
+JavaScript features, a separate Next.js app for `/services/health`, and independent build
+paths. The migration consolidates the user-facing portal under `apps/web` and replaces the
+standalone Next.js health page with a TanStack route.
 
-## Pages
+Migration work is reviewed in incremental pull requests against the `develop` branch. Treat
+the merged code on `develop` as the source of truth; an open pull request is not part of the
+deployed application until merged and deployed.
 
-Every page is a complete HTML document, so it works without JavaScript, without a build step
-and without layout shift. The page chrome is copied into each page, but it is generated from
-one source (see [Shared page chrome](#shared-page-chrome)):
+The user-facing routes have been migrated. The legacy pages remain the visual and content
+reference for parity review. See [Legacy static pages](#legacy-static-pages).
 
-1. Hotline bar (emergency numbers)
-2. Header with logo, navigation and the EN / FIL / CEB language buttons
-3. Real-time info bar (exchange rate, Malaybalay weather, Philippine time)
-4. Page content (`<main id="main-content">`)
-5. Footer (tagline, links, resources, "Cost to the People of Bukidnon = ₱0", partners, version)
-6. Volunteer popup markup (homepage)
+Current migration goals:
 
-The skip link, hotline bar, header and footer are shared. The real-time info bar, page
-content and volunteer popup belong to each page. The hotline numbers live in
-[bukidnon-facts.md](bukidnon-facts.md); keep them in sync.
+- One production frontend under `apps/web`.
+- TypeScript for application code, tests, and maintained Node tooling.
+- Shared React components instead of copied page chrome and browser scripts.
+- Validated local JSON datasets, with source links and honest empty states for missing data.
+- Static prerendering for direct navigation, accessibility, and search indexing.
+- No legacy runtime or second framework in the production build.
 
-### Shared page chrome
+## Technology stack
 
-| Block       | Template                        | Contains                                                    |
-| ----------- | ------------------------------- | ----------------------------------------------------------- |
-| `skip-link` | `scripts/chrome/skip-link.html` | "Skip to main content" link                                 |
-| `hotline`   | `scripts/chrome/hotline.html`   | Emergency hotline bar                                       |
-| `header`    | `scripts/chrome/header.html`    | Logo, navigation with dropdowns, EN / FIL / CEB buttons     |
-| `footer`    | `scripts/chrome/footer.html`    | Tagline, links, resources, "Cost to the People" and version |
+| Area              | Choice                                       | Role                                                                        |
+| ----------------- | -------------------------------------------- | --------------------------------------------------------------------------- |
+| Runtime           | Node.js 22+ and pnpm                         | Local development, checks, and builds                                       |
+| Build tooling     | Vite+                                        | Vite build and preview, Oxlint, Oxfmt, TypeScript Go checks, and tests      |
+| UI                | React 19 and TypeScript 7                    | Typed components and app code                                               |
+| Routing/rendering | TanStack Start and TanStack Router           | File-based routes, static prerendering, and route-aware links               |
+| Styling           | Tailwind CSS 4                               | Utility-first application styles                                            |
+| Components        | Local components with a `cn()` class helper  | Accessible, composable UI; follow shadcn/ui patterns when adding primitives |
+| Animation         | Motion (`motion/react`)                      | Interface transitions and animated components                               |
+| Validation        | Zod                                          | Runtime validation for imported JSON content and editor input               |
+| Icons             | Bootstrap Icons (`components/ui/icon.tsx`)   | The same icon font the legacy pages use                                     |
+| Offline support   | Workbox build and a generated service worker | Precaches the static site and handles offline navigation                    |
+| Map               | Leaflet with OpenStreetMap tiles             | Home page map; falls back to the OpenStreetMap embed if tiles are blocked   |
+| Animation files   | lottie-web (light player)                    | Plays the legacy Lottie JSON from `public/animations/`, loaded on scroll    |
+| Hosting           | Cloudflare Workers static assets             | Serves the prerendered output and preview deployments                       |
 
-To change any of these, edit the template once and run:
+Vite+ provides the frontend toolchain in one place. Do not add Biome as a parallel formatter or
+linter; use the repository's `vp check` workflow. TypeScript 7 is checked with TypeScript Go
+through Vite+.
 
-```bash
-npm run chrome          # rewrite the block in every page
-npm run chrome:check    # fail if a page differs from the templates (also run by build.sh and the tests)
-```
+## Repository layout
 
-In a page, each block sits between two marker comments. Never edit between them by hand; the
-next `npm run chrome` overwrites it.
-
-```html
-<!-- chrome:header -->
-...generated...
-<!-- /chrome:header -->
+```text
+apps/
+  web/
+    public/                  Static public files, manifest, icons, error pages
+    src/
+      routes/                TanStack file routes: loader, head (seo) and one feature page each
+      features/<domain>/     Pages, components, data loaders, schemas and tests for one domain:
+                             home, services, projects, government, legislative, transparency,
+                             news, engagement, pwa, directories
+      components/            Shared UI: layout (shell, header, footer, page header, breadcrumbs,
+                             language menu, not-found), ui (icon, links), blocks (MDX blocks)
+      config/                Site metadata, navigation and the contact/hotline directory
+      lib/                   Helpers: i18n, seo, structured data, document loading, schemas
+      styles.css             Tailwind entry and application theme
+    vite.config.ts           Vite+, TanStack Start, Tailwind, prerender settings
+    tsconfig.json
+content/                     MDX documents: content/<collection>/<slug>/<locale>.mdx
+data/                        JSON content sources, validated at the app boundary
+scripts/                     TypeScript build, SEO, service worker and content maintenance tools
+tests/                       Playwright browser tests
+docs/                         Architecture, content, deployment, and contributor guidance
+wrangler.jsonc                Cloudflare static asset directory and environment routes
 ```
 
-`scripts/sync-chrome.js` fills in what differs from page to page:
+The root still holds the legacy static site (page folders such as `services/` and `faq/`,
+`index.html`, `assets/`). It is not deployed; see
+[Legacy static pages](#legacy-static-pages).
 
-- `{{root}}` is the path to the site root (`''`, `../`, or `/` on `403.html`, `404.html` and
-  `500.html`, which are served from any URL). `{{home}}` is the link to the homepage.
-- `{{active:key}}` marks the nav item for the page's section (`services` and
-  `service-details` highlight Services, `budget` highlights Transparency, and so on). The
-  mapping is `SECTION_NAV` and `PAGE_NAV` in the script.
-- `{{version}}` comes from `version.json`, so a version bump and the footer stay in step.
-- Options go after the block name in the marker: `<!-- chrome:footer no-margin-top -->`
-  (used on `services/index.html` and a few `service-details/` pages).
-- The script formats the result with Prettier, so the generated pages pass `format:check`.
+## App structure
 
-A new page needs the four marker pairs (copy them from any page, for example `faq/index.html`)
-and then `npm run chrome`. A page without them fails `chrome:check`, except `offline.html`,
-which is standalone on purpose.
+### Routes
 
-All of the chrome uses one set of translation keys: `nav-*` for the skip link and navigation,
-`footer-*` for the footer. Do not add per-page prefixes to them.
+Routes live in `apps/web/src/routes`. Filenames define URLs; examples include:
 
-Links use clean URLs (`/services/health`, `/service-details/pswdo`). Cloudflare's
-`html_handling: auto-trailing-slash` maps them to the `.html` files, and `serve.py` does the
-same locally.
+| Route file                  | URL                      |
+| --------------------------- | ------------------------ |
+| `index.tsx`                 | `/`                      |
+| `services/index.tsx`        | `/services`              |
+| `services/$category.tsx`    | `/services/:category`    |
+| `service-details.$slug.tsx` | `/service-details/:slug` |
+| `government/officials.tsx`  | `/government/officials`  |
 
-## JavaScript
+A section with several pages (`services/`, `government/`, `legislative/`) is a folder with an
+`index.tsx`, so its pages are siblings. A flat `services.tsx` next to `services.$category.tsx`
+would make the second a child of the first, and the child page would render the parent's
+content instead of its own.
 
-All scripts are plain browser JavaScript loaded with `defer`. No bundler.
+The generated `routeTree.gen.ts` is maintained by TanStack tooling. Do not hand-edit it. Static
+prerender configuration in `apps/web/vite.config.ts` enables link crawling and explicitly adds
+data-driven service detail pages so their direct URLs exist at deployment time.
 
-| Script                                                        | Used on        | What it does                                                                                                              |
-| ------------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `translations.js`                                             | every page     | Dictionaries for `en`, `fil`, `ceb` and the `TranslationEngine` that applies them. See [translations.md](translations.md) |
-| `main.js`                                                     | every page     | Navigation, dropdowns, mobile menu, shared UI behaviour                                                                   |
-| `info-bar.js`                                                 | every page     | Exchange rates (open.er-api.com), weather (Open-Meteo, Malaybalay coordinates), PH time                                   |
-| `version.js`                                                  | every page     | Shows the site version from `version.json`                                                                                |
-| `search.js`                                                   | home, services | Service search and autocomplete                                                                                           |
-| `weather-map.js`                                              | home           | Weather widget and the OpenStreetMap / Leaflet map                                                                        |
-| `news.js`                                                     | home, news     | Renders `data/news.json`                                                                                                  |
-| `fb-feed.js`                                                  | home           | Facebook page feed embed helpers                                                                                          |
-| `volunteer-popup.js`                                          | home           | Volunteer recruitment dialog                                                                                              |
-| `projects.js`                                                 | projects       | Renders `data/projects.json`: status tabs with counts, search, repo/category filters, card grid, View Details dialog      |
-| `officials.js`                                                | government     | Renders `data/officials.json`                                                                                             |
-| `statistics-new.js`                                           | statistics     | Charts (Chart.js) and animated counters from `data/demographics.json`                                                     |
-| `ordinances.js`, `resolutions.js`                             | legislative    | Render `data/ordinances.json`, `data/resolutions.json`                                                                    |
-| `transparency-v2.js`, `dpwh-projects.js`                      | budget         | Render fiscal data and DPWH projects                                                                                      |
-| `transparency.js`, `transparency-2025.js`, `sre-formatter.js` | none           | Unused legacy scripts from the template, kept for reference; their Solano figures were removed                            |
-| `services-validator.js`, `validation-utils.js`                | services       | Validate `data/services.json` entries                                                                                     |
+### Shared components
 
-## Data files
+`components/layout/site-shell.tsx` renders the page chrome in the legacy order: skip link,
+`hotline-bar.tsx`, `site-header.tsx` (navigation with dropdowns, the slide-down menu at 1024px
+and below, and `language-menu.tsx`), `info-bar.tsx` (exchange rate, Malaybalay weather,
+and Philippine time), the page, and `site-footer.tsx`. Pages that need a trail use
+`breadcrumbs.tsx`. Navigation, footer links, and the hotline bar items come from
+`config/navigation.ts`; hotline numbers come from `config/contact.ts`. Root route metadata
+and the document shell live in `routes/__root.tsx`.
 
-| File                                            | Content                                                             | Status                          |
-| ----------------------------------------------- | ------------------------------------------------------------------- | ------------------------------- |
-| `data/officials.json`                           | Governor, Vice Governor, Board Members, representatives (2025–2028) | Filled                          |
-| `data/demographics.json`                        | Province and per-LGU population, area, barangays                    | Filled                          |
-| `data/services.json`                            | Service directory used by search                                    | Filled                          |
-| `data/competitive-index.json`                   | DTI CMCI scores                                                     | Empty, links to cmci.dti.gov.ph |
-| `data/ordinances.json`, `data/resolutions.json` | Sangguniang Panlalawigan records                                    | Empty                           |
-| `data/fiscal_transparency.json`                 | Budget and SRE                                                      | Empty                           |
-| `data/dpwh-projects.json`                       | DPWH projects in Bukidnon                                           | Empty                           |
-| `data/projects.json`                            | Projects shown on the Our Projects page and nav dropdown            | Filled                          |
-| `data/news.json`                                | Curated news items                                                  | Empty until curated             |
+### Features and routes
 
-Pages must keep working when a data file is empty: they show an empty state that links to
-the official source. See [content-guide.md](content-guide.md) for how to fill them.
+Code for one domain lives together in `features/<domain>/`: its page components, data
+loaders with their Zod schemas, and tests. Routes stay thin: a route file declares its path,
+loader and `head` (`seo()`), and renders the feature's page, passing loader data and search
+params as props. A feature imports shared code from `components/`, `config/` and `lib/`, and
+another feature's public modules only when it needs them (the home hero uses the services
+search box). All user-facing routes have an app implementation. The legacy files remain
+available for visual and behavior parity review until the retirement audit is complete.
 
-## React app (`react-app/`)
+Service search (`features/services/service-search-box.tsx`, used by the home hero and the
+Services page) runs the engine in `features/services/search.ts`, a port of the legacy
+`assets/js/search.js`: the same fuzzy matching, scores, "Did you mean?" suggestions, category
+chips, and recent and popular searches, under the same `localStorage` keys.
+`features/services/search.test.ts` holds results recorded from the legacy engine; if you change
+ranking on purpose, update those expectations in the same pull request. Results link to the
+app path for each `services.json` entry (`serviceHref`), and keywords in `services.json` are
+what most searches match against.
 
-A Next.js 14 + TypeScript app with its own header, footer, hotline bar and language context
-(`src/contexts/LanguageContext.tsx`). It is exported statically (`react-app/out/`). The build
-copies only `out/_next/` and `out/services/health.html` into `dist/`, so in production
-`/services/health` is the React page and everything else is the static site. The React app is
-**not** generated from `scripts/chrome/`: when you change shared chrome (nav items, hotlines,
-footer links, languages), change `Header.tsx`, `HotlineBar.tsx`, `Footer.tsx` and
-`LanguageContext.tsx` by hand as well.
-`npm run chrome:check` compares the links in `scripts/chrome/header.html` with the ones in
-`Header.tsx` and fails if either has a link the other lacks. It does not compare labels or
-translations.
-`npm run chrome:check` compares the links in `scripts/chrome/header.html` with the ones in
-`Header.tsx` and fails if either has a link the other lacks. It does not compare labels or
-translations.
+### Content and validation
 
-## Build pipeline
+Content remains in repository JSON files under `data/`. Each feature's data module (such as
+`features/services/services.ts` or `features/government/data.ts`) imports its JSON and
+validates it with the feature's schema and `parseContent` from `lib/schemas.ts` before pages
+use it, so invalid data fails the build. Shared schema pieces (`localizedTextSchema`,
+`sourceSchema`) are in `lib/schemas.ts`. Keep
+validation at this boundary so components receive typed, normalized values. When a dataset is
+empty, show an explicit empty state and link to an authoritative source instead of filling the
+page with sample or inferred public facts.
 
-`build.sh` (run by `npm run build`):
+Each feature has tests next to its data (`*.test.ts`); `pnpm web:test` runs them all from
+`apps/web`, so tests can use the `@/` imports like the rest of the app.
 
-0. Loads `.env` if present (`SITE_URL`, see `.env.example`)
-1. Bumps the version (`scripts/bump-version.js` updates `version.json`, `package.json`, the
-   version shown in every page footer and `react-app/public/version.json`), then runs
-   `scripts/sync-chrome.js --check` and stops if a page differs from the chrome templates
-2. Cleans `dist/`
-3. Copies the site into `dist/` with `rsync` (or `scripts/copy-dist.js` on Windows), leaving
-   out `docs/`, `scripts/`, `tests/`, `admin/`, `react-app/`, `node_modules/`, Markdown files
-   and config files
-4. Builds the React app and merges `/services/health`
-5. Minifies HTML (html-minifier-terser), CSS (clean-css) and JS (Babel + Terser)
-6. Sets file permissions (a cPanel leftover; harmless on Cloudflare)
+Documents (pages read top to bottom, such as service guides) are MDX files in `content/`,
+compiled by `@mdx-js/rollup`. `lib/content.ts` loads each one as its own chunk and validates
+its frontmatter with the collection's schema (service guides: `features/services/schemas.ts`,
+loaded by `features/services/guides.ts`); `lib/documents.ts` lists the blocks a document may
+use and `components/blocks` implements them. `lib/documents.test.ts` checks every file. URLs that match
+no route render `components/layout/not-found.tsx` (the router's default not-found page).
 
-## Progressive Web App
+### Languages and SEO
 
-`manifest.webmanifest` makes the site installable. `sw.js` precaches the core pages and
-assets and serves `offline.html` when the network is down. When you add, rename or delete a
-page that is in the precache list, update `PRECACHE_URLS` and bump `CACHE_VERSION` in `sw.js`
-so browsers drop the old cache.
+The language is part of the URL: English at the root, `/fil/...` and `/ceb/...` for Filipino
+and Cebuano, each prerendered as its own page. Paraglide JS (`apps/web/paraglide.config.ts`,
+messages in `apps/web/messages/`) compiles interface text to typed functions (`m.nav_home()`)
+and maps localized URLs onto the same route files through the router's `rewrite`. Record data
+uses `{ en, fil, ceb }` strings read with `useLocale().l()`. Plain links from data go through
+`localizePath()` so they stay in the current language. See [translations.md](translations.md).
 
-## Third-party services
+Every route sets its head with `seo()` from `lib/seo.ts` (title, description, canonical,
+`hreflang` for every language, Open Graph and Twitter tags); the home page and breadcrumbs add
+JSON-LD. After the build, `scripts/generate-seo-files.ts` writes `sitemap.xml` and
+`robots.txt` (indexable only for production builds), and `pnpm seo:check` validates the
+result. The reasons for these choices are in
+[ADR 0001](adr/0001-i18n-seo-content-architecture.md).
 
-| Service                       | Purpose                                   | Data sent               |
-| ----------------------------- | ----------------------------------------- | ----------------------- |
-| Open-Meteo                    | Weather                                   | Malaybalay coordinates  |
-| open.er-api.com               | Exchange rates                            | none                    |
-| OpenStreetMap                 | Map tiles and embed                       | map viewport            |
-| Facebook page plugin          | Latest updates feed                       | standard Facebook embed |
-| jsDelivr, unpkg, Google Fonts | Icons, Leaflet, Lottie player, Inter font | standard CDN requests   |
+### Styling and UI
 
-There is no analytics script. The upstream template's Google Analytics tag was removed.
+Tailwind CSS 4 is loaded through `@tailwindcss/vite`. Shared design tokens and global rules live
+in `apps/web/src/styles.css`; component styles are expressed with Tailwind classes.
+
+The legacy pages are the visual spec. The theme tokens copy their values from
+`assets/css/style.css`: `primary` (#0032a0), `primary-dark`, `secondary`, `accent`, `ink`,
+`surface-alt`, the hotline, info bar and footer colors, Inter (300–700, self-hosted with
+Fontsource), the `container-site` utility (the legacy `.container`: 1200px, 960px from 1025px to
+1199px, and 24/16/8px side padding), the 8px `rounded-site` radius, the legacy breakpoints
+(`xs` 481, `sm` 576, `md` 768, `lg` 992, `xl` 1025; `max-xl:` is the legacy
+`max-width: 1024px`), the global link colors, and the
+`shadow-sm`/`shadow-md` values. Use these tokens instead of Tailwind's default palette, and
+compare a migrated route with its legacy page at desktop and phone widths before merging.
+Legacy text inherits the body's 1.6 line-height, so set legacy font sizes with arbitrary values
+such as `text-[0.8125rem]`; Tailwind's named sizes (`text-sm`, `text-xs`) also set a
+line-height and make elements a pixel or two shorter than the legacy ones. Legacy buttons and inputs
+usually keep the browser's `normal` line-height, which Tailwind's reset replaces with the
+inherited 1.6; add `leading-[normal]` to those unless the legacy rule sets `font: inherit`.
+
+Icons use `<Icon name="arrow-right" />`, which renders the Bootstrap Icons font with the same
+`bi bi-*` classes as the legacy markup. `name` is typed against the icon set. Pass `label` for
+an icon that carries meaning on its own; icons next to visible text are hidden from assistive
+technology. Reusable
+local components live under `components/`. shadcn/ui is a component pattern and generator, not a
+runtime dependency: add only the primitives the app actually uses, and keep generated code
+typed and accessible.
+
+### Motion
+
+Use Motion from `motion/react` for transitions that clarify a state change. Respect reduced
+motion preferences and avoid animating essential content in a way that delays access.
+
+## Build and deployment
+
+The root `pnpm build` command runs the app build (every page in every language), then
+`scripts/generate-seo-files.ts` (sitemap and `robots.txt`), then the Workbox service worker.
+TanStack Start writes the browser deployment to `apps/web/dist/client` and a separate server
+bundle to `apps/web/dist/server`; only the client directory is deployed because routes are
+prerendered. `wrangler.jsonc` points Cloudflare static assets at `apps/web/dist/client`.
+
+The client output contains the prerendered route HTML, hashed assets, web manifest, icons,
+static `403.html` and `500.html` fallbacks, and generated `sw.js` plus its Workbox runtime.
+`404.html` (and `fil/404.html`, `ceb/404.html`) are prerendered from the `/404` route, the
+same page the router shows for unknown URLs inside the app.
+
+The service worker (`scripts/generate-web-sw.ts`) precaches the English pages under their
+URLs (`/services`, matched without the query string) and caches Filipino and Cebuano pages
+as they are visited. Any other navigation goes to the network, so unknown URLs get the 404
+page; without a connection it shows `offline.html`, a script-free copy of the `/offline`
+page that can be shown at any URL.
+
+Cloudflare has development, production, and branch preview environments. Domain routing and
+the static asset path are configured in `wrangler.jsonc`; consult [deployment.md](deployment.md)
+before changing those settings. Building does not publish or deploy the site.
+
+## Quality checks
+
+| Command                            | Purpose                                                        |
+| ---------------------------------- | -------------------------------------------------------------- |
+| `pnpm web:dev`                     | Run the app locally                                            |
+| `pnpm web:check`                   | Format, lint, and type-check app files with Vite+              |
+| `pnpm web:test`                    | Run app content tests                                          |
+| `pnpm web:build`                   | Build and prerender the app, then generate its service worker  |
+| `pnpm build`                       | Production build alias used by CI and deployment               |
+| `pnpm seo:check`                   | Validate titles, canonical and hreflang links, and the sitemap |
+| `pnpm web:messages`                | Regenerate the typed Paraglide messages                        |
+| `pnpm exec playwright test --list` | Check browser-test discovery                                   |
+
+The Playwright tests under `tests/` currently cover legacy reference behavior. They are not part
+of the pull request CI workflow. Keep the legacy source available until route parity review and
+app-route browser coverage are complete.
+
+## Legacy static pages
+
+The HTML pages at the repository root are the site this project forked from. Cloudflare no
+longer serves them; they remain as the visual and content reference and for targeted comparison.
+
+Their shared chrome can be regenerated from `scripts/chrome/` with `pnpm chrome`; that command
+only updates legacy reference pages and does not change the deployed application.
+
+## Architecture decisions
+
+- **One app instead of a separate health app:** `/services/health` used to be a standalone
+  Next.js app. It is now a route in the same portal, with the shared shell,
+  search, localization, and deployment. A separate app would add a second build and ownership
+  boundary without representing a separate product.
+- **Static prerendering:** public service and government pages need stable direct links and
+  should work on static hosting. Runtime server features are not enabled without a concrete
+  requirement.
+- **Validated JSON instead of a database:** content is versioned with the source and reviewed
+  through Git. Zod detects invalid data during app loading/building.
+- **Vite+ instead of a separate Biome setup:** the chosen toolchain already supplies formatter,
+  linter, type checks, tests, and Vite workflows.
+- **No blanket `apps/*` workspace yet:** `apps/web` is the current deployable product. Add a
+  workspace package boundary when a second independently built app or shared package exists.

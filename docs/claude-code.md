@@ -6,7 +6,7 @@ are available alongside your own. Claude picks one automatically when a task mat
 description, or you can ask for one by name:
 
 ```
-> Use the accessibility-tester agent to audit service-details/pswdo.html
+> Use the accessibility-tester agent to audit the PSWDO service guide in apps/web
 > Have the seo-specialist review the meta tags on the homepage
 ```
 
@@ -18,13 +18,13 @@ The agent files are copied unmodified from
 
 | Area                          | Agents                                                                                                   | Typical use here                                                  |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| Front end                     | `frontend-developer`, `ui-designer`, `javascript-pro`                                                    | Page layout, CSS, the vanilla JS in `assets/js/`                  |
-| React app                     | `react-specialist`, `nextjs-developer`, `typescript-pro`                                                 | `react-app/` (the `/services/health` page)                        |
+| Front end                     | `frontend-developer`, `ui-designer`, `javascript-pro`                                                    | Page layout and CSS for `apps/web`; legacy files are reference    |
+| React app                     | `react-specialist`, `typescript-pro`                                                                     | Routes and features under `apps/web/src/`                         |
 | Scripts                       | `python-pro`                                                                                             | Maintenance scripts in `scripts/`                                 |
 | Quality                       | `code-reviewer`, `debugger`, `qa-expert`, `test-automator`, `ui-ux-tester`                               | Reviews, bug hunts, Playwright tests in `tests/`                  |
 | Accessibility and performance | `accessibility-tester`, `performance-engineer`                                                           | WCAG 2.1 AA checks, Lighthouse scores, page weight                |
 | Security                      | `security-auditor`                                                                                       | Read-only audits (CSP, third-party scripts, data exposure)        |
-| Build and deploy              | `build-engineer`, `deployment-engineer`, `devops-engineer`, `dependency-manager`, `git-workflow-manager` | `build.sh`, `wrangler.jsonc`, GitHub Actions, npm updates         |
+| Build and deploy              | `build-engineer`, `deployment-engineer`, `devops-engineer`, `dependency-manager`, `git-workflow-manager` | `package.json`, `wrangler.jsonc`, GitHub Actions, pnpm updates    |
 | Docs                          | `documentation-engineer`, `technical-writer`, `readme-generator`, `docs-drift-editor`                    | Keeping `docs/` and `README.md` accurate                          |
 | Content                       | `content-quality-editor`, `ux-microcopy-reviewer`, `seo-specialist`, `ux-researcher`                     | Plain-language page text, button labels, meta tags, user research |
 | Research                      | `research-analyst`, `data-researcher`, `search-specialist`                                               | Finding and verifying public data about Bukidnon                  |

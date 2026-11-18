@@ -1,8 +1,9 @@
 # Content Guide
 
-How to change what the site says. Read [translations.md](translations.md) first: most visible
-text exists twice, once in the HTML and once in `assets/js/translations.js`, and the dictionary
-wins.
+How to change what the app says. Use the files under `apps/web`, `data/`, and `content/` as the
+active sources. The root HTML/CSS/JavaScript is retained as a visual and behavior reference;
+update it only when a parity check or redirect requires it. Read [translations.md](translations.md)
+before changing localized text.
 
 Before changing a fact (a name, a number, a date), update
 [bukidnon-facts.md](bukidnon-facts.md) with the new value and its source. Then update the
@@ -10,23 +11,24 @@ pages listed below.
 
 ## Where things live
 
-| What                                                    | Where                                                                                                                                 |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Emergency hotline bar                                   | `scripts/chrome/hotline.html` (then `npm run chrome`), plus `react-app/src/components/layout/HotlineBar.tsx`                          |
-| Header, navigation and footer                           | `scripts/chrome/header.html`, `footer.html` (then `npm run chrome`), plus the React `Header.tsx` and `Footer.tsx`                     |
-| Homepage                                                | `index.html` and the `home-*` keys in `translations.js`                                                                               |
-| Governor, Vice Governor, Board Members, representatives | `data/officials.json` (rendered by `assets/js/officials.js`) and the cards in `government/index.html` and `index.html`                |
-| Cities, municipalities and districts                    | `government/index.html` (section `#lgus`) and `data/demographics.json`                                                                |
-| Population and area                                     | `data/demographics.json`, the homepage stat cards, `statistics/index.html`                                                            |
-| Service categories                                      | `services/*.html`                                                                                                                     |
-| Office pages and document guides                        | `service-details/*.html`                                                                                                              |
-| Search results                                          | `data/services.json` and `assets/js/search.js`                                                                                        |
-| Capitol directory                                       | `contact/index.html`                                                                                                                  |
-| Ordinances and resolutions                              | `data/ordinances.json`, `data/resolutions.json`                                                                                       |
-| Budget, SRE and DPWH projects                           | `data/fiscal_transparency.json`, `data/dpwh-projects.json`                                                                            |
-| News                                                    | `data/news.json` (see [news-curation.md](news-curation.md))                                                                           |
-| Our Projects page and nav dropdown                      | `data/projects.json` (rendered by `assets/js/projects.js`), the "Our Projects" dropdown in `scripts/chrome/header.html`, `Header.tsx` |
-| Sitemap                                                 | `sitemap.xml` and `sitemap/index.html`                                                                                                |
+| What                                                    | Where                                                                                                                                            |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Emergency hotline bar                                   | `apps/web/src/config/contact.ts`                                                                                                                 |
+| Header, navigation and footer                           | `apps/web/src/components/layout/` and `apps/web/src/config/navigation.ts`; text in `apps/web/messages/`                                          |
+| Homepage                                                | `apps/web/src/features/home/` and the `home_*` keys in `apps/web/messages/*.json`                                                                |
+| Governor, Vice Governor, Board Members, representatives | `data/officials.json`, rendered by the government feature and homepage                                                                           |
+| Cities, municipalities and districts                    | `data/demographics.json` and the government feature                                                                                              |
+| LGU and barangay directories                            | `data/lgus.json`, `data/barangays.json`, `data/bukidnon-boundary.geojson`; validated in `apps/web/src/features/directories/`                     |
+| Population and area                                     | `data/demographics.json` and the home and statistics features                                                                                    |
+| Service categories                                      | `data/service-categories.json` (each `/services/<id>` page, in EN, FIL and CEB); the directory cards in `apps/web/src/routes/services/index.tsx` |
+| Office pages and document guides                        | `content/services/<slug>/{en,fil,ceb}.mdx`                                                                                                       |
+| Search results                                          | `data/services.json` (titles, keywords, offices) and the engine in `apps/web/src/features/services/search.ts`                                    |
+| Capitol directory                                       | `apps/web/src/features/engagement/` and `apps/web/src/config/contact.ts`                                                                         |
+| Ordinances and resolutions                              | `data/ordinances.json`, `data/resolutions.json`                                                                                                  |
+| Budget, SRE and DPWH projects                           | `data/fiscal_transparency.json`, `data/dpwh-projects.json`                                                                                       |
+| News                                                    | `data/news.json` (see [news-curation.md](news-curation.md))                                                                                      |
+| Our Projects page and nav dropdown                      | `data/projects.json` (validated in `apps/web/src/features/projects/`), the "Our Projects" dropdown in `apps/web/src/config/navigation.ts`        |
+| Sitemap                                                 | Generated from routes by `scripts/generate-seo-files.ts`; the sitemap page is in `apps/web/src/routes/sitemap.tsx`                               |
 
 ## Common tasks
 
@@ -34,48 +36,173 @@ pages listed below.
 
 1. Update section 3 of [bukidnon-facts.md](bukidnon-facts.md) with the source.
 2. Edit `data/officials.json`.
-3. Update the Governor and Vice Governor cards on the homepage (`index.html`, section
-   "Provincial Leadership") and on `government/index.html`.
-4. Search for the old names across the repo, `react-app/` included:
-   `grep -rn "Old Name" --include=*.html --include=*.js --include=*.json .`
+3. Run `pnpm web:check` and `pnpm web:test` to catch invalid data and presentation issues.
+4. Search for the old name in active app and content sources with `rg "Old Name" apps/web data content`.
 
 ### A hotline number changes
 
-The hotline bar is generated from one template. Edit the number in
-`scripts/chrome/hotline.html`, then copy it into every page and check the diff:
+The app hotline directory is defined in `apps/web/src/config/contact.ts`. Update it there and
+check the related contact page and navigation labels:
 
 ```bash
-npm run chrome
-git diff --stat
+pnpm web:check
+pnpm web:test
 ```
 
-Also update `react-app/src/components/layout/HotlineBar.tsx`, `contact/index.html` and
-[bukidnon-facts.md](bukidnon-facts.md).
+Update [bukidnon-facts.md](bukidnon-facts.md) when the number is a verified provincial fact.
 
-### Add a service-details page
+### Change a service category page
 
-1. Copy an existing page in `service-details/` that has a similar layout.
-2. Change the `<title>`, meta description, canonical and `og:url`, breadcrumbs and content.
-3. Use a new key prefix for its `data-i18n` keys and add `en` and `fil` (and ideally `ceb`)
-   values to `translations.js`.
-4. Link to it from the relevant `services/*.html` page and from `government/index.html` if
-   it is an office.
-5. Add it to `data/services.json` (for search), `sitemap.xml` and `sitemap/index.html`.
+Each `/services/<id>` page comes from `data/service-categories.json`: the header, the contact
+strip, the card sections and the closing note. Every piece of text has `en`, and `fil` and
+`ceb` where a translation exists; a missing translation shows the English text. Links are app
+paths (`/service-details/pswdo`), `tel:` numbers, or `https://` URLs, which open in a new tab.
+`pnpm web:test` fails if a link points to a page that does not exist or an icon is not in
+Bootstrap Icons.
+
+### Write or change a service guide (MDX)
+
+Service guides such as `/service-details/pswdo` are documents in
+`content/services/<slug>/`, one file per language: `en.mdx` (required), `fil.mdx` and
+`ceb.mdx`. A language without a file shows the English text; that page points search engines
+to the English one and leaves the sitemap until it is translated. The slug must exist in
+`data/services.json`.
+
+Each file starts with frontmatter, then Markdown and a small set of blocks that reproduce the
+legacy design:
+
+```mdx
+---
+title: Provincial Social Welfare and Development Office (PSWDO) # page heading
+shortTitle: Provincial Social Welfare and Development Office # breadcrumb and browser title
+description: One or two sentences for search results and link previews (50-300 characters).
+summary: The line under the heading
+badge: Social Welfare
+icon: heart-fill # Bootstrap Icons name
+parent: /services/social-services # breadcrumb parent: a /services/<category> page or /government; omit to go straight from Services
+---
+
+<Section alt icon="list-ol" title="How to Ask for Help" intro="General steps.">
+
+<Columns>
+
+<Box title="Steps">
+
+1. Numbered steps get numbered icons.
+2. ...
+
+</Box>
+
+<Box title="What to Bring" note="Requirements may vary; confirm with the office.">
+
+- Bullet lists get check icons (`listIcon="check"` changes them).
+
+</Box>
+
+</Columns>
+
+</Section>
+```
+
+| Block                                   | Use                                                                                                                                                                      |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `<Section alt icon title intro>`        | A band of the page; `alt` makes it grey. Without `title` it has no heading                                                                                               |
+| `<Stats>` with `<Stat icon label>`      | Four quick facts (office, location, hours, days)                                                                                                                         |
+| `<CharterNote>`                         | The volunteer-guide disclaimer, ending with a Markdown link                                                                                                              |
+| `<Prose>`                               | Paragraphs of running text in a box                                                                                                                                      |
+| `<Cards>` with `<Card icon title tags>` | A grid of programs or services; the text or a list goes between the tags. `tags="PWD"` or `tags={["Businesses", "Provincial tax"]}`                                      |
+| `<Columns>`                             | Two columns (one on phones)                                                                                                                                              |
+| `<Box title icon listIcon note>`        | A box with a heading and a list                                                                                                                                          |
+| `<OfficeInfo address hours phone>`      | Address, hours and a tap-to-call number. For several numbers or a note, put `<Phone number="(088) 813-5741">(Capitol main line)</Phone>` items inside instead of `phone` |
+| `<LinkButton href icon>`                | A button link on its own line                                                                                                                                            |
+| Markdown table                          | A fee or schedule table (blue header row); `<Danger>` inside a cell makes it red                                                                                         |
+| `<TableNote>`                           | The small source line under a table                                                                                                                                      |
+
+Some offices (Civil Registration, PDRRMD, the Provincial Health Office, the Provincial
+Assessor) use the legacy guide layout instead: quick facts, then topics on the left and the
+office's contact card on the right. See `content/services/pdrrmd/en.mdx` for a complete
+example.
+
+| Block                                             | Use                                                                                                                 |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `<PageSection>`                                   | A band of the page with the larger legacy spacing                                                                   |
+| `<KeyFacts>` with `<KeyFact icon label>`          | Four quick facts; the value can be a link (`[(088) 813-1262](tel:+63888131262)`)                                    |
+| `<TopicNav label>` with `<TopicLink href icon>`   | Buttons that jump to topics (`href="#psa"` for `<Topic id="psa">`)                                                  |
+| `<SidebarLayout>`                                 | Holds `<Topics>` (the topics) and `<ContactCard>` (the sidebar)                                                     |
+| `<Topic id theme icon title subtitle>`            | A topic with a coloured header; `theme` is one of `blue`, `pink`, `gray`, `violet`, `amber`, `green`, `cyan`, `red` |
+| `<Checklist>`                                     | A Markdown list shown as tiles with a green check                                                                   |
+| `<Steps>` with `<Step title>`                     | Numbered steps, each with a title and text                                                                          |
+| `<ContactCard title>` with `<Contact icon label>` | The office's contact details; text or links inside each `Contact`                                                   |
+| `<RelatedLinks title>`                            | A Markdown list of links at the bottom of the contact card                                                          |
+
+Inside a `<Topic>`, use Markdown headings (`###`, `####`), paragraphs, links and tables.
+More guide-layout blocks, used by the Provincial Assessor page:
+
+| Block                                             | Use                                                                               |
+| ------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `<Topic … prose>`                                 | Sets the topic's paragraphs as smaller running prose                              |
+| `<TopicFacts>` with `<TopicFact icon label note>` | Four facts across the top of a topic                                              |
+| `<Checklist title icon>`                          | A small heading above the tiles, and another icon than the check                  |
+| `<Lead>`, `<Note>`, `<Fineprint>`                 | An opening grey paragraph; a small line or link after the steps; small grey print |
+| `<PageSection flushTop>`                          | A band with no top padding, continuing the one above                              |
+| `<RelatedLinks title plain>`, `<SideNotes title>` | The Assessor's related links, and a bulleted list of notes, in the contact card   |
+| `<ContactButton href>`                            | A full-width button at the bottom of the contact card                             |
+
+The birth, death and marriage certificate pages use the certificate layout (see
+`content/services/birth-certificate/en.mdx`), with `Section` and `Stats` from above:
+
+| Block                                             | Use                                                                                  |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `<Notice icon title>`                             | The box that says which office handles the document, ending with a link              |
+| `<RouteGrid>` with `<ListBox icon title>`         | Two boxes side by side; a numbered Markdown list is steps, a bullet list gets checks |
+| `<ListNote>`                                      | A small line, usually a link, under a box's list                                     |
+| `<ProcessCards>` with `<ProcessCard title final>` | Numbered steps as cards; `final` makes the last number green                         |
+| `<InfoGrid>` with `<InfoMain>` and `<InfoSide>`   | A wide column and a narrow one                                                       |
+| `<SectionHeading icon title intro>`               | A section heading inside a column                                                    |
+| `<Faq question>`                                  | A question that opens to show its answer                                             |
+| `<SideCard icon title>`                           | A card in the narrow column; Markdown text, `**bold**` lines and link lists inside   |
+| `<Hours>`, `<SideLink href>`, `<ButtonLink href>` | A line with a clock; a link on its own; a full-width button                          |
+
+Business Permits and Property Declaration add a few blocks of their own:
+
+| Block                                                         | Use                                                                                                          |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `<ProcessTable widths="34,40,26">` with `<StepBadge>`         | A Markdown table of steps with a blue header; start each step cell with `<StepBadge>1</StepBadge> **Title**` |
+| `<ListBox>` without `icon` and `title`                        | A box with only a list                                                                                       |
+| `<CardGrid>` with `<InfoCard title href>`                     | Short titled cards, three per row (or two in a `<RouteGrid>`); `href` makes the title a link                 |
+| `<Section large>`, `<Stats large>`                            | The bigger headings and quick facts of Property Declaration                                                  |
+| `<Tiles>` with `<Tile label>`                                 | A label beside a short answer, three per row                                                                 |
+| `<FieldGroups>` with `<FieldGroup icon title>`                | Two cards per row, each with a checked Markdown list                                                         |
+| `<RequirementCard title>`                                     | A card with a plain bulleted list; put several in `<Tiles>`                                                  |
+| `<ContactBox icon title>` with `<IconList>`/`<IconItem icon>` | A contact or links card; each list item has its own icon (`<IconList muted>` for grey)                       |
+
+- Leave a blank line around Markdown inside a block, as above.
+- Links: app paths (`/government#lgus`) stay in the reader's language; `https://` links open
+  in a new tab.
+- No `import`, `export` or other components: `pnpm web:test` fails on anything not in the
+  table, on unknown icons and on invalid frontmatter.
+- Keep the same blocks, in the same order, in every language. Text that is not translated yet
+  can stay in English in `fil.mdx` or `ceb.mdx`.
+
+Service guides are maintained as localized MDX documents; legacy `service-details/*.html` files
+remain available for visual and behavior parity review. New guides
+go in `content/services/`.
 
 ### Add or change a project on the Our Projects page
 
 1. Add an entry to `data/projects.json`: `id`, `name`, `description`, `url`, `repos` (a list
    of `{ "name": "Org/repo", "url": "https://github.com/Org/repo" }`), `type` (`org` or
    `community`), `category`, `status` (`active`, `development` or `archived`) and a Bootstrap
-   `icon`. The tabs, repo filter, category filter and the View Details dialog are built from
-   this file.
-2. Add `proj-<id>-name` and `proj-<id>-desc` to `en`, `fil` and `ceb` in `translations.js`
-   (and `proj-cat-<category>` for a new category). The JSON text is the English fallback.
-3. If the project is `active`, also add it to the "Our Projects" dropdown: add an `<li>` to
-   the dropdown in `scripts/chrome/header.html` and run `npm run chrome`, add
-   `EXTERNAL_PROJECTS` in `react-app/src/components/layout/Header.tsx`, and add a
-   `nav-projects-<id>` key in `translations.js` and `LanguageContext.tsx`.
-4. Bump `CACHE_VERSION` in `sw.js` so browsers pick up the new data.
+   `icon` class such as `bi-cash-coin`. The tabs, repo filter, category filter and the View
+   Details dialog are built from this file, and the build fails if an entry is invalid.
+2. Add `proj_<id>_name` and `proj_<id>_desc` to `apps/web/messages/{en,fil,ceb}.json` (and
+   `proj_cat_<category>` for a new category), and map them in `projectText` in
+   `apps/web/src/features/projects/projects-page.tsx`. `pnpm web:test` fails if a project has no name or
+   description in a language, or if its icon is not in Bootstrap Icons.
+3. If the project is `active`, also add it to the "Our Projects" dropdown in
+   `apps/web/src/config/navigation.ts`, with a `nav_projects_<id>` message.
+4. Keep the legacy `projects/` page as a parity reference; update it only when required for a
+   direct comparison or URL compatibility check.
 
 ### Fill an empty data file
 
@@ -84,8 +211,9 @@ Bukidnon data is available. To fill one:
 
 1. Get the data from the official source (Sangguniang Panlalawigan records, BLGF, DBM,
    DPWH, DTI CMCI, the Provincial Government's Facebook page).
-2. Look at the script that renders it (see [architecture.md](architecture.md#javascript)) to
-   see the fields it expects. Keep the existing top-level shape of the file.
+2. Look at its schema in the feature's data module, such as
+   `apps/web/src/features/legislative/data.ts` (see
+   [architecture.md](architecture.md#content-and-validation)) to see the fields it expects. Keep the existing top-level shape of the file.
 3. Add a source and "as of" date in the data where the format allows, and mention the source
    on the page.
 4. Load the page locally and check the browser console for errors.

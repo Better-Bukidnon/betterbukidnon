@@ -1,53 +1,102 @@
-# Getting Started
+# Getting started
 
 ## Requirements
 
-- Node.js 20 or newer (the build uses `npx`, Babel, Terser, clean-css and html-minifier)
-- Python 3 (local web server)
+- Node.js 22.18+, 24.11+ or 26+ (see `engines` in `package.json`)
+- pnpm 11 or newer (Corepack is recommended)
 - Git
-- Optional: [Wrangler](https://developers.cloudflare.com/workers/wrangler/) for deploying
-  (`npx wrangler` works without a global install)
+- Python 3 for `pnpm serve:dist` and the Playwright test server
 
-## Run the site locally
+## Install and run
 
 ```bash
 git clone https://github.com/Better-Bukidnon/betterbukidnon.git
 cd betterbukidnon
-npm install
-npm run dev            # http://localhost:8000
+corepack enable
+pnpm install
+pnpm web:dev
 ```
 
-`npm run dev` serves the source files as they are, with no build step. Pages link to each
-other with clean URLs (`/services/health`, not `/services/health.html`). Python's built-in
-server doesn't resolve those, so for clicking around use the clean-URL server instead:
+The Vite development server prints its local URL. The current React app lives in `apps/web`;
+run its scripts from the repository root so it uses the shared dependency installation.
+
+## Build and preview
 
 ```bash
-python3 serve.py -d .  # source files on http://localhost:8888, resolves /page to /page.html
-python3 serve.py       # same for the built dist/ folder
+pnpm web:check
+pnpm web:test
+pnpm build
+pnpm serve:dist
 ```
 
-## Build for production
+`pnpm build` writes the Cloudflare static site to `apps/web/dist/client`. It prerenders routes
+and generates the service worker. `pnpm serve:dist` serves those generated files on port 8080.
+Use `wrangler.jsonc` as the source of truth for the deployed static directory and environment
+routes.
+
+## Repository commands
+
+| Command                             | Purpose                                                        |
+| ----------------------------------- | -------------------------------------------------------------- |
+| `pnpm web:dev`                      | Start the app development server                               |
+| `pnpm web:check`                    | Run app formatting, lint, and TypeScript checks                |
+| `pnpm web:test`                     | Run the app's unit and content tests                           |
+| `pnpm web:e2e`                      | Run browser checks against the built app                       |
+| `pnpm web:build`                    | Build, prerender, and generate the service worker              |
+| `pnpm build`                        | Production build entry point                                   |
+| `pnpm version:check`                | Print current project version without changing it              |
+| `pnpm test`                         | Run the legacy Playwright browser tests                        |
+| `pnpm lighthouse`                   | Run Lighthouse CI against a running `pnpm serve:dist`          |
+| `pnpm screenshots:mobile`           | Phone-size screenshots of the legacy pages                     |
+| `pnpm chrome` / `pnpm chrome:check` | Regenerate or check the legacy pages' shared header and footer |
+| `pnpm visual:parity`                | Capture a side-by-side app and legacy comparison               |
+
+### Visual parity review
+
+Build first, then compare a focused set of routes in the supported locales and widths:
 
 ```bash
-npm run build          # bumps the patch version, then builds dist/
-bash build.sh --no-bump
-bash build.sh --no-react   # skip the Next.js build (faster)
-npm run serve:dist     # preview dist/ on http://localhost:8080
+pnpm build
+pnpm visual:parity -- --routes=/,/projects,/services --locales=en,fil,ceb --widths=1366,1024,768,375
 ```
 
-`build.sh` copies the site into `dist/` (leaving out development files such as `docs/`,
-`scripts/`, `tests/`, `admin/` and `react-app/`), builds the React app and merges its
-`/services/health` page, then minifies HTML, CSS and JavaScript. See
-[architecture.md](architecture.md#build-pipeline) for the details.
+The script serves the legacy root and built app locally, stops both servers when finished, and
+writes screenshots plus an opacity-overlay review page to `screenshots/parity/index.html`.
+Choose routes explicitly so comparisons stay focused; app clean URLs are matched to their
+legacy `.html` sources through `apps/web/public/_redirects`.
+Pass `--browser=firefox` or `--browser=webkit` to use another installed Playwright browser.
+
+## Migration and contribution workflow
+
+The user-facing application routes live in `apps/web`. Legacy HTML, CSS, and JavaScript stay
+in the repository as visual and behavior references during parity review; see
+[architecture.md](architecture.md#legacy-static-pages).
+
+For a new feature, prefer this sequence:
+
+1. Put the page, its components, data loading and tests in `apps/web/src/features/<domain>/`,
+   and a thin route in `apps/web/src/routes` that renders it.
+2. Validate JSON where the feature loads it, with a Zod schema and `parseContent`.
+3. Use shared route links, localization, and layout components rather than duplicating them.
+4. Run `pnpm web:check`, `pnpm web:test`, and `pnpm build` for app or deployment changes.
+5. Open a pull request into `develop` and describe any content sources or verification limits.
+
+See [architecture.md](architecture.md), [content-guide.md](content-guide.md), and
+[deployment.md](deployment.md) for more detail.
 
 ## Tests and checks
 
+The Playwright tests need browsers the first time:
+
 ```bash
-npm run format:check   # Prettier
-npm test               # Playwright (volunteer popup specs); needs browsers:
-npx playwright install
-npm run lighthouse     # Lighthouse CI against a running dist/ server
+pnpm exec playwright install
+pnpm test
+pnpm build
+pnpm web:e2e
 ```
+
+`pnpm test` covers the retained legacy pages. `pnpm web:e2e` serves `apps/web/dist/client`
+through a local static server that applies the app's trailing-slash and 404 behavior.
 
 GitHub Actions runs Lighthouse CI on pushes and pull requests to `main`
 (`.github/workflows/lighthouse.yml`). Accessibility must score 90 or more.
@@ -55,22 +104,21 @@ GitHub Actions runs Lighthouse CI on pushes and pull requests to `main`
 ### Phone screenshots
 
 ```bash
-npm run screenshots:mobile
+pnpm screenshots:mobile
 ```
 
-Saves the first screen and the full page of every page at 320, 375 and 412 px wide to
-`screenshots/` (ignored by git and left out of the build), and lists any page that scrolls
-sideways. It uses your installed Google Chrome; pass `--browser=chromium` or
-`--browser=firefox` to use a browser from `npx playwright install` instead. Narrow it down with
-`--pages=home,services,service-details/civil-registrar` and `--widths=375`: a folder name is
-that folder's index page, and `folder/name` is another page in it.
+Saves the first screen and the full page of every legacy page at 320, 375 and 412 px wide to
+`screenshots/` (ignored by git) and lists any page that scrolls sideways. It uses your
+installed Google Chrome; pass `--browser=chromium` or `--browser=firefox` to use a browser
+from `pnpm exec playwright install` instead. Narrow it down with `--pages=home,services` and
+`--widths=375`.
 
 For before/after images in a pull request, run it on `develop` and on your branch with
 different output folders:
 
 ```bash
-git switch develop && npm run screenshots:mobile -- --out=screenshots/before
-git switch my-branch && npm run screenshots:mobile -- --out=screenshots/after
+git switch develop && pnpm screenshots:mobile -- --out=screenshots/before
+git switch my-branch && pnpm screenshots:mobile -- --out=screenshots/after
 ```
 
 ## Branches
@@ -82,11 +130,3 @@ git switch my-branch && npm run screenshots:mobile -- --out=screenshots/after
 | feature branches | Your work; open PRs into `develop` | preview URL on `*.workers.dev`                          |
 
 See [deployment.md](deployment.md).
-
-## Your first change
-
-1. Read [content-guide.md](content-guide.md) for where the text you want to change lives.
-2. Remember that most visible text is also in `assets/js/translations.js`. Changing only the
-   HTML is not enough (see [translations.md](translations.md)).
-3. Run the site, check the page in English, Filipino and Cebuano, and check it at phone width.
-4. Open a pull request into `develop`.

@@ -1,0 +1,101 @@
+/**
+ * Documents: pages read top to bottom, written in MDX at
+ * `content/<collection>/<slug>/<locale>.mdx` (see docs/content-guide.md).
+ */
+
+/** Components a document may use; `components/blocks` implements each one. */
+export const blockNames = [
+  'CardGrid',
+  'ContactBox',
+  'FieldGroup',
+  'FieldGroups',
+  'IconItem',
+  'IconList',
+  'InfoCard',
+  'ProcessTable',
+  'RequirementCard',
+  'StepBadge',
+  'Tile',
+  'Tiles',
+  'ContactButton',
+  'Fineprint',
+  'Lead',
+  'Note',
+  'SideNotes',
+  'TopicFact',
+  'TopicFacts',
+  'ButtonLink',
+  'Faq',
+  'Hours',
+  'InfoGrid',
+  'InfoMain',
+  'InfoSide',
+  'ListBox',
+  'ListNote',
+  'Notice',
+  'ProcessCard',
+  'ProcessCards',
+  'RouteGrid',
+  'SectionHeading',
+  'SideCard',
+  'SideLink',
+  'Checklist',
+  'Contact',
+  'ContactCard',
+  'KeyFact',
+  'KeyFacts',
+  'PageSection',
+  'RelatedLinks',
+  'SidebarLayout',
+  'Step',
+  'Steps',
+  'Topic',
+  'TopicLink',
+  'TopicNav',
+  'Topics',
+  'Box',
+  'Card',
+  'Cards',
+  'CharterNote',
+  'Columns',
+  'Danger',
+  'LinkButton',
+  'OfficeInfo',
+  'Phone',
+  'Prose',
+  'Section',
+  'Stat',
+  'Stats',
+  'TableNote',
+] as const
+export type BlockName = (typeof blockNames)[number]
+
+/** `…/content/services/pswdo/fil.mdx` -> { collection: 'services', slug: 'pswdo', locale: 'fil' } */
+export function parseDocumentPath(path: string) {
+  const match = /(?:^|\/)content\/([^/]+)\/([^/]+)\/([^/]+)\.mdx$/.exec(path)
+  if (!match) return undefined
+  const [, collection = '', slug = '', locale = ''] = match
+  return { collection, slug, locale }
+}
+
+/**
+ * The file to show for a page in a language, and the languages the page exists in. Falls back
+ * to English when there is no translation; `undefined` when the page has no document at all.
+ */
+export function resolveDocument(
+  paths: readonly string[],
+  collection: string,
+  slug: string,
+  locale: string,
+  baseLocale = 'en',
+) {
+  const files = new Map<string, string>()
+  for (const path of paths) {
+    const parsed = parseDocumentPath(path)
+    if (parsed?.collection === collection && parsed.slug === slug) files.set(parsed.locale, path)
+  }
+  const shown = files.has(locale) ? locale : baseLocale
+  const path = files.get(shown)
+  if (!path) return undefined
+  return { path, locale: shown, locales: [...files.keys()].sort() }
+}

@@ -4,28 +4,40 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: [develop, main]
+
+permissions:
+  contents: read
 
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Enable pnpm
+        run: corepack enable
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
+          cache: pnpm
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build
-        run: npm run build
+        run: pnpm build
+        env:
+          # Audit the production robots.txt; preview builds block crawling on purpose.
+          SITE_ENV: production
 
       - name: Start server
         run: |
-          cd dist
+          cd apps/web/dist/client
           python3 -m http.server 8080 &
           sleep 3
 
@@ -34,8 +46,9 @@ jobs:
         with:
           urls: |
             http://localhost:8080/
-            http://localhost:8080/services/
-            http://localhost:8080/contact/
-            http://localhost:8080/government/
+            http://localhost:8080/services
+            http://localhost:8080/fil/services/health
+            http://localhost:8080/contact
+            http://localhost:8080/government
           configPath: .lighthouserc.json
           uploadArtifacts: true

@@ -9,8 +9,7 @@ how to update content and translations, and how it is deployed.
 
 ### Prerequisites
 
-- Node.js 20 or higher and npm
-- Python 3 (for the local development server)
+- Node.js version supported by `package.json` and pnpm
 - Git
 
 ### Setup
@@ -18,12 +17,13 @@ how to update content and translations, and how it is deployed.
 ```bash
 git clone https://github.com/Better-Bukidnon/betterbukidnon.git
 cd betterbukidnon
-npm install
-npm run dev
+corepack enable
+pnpm install
+pnpm web:dev
 ```
 
-Open http://localhost:8000 in your browser. See [docs/getting-started.md](docs/getting-started.md)
-for the full workflow, including the React app in `react-app/` and the production build.
+Open the local URL printed by Vite. See [docs/getting-started.md](docs/getting-started.md)
+for checks, builds, and the legacy-site parity workflow.
 
 ## How to Contribute
 
@@ -97,25 +97,12 @@ Types:
 
 ## Code Guidelines
 
-### HTML
+### Frontend
 
-- Use semantic HTML5 elements
-- Include proper ARIA labels for accessibility
-- Validate HTML before submitting
-
-### CSS
-
-- Follow existing naming conventions
-- Use CSS custom properties (variables)
-- Ensure responsive design
-- Test on mobile devices
-
-### JavaScript
-
-- Keep vanilla JS (no frameworks unless approved)
-- Use meaningful variable and function names
-- Add comments for complex logic
-- Avoid global variables
+- Build application routes in `apps/web` with React and TypeScript.
+- Use Tailwind CSS and the existing shared layout and UI components.
+- Keep migrated pages visually aligned with the legacy HTML/CSS reference.
+- Use the repository's pnpm and Vite+ commands; do not add a second package manager.
 
 ### Accessibility
 
@@ -169,9 +156,9 @@ Technical correctness alone does not guarantee acceptance, particularly when a c
 Before opening a Pull Request against `develop`, run the automated checks locally:
 
 ```bash
-npm run chrome:check   # Verify shared header, footer, and hotline bar across all pages
-npm run validate       # Validate JSON schemas, PSGC uniqueness, LGU-barangay links, and local assets
-npm run test:chrome    # Run Playwright route smoke tests, directory filters, and responsive checks
+pnpm chrome:check   # Verify shared header, footer, and hotline bar across all pages
+pnpm validate       # Validate JSON schemas, PSGC uniqueness, LGU-barangay links, and local assets
+pnpm test:chrome    # Run Playwright route smoke tests, directory filters, and responsive checks
 ```
 
 Manual checks for content, accessibility, and translations:

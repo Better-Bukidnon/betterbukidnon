@@ -9,6 +9,7 @@
 
 import { chromium } from 'playwright';
 import { spawn } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { mkdir, rm } from 'node:fs/promises';
 import { setTimeout as sleep } from 'node:timers/promises';
 
@@ -24,7 +25,7 @@ const FRAMES_DIR = `/tmp/popup-frames-${VP.name}`;
 const VIDEO_DIR = `/tmp/popup-video-${VP.name}`;
 
 const server = spawn('python3', ['-m', 'http.server', String(PORT)], {
-  cwd: new URL('..', import.meta.url).pathname,
+  cwd: fileURLToPath(new URL('..', import.meta.url)),
   stdio: 'ignore',
 });
 await sleep(1200);

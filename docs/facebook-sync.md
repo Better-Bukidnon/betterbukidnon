@@ -7,9 +7,9 @@ them, and merges them into [`data/news.json`](../data/news.json) — which drive
 both the homepage **Latest Updates** and the **News** page. Runs on a schedule
 with no per-post manual work.
 
-- Engine: [`scripts/sync-facebook.js`](../scripts/sync-facebook.js)
+- Engine: [`scripts/sync-facebook.ts`](../scripts/sync-facebook.ts)
 - Scheduler: [`.github/workflows/facebook-sync.yml`](../.github/workflows/facebook-sync.yml)
-- Renderer: [`assets/js/news.js`](../assets/js/news.js) (unchanged — reads the merged file)
+- Renderer: the News feature in [`apps/web/src/features/news/`](../apps/web/src/features/news/)
 
 ## The one prerequisite (activation gate)
 
@@ -43,25 +43,9 @@ In **GitHub → Settings → Secrets and variables → Actions**:
 | `FB_PAGE_ID`      | **Variable** | The page's numeric ID (public, safe as a variable) |
 | `FB_ACCESS_TOKEN` | **Secret**   | The Page / System User access token                |
 
-> **Hosting note.** The site now deploys on Cloudflare Workers (`wrangler.jsonc`,
-> `npm run build`). The cPanel FTP deploy step in the workflow is **legacy**: it is
-> kept, but only runs when `FTP_SERVER` is set. On Cloudflare, commit the updated
-> `data/news.json` (download the `news-json` artifact the job uploads) and let the
-> normal build deploy it.
-
-Legacy only: to auto-deploy the updated file to an old cPanel host, also add:
-
-| Name              | Type         | Value                                               |
-| ----------------- | ------------ | --------------------------------------------------- |
-| `FTP_SERVER`      | Secret       | cPanel FTP host (e.g. `ftp.betterbukidnon.org`)     |
-| `FTP_USERNAME`    | Secret       | FTP account username                                |
-| `FTP_PASSWORD`    | Secret       | FTP account password                                |
-| `FTP_REMOTE_PATH` | **Variable** | Path to the file, e.g. `public_html/data/news.json` |
-
-The deploy step uses **FTPS** (`curl --ssl-reqd`). If your host only allows
-**SFTP**, swap the deploy step for an SFTP/key-based action — the sync engine is
-unchanged either way. If no FTP secrets are set, the workflow instead uploads the
-updated `news.json` as a downloadable build artifact, so nothing is ever lost.
+> **Hosting note.** The site deploys to Cloudflare Workers (`wrangler.jsonc`,
+> `pnpm build`). The workflow uploads changed `data/news.json` as an artifact. Review
+> and commit the artifact so the regular Cloudflare build publishes it.
 
 ## How it behaves (reliability guarantees)
 
@@ -86,14 +70,14 @@ The engine accepts a saved Graph response via `FB_FIXTURE`, bypassing the networ
 
 ```bash
 # Save a sample Graph /posts response to fixture.json, then:
-FB_FIXTURE=fixture.json NEWS_JSON_PATH=/tmp/news.json node scripts/sync-facebook.js
+FB_FIXTURE=fixture.json NEWS_JSON_PATH=/tmp/news.json pnpm exec tsx scripts/sync-facebook.ts
 ```
 
 Once a real token exists, dry-run against the live API without deploying:
 
 ```bash
 FB_PAGE_ID=<id> FB_ACCESS_TOKEN=<token> NEWS_JSON_PATH=/tmp/news.json \
-  node scripts/sync-facebook.js
+  pnpm exec tsx scripts/sync-facebook.ts
 ```
 
 ## Optional upgrade: smarter categorization

@@ -1,0 +1,16 @@
+{
+  "name": "BetterBukidnon.org",
+  "short_name": "BetterBukidnon",
+  "description": "Civic information portal for the Province of Bukidnon.",
+  "theme_color": "#0032a0",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/icons/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
