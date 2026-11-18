@@ -44,6 +44,12 @@ test('the legacy barangay profile URL redirects by PSGC code', async ({ page }) 
   await expect(page.locator('h1')).toContainText('Aglayan')
 })
 
+test('an unknown legacy barangay code shows not-found without changing the URL', async ({ page }) => {
+  await page.goto('/barangays/profile?code=not-a-psgc-code')
+  await expect(page).toHaveURL(/\/barangays\/profile\?code=not-a-psgc-code$/)
+  await expect(page.getByRole('heading', { name: 'Page Not Found' })).toBeVisible()
+})
+
 test('the home map searches LGUs and opens the selected barangay profile', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('bb-vol-popup-v1', '1'))
   await page.goto('/')

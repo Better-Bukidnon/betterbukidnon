@@ -1,14 +1,16 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { NotFound } from '@/components/layout/not-found'
 import { localizePath } from '@/lib/i18n'
 import { seo } from '@/lib/seo'
+import { m } from '@/paraglide/messages'
 import { getLocale } from '@/paraglide/runtime'
 
 export const Route = createFileRoute('/barangays/profile/')({
   head: () =>
     seo({
-      title: 'Barangay profile',
-      description: 'Open a barangay profile by its PSGC code.',
+      title: m.seo_barangays_title(),
+      description: m.seo_barangays_description(),
       path: '/barangays/profile',
       noindex: true,
     }),
@@ -16,6 +18,8 @@ export const Route = createFileRoute('/barangays/profile/')({
 })
 
 function LegacyBarangayProfileRedirect() {
+  const [notFound, setNotFound] = useState(false)
+
   useEffect(() => {
     let cancelled = false
     const code = new URLSearchParams(window.location.search).get('code') ?? undefined
@@ -29,9 +33,11 @@ function LegacyBarangayProfileRedirect() {
     void import('@/features/directories/data').then(({ barangays }) => {
       if (cancelled) return
       const barangay = barangays.find((entry) => entry.psgc_code === code)
-      const href = barangay
-        ? `/barangays/${barangay.lgu_slug}/${barangay.slug.split('/').at(-1)}`
-        : '/404'
+      if (!barangay) {
+        setNotFound(true)
+        return
+      }
+      const href = `/barangays/${barangay.lgu_slug}/${barangay.slug.split('/').at(-1)}`
       window.location.replace(localizePath(href, getLocale()))
     })
 
@@ -40,9 +46,10 @@ function LegacyBarangayProfileRedirect() {
     }
   }, [])
 
+  if (notFound) return <NotFound />
   return (
     <p role="status" className="container-site py-12">
-      Opening barangay profile…
+      {m.stats_loading()}
     </p>
   )
 }
