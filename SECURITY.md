@@ -4,8 +4,8 @@
 
 | Version | Supported |
 | ------- | --------- |
-| 1.1.x   | Yes       |
-| < 1.1   | No        |
+| 2.x     | Yes       |
+| < 2.0   | No        |
 
 ## Reporting a Vulnerability
 
@@ -15,7 +15,10 @@ We take security seriously at BetterBukidnon.org. If you discover a security vul
 
 **Do NOT open a public GitHub issue for security vulnerabilities.**
 
-Instead, please email: **volunteer@betterbukidnon.org**
+Instead, report it privately using either:
+
+- **GitHub (preferred):** [Report a vulnerability](https://github.com/Better-Bukidnon/betterbukidnon/security/advisories/new). It's also under the Security tab → "Report a vulnerability".
+- **Email:** **volunteer@betterbukidnon.org**
 
 Include in your report:
 
@@ -94,7 +97,7 @@ Out of scope:
 
 ## Contact
 
-For security concerns: **volunteer@betterbukidnon.org**
+For security concerns: [report a vulnerability privately](https://github.com/Better-Bukidnon/betterbukidnon/security/advisories/new) or email **volunteer@betterbukidnon.org**
 
 For general inquiries: open a [GitHub issue](https://github.com/Better-Bukidnon/betterbukidnon/issues)
 
