@@ -2,54 +2,36 @@ name: CI
 
 on:
   pull_request:
-    branches: [develop, main]
+    branches: [develop]
   push:
-    branches: [develop, main]
+    branches: [develop]
 
 permissions:
   contents: read
 
-concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
-  web:
+  check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
-
-      - name: Enable pnpm
-        run: corepack enable
-
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      # web:check and web:test compile the Paraglide messages first.
-      - name: Format, lint and type-check
-        run: pnpm web:check
-
-      - name: Unit and content tests
-        run: pnpm web:test
-
-      - name: Build (prerenders every page in every language)
-        run: pnpm build
-
-      - name: Check titles, canonical and hreflang links, JSON-LD and the sitemap
-        run: pnpm seo:check
-
-      - name: Validate legacy datasets
-        run: pnpm validate
-
-      - name: Install Chromium for migrated app checks
-        run: pnpm exec playwright install --with-deps chromium
-
-      - name: Browser checks against the built app
-        run: pnpm web:e2e
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      # Route and sitemap parity against out/ (skipped by `npm test`, which runs before the build)
+      - run: npm run check:routes
+      - run: npx playwright install --with-deps --no-shell chromium
+      - run: npm run test:e2e
+      - if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: playwright-traces
+          path: test-results/
+          retention-days: 7

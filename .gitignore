@@ -1,21 +1,15 @@
 .DS_Store
 node_modules/
-dist/
 .next/
-react-app/out/
-out/
-*.backup
 
-# Playwright
+out/
+
+# Playwright output
 test-results/
 playwright-report/
-blob-report/
-.playwright/
+*.backup
 
-# Output of pnpm screenshots:mobile
-screenshots/
-
-# Local environment files and release archives
+# Build-time config (see .env.example) and release archives
 .env
 release/
 
@@ -24,14 +18,3 @@ release/
 
 # TypeScript incremental build info
 *.tsbuildinfo
-apps/web/dist/
-.vitest/
-
-# TanStack router generator scratch files
-.tanstack/
-
-# Paraglide's compiled messages and runtime (generated from apps/web/messages)
-apps/web/src/paraglide/
-
-# inlang project cache
-apps/web/project.inlang/cache/

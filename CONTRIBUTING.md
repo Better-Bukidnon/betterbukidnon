@@ -9,7 +9,7 @@ how to update content and translations, and how it is deployed.
 
 ### Prerequisites
 
-- Node.js version supported by `package.json` and pnpm
+- Node.js version supported by `package.json` and npm
 - Git
 
 ### Setup
@@ -17,13 +17,12 @@ how to update content and translations, and how it is deployed.
 ```bash
 git clone https://github.com/Better-Bukidnon/betterbukidnon.git
 cd betterbukidnon
-corepack enable
-pnpm install
-pnpm web:dev
+npm install
+npm run dev
 ```
 
-Open the local URL printed by Vite. See [docs/getting-started.md](docs/getting-started.md)
-for checks, builds, and the legacy-site parity workflow.
+Open the local URL printed by Next.js. See [docs/getting-started.md](docs/getting-started.md)
+for checks, builds, and the static export workflow.
 
 ## How to Contribute
 
@@ -97,12 +96,26 @@ Types:
 
 ## Code Guidelines
 
-### Frontend
+### HTML
 
-- Build application routes in `apps/web` with React and TypeScript.
-- Use Tailwind CSS and the existing shared layout and UI components.
-- Keep migrated pages visually aligned with the legacy HTML/CSS reference.
-- Use the repository's pnpm and Vite+ commands; do not add a second package manager.
+- Use semantic HTML5 elements
+- Include proper ARIA labels for accessibility
+- Validate HTML before submitting
+
+### CSS
+
+- Follow existing naming conventions
+- Use CSS custom properties (variables)
+- Ensure responsive design
+- Test on mobile devices
+
+### JavaScript
+
+- Build application routes in `src/app` with Next.js, React, and TypeScript
+- Use the repository's npm commands; do not add a second package manager
+- Use meaningful variable and function names
+- Add comments for complex logic
+- Avoid global variables
 
 ### Accessibility
 
@@ -150,23 +163,6 @@ Pull requests are reviewed for:
 Maintainers make final decisions on whether a pull request is accepted, requires revisions, or is closed without merging.
 
 Technical correctness alone does not guarantee acceptance, particularly when a contribution introduces significant architectural changes that have not been discussed or approved.
-
-## Local Verification & Testing Checklist
-
-Before opening a Pull Request against `develop`, run the automated checks locally:
-
-```bash
-pnpm chrome:check   # Verify shared header, footer, and hotline bar across all pages
-pnpm validate       # Validate JSON schemas, PSGC uniqueness, LGU-barangay links, and local assets
-pnpm test:chrome    # Run Playwright route smoke tests, directory filters, and responsive checks
-```
-
-Manual checks for content, accessibility, and translations:
-
-- **Source Verification:** Confirm new officials, contacts, and statistics follow [docs/source-verification.md](docs/source-verification.md) and never present historical or unconfirmed records as current.
-- **Accessibility:** Verify keyboard navigation, focus states, semantic landmarks, and `alt` attributes (see `tests/volunteer-modal.a11y.spec.js` and `accessibility/`).
-- **Translations:** Ensure any new `data-i18n` keys exist in `en`, `fil`, and `ceb` in `assets/js/translations.js` (see [docs/translations.md](docs/translations.md)).
-
 
 ## Community
 

@@ -1,8 +1,10 @@
 name: Facebook News Sync
 
 # Pulls the latest Provincial Government of Bukidnon Facebook posts, categorizes
-# them, merges them into data/news.json, and uploads changed data as an artifact
-# for review before it is committed to the Cloudflare deployment.
+# them, merges them into src/content/data/news.json, and (if changed) uploads the file.
+#
+# The site imports news.json at build time, so a change goes live only after it is
+# committed and the site rebuilds. Download the artifact and commit it to develop.
 # Runs on a schedule with no manual intervention. Stays dormant and harmless
 # until FB_ACCESS_TOKEN is added as a repository secret.
 
@@ -24,15 +26,15 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 22.19.0
+          node-version: 22
 
-      - name: Sync Facebook posts into data/news.json
+      - name: Sync Facebook posts into src/content/data/news.json
         id: sync
         env:
           FB_PAGE_ID: ${{ vars.FB_PAGE_ID }}
@@ -41,12 +43,12 @@ jobs:
           # FB_API_VERSION: v21.0
           # FB_LIMIT: '25'
           # MAX_FB_ITEMS: '30'
-        run: node --experimental-strip-types scripts/sync-facebook.ts
+        run: node scripts/sync-facebook.js
 
-      - name: Upload news.json artifact for review
+      - name: Upload news.json artifact
         if: steps.sync.outputs.changed == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: news-json
-          path: data/news.json
+          path: src/content/data/news.json
           retention-days: 7

@@ -1,0 +1,23 @@
+{
+  "offline": "Offline",
+  "err403-access-forbidden": "Gidili ang Pagsulod",
+  "err403-contact-us": "Kontaka Kami",
+  "err403-go-to-homepage": "Adto sa Homepage",
+  "err404-browse-services": "Tan-awa ang mga Serbisyo",
+  "err404-go-to-homepage": "Adto sa Homepage",
+  "err404-page-not-found": "Wala Makita ang Panid",
+  "err500-contact-us": "Kontaka Kami",
+  "err500-go-to-homepage": "Adto sa Homepage",
+  "err500-server-error": "Sayop sa Server",
+  "offline-fire-bfp": "Sunog (BFP)",
+  "offline-provincial-hall": "Kapitolyo sa Probinsya",
+  "offline-police-pnp": "Pulis (PNP)",
+  "offline-skip-to-main-content": "Laktaw sa panguna nga sulod",
+  "offline-some-pages-may-not-be-available-right-now": "Ang ubang panid mahimong dili magamit karon. Ania sa ubos ang mga emergency hotline para sa imong kasayon.",
+  "offline-you-are-currently-offline": "Offline ka karon",
+  "offline-emergency-hotlines-bukidnon": "Mga Emergency Hotline sa Bukidnon",
+  "offline-national-emergency": "National Emergency",
+  "offline-pdrrmd": "PDRRMD",
+  "offline-pho": "Provincial Health Office",
+  "offline-pswdo": "PSWDO"
+}
