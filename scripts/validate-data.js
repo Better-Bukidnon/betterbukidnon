@@ -51,6 +51,8 @@ function resolveAssetPath(relAssetPath) {
   if (fs.existsSync(rootCandidate)) return rootCandidate;
   const publicCandidate = path.join(ROOT, 'public', cleanRel);
   if (fs.existsSync(publicCandidate)) return publicCandidate;
+  const webPublicCandidate = path.join(ROOT, 'apps', 'web', 'public', cleanRel.replace(/^assets\//, ''));
+  if (fs.existsSync(webPublicCandidate)) return webPublicCandidate;
   return rootCandidate;
 }
 

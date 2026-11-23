@@ -43,5 +43,4 @@ kept unchanged for reference. They describe Solano, not Bukidnon.
    source.
 4. **Accessible and light.** The active site is a prerendered React and TypeScript app styled
    with Tailwind. Keep pages usable on older phones and slow connections, and preserve the
-   project's WCAG 2.1 AA and Lighthouse accessibility goals. Root HTML/CSS/JS pages are retained
-   as legacy references until their migration and parity review are complete.
+   project's WCAG 2.1 AA and Lighthouse accessibility goals.

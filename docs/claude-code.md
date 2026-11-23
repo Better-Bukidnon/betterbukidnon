@@ -18,7 +18,7 @@ The agent files are copied unmodified from
 
 | Area                          | Agents                                                                                                   | Typical use here                                                  |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| Front end                     | `frontend-developer`, `ui-designer`, `javascript-pro`                                                    | Page layout and CSS for `apps/web`; legacy files are reference    |
+| Front end                     | `frontend-developer`, `ui-designer`, `javascript-pro`                                                    | Page layout and CSS for `apps/web`                                |
 | React app                     | `react-specialist`, `typescript-pro`                                                                     | Routes and features under `apps/web/src/`                         |
 | Scripts                       | `python-pro`                                                                                             | Maintenance scripts in `scripts/`                                 |
 | Quality                       | `code-reviewer`, `debugger`, `qa-expert`, `test-automator`, `ui-ux-tester`                               | Reviews, bug hunts, Playwright tests in `tests/`                  |

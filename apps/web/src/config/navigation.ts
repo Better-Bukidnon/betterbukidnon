@@ -48,7 +48,10 @@ export const primaryNavigation: readonly NavItem[] = [
     link: linkOptions({ to: '/government' }),
     children: [
       { label: m.dir_lgus, link: linkOptions({ to: '/lgus' }) },
-      { label: m.dir_barangays, link: linkOptions({ to: '/barangays' }) },
+      {
+        label: m.dir_barangays,
+        link: linkOptions({ to: '/barangays', search: { lgu: undefined } }),
+      },
     ],
   },
   { label: m.nav_statistics, sections: ['statistics'], link: linkOptions({ to: '/statistics' }) },

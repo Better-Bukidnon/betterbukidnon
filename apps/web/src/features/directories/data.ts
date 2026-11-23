@@ -223,12 +223,6 @@ export const bukidnonBoundary = parseContent(
 
 export const lguBySlug = new Map(lgus.map((lgu) => [lgu.slug, lgu]))
 export const barangayBySlug = new Map(barangays.map((barangay) => [barangay.slug, barangay]))
-export const barangayByPsgc = new Map(
-  barangays.flatMap((barangay) => [
-    [barangay.psgc_code, barangay] as const,
-    [barangay.psgc_9digit, barangay] as const,
-  ]),
-)
 export const barangaysByLgu = barangays.reduce((groups, barangay) => {
   const group = groups.get(barangay.lgu_slug)
   if (group) group.push(barangay)
@@ -238,5 +232,4 @@ export const barangaysByLgu = barangays.reduce((groups, barangay) => {
 
 export const findLgu = (slug: string) => lguBySlug.get(slug)
 export const findBarangay = (slug: string) => barangayBySlug.get(slug)
-export const findBarangayByPsgc = (code: string) => barangayByPsgc.get(code)
 export const findBarangaysForLgu = (slug: string) => barangaysByLgu.get(slug) ?? []

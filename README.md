@@ -63,11 +63,11 @@ Everything else is in [docs/](docs/README.md):
 - [Claude Code subagents](docs/claude-code.md): the AI helpers included in `.claude/agents/`
 - [Rebrand notes](docs/rebrand-from-bettersolano.md): what changed from the BetterSolano template
 
-## Migration note
+## Application
 
-The user-facing migration to the typed React application in `apps/web` is complete. The app is
-what gets deployed; the legacy pages at the repository root remain as visual and content
-references during parity review. See the [architecture guide](docs/architecture.md#migration-status).
+`apps/web` is the only public-site implementation and the only Cloudflare deployment runtime.
+The retired static-site source is recoverable from the
+[`legacy-static-site-pre-70-org-develop` Git tag](docs/cutover-readiness.md).
 
 ## Contributing
 

@@ -16,8 +16,8 @@ Migration work is reviewed in incremental pull requests against the `develop` br
 the merged code on `develop` as the source of truth; an open pull request is not part of the
 deployed application until merged and deployed.
 
-The user-facing routes have been migrated. The legacy pages remain the visual and content
-reference for parity review. See [Legacy static pages](#legacy-static-pages).
+The user-facing routes have been migrated and the retired static source is archived at
+`legacy-static-site-pre-70`.
 
 Current migration goals:
 
@@ -76,9 +76,8 @@ docs/                         Architecture, content, deployment, and contributor
 wrangler.jsonc                Cloudflare static asset directory and environment routes
 ```
 
-The root still holds the legacy static site (page folders such as `services/` and `faq/`,
-`index.html`, `assets/`). It is not deployed; see
-[Legacy static pages](#legacy-static-pages) and the [cutover readiness checklist](cutover-readiness.md).
+The root contains the application source, content and data only. The pre-cleanup static site is
+recoverable from the `legacy-static-site-pre-70` tag; see [the archive record](cutover-readiness.md).
 
 ## App structure
 
@@ -120,8 +119,7 @@ loaders with their Zod schemas, and tests. Routes stay thin: a route file declar
 loader and `head` (`seo()`), and renders the feature's page, passing loader data and search
 params as props. A feature imports shared code from `components/`, `config/` and `lib/`, and
 another feature's public modules only when it needs them (the home hero uses the services
-search box). All user-facing routes have an app implementation. The legacy files remain
-available for visual and behavior parity review until the retirement audit is complete.
+search box). All user-facing routes have an app implementation.
 
 Service search (`features/services/service-search-box.tsx`, used by the home hero and the
 Services page) runs the engine in `features/services/search.ts`, a port of the legacy
@@ -174,16 +172,16 @@ result. The reasons for these choices are in
 Tailwind CSS 4 is loaded through `@tailwindcss/vite`. Shared design tokens and global rules live
 in `apps/web/src/styles.css`; component styles are expressed with Tailwind classes.
 
-The legacy pages are the visual spec. The theme tokens copy their values from
-`assets/css/style.css`: `primary` (#0032a0), `primary-dark`, `secondary`, `accent`, `ink`,
+The app retains the established visual language. Its theme tokens use the original values for
+`primary` (#0032a0), `primary-dark`, `secondary`, `accent`, `ink`,
 `surface-alt`, the hotline, info bar and footer colors, Inter (300–700, self-hosted with
 Fontsource), the `container-site` utility (the legacy `.container`: 1200px, 960px from 1025px to
 1199px, and 24/16/8px side padding), the 8px `rounded-site` radius, the legacy breakpoints
 (`xs` 481, `sm` 576, `md` 768, `lg` 992, `xl` 1025; `max-xl:` is the legacy
 `max-width: 1024px`), the global link colors, and the
 `shadow-sm`/`shadow-md` values. Use these tokens instead of Tailwind's default palette, and
-compare a migrated route with its legacy page at desktop and phone widths before merging.
-Legacy text inherits the body's 1.6 line-height, so set legacy font sizes with arbitrary values
+use the existing responsive tokens and components when changing a route. Text inherits the
+body's 1.6 line-height, so set explicit sizes with arbitrary values
 such as `text-[0.8125rem]`; Tailwind's named sizes (`text-sm`, `text-xs`) also set a
 line-height and make elements a pixel or two shorter than the legacy ones. Legacy buttons and inputs
 usually keep the browser's `normal` line-height, which Tailwind's reset replaces with the
@@ -227,28 +225,21 @@ before changing those settings. Building does not publish or deploy the site.
 
 ## Quality checks
 
-| Command                            | Purpose                                                        |
-| ---------------------------------- | -------------------------------------------------------------- |
-| `pnpm web:dev`                     | Run the app locally                                            |
-| `pnpm web:check`                   | Format, lint, and type-check app files with Vite+              |
-| `pnpm web:test`                    | Run app content tests                                          |
-| `pnpm web:build`                   | Build and prerender the app, then generate its service worker  |
-| `pnpm build`                       | Production build alias used by CI and deployment               |
-| `pnpm seo:check`                   | Validate titles, canonical and hreflang links, and the sitemap |
-| `pnpm web:messages`                | Regenerate the typed Paraglide messages                        |
-| `pnpm exec playwright test --list` | Check browser-test discovery                                   |
+| Command             | Purpose                                                        |
+| ------------------- | -------------------------------------------------------------- |
+| `pnpm web:dev`      | Run the app locally                                            |
+| `pnpm web:check`    | Format, lint, and type-check app files with Vite+              |
+| `pnpm web:test`     | Run app content tests                                          |
+| `pnpm web:build`    | Build and prerender the app, then generate its service worker  |
+| `pnpm build`        | Production build alias used by CI and deployment               |
+| `pnpm seo:check`    | Validate titles, canonical and hreflang links, and the sitemap |
+| `pnpm web:messages` | Regenerate the typed Paraglide messages                        |
 
-The Playwright tests under `tests/` currently cover legacy reference behavior. They are not part
-of the pull request CI workflow. Keep the legacy source available until route parity review and
-app-route browser coverage are complete.
+## Retired static site
 
-## Legacy static pages
-
-The HTML pages at the repository root are the site this project forked from. Cloudflare no
-longer serves them; they remain as the visual and content reference and for targeted comparison.
-
-Their shared chrome can be regenerated from `scripts/chrome/` with `pnpm chrome`; that command
-only updates legacy reference pages and does not change the deployed application.
+The former root HTML site was removed after cutover. The annotated
+`legacy-static-site-pre-70` tag preserves its pre-removal state. It is not a production runtime;
+the app's permanent redirects and barangay query compatibility route remain under `apps/web`.
 
 ## Architecture decisions
 

@@ -24,7 +24,6 @@ import { Route as StatisticsRouteImport } from './routes/statistics'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AdminNewsEditorRouteImport } from './routes/admin.news-editor'
 import { Route as BarangaysIndexRouteImport } from './routes/barangays/index'
-import { Route as BarangaysProfileRouteImport } from './routes/barangays/profile'
 import { Route as GovernmentIndexRouteImport } from './routes/government/index'
 import { Route as GovernmentOfficialsRouteImport } from './routes/government/officials'
 import { Route as LegislativeIndexRouteImport } from './routes/legislative/index'
@@ -113,11 +112,6 @@ const BarangaysIndexRoute = BarangaysIndexRouteImport.update({
   path: '/barangays/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BarangaysProfileRoute = BarangaysProfileRouteImport.update({
-  id: '/barangays/profile',
-  path: '/barangays/profile',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const GovernmentIndexRoute = GovernmentIndexRouteImport.update({
   id: '/government/',
   path: '/government/',
@@ -197,7 +191,6 @@ export interface FileRoutesByFullPath {
   '/statistics': typeof StatisticsRoute
   '/terms': typeof TermsRoute
   '/admin/news-editor': typeof AdminNewsEditorRoute
-  '/barangays/profile': typeof BarangaysProfileRoute
   '/government/officials': typeof GovernmentOfficialsRoute
   '/legislative/ordinance-framework': typeof LegislativeOrdinanceFrameworkRoute
   '/legislative/resolution-framework': typeof LegislativeResolutionFrameworkRoute
@@ -227,7 +220,6 @@ export interface FileRoutesByTo {
   '/statistics': typeof StatisticsRoute
   '/terms': typeof TermsRoute
   '/admin/news-editor': typeof AdminNewsEditorRoute
-  '/barangays/profile': typeof BarangaysProfileRoute
   '/government/officials': typeof GovernmentOfficialsRoute
   '/legislative/ordinance-framework': typeof LegislativeOrdinanceFrameworkRoute
   '/legislative/resolution-framework': typeof LegislativeResolutionFrameworkRoute
@@ -258,7 +250,6 @@ export interface FileRoutesById {
   '/statistics': typeof StatisticsRoute
   '/terms': typeof TermsRoute
   '/admin/news-editor': typeof AdminNewsEditorRoute
-  '/barangays/profile': typeof BarangaysProfileRoute
   '/government/officials': typeof GovernmentOfficialsRoute
   '/legislative/ordinance-framework': typeof LegislativeOrdinanceFrameworkRoute
   '/legislative/resolution-framework': typeof LegislativeResolutionFrameworkRoute
@@ -290,7 +281,6 @@ export interface FileRouteTypes {
     | '/statistics'
     | '/terms'
     | '/admin/news-editor'
-    | '/barangays/profile'
     | '/government/officials'
     | '/legislative/ordinance-framework'
     | '/legislative/resolution-framework'
@@ -320,7 +310,6 @@ export interface FileRouteTypes {
     | '/statistics'
     | '/terms'
     | '/admin/news-editor'
-    | '/barangays/profile'
     | '/government/officials'
     | '/legislative/ordinance-framework'
     | '/legislative/resolution-framework'
@@ -350,7 +339,6 @@ export interface FileRouteTypes {
     | '/statistics'
     | '/terms'
     | '/admin/news-editor'
-    | '/barangays/profile'
     | '/government/officials'
     | '/legislative/ordinance-framework'
     | '/legislative/resolution-framework'
@@ -381,7 +369,6 @@ export interface RootRouteChildren {
   StatisticsRoute: typeof StatisticsRoute
   TermsRoute: typeof TermsRoute
   AdminNewsEditorRoute: typeof AdminNewsEditorRoute
-  BarangaysProfileRoute: typeof BarangaysProfileRoute
   GovernmentOfficialsRoute: typeof GovernmentOfficialsRoute
   LegislativeOrdinanceFrameworkRoute: typeof LegislativeOrdinanceFrameworkRoute
   LegislativeResolutionFrameworkRoute: typeof LegislativeResolutionFrameworkRoute
@@ -504,13 +491,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BarangaysIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/barangays/profile': {
-      id: '/barangays/profile'
-      path: '/barangays/profile'
-      fullPath: '/barangays/profile'
-      preLoaderRoute: typeof BarangaysProfileRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/government/': {
       id: '/government/'
       path: '/government'
@@ -613,7 +593,6 @@ const rootRouteChildren: RootRouteChildren = {
   StatisticsRoute: StatisticsRoute,
   TermsRoute: TermsRoute,
   AdminNewsEditorRoute: AdminNewsEditorRoute,
-  BarangaysProfileRoute: BarangaysProfileRoute,
   GovernmentOfficialsRoute: GovernmentOfficialsRoute,
   LegislativeOrdinanceFrameworkRoute: LegislativeOrdinanceFrameworkRoute,
   LegislativeResolutionFrameworkRoute: LegislativeResolutionFrameworkRoute,

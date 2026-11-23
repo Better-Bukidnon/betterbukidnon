@@ -184,9 +184,7 @@ Business Permits and Property Declaration add a few blocks of their own:
 - Keep the same blocks, in the same order, in every language. Text that is not translated yet
   can stay in English in `fil.mdx` or `ceb.mdx`.
 
-Service guides are maintained as localized MDX documents; legacy `service-details/*.html` files
-remain available for visual and behavior parity review. New guides
-go in `content/services/`.
+Service guides are maintained as localized MDX documents. New guides go in `content/services/`.
 
 ### Add or change a project on the Our Projects page
 
@@ -201,8 +199,6 @@ go in `content/services/`.
    description in a language, or if its icon is not in Bootstrap Icons.
 3. If the project is `active`, also add it to the "Our Projects" dropdown in
    `apps/web/src/config/navigation.ts`, with a `nav_projects_<id>` message.
-4. Keep the legacy `projects/` page as a parity reference; update it only when required for a
-   direct comparison or URL compatibility check.
 
 ### Fill an empty data file
 
