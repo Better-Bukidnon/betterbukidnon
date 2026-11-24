@@ -2,11 +2,11 @@
 
 The site is available in three languages:
 
-| Code  | Language           | URL prefix | Coverage                                                                                       |
-| ----- | ------------------ | ---------- | ---------------------------------------------------------------------------------------------- |
-| `en`  | English            | `/`        | Complete; default language and fallback                                                        |
-| `fil` | Filipino           | `/fil`     | Localized routes; untranslated messages, records, and documents fall back to English           |
-| `ceb` | Cebuano (Binisaya) | `/ceb`     | Localized routes; untranslated messages, records, and documents fall back to English           |
+| Code  | Language           | URL prefix | Coverage                                                                             |
+| ----- | ------------------ | ---------- | ------------------------------------------------------------------------------------ |
+| `en`  | English            | `/`        | Complete; default language and fallback                                              |
+| `fil` | Filipino           | `/fil`     | Localized routes; untranslated messages, records, and documents fall back to English |
+| `ceb` | Cebuano (Binisaya) | `/ceb`     | Localized routes; untranslated messages, records, and documents fall back to English |
 
 Cebuano replaced the upstream template's Ilocano because it is the language most widely
 spoken in Bukidnon. Binukid, Higaonon and other indigenous languages would be welcome
@@ -99,8 +99,3 @@ gap stays visible. See [content-guide.md](content-guide.md) for each data file.
    `scripts/check-seo.ts`, and to `localizedTextSchema` in `apps/web/src/lib/schemas.ts`.
 4. Run `pnpm build && pnpm seo:check`: every page should now exist in the new language with
    `hreflang` links in all the others.
-
-## The legacy site
-
-The legacy static pages at the repository root still use `assets/js/translations.js` and
-`data-i18n` attributes until they are removed. Do not add new text there; add it to the app.

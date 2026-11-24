@@ -23,7 +23,7 @@ pnpm web:dev
 ```
 
 Open the local URL printed by Vite. See [docs/getting-started.md](docs/getting-started.md)
-for checks, builds, and the legacy-site parity workflow.
+for checks, builds, and local development.
 
 ## How to Contribute
 
@@ -101,7 +101,8 @@ Types:
 
 - Build application routes in `apps/web` with React and TypeScript.
 - Use Tailwind CSS and the existing shared layout and UI components.
-- Keep migrated pages visually aligned with the legacy HTML/CSS reference.
+- Preserve the existing app's visual language by using its shared tokens, layout components and
+  responsive conventions.
 - Use the repository's pnpm and Vite+ commands; do not add a second package manager.
 
 ### Accessibility

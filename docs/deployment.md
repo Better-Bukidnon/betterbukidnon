@@ -70,17 +70,17 @@ the files already in `dist`.
 
 - [ ] Confirm every **Verify** item in [bukidnon-facts.md](bukidnon-facts.md), especially
       the hotline numbers in the hotline bar and the Provincial Government's Facebook page URL.
-- [ ] Regenerate `assets/images/banners/opengraph.png` from the finished homepage (a 1200×630
+- [ ] Regenerate `apps/web/public/og/default.png` from the finished homepage (a 1200×630
       screenshot) if the homepage changed.
 - [ ] Set up email routing for `volunteer@betterbukidnon.org` (Cloudflare Email Routing on
       the betterbukidnon.org zone). The address is used in the footer, the volunteer popup
       and the legal pages.
 - [ ] Decide on analytics. None is installed. Cloudflare Web Analytics can be turned on for
-      the Worker without code changes; update `privacy/index.html` if you do.
+      the Worker without code changes; update the app's privacy route if you do.
 - [ ] Run Lighthouse on the dev site and keep accessibility at 90 or more.
 
-## Legacy reference
+## Retired static site
 
-The original HTML, CSS, and JavaScript remain in the repository as the visual and behavior
-reference while migrated routes are reviewed. They are not part of the Cloudflare deployment.
-The former cPanel packaging and Apache build scripts have been retired.
+The root static site and its development tooling were removed after cutover. Its pre-removal
+source is recoverable from the `legacy-static-site-pre-70` tag; permanent URL redirects remain
+in `apps/web/public/_redirects`.

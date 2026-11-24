@@ -74,9 +74,8 @@ do not see duplicate content.
 
 Thin routes, domain code in `src/features/<domain>/`, shared components in
 `components/{layout,ui,blocks}`, helpers in `lib/{i18n,seo,content,paths}`; `content/` and
-`data/` at the repository root for non-developer editors; `apps/web` becomes a pnpm workspace
-package once the legacy site is removed. CI runs checks, tests, the build and `seo:check` on
-every pull request.
+`data/` at the repository root for non-developer editors. CI runs checks, tests, the build and
+`seo:check` on every pull request.
 
 ## Consequences
 
@@ -93,4 +92,3 @@ every pull request.
 3. Feature-folder restructure.
 4. The remaining page migrations.
 5. Visual baselines and end-to-end tests on the app.
-6. Legacy cleanup and the workspace split.
